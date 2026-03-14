@@ -1,0 +1,86 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-block: var(--space-24);
+  /* Optional top padding to account for navbar if we want hero to go under it */
+  padding-top: calc(var(--header-height) + var(--space-12));
+}
+
+.videoBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Optional overlay to ensure text is readable if video is too bright */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 75%,
+    var(--color-bg) 100%
+  );
+  z-index: -1;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.prehead {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+  text-transform: none;
+  font-weight: var(--font-medium);
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font-size: var(--text-5xl);
+  font-weight: 500;
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 600px;
+  margin-inline: auto;
+  margin-bottom: var(--space-10);
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 5.5rem; /* Larger title for desktop */
+  }
+
+  .subtitle {
+    font-size: var(--text-lg);
+  }
+}
