@@ -3,28 +3,19 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Features.module.css';
 import { Container } from '@/components/ui/Container/Container';
+import { useLang } from '@/lib/i18n';
 
-const FEATURES = [
-  {
-    title: 'Accelerate Decision-Making',
-    description: 'Move from fragmented information to clear, actionable insights.',
-  },
-  {
-    title: 'Increase Operational Efficiency',
-    description: 'Eliminate bottlenecks and automate critical processes.',
-  },
-  {
-    title: 'Scale with Confidence',
-    description: 'Build technology solutions that evolve alongside your business.',
-  },
-  {
-    title: 'Optimize Financial Visibility',
-    description: 'Get real-time clarity on your financial performance and margins.',
-  },
+const FEATURES_CONFIG = [
+  { titleKey: 'features.item0.title', descKey: 'features.item0.desc', videoSrc: '/videos/Acelerate Decision Making (1).webm' },
+  { titleKey: 'features.item1.title', descKey: 'features.item1.desc', videoSrc: '/videos/Increase Operational Efficency.webm' },
+  { titleKey: 'features.item2.title', descKey: 'features.item2.desc', videoSrc: '/videos/Scale with confidence.webm' },
+  { titleKey: 'features.item3.title', descKey: 'features.item3.desc', videoSrc: '/videos/Optimize Financial Visibility.webm' },
 ];
 
 export function Features() {
+  const { t } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -34,14 +25,13 @@ export function Features() {
       const { top, height } = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // Calculate how far we've scrolled into the container
       const scrollableDistance = height - windowHeight;
       if (scrollableDistance <= 0) return;
       
       let progress = -top / scrollableDistance;
       progress = Math.max(0, Math.min(1, progress));
       
-      const itemsCount = FEATURES.length;
+      const itemsCount = FEATURES_CONFIG.length;
       const index = Math.min(
         Math.floor(progress * itemsCount),
         itemsCount - 1
@@ -51,11 +41,21 @@ export function Features() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initial calculation
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const newSrc = FEATURES_CONFIG[activeIndex].videoSrc;
+    if (video.getAttribute('src') !== newSrc) {
+      video.src = newSrc;
+      video.load();
+      video.play().catch(() => {});
+    }
+  }, [activeIndex]);
 
   return (
     <section className={styles.section} ref={containerRef}>
@@ -63,30 +63,29 @@ export function Features() {
         <Container className={styles.container}>
           <div className={styles.grid}>
             
-            {/* Left Column - Content */}
             <div className={styles.contentCol}>
               <h2 className={styles.title}>
-                Built for <br />
-                Measurable <br />
-                <span className={styles.italic}>Impact.</span>
+                {t('features.title1')} <br />
+                {t('features.title2')} <br />
+                <span className={styles.italic}>{t('features.title3')}</span>
               </h2>
               
               <div className={styles.list}>
-                {FEATURES.map((feature, index) => {
+                {FEATURES_CONFIG.map((feature, index) => {
                   const isActive = index === activeIndex;
                   return (
                     <div 
                       key={index} 
                       className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
                     >
-                      <h3 className={styles.itemTitle}>{feature.title}</h3>
+                      <h3 className={styles.itemTitle}>{t(feature.titleKey)}</h3>
                       <div className={styles.itemDescriptionWrapper}>
                         <div>
                           <p className={styles.itemDescription}>
-                            {feature.description}
+                            {t(feature.descKey)}
                           </p>
                           <div className={styles.learnMore}>
-                            Learn more <span>›</span>
+                            {t('features.learnMore')} <span>›</span>
                           </div>
                         </div>
                       </div>
@@ -96,11 +95,11 @@ export function Features() {
               </div>
             </div>
 
-            {/* Right Column - Media */}
             <div className={styles.mediaCol}>
               <div className={styles.videoWrapper}>
                 <video 
-                  src="/videos/accelerate-decision-making.webm" 
+                  ref={videoRef}
+                  src={FEATURES_CONFIG[0].videoSrc}
                   autoPlay 
                   loop 
                   muted 

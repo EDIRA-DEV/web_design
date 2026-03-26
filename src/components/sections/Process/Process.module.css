@@ -1,0 +1,260 @@
+.section {
+  padding-block: var(--space-24);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fullWidthContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 75%;
+  max-width: 1000px;
+  margin-inline: auto;
+  margin-bottom: var(--space-16);
+  text-align: left;
+}
+
+.header > * {
+  max-width: 480px;
+}
+
+.heading {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.subheading {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-12);
+}
+
+.card {
+  position: absolute;
+  width: 75%;
+  max-width: 1000px;
+  height: 100%;
+  background-color: var(--color-bg-alt);
+  border-radius: var(--radius-xl);
+  display: flex;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.card.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+  z-index: 3;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.card.prev {
+  opacity: 0.3;
+  transform: translateX(-65%) scale(0.85);
+  z-index: 2;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.card.next {
+  opacity: 0.3;
+  transform: translateX(65%) scale(0.85);
+  z-index: 2;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.card.hiddenRight {
+  opacity: 0;
+  transform: translateX(100%) scale(0.7);
+}
+
+.card.hiddenLeft {
+  opacity: 0;
+  transform: translateX(-100%) scale(0.7);
+}
+
+.cardLeft {
+  flex: 1;
+  padding: var(--space-10);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.iconContainer {
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--space-8);
+}
+
+.iconContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cardDescription {
+  font-size: var(--text-2xl);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.cardRight {
+  flex: 1;
+  background-color: #000; /* fall back if needed */
+  position: relative;
+  overflow: hidden;
+}
+
+.cardRight img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottomNavContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--space-6);
+}
+
+.bottomNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.stepNames {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.stepName {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.stepName.active {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.stepName:hover {
+  color: var(--color-text);
+}
+
+.controls {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.navBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.navBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.navBtn svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+}
+
+@media (max-width: 1024px) {
+  .card {
+     width: 85%;
+     flex-direction: column;
+  }
+  .cardLeft, .cardRight {
+     flex: initial;
+     height: 50%;
+  }
+  .cardLeft {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-6);
+  }
+  .cardRight img {
+     object-fit: cover; 
+  }
+  .card.prev { transform: translateX(-80%) scale(0.9); }
+  .card.next { transform: translateX(80%) scale(0.9); }
+  .cardDescription { font-size: var(--text-lg); }
+  
+  .carouselContainer {
+    height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselContainer {
+     height: 650px;
+  }
+  .card {
+     width: 90%;
+  }
+  .card.prev { transform: translateX(-95%) scale(0.95); opacity: 0; pointer-events:none;}
+  .card.next { transform: translateX(95%) scale(0.95); opacity: 0; pointer-events:none;}
+  
+  .bottomNav {
+     flex-direction: column;
+     gap: var(--space-6);
+     align-items: stretch;
+  }
+  .stepNames {
+     justify-content: center;
+  }
+  .controls {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,68 @@
+.section {
+  background-color: var(--color-bg);
+  padding: var(--space-24) 0;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.topSection {
+  text-align: left;
+}
+
+.title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.italic {
+  font-style: italic;
+  font-family: serif;
+  font-weight: 400;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: var(--space-8) 0;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* Optional: gives it a little floating effect if it's a transparent illustration */
+  filter: drop-shadow(0px 10px 30px rgba(124, 58, 237, 0.1));
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: flex-end; /* Align the paragraph to the right */
+}
+
+.description {
+  max-width: 600px;
+  text-align: right;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: var(--text-5xl);
+  }
+  .description {
+    font-size: var(--text-lg);
+  }
+}

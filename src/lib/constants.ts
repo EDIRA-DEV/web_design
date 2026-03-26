@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: 'Services', href: '#services' },
+  { label: 'Services', href: '/services' },
   { label: 'Industries', href: '#industries' },
   { label: 'Case Studies', href: '#case-studies' },
   { label: 'Resources', href: '#resources' },

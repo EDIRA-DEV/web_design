@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { SITE_CONFIG } from '@/lib/constants';
+import { LangProvider } from '@/lib/i18n';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,7 +30,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        <LangProvider>
+          {children}
+        </LangProvider>
+      </body>
     </html>
   );
 }

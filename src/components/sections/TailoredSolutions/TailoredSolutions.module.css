@@ -39,9 +39,21 @@
   width: 100%;
 }
 
+.gridFade {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+  width: 100%;
+}
+
+.animating {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-8);
   width: 100%;
 }
@@ -65,7 +77,7 @@
 .mediaContainer {
   width: 100%;
   aspect-ratio: 16 / 9;
-  border-radius: var(--radius-md); /* Add radius if you want video rounded internally */
+  border-radius: var(--radius-md);
   overflow: hidden;
   margin-bottom: var(--space-8);
   display: flex;
@@ -76,7 +88,7 @@
 .video {
   width: 100%;
   height: auto;
-  object-fit: contain; /* Ensure 3D isometric designs are fully visible without cropping */
+  object-fit: contain;
 }
 
 .content {
@@ -99,16 +111,49 @@
   line-height: 1.6;
 }
 
-/* Removed pagination controls styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-12);
+}
 
-/* Responsive adjustments */
+.navButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+}
+
+.navButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.navButton svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
 @media (max-width: 1024px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
   }

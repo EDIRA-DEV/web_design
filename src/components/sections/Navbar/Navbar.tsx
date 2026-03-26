@@ -1,11 +1,27 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container/Container';
 import { Button } from '@/components/ui/Button/Button';
-import { SITE_CONFIG, NAV_LINKS } from '@/lib/constants';
+import { SITE_CONFIG } from '@/lib/constants';
+import { useLang } from '@/lib/i18n';
 import styles from './Navbar.module.css';
 
+const NAV_KEYS = [
+  { key: 'nav.services', href: '/services' },
+  { key: 'nav.industries', href: '#industries' },
+  { key: 'nav.caseStudies', href: '#case-studies' },
+  { key: 'nav.resources', href: '#resources' },
+  { key: 'nav.aboutUs', href: '#about-us' },
+  { key: 'nav.careers', href: '#careers' },
+];
+
 export function Navbar() {
+  const { lang, setLang, t } = useLang();
+
+  const toggleLang = () => setLang(lang === 'en' ? 'es' : 'en');
+
   return (
     <header className={styles.navbar}>
       <Container className={styles.container}>
@@ -21,9 +37,9 @@ export function Navbar() {
           </Link>
 
           <nav className={styles.nav} aria-label="Navegación principal">
-            {NAV_LINKS.map((link) => (
+            {NAV_KEYS.map((link) => (
               <Link key={link.href} href={link.href} className={styles.navLink}>
-                {link.label}
+                {t(link.key)}
               </Link>
             ))}
           </nav>
@@ -42,7 +58,7 @@ export function Navbar() {
                 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
               </svg>
             </button>
-            <button className={styles.iconButton} aria-label="Language selector">
+            <button className={styles.iconButton} aria-label="Language selector" onClick={toggleLang}>
               <span className={styles.languageSelect}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m5 8 6 6"></path>
@@ -52,11 +68,11 @@ export function Navbar() {
                   <path d="m22 22-5-10-5 10"></path>
                   <path d="M14 18h6"></path>
                 </svg>
-                EN
+                {lang === 'en' ? 'ES' : 'EN'}
               </span>
             </button>
             <Button variant="primary" size="sm">
-              Contact Us
+              {t('nav.contact')}
             </Button>
           </div>
         </div>
