@@ -10,8 +10,8 @@ import styles from './Navbar.module.css';
 
 const NAV_KEYS = [
   { key: 'nav.services', href: '/services' },
-  { key: 'nav.industries', href: '#industries' },
-  { key: 'nav.caseStudies', href: '#case-studies' },
+  { key: 'nav.industries', href: '/industries' },
+  { key: 'nav.caseStudies', href: '/insights' },
   { key: 'nav.resources', href: '#resources' },
   { key: 'nav.aboutUs', href: '#about-us' },
   { key: 'nav.careers', href: '#careers' },

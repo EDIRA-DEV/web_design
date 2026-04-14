@@ -1,0 +1,215 @@
+.section {
+  padding-block: var(--space-20);
+  background-color: var(--color-bg);
+}
+
+.sectionTitle {
+  font-size: var(--text-4xl);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: var(--space-12);
+  color: var(--color-text);
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* MAIN CARD */
+.mainCard {
+  position: relative;
+  display: flex;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  text-decoration: none;
+  background-color: var(--color-bg-alt);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.mainCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.mainImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.mainCard:hover .mainImage {
+  transform: scale(1.02);
+}
+
+.mainOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: var(--space-8);
+}
+
+.mainContent {
+  flex: 1;
+  max-width: 60%;
+}
+
+.mainTitle {
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-tight);
+}
+
+.mainDesc {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: var(--leading-relaxed);
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: #fff;
+  transition: color var(--transition-fast);
+}
+
+.mainCard:hover .readMore {
+  color: var(--color-primary);
+}
+
+/* SECONDARY ROW */
+.secondaryRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .secondaryRow {
+    flex-direction: row;
+  }
+}
+
+.subCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.subImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background-color: var(--color-bg-alt);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--space-4);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.subCard:hover .subImageWrapper {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.subImage {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.subCard:hover .subImage {
+  transform: scale(1.02);
+}
+
+.subTitle {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: var(--space-2);
+  line-height: var(--leading-tight);
+  transition: color var(--transition-fast);
+}
+
+.subCard:hover .subTitle {
+  color: var(--color-primary);
+}
+
+.subMeta {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Small adjustments for mobile readability */
+@media (max-width: 767px) {
+  .mainOverlay {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-4);
+  }
+  
+  .mainContent {
+    max-width: 100%;
+    margin-bottom: var(--space-4);
+  }
+
+  .mainTitle {
+    font-size: var(--text-xl);
+  }
+}
+
+/* TERTIARY ROW */
+.tertiaryRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+@media (min-width: 768px) {
+  .tertiaryRow {
+    flex-direction: row;
+  }
+}
+
+/* BROWSE ALL LINK */
+.browseAllWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-4);
+}
+
+.browseAllLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: #fff;
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.browseAllLink:hover {
+  color: var(--color-primary);
+}

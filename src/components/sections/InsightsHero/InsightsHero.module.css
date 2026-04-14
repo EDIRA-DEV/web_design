@@ -1,0 +1,87 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding-block: var(--space-24);
+  padding-top: calc(var(--header-height) + var(--space-12));
+}
+
+.videoBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  /* Darken slightly to ensure text is readable against the bright purple background */
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: -1;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prehead {
+  font-size: var(--text-base);
+  color: #ffffff;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.title {
+  font-size: var(--text-5xl);
+  font-weight: 500; /* Visually looks a bit lighter than bold */
+  line-height: 1.1;
+  margin-bottom: var(--space-8);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column; /* Forces words to wrap to next line like in screenshot */
+  align-items: center;
+}
+
+.titleWord {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .prehead {
+    font-size: var(--text-xl);
+  }
+  
+  .title {
+    font-size: 6rem; /* Huge text like in the design */
+  }
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: var(--leading-relaxed);
+  max-width: 450px; /* Constrain width to force wrap like in screenshot */
+}

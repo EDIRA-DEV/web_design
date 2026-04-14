@@ -117,6 +117,56 @@ export const translations: Record<Lang, Record<string, string>> = {
     'servicesHero.subtitle': 'We help organizations build stronger data foundations, activate AI with purpose, and turn fragmented systems into scalable decision-making capabilities.',
     'servicesHero.cta': 'Get started',
 
+    // Industries Hero
+    'industriesHero.prehead': 'Intelligence that masters',
+    'industriesHero.title': "Your sector's complexity",
+    'industriesHero.subtitle': 'We transform industry challenges into measurable, sustainable competitive advantage powered by data and applied intelligence.',
+    'industriesHero.cta': 'Contact us',
+
+    // Industries List
+    'industries.financial.title': 'Financial Services',
+    'industries.financial.desc': 'From optimizing risk management to streamlining regulatory reporting, our solutions empower financial institutions to enhance decision-making, improve compliance, and drive profitability.',
+    'industries.retail.title': 'Retail & Consumer Goods',
+    'industries.retail.desc': 'We help retailers and consumer goods companies forecast demand, optimize pricing strategies, and improve supply chain visibility—ensuring profitability and customer satisfaction with data-driven solutions.',
+    'industries.manufacturing.title': 'Manufacturing',
+    'industries.manufacturing.desc': 'From optimizing risk management to streamlining regulatory reporting, our solutions empower financial institutions to enhance decision-making, improve compliance, and drive profitability.',
+    'industries.healthcare.title': 'Healthcare',
+    'industries.healthcare.desc': 'From optimizing risk management to streamlining regulatory reporting, our solutions empower financial institutions to enhance decision-making, improve compliance, and drive profitability.',
+    'industries.energy.title': 'Energy & Utilities',
+    'industries.energy.desc': 'Our solutions help energy companies optimize operations, predict demand, and improve asset performance—empowering them to stay ahead of industry trends while improving efficiency and sustainability.',
+    'industries.professional.title': 'Professional Services',
+    'industries.professional.desc': 'From optimizing client deliverables to improving resource allocation, our solutions for professional services firms enable smarter decision-making, faster project execution, and increased client satisfaction.',
+
+    // Industries CTA
+    'industries.cta.title': 'Ready to drive Transformation in your Industry?',
+
+    // Insights Hero
+    'insightsHero.prehead': 'Ideas that Drive',
+    'insightsHero.title': 'Better Decisions',
+    'insightsHero.subtitle': 'Perspectives, frameworks, and practical thinking on data, AI, and decision-making, designed for leaders building modern organizations.',
+
+    // Featured Insights
+    'insights.featured.title': 'Featured Insights',
+    'insights.featured.item0.title': 'The Hidden Cost of Manual Reporting',
+    'insights.featured.item0.desc': 'Why most organizations underestimate the impact of fragmented data—and how to fix it.',
+    'insights.featured.readMore': 'Read more',
+    'insights.featured.item1.title': 'Building KPI Frameworks That Actually Drive Decisions',
+    'insights.featured.item1.meta': 'Analytics • 5 min read',
+    'insights.featured.item2.title': 'Forecasting Beyond the Spreadsheet',
+    'insights.featured.item2.meta': 'Financial & Operational Analytics • 3 min read',
+    'insights.featured.item3.title': 'Pricing Decisions Need Better Data',
+    'insights.featured.item3.meta': 'Financial & Operational Analytics • 4 min read',
+    'insights.featured.item4.title': 'Where AI Creates Real Business Value',
+    'insights.featured.item4.meta': 'AI & Automation • 6 min read',
+    'insights.featured.item5.title': 'Data Ownership: The Missing Piece in Many Organizations',
+    'insights.featured.item5.meta': 'Data Strategy & Governance • 3 min read',
+    'insights.featured.browseAll': 'Browse all',
+
+    // Insights CTA
+    'insights.cta.title': 'Turn Insight into Action',
+    'insights.cta.desc': "Let's design the right data, AI, and decision frameworks for your business.",
+    'insights.cta.button': "Let's talk",
+
     // Deliverables
     'deliverables.title.main': 'What We',
     'deliverables.title.italic': 'Deliver',
@@ -294,6 +344,56 @@ export const translations: Record<Lang, Record<string, string>> = {
     'servicesHero.title': 'Diseñado para el Impacto.',
     'servicesHero.subtitle': 'Ayudamos a las organizaciones a construir bases de datos más sólidas, activar la IA con propósito y convertir sistemas fragmentados en capacidades de toma de decisiones escalables.',
     'servicesHero.cta': 'Comenzar',
+
+    // Industries Hero
+    'industriesHero.prehead': 'Inteligencia que domina',
+    'industriesHero.title': 'La complejidad de tu sector',
+    'industriesHero.subtitle': 'Transformamos los desafíos de la industria en ventajas competitivas medibles y sostenibles, impulsadas por datos e inteligencia aplicada.',
+    'industriesHero.cta': 'Contáctanos',
+
+    // Industries List
+    'industries.financial.title': 'Servicios Financieros',
+    'industries.financial.desc': 'Desde optimizar la gestión de riesgos hasta agilizar el cumplimiento normativo, nuestras soluciones empoderan a las instituciones financieras para mejorar la toma de decisiones, asegurar el cumplimiento y aumentar la rentabilidad.',
+    'industries.retail.title': 'Comercio Minorista y Bienes de Consumo',
+    'industries.retail.desc': 'Ayudamos a minoristas y empresas de bienes de consumo a prever la demanda, optimizar estrategias de precios y mejorar la visibilidad de la cadena de suministro, asegurando rentabilidad y satisfacción del cliente con soluciones basadas en datos.',
+    'industries.manufacturing.title': 'Manufactura',
+    'industries.manufacturing.desc': 'Desde optimizar la gestión de riesgos hasta agilizar el cumplimiento normativo, nuestras soluciones empoderan a las instituciones financieras para mejorar la toma de decisiones, asegurar el cumplimiento y aumentar la rentabilidad.',
+    'industries.healthcare.title': 'Salud',
+    'industries.healthcare.desc': 'Desde optimizar la gestión de riesgos hasta agilizar el cumplimiento normativo, nuestras soluciones empoderan a las instituciones financieras para mejorar la toma de decisiones, asegurar el cumplimiento y aumentar la rentabilidad.',
+    'industries.energy.title': 'Energía y Servicios Públicos',
+    'industries.energy.desc': 'Nuestras soluciones ayudan a empresas energéticas a optimizar operaciones, predecir demanda y mejorar el rendimiento de activos, permitiéndoles mantenerse a la vanguardia de las tendencias mientras mejoran eficiencia y sostenibilidad.',
+    'industries.professional.title': 'Servicios Profesionales',
+    'industries.professional.desc': 'Desde optimizar entregables para clientes hasta mejorar la asignación de recursos, nuestras soluciones para firmas de servicios profesionales permiten una toma de decisiones más inteligente, ejecución rápida de proyectos y mayor satisfacción del cliente.',
+
+    // Industries CTA
+    'industries.cta.title': '¿Listo para impulsar la Transformación en tu Industria?',
+
+    // Insights Hero
+    'insightsHero.prehead': 'Ideas que Impulsan',
+    'insightsHero.title': 'Mejores Decisiones',
+    'insightsHero.subtitle': 'Perspectivas, marcos de trabajo y pensamiento práctico sobre datos, IA y toma de decisiones, diseñados para líderes que construyen organizaciones modernas.',
+
+    // Featured Insights
+    'insights.featured.title': 'Insights Destacados',
+    'insights.featured.item0.title': 'El Costo Oculto de los Reportes Manuales',
+    'insights.featured.item0.desc': 'Por qué la mayoría de las organizaciones subestiman el impacto de los datos fragmentados—y cómo solucionarlo.',
+    'insights.featured.readMore': 'Leer más',
+    'insights.featured.item1.title': 'Construyendo Marcos de KPI que Realmente Impulsan Decisiones',
+    'insights.featured.item1.meta': 'Analítica • 5 min de lectura',
+    'insights.featured.item2.title': 'Pronósticos Más Allá de la Hoja de Cálculo',
+    'insights.featured.item2.meta': 'Analítica Financiera y Operacional • 3 min de lectura',
+    'insights.featured.item3.title': 'Las Decisiones de Precios Necesitan Mejores Datos',
+    'insights.featured.item3.meta': 'Analítica Financiera y Operacional • 4 min de lectura',
+    'insights.featured.item4.title': 'Dónde la IA Crea Valor Comercial Real',
+    'insights.featured.item4.meta': 'IA y Automatización • 6 min de lectura',
+    'insights.featured.item5.title': 'Propiedad de Datos: La Pieza Faltante en Muchas Organizaciones',
+    'insights.featured.item5.meta': 'Estrategia de Datos y Gobernanza • 3 min de lectura',
+    'insights.featured.browseAll': 'Ver todos',
+
+    // Insights CTA
+    'insights.cta.title': 'Convierte el Insight en Acción',
+    'insights.cta.desc': 'Diseñemos los marcos de datos, IA y decisiones adecuados para tu negocio.',
+    'insights.cta.button': 'Hablemos',
 
     // Deliverables
     'deliverables.title.main': 'Lo que',
