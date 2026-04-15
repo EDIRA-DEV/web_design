@@ -11,7 +11,7 @@ export function IndustriesHero() {
   return (
     <section className={styles.hero} id="industries-hero">
       <video autoPlay loop muted playsInline className={styles.videoBg}>
-        <source src="/videos/Industries_Background.mp4" type="video/mp4" />
+        <source src="/videos/Industries_Background.webm" type="video/webm" />
       </video>
       <div className={styles.overlay} />
 

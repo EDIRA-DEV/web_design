@@ -1,0 +1,83 @@
+.section {
+  background-color: #0a0a0a;
+  padding-top: var(--space-24);
+}
+
+.textBlock {
+  text-align: center;
+  max-width: 660px;
+  margin: 0 auto;
+  padding-bottom: var(--space-20);
+}
+
+.title {
+  font-size: var(--text-5xl);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: var(--space-8);
+  line-height: 1.1;
+}
+
+.paragraph {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* Bold spans rendered via dangerouslySetInnerHTML */
+.paragraph :global(strong) {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.videoWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, #0a0a0a 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.videoWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .paragraph {
+    font-size: var(--text-lg);
+  }
+}

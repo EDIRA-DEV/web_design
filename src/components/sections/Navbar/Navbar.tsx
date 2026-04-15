@@ -13,7 +13,7 @@ const NAV_KEYS = [
   { key: 'nav.industries', href: '/industries' },
   { key: 'nav.caseStudies', href: '/insights' },
   { key: 'nav.resources', href: '#resources' },
-  { key: 'nav.aboutUs', href: '#about-us' },
+  { key: 'nav.aboutUs', href: '/about-us' },
   { key: 'nav.careers', href: '#careers' },
 ];
 

@@ -137,6 +137,55 @@ export const translations: Record<Lang, Record<string, string>> = {
     'industries.professional.title': 'Professional Services',
     'industries.professional.desc': 'From optimizing client deliverables to improving resource allocation, our solutions for professional services firms enable smarter decision-making, faster project execution, and increased client satisfaction.',
 
+    // About Us CTA
+    'aboutUsCTA.title': 'Ready to transform your Business?',
+    'aboutUsCTA.subtitle': "Let's work together to design the right technology solutions for your business.",
+    'aboutUsCTA.cta': 'Contact us',
+
+    // About Us Values
+    'aboutUsValues.title': 'Our values',
+    'aboutUsValues.card0.label': 'Integrity',
+    'aboutUsValues.card0.desc': 'We always act with honesty and integrity, fostering trust and respect.',
+    'aboutUsValues.card1.label': 'Innovation',
+    'aboutUsValues.card1.desc': 'We are constantly exploring new ideas and solutions to stay ahead of technological trends.',
+    'aboutUsValues.card2.label': 'Collaboration',
+    'aboutUsValues.card2.desc': 'We believe in working closely with our clients, listening to their needs, and creating customized solutions together.',
+    'aboutUsValues.card3.label': 'Excellence',
+    'aboutUsValues.card3.desc': 'We strive for excellence in everything we do, delivering high-quality solutions that exceed expectations.',
+
+    // About Us Team
+    'aboutUsTeam.title': 'Our team',
+    'aboutUsTeam.subtitle': 'Our professionals come from various industries and bring a wealth of experience to every project. We are passionate about solving complex problems and helping businesses harness the full potential of technology.',
+
+    // About Us Apart
+    'aboutUsApart.title': 'What sets us apart',
+    'aboutUsApart.subtitle': 'We craft personalized solutions that align with your unique business challenges, ensuring measurable impact and sustainable growth.',
+    'aboutUsApart.card0.label': 'Tailored Solutions',
+    'aboutUsApart.card0.desc': 'We don\'t believe in one-size-fits-all. Each solution is crafted to fit your unique needs and goals, ensuring maximum impact.',
+    'aboutUsApart.card1.label': 'Data-Driven Decision-Making',
+    'aboutUsApart.card1.desc': 'We provide the clarity and tools necessary to turn data into actionable insights, allowing you to make informed decisions faster.',
+    'aboutUsApart.card2.label': 'End-to-End Expertise',
+    'aboutUsApart.card2.desc': 'From strategy development to implementation and optimization, we guide you at every step of your transformation journey.',
+    'aboutUsApart.card3.label': 'Long-Term Impact',
+    'aboutUsApart.card3.desc': 'Our solutions are designed to grow with your business, ensuring that they remain effective and relevant as your needs evolve.',
+
+    // About Us Core
+    'aboutUsCore.title': 'Our Core',
+    'aboutUsCore.mission.label': 'Mission',
+    'aboutUsCore.mission.desc': 'To be a trusted partner for organizations looking to leverage the power of data, AI, and digital transformation to drive sustainable growth. We empower businesses to make smarter decisions, improve operational efficiency, and scale with confidence through personalized, high-impact solutions.',
+    'aboutUsCore.vision.label': 'Vision',
+    'aboutUsCore.vision.desc': 'To redefine how businesses think about and use technology. At EDIRA, we envision a future where technology and data are seamlessly integrated into business strategies, helping organizations not only survive but thrive in an increasingly competitive world.',
+
+    // About Us Story
+    'aboutUsStory.title': 'The Story begins',
+    'aboutUsStory.p1': 'EDIRA was founded with the belief that technology should be a <strong>driver of change</strong>, not just an enabler.',
+    'aboutUsStory.p2': 'Our team is passionate about helping organizations unlock their <strong>full potential</strong> by transforming complex data into actionable insights, streamlining operations with AI, and creating scalable digital solutions that drive long-term business success.',
+
+    'aboutUsHero.prehead': 'Innovative Minds,',
+    'aboutUsHero.title': 'Transforming Businesses',
+    'aboutUsHero.subtitle': 'Partnering with businesses to unlock their potential through tailored technology and data solutions.',
+    'aboutUsHero.cta': 'Contact Us',
+
     // Industries CTA
     'industries.cta.title': 'Ready to drive Transformation in your Industry?',
 
@@ -364,6 +413,55 @@ export const translations: Record<Lang, Record<string, string>> = {
     'industries.energy.desc': 'Nuestras soluciones ayudan a empresas energéticas a optimizar operaciones, predecir demanda y mejorar el rendimiento de activos, permitiéndoles mantenerse a la vanguardia de las tendencias mientras mejoran eficiencia y sostenibilidad.',
     'industries.professional.title': 'Servicios Profesionales',
     'industries.professional.desc': 'Desde optimizar entregables para clientes hasta mejorar la asignación de recursos, nuestras soluciones para firmas de servicios profesionales permiten una toma de decisiones más inteligente, ejecución rápida de proyectos y mayor satisfacción del cliente.',
+
+    // About Us CTA
+    'aboutUsCTA.title': '¿Listo para transformar tu Negocio?',
+    'aboutUsCTA.subtitle': 'Trabajemos juntos para diseñar las soluciones tecnológicas adecuadas para tu empresa.',
+    'aboutUsCTA.cta': 'Contáctanos',
+
+    // About Us Values
+    'aboutUsValues.title': 'Nuestros valores',
+    'aboutUsValues.card0.label': 'Integridad',
+    'aboutUsValues.card0.desc': 'Siempre actuamos con honestidad e integridad, fomentando la confianza y el respeto.',
+    'aboutUsValues.card1.label': 'Innovación',
+    'aboutUsValues.card1.desc': 'Exploramos constantemente nuevas ideas y soluciones para mantenernos a la vanguardia de las tendencias tecnológicas.',
+    'aboutUsValues.card2.label': 'Colaboración',
+    'aboutUsValues.card2.desc': 'Creemos en trabajar estrechamente con nuestros clientes, escuchando sus necesidades y creando soluciones personalizadas juntos.',
+    'aboutUsValues.card3.label': 'Excelencia',
+    'aboutUsValues.card3.desc': 'Nos esforzamos por la excelencia en todo lo que hacemos, entregando soluciones de alta calidad que superan las expectativas.',
+
+    // About Us Team
+    'aboutUsTeam.title': 'Nuestro equipo',
+    'aboutUsTeam.subtitle': 'Nuestros profesionales provienen de diversas industrias y aportan una gran experiencia a cada proyecto. Somos apasionados por resolver problemas complejos y ayudar a las empresas a aprovechar todo el potencial de la tecnología.',
+
+    // About Us Apart
+    'aboutUsApart.title': 'Lo que nos distingue',
+    'aboutUsApart.subtitle': 'Diseñamos soluciones personalizadas que se alinean con los desafíos únicos de tu negocio, garantizando un impacto medible y un crecimiento sostenible.',
+    'aboutUsApart.card0.label': 'Soluciones a la Medida',
+    'aboutUsApart.card0.desc': 'No creemos en soluciones genéricas. Cada solución está diseñada para adaptarse a tus necesidades y objetivos únicos, garantizando el máximo impacto.',
+    'aboutUsApart.card1.label': 'Decisiones Basadas en Datos',
+    'aboutUsApart.card1.desc': 'Brindamos la claridad y las herramientas necesarias para convertir datos en insights accionables, permitiéndote tomar decisiones informadas más rápido.',
+    'aboutUsApart.card2.label': 'Experiencia Integral',
+    'aboutUsApart.card2.desc': 'Desde el desarrollo de la estrategia hasta la implementación y optimización, te acompañamos en cada paso de tu camino de transformación.',
+    'aboutUsApart.card3.label': 'Impacto a Largo Plazo',
+    'aboutUsApart.card3.desc': 'Nuestras soluciones están diseñadas para crecer con tu negocio, asegurando que sigan siendo efectivas y relevantes a medida que evolucionan tus necesidades.',
+
+    // About Us Core
+    'aboutUsCore.title': 'Nuestro Core',
+    'aboutUsCore.mission.label': 'Misión',
+    'aboutUsCore.mission.desc': 'Ser un socio de confianza para las organizaciones que buscan aprovechar el poder de los datos, la IA y la transformación digital para impulsar un crecimiento sostenible. Empoderamos a las empresas para tomar decisiones más inteligentes, mejorar la eficiencia operacional y escalar con confianza mediante soluciones personalizadas de alto impacto.',
+    'aboutUsCore.vision.label': 'Visión',
+    'aboutUsCore.vision.desc': 'Redefinir la forma en que las empresas piensan y utilizan la tecnología. En EDIRA, imaginamos un futuro donde la tecnología y los datos se integran de forma natural en las estrategias de negocio, ayudando a las organizaciones no solo a sobrevivir sino a prosperar en un mundo cada vez más competitivo.',
+
+    // About Us Story
+    'aboutUsStory.title': 'La Historia comienza',
+    'aboutUsStory.p1': 'EDIRA fue fundada con la creencia de que la tecnología debe ser un <strong>motor de cambio</strong>, no solo un habilitador.',
+    'aboutUsStory.p2': 'Nuestro equipo es apasionado por ayudar a las organizaciones a desbloquear su <strong>pleno potencial</strong> transformando datos complejos en insights accionables, optimizando operaciones con IA y creando soluciones digitales escalables que impulsan el éxito empresarial a largo plazo.',
+
+    'aboutUsHero.prehead': 'Mentes Innovadoras,',
+    'aboutUsHero.title': 'Transformando Negocios',
+    'aboutUsHero.subtitle': 'Colaboramos con empresas para desbloquear su potencial a través de soluciones tecnológicas y de datos a la medida.',
+    'aboutUsHero.cta': 'Contáctanos',
 
     // Industries CTA
     'industries.cta.title': '¿Listo para impulsar la Transformación en tu Industria?',

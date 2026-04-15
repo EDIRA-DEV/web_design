@@ -10,7 +10,7 @@ export function InsightsHero() {
   return (
     <section className={styles.hero} id="insights-hero">
       <video autoPlay loop muted playsInline className={styles.videoBg}>
-        <source src="/videos/Insights Background.mp4" type="video/mp4" />
+        <source src="/videos/Insights Background.webm" type="video/webm" />
       </video>
       <div className={styles.overlay} />
 

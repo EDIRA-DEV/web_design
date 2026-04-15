@@ -1,0 +1,77 @@
+.section {
+  background-color: #0a0a0a;
+  padding-top: var(--space-24);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.title {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: var(--space-6);
+  line-height: 1.15;
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: rgba(255, 255, 255, 0.65);
+  line-height: var(--leading-relaxed);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Video with fade on all four edges */
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  line-height: 0;
+}
+
+.videoWrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, #0a0a0a 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.videoWrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Left and right fades via a single extra element */
+.video {
+  width: 100%;
+  height: auto;
+  display: block;
+  mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: var(--text-lg);
+  }
+}

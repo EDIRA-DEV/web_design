@@ -11,7 +11,7 @@ export function ServicesHero() {
   return (
     <section className={styles.hero} id="services-hero">
       <video autoPlay loop muted playsInline className={styles.videoBg}>
-        <source src="/videos/Edira_Services_Video_Background.mp4" type="video/mp4" />
+        <source src="/videos/Edira_Services_Video_Background.webm" type="video/webm" />
       </video>
       <div className={styles.overlay} />
 

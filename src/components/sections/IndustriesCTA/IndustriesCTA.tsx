@@ -20,7 +20,7 @@ export function IndustriesCTA() {
             playsInline 
             className={styles.video}
           >
-            <source src="/videos/Ready to drive Transformation in your Industry_.mp4" type="video/mp4" />
+            <source src="/videos/Ready to drive Transformation in your Industry_.webm" type="video/webm" />
           </video>
         </div>
       </Container>
