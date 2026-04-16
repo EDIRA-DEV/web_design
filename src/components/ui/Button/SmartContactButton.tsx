@@ -7,7 +7,7 @@ import { ReactNode } from 'react';
 // Pass through all standard Button props, but override onClick with our smart routing
 export interface SmartContactButtonProps {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   className?: string; // in case we need to append classes
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void; // Optional override 
