@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { SITE_CONFIG } from '@/lib/constants';
 import { LangProvider } from '@/lib/i18n';
+import { ContactModalProvider } from '@/providers/ContactModalContext';
+import { GlobalContactModal } from '@/providers/GlobalContactModal';
+import { App } from 'antd';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,7 +35,12 @@ export default function RootLayout({
     <html lang="es" className={inter.variable}>
       <body>
         <LangProvider>
-          {children}
+          <ContactModalProvider>
+            <App>
+              {children}
+              <GlobalContactModal />
+            </App>
+          </ContactModalProvider>
         </LangProvider>
       </body>
     </html>

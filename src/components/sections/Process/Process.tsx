@@ -33,7 +33,7 @@ export function Process() {
   };
 
   return (
-    <section className={styles.section} id="process">
+    <section className={styles.section} id="delivery-process">
       <div className={styles.fullWidthContainer}>
         <div className={styles.header}>
           <h2 className={styles.heading}>{t('process.heading')}</h2>

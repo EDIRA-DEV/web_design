@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/ui/Container/Container';
 import { Button } from '@/components/ui/Button/Button';
+import { SmartContactButton } from '@/components/ui/Button/SmartContactButton';
 import { useLang } from '@/lib/i18n';
 import styles from './CTA.module.css';
 
@@ -16,9 +17,9 @@ export function CTA() {
         </p>
 
         <div className={styles.actions}>
-          <Button variant="primary" size="lg">
+          <SmartContactButton variant="primary" size="lg">
             {t('cta.primary')}
-          </Button>
+          </SmartContactButton>
           <Button variant="secondary" size="lg">
             {t('cta.secondary')}
           </Button>

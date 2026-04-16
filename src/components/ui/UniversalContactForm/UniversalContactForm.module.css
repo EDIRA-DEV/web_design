@@ -1,0 +1,84 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.formItem {
+  margin-bottom: 0 !important;
+}
+
+.formItemFull {
+  margin-bottom: 0 !important;
+}
+
+.input,
+.textarea {
+  background-color: var(--color-bg-alt, #111) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--radius-lg, 8px) !important;
+  padding: var(--space-4, 1rem) var(--space-5, 1.25rem) !important;
+  color: var(--color-text, #fff) !important;
+  font-size: var(--text-sm, 0.875rem) !important;
+  font-family: inherit !important;
+  box-shadow: none !important;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--color-text-secondary, #a1a1aa) !important;
+}
+
+.input:focus,
+.input:hover,
+.textarea:focus,
+.textarea:hover {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background-color: var(--color-bg-alt, #111) !important;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submitRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4, 1rem);
+}
+
+.submitBtn {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full, 9999px);
+  padding: var(--space-3, 0.75rem) var(--space-8, 2rem);
+  font-size: var(--text-base, 1rem);
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,112 @@
+.section {
+  padding: var(--space-20) 0;
+  background-color: transparent;
+}
+
+.title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: #fff;
+  margin-bottom: var(--space-4);
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.header {
+  margin-bottom: var(--space-16);
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.cardReversed {
+  flex-direction: row-reverse;
+}
+
+.imageBox {
+  flex: 1;
+  border-radius: var(--radius-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.imageBox::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg-gradient);
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.gradientOwnership {
+  --bg-gradient: radial-gradient(circle at center, #1f43c2 0%, transparent 70%);
+}
+
+.gradientCollaboration {
+  --bg-gradient: radial-gradient(circle at center, #7736e4 0%, transparent 70%);
+}
+
+.gradientContinuous {
+  --bg-gradient: radial-gradient(circle at center, #a72ef4 0%, transparent 70%);
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+}
+
+.content {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: var(--space-4);
+}
+
+.cardDesc {
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .card, .cardReversed {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+}

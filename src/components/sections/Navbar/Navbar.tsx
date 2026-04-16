@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container/Container';
 import { Button } from '@/components/ui/Button/Button';
+import { SmartContactButton } from '@/components/ui/Button/SmartContactButton';
 import { SITE_CONFIG } from '@/lib/constants';
 import { useLang } from '@/lib/i18n';
 import styles from './Navbar.module.css';
@@ -11,10 +12,9 @@ import styles from './Navbar.module.css';
 const NAV_KEYS = [
   { key: 'nav.services', href: '/services' },
   { key: 'nav.industries', href: '/industries' },
-  { key: 'nav.caseStudies', href: '/insights' },
-  { key: 'nav.resources', href: '#resources' },
+  { key: 'nav.insights', href: '/insights' },
   { key: 'nav.aboutUs', href: '/about-us' },
-  { key: 'nav.careers', href: '#careers' },
+  { key: 'nav.careers', href: '/careers' },
 ];
 
 export function Navbar() {
@@ -71,9 +71,9 @@ export function Navbar() {
                 {lang === 'en' ? 'ES' : 'EN'}
               </span>
             </button>
-            <Button variant="primary" size="sm">
+            <SmartContactButton variant="primary" size="sm">
               {t('nav.contact')}
-            </Button>
+            </SmartContactButton>
           </div>
         </div>
       </Container>

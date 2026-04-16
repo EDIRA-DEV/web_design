@@ -1,7 +1,7 @@
 'use client';
 
 import { Container } from '@/components/ui/Container/Container';
-import { Button } from '@/components/ui/Button/Button';
+import { SmartContactButton } from '@/components/ui/Button/SmartContactButton';
 import { useLang } from '@/lib/i18n';
 import styles from './InsightsCTA.module.css';
 
@@ -15,9 +15,9 @@ export function InsightsCTA() {
           <h2 className={styles.title}>{t('insights.cta.title')}</h2>
           <p className={styles.description}>{t('insights.cta.desc')}</p>
           <div className={styles.actions}>
-            <Button variant="primary" size="lg">
+            <SmartContactButton variant="primary" size="lg">
               {t('insights.cta.button')}
-            </Button>
+            </SmartContactButton>
           </div>
         </div>
         

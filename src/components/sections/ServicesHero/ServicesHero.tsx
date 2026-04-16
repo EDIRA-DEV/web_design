@@ -1,7 +1,7 @@
 'use client';
 
 import { Container } from '@/components/ui/Container/Container';
-import { Button } from '@/components/ui/Button/Button';
+import { SmartContactButton } from '@/components/ui/Button/SmartContactButton';
 import { useLang } from '@/lib/i18n';
 import styles from './ServicesHero.module.css';
 
@@ -25,9 +25,9 @@ export function ServicesHero() {
           <p className={styles.subtitle}>{t('servicesHero.subtitle')}</p>
 
           <div className={styles.actions}>
-            <Button variant="primary" size="lg">
+            <SmartContactButton variant="primary" size="lg">
               {t('servicesHero.cta')}
-            </Button>
+            </SmartContactButton>
           </div>
         </div>
       </Container>

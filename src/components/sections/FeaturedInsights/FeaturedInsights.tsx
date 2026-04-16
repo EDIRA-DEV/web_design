@@ -16,7 +16,7 @@ export function FeaturedInsights() {
 
         <div className={styles.grid}>
           {/* Main Featured Item */}
-          <Link href="#post-1" className={styles.mainCard}>
+          <Link href="/insights/the-hidden-cost-of-manual-reporting" className={styles.mainCard}>
             <Image
               src="/images/The Hidden Cost of Manual Reporting.png"
               alt={t('insights.featured.item0.title')}
@@ -40,7 +40,7 @@ export function FeaturedInsights() {
           {/* Secondary Items */}
           <div className={styles.secondaryRow}>
             {/* Item 2 */}
-            <Link href="#post-2" className={styles.subCard}>
+            <Link href="/insights/building-kpi-frameworks-that-actually-drive-decisions" className={styles.subCard}>
               <div className={styles.subImageWrapper}>
                 <Image
                   src="/images/Building KPI Frameworks That Actually Drive Decisions.png"
@@ -56,7 +56,7 @@ export function FeaturedInsights() {
             </Link>
 
             {/* Item 3 */}
-            <Link href="#post-3" className={styles.subCard}>
+            <Link href="/insights/forecasting-beyond-the-spreadsheet" className={styles.subCard}>
               <div className={styles.subImageWrapper}>
                 <Image
                   src="/images/Forecasting Beyond the Spreadsheet.png"
@@ -75,7 +75,7 @@ export function FeaturedInsights() {
           {/* Tertiary Items */}
           <div className={styles.tertiaryRow}>
             {/* Item 4 */}
-            <Link href="#post-4" className={styles.subCard}>
+            <Link href="/insights/pricing-decisions-need-better-data" className={styles.subCard}>
               <div className={styles.subImageWrapper}>
                 <Image
                   src="/images/Pricing Decisions Need Better Data.png"
@@ -91,7 +91,7 @@ export function FeaturedInsights() {
             </Link>
 
             {/* Item 5 */}
-            <Link href="#post-5" className={styles.subCard}>
+            <Link href="/insights/where-ai-creates-real-business-value" className={styles.subCard}>
               <div className={styles.subImageWrapper}>
                 <Image
                   src="/images/Where AI Creates Real Business Value.png"
@@ -107,7 +107,7 @@ export function FeaturedInsights() {
             </Link>
 
             {/* Item 6 */}
-            <Link href="#post-6" className={styles.subCard}>
+            <Link href="/insights/data-ownership-the-missing-piece" className={styles.subCard}>
               <div className={styles.subImageWrapper}>
                 <Image
                   src="/images/Data Ownership- The Missing Piece in Many Organizations.png"
@@ -124,7 +124,7 @@ export function FeaturedInsights() {
           </div>
 
           <div className={styles.browseAllWrapper}>
-            <Link href="#all-insights" className={styles.browseAllLink}>
+            <Link href="/insights" className={styles.browseAllLink}>
               {t('insights.featured.browseAll')}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="m9 18 6-6-6-6"/>
