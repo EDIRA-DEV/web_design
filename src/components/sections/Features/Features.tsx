@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './Features.module.css';
 import { Container } from '@/components/ui/Container/Container';
 import { useLang } from '@/lib/i18n';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 const FEATURES_CONFIG = [
   { titleKey: 'features.item0.title', descKey: 'features.item0.desc', videoSrc: '/videos/Acelerate Decision Making (1).webm' },
@@ -17,10 +19,11 @@ export function Features() {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || window.innerWidth <= 1024) return;
       
       const { top, height } = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -46,6 +49,55 @@ export function Features() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleItemClick = (index: number) => {
+    setActiveIndex(index);
+    if (window.innerWidth <= 1024) {
+      // Mobile native snapping container scroll
+      if (itemRefs.current[index]) {
+        itemRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    } else {
+      // Desktop sticky scroll mapping
+      if (!containerRef.current) return;
+      const { top } = containerRef.current.getBoundingClientRect();
+      const absoluteTop = window.scrollY + top;
+      const height = containerRef.current.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollableDistance = height - windowHeight;
+      const itemsCount = FEATURES_CONFIG.length;
+      const progress = (index + 0.5) / itemsCount; 
+      
+      window.scrollTo({
+        top: absoluteTop + (progress * scrollableDistance),
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleListScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth > 1024) return;
+    const container = e.currentTarget;
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.top + containerRect.height / 2;
+    let closestIndex = activeIndex;
+    let minDistance = Infinity;
+
+    itemRefs.current.forEach((el, index) => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const elCenter = rect.top + rect.height / 2;
+      const distance = Math.abs(containerCenter - elCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (closestIndex !== activeIndex) {
+      setActiveIndex(closestIndex);
+    }
+  };
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -70,26 +122,44 @@ export function Features() {
                 <span className={styles.italic}>{t('features.title3')}</span>
               </h2>
               
-              <div className={styles.list}>
+              <div className={styles.list} onScroll={handleListScroll}>
                 {FEATURES_CONFIG.map((feature, index) => {
                   const isActive = index === activeIndex;
                   return (
-                    <div 
+                    <motion.div 
                       key={index} 
-                      className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
+                      ref={(el: HTMLDivElement | null) => { itemRefs.current[index] = el; }}
+                      className={styles.item}
+                      onClick={() => handleItemClick(index)}
+                      initial={false}
+                      animate={{ opacity: isActive ? 1 : 0.4 }}
+                      transition={{ duration: 0.4 }}
                     >
-                      <h3 className={styles.itemTitle}>{t(feature.titleKey)}</h3>
-                      <div className={styles.itemDescriptionWrapper}>
-                        <div>
-                          <p className={styles.itemDescription}>
-                            {t(feature.descKey)}
-                          </p>
-                          <div className={styles.learnMore}>
-                            {t('features.learnMore')} <span>›</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                      <motion.h3 
+                        className={styles.itemTitle}
+                        animate={{ color: isActive ? 'var(--color-text)' : 'var(--color-text-secondary)' }}
+                      >
+                        {t(feature.titleKey)}
+                      </motion.h3>
+                      <AnimatePresence initial={false}>
+                        {isActive && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                            style={{ overflow: 'hidden' }}
+                          >
+                            <p className={styles.itemDescription}>
+                              {t(feature.descKey)}
+                            </p>
+                            <Link href="/services" className={styles.learnMore}>
+                              {t('features.learnMore')} <span>›</span>
+                            </Link>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   );
                 })}
               </div>

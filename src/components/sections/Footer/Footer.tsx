@@ -1,9 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container/Container';
 import { SITE_CONFIG, NAV_LINKS } from '@/lib/constants';
+import { useLang } from '@/lib/i18n';
 import styles from './Footer.module.css';
 
 export function Footer() {
+  const { lang } = useLang();
   const year = new Date().getFullYear();
 
   return (
@@ -14,16 +18,10 @@ export function Footer() {
             {SITE_CONFIG.name}
           </Link>
 
-          <nav className={styles.links} aria-label="Footer">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className={styles.link}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          { }
 
           <p className={styles.copy}>
-            &copy; {year} {SITE_CONFIG.name}. Todos los derechos reservados.
+            &copy; {year} {SITE_CONFIG.name}. {lang === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}
           </p>
         </div>
       </Container>

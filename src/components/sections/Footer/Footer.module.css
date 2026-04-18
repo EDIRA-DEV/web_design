@@ -19,7 +19,7 @@
 }
 
 .links {
-  display: flex;
+  display: none;
   gap: var(--space-6);
   flex-wrap: wrap;
   justify-content: center;
@@ -45,5 +45,8 @@
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
+  }
+  .links {
+    display: flex;
   }
 }

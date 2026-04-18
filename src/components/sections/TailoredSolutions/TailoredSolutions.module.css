@@ -155,6 +155,22 @@
 
 @media (max-width: 768px) {
   .grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* IE/Edge */
+    gap: var(--space-4);
+    padding-bottom: var(--space-6); 
+    padding-inline: var(--space-4);
+  }
+  
+  .grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
   }
 }

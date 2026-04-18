@@ -1,12 +1,28 @@
 .navbar {
-  position: absolute; /* Using absolute so it overlays the hero */
+  isolation: isolate;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 1000;
   height: var(--header-height);
-  background-color: transparent;
-  /* Removed border-bottom as requested */
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, border-color 0.4s ease;
+  transform: translateZ(0);
+  will-change: background-color, backdrop-filter, -webkit-backdrop-filter;
+}
+
+.scrolled {
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(12px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 
 .container {
@@ -29,6 +45,12 @@
 .logo img {
   height: 28px;
   width: auto;
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease-in-out;
+}
+
+.scrolled .logo img {
+  filter: none;
 }
 
 .nav {
@@ -45,7 +67,12 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.7);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), text-shadow 0.3s ease-in-out;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.scrolled .navLink {
+  text-shadow: none;
 }
 
 .navLink:hover {
@@ -55,7 +82,55 @@
 .actions {
   display: flex;
   align-items: center;
+  gap: var(--space-3);
+}
+
+.hamburgerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.hamburgerBtn svg {
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease-in-out;
+}
+
+.scrolled .hamburgerBtn svg {
+  filter: none;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-6) 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-4);
+}
+
+.mobileNavLink {
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .iconButton {
@@ -70,6 +145,11 @@
   color: #ffffff;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.scrolled .iconButton {
+  box-shadow: none;
 }
 
 .iconButton:hover {
@@ -82,10 +162,34 @@
   gap: 2px;
   font-size: 0.75rem;
   font-weight: 600;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.scrolled .languageSelect {
+  text-shadow: none;
+}
+
+.languageSelect svg {
+  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease-in-out;
+}
+
+.scrolled .languageSelect svg {
+  filter: none;
 }
 
 @media (min-width: 768px) {
   .nav {
     display: flex;
+  }
+  .hamburgerBtn {
+    display: none;
+  }
+  .mobileMenu {
+    display: none;
+  }
+  .actions {
+    gap: var(--space-4);
   }
 }

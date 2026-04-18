@@ -238,23 +238,38 @@
 
 @media (max-width: 768px) {
   .carouselContainer {
-     height: 650px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: auto;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4);
   }
-  .card {
-     width: 90%;
-  }
-  .card.prev { transform: translateX(-95%) scale(0.95); opacity: 0; pointer-events:none;}
-  .card.next { transform: translateX(95%) scale(0.95); opacity: 0; pointer-events:none;}
   
-  .bottomNav {
-     flex-direction: column;
-     gap: var(--space-6);
-     align-items: stretch;
+  .carouselContainer::-webkit-scrollbar {
+    display: none;
   }
-  .stepNames {
-     justify-content: center;
+
+  .card {
+    position: relative;
+    flex: 0 0 85%;
+    width: auto;
+    height: auto;
+    /* OVERRIDE JS ANIMATIONS & OPACITIES */
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    z-index: 1 !important;
+    scroll-snap-align: center;
   }
-  .controls {
-    justify-content: center;
+
+  .card.prev, .card.next, .card.active, .card.hiddenRight, .card.hiddenLeft {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
   }
 }

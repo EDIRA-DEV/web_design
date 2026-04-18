@@ -1,5 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@/components/ui/Container/Container';
@@ -19,11 +21,23 @@ const NAV_KEYS = [
 
 export function Navbar() {
   const { lang, setLang, t } = useLang();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleLang = () => setLang(lang === 'en' ? 'es' : 'en');
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <header className={styles.navbar}>
+    <header className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
       <Container className={styles.container}>
         <div className={styles.inner}>
           <Link href="/" className={styles.logo}>
@@ -45,19 +59,6 @@ export function Navbar() {
           </nav>
 
           <div className={styles.actions}>
-            <button className={styles.iconButton} aria-label="Toggle theme">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg>
-            </button>
             <button className={styles.iconButton} aria-label="Language selector" onClick={toggleLang}>
               <span className={styles.languageSelect}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -71,12 +72,33 @@ export function Navbar() {
                 {lang === 'en' ? 'ES' : 'EN'}
               </span>
             </button>
-            <SmartContactButton variant="primary" size="sm">
+            <SmartContactButton variant="primary" size="sm" className={styles.contactBtn}>
               {t('nav.contact')}
             </SmartContactButton>
+            <button className={styles.hamburgerBtn} aria-label="Toggle menu" onClick={toggleMenu}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="4" y1="8" x2="20" y2="8"></line>
+                <line x1="4" y1="16" x2="20" y2="16"></line>
+              </svg>
+            </button>
           </div>
         </div>
       </Container>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className={styles.mobileMenu}>
+          <Container>
+            <nav className={styles.mobileNav} aria-label="Mobile Navigation">
+              {NAV_KEYS.map((link) => (
+                <Link key={link.href} href={link.href} className={styles.mobileNavLink} onClick={toggleMenu}>
+                  {t(link.key)}
+                </Link>
+              ))}
+            </nav>
+          </Container>
+        </div>
+      )}
     </header>
   );
 }

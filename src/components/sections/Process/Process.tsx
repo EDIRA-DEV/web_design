@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container/Container';
 import { useLang } from '@/lib/i18n';
 import styles from './Process.module.css';
@@ -8,6 +8,15 @@ import styles from './Process.module.css';
 export function Process() {
   const { t } = useLang();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const STEPS = [
     { id: 'discover', titleKey: 'process.step0.title', descKey: 'process.step0.desc', image: '/images/Discover.png', icon: '/images/Discover.svg' },
@@ -20,16 +29,47 @@ export function Process() {
     { id: 'drive',    titleKey: 'process.step7.title', descKey: 'process.step7.desc', image: '/images/Drive.png',    icon: '/images/Drive.svg' },
   ];
 
+  const handleScroll = () => {
+    if (!isMobile || !carouselRef.current) return;
+    const container = carouselRef.current;
+    if (container.children.length === 0) return;
+    const childWidth = (container.children[0] as HTMLElement).offsetWidth;
+    const index = Math.round(container.scrollLeft / (childWidth + 16));
+    if (index >= 0 && index < STEPS.length && index !== activeIndex) {
+      setActiveIndex(index);
+    }
+  };
+
   const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % STEPS.length);
+    if (isMobile && carouselRef.current) {
+      const container = carouselRef.current;
+      const childWidth = (container.children[0] as HTMLElement).offsetWidth + 16;
+      container.scrollBy({ left: childWidth, behavior: 'smooth' });
+    } else {
+      setActiveIndex((prev) => (prev + 1) % STEPS.length);
+    }
   };
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + STEPS.length) % STEPS.length);
+    if (isMobile && carouselRef.current) {
+      const container = carouselRef.current;
+      const childWidth = (container.children[0] as HTMLElement).offsetWidth + 16;
+      container.scrollBy({ left: -childWidth, behavior: 'smooth' });
+    } else {
+      setActiveIndex((prev) => (prev - 1 + STEPS.length) % STEPS.length);
+    }
   };
 
   const setStep = (index: number) => {
-    setActiveIndex(index);
+    if (isMobile && carouselRef.current) {
+      const container = carouselRef.current;
+      const cardEl = container.children[index] as HTMLElement;
+      if (cardEl) {
+        container.scrollTo({ left: cardEl.offsetLeft - 16, behavior: 'smooth' });
+      }
+    } else {
+      setActiveIndex(index);
+    }
   };
 
   return (
@@ -42,7 +82,7 @@ export function Process() {
           </p>
         </div>
         
-        <div className={styles.carouselContainer}>
+        <div className={styles.carouselContainer} ref={carouselRef} onScroll={handleScroll}>
           {STEPS.map((step, index) => {
             let positionClass = styles.hiddenRight;
             if (index === activeIndex) {

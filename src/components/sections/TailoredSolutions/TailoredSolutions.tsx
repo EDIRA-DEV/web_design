@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Container } from '@/components/ui/Container/Container';
 import { useLang } from '@/lib/i18n';
 import styles from './TailoredSolutions.module.css';
@@ -21,14 +21,15 @@ export function TailoredSolutions() {
   const [currentPage, setCurrentPage] = useState(0);
   const [cardsPerPage, setCardsPerPage] = useState(4);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setCardsPerPage(1);
-      } else if (window.innerWidth < 1024) {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth < 1024 && window.innerWidth >= 768) {
         setCardsPerPage(2);
-      } else {
+      } else if (window.innerWidth >= 1024) {
         setCardsPerPage(4);
       }
     };
@@ -46,7 +47,27 @@ export function TailoredSolutions() {
     }
   }, [totalPages, currentPage]);
 
+  const handleScroll = () => {
+    if (!isMobile || !gridRef.current) return;
+    const container = gridRef.current;
+    if (container.children.length === 0) return;
+    const childWidth = (container.children[0] as HTMLElement).offsetWidth;
+    const index = Math.round(container.scrollLeft / (childWidth + 16));
+    if (index !== currentPage && index >= 0 && index < totalPages) { // For mobile totalPages isn't exactly the same, but it's okay because we scroll
+      // Actually on mobile totalItems is SOLUTIONS_KEYS.length
+       if(index < SOLUTIONS_KEYS.length) {
+          setCurrentPage(index);
+       }
+    }
+  };
+
   const handleNext = () => {
+    if (isMobile && gridRef.current) {
+      const container = gridRef.current;
+      const childWidth = (container.children[0] as HTMLElement).offsetWidth + 16;
+      container.scrollBy({ left: childWidth, behavior: 'smooth' });
+      return;
+    }
     if (isAnimating) return;
     setIsAnimating(true);
     setTimeout(() => {
@@ -56,6 +77,12 @@ export function TailoredSolutions() {
   };
 
   const handlePrev = () => {
+    if (isMobile && gridRef.current) {
+      const container = gridRef.current;
+      const childWidth = (container.children[0] as HTMLElement).offsetWidth + 16;
+      container.scrollBy({ left: -childWidth, behavior: 'smooth' });
+      return;
+    }
     if (isAnimating) return;
     setIsAnimating(true);
     setTimeout(() => {
@@ -64,10 +91,12 @@ export function TailoredSolutions() {
     }, 300);
   };
 
-  const currentSolutions = SOLUTIONS_KEYS.slice(
-    currentPage * cardsPerPage,
-    (currentPage + 1) * cardsPerPage
-  );
+  const currentSolutions = isMobile 
+    ? SOLUTIONS_KEYS 
+    : SOLUTIONS_KEYS.slice(
+        currentPage * cardsPerPage,
+        (currentPage + 1) * cardsPerPage
+      );
 
   return (
     <section className={styles.section}>
@@ -82,8 +111,8 @@ export function TailoredSolutions() {
         </div>
 
         <div className={styles.carouselContainer}>
-          <div className={`${styles.gridFade} ${isAnimating ? styles.animating : ''}`}>
-            <div className={styles.grid}>
+          <div className={`${styles.gridFade} ${!isMobile && isAnimating ? styles.animating : ''}`}>
+            <div className={styles.grid} ref={gridRef} onScroll={handleScroll}>
               {currentSolutions.map((solution) => (
                 <div 
                   key={solution.titleKey}

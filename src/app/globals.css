@@ -162,3 +162,34 @@ h1, h2, h3, h4, h5, h6 {
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ============================================
+   GLOBAL HERO VIDEO FADE TO BLACK (CINEMATIC)
+   ============================================ */
+section[class*="Hero_hero"],
+section[class*="AboutUsHero_hero"],
+section[class*="CareersHero_hero"],
+section[class*="IndustriesHero_hero"],
+section[class*="InsightsHero_hero"],
+section[class*="ServicesHero_hero"],
+section[class*="ArticleHero_hero"] {
+  position: relative;
+}
+
+section[class*="Hero_hero"]::after,
+section[class*="AboutUsHero_hero"]::after,
+section[class*="CareersHero_hero"]::after,
+section[class*="IndustriesHero_hero"]::after,
+section[class*="InsightsHero_hero"]::after,
+section[class*="ServicesHero_hero"]::after,
+section[class*="ArticleHero_hero"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(to bottom, transparent 0%, #000 100%);
+  pointer-events: none;
+  z-index: 6;
+}

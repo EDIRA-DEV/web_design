@@ -1,7 +1,8 @@
 'use client';
 
-import { Form, Input, ConfigProvider, theme, App } from 'antd';
+import { Form, Input, ConfigProvider, theme, App, Select } from 'antd';
 import { useState } from 'react';
+import { useLang } from '@/lib/i18n';
 import styles from './UniversalContactForm.module.css';
 
 // Dark theme setup for ConfigProvider
@@ -9,11 +10,23 @@ const darkTheme = {
   algorithm: theme.darkAlgorithm,
   token: {
     colorPrimary: '#a855f7',
-    colorBgContainer: '#1c1c1c', 
+    colorBgContainer: '#111', 
     colorBorder: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 8,
     fontFamily: 'inherit',
+    controlHeight: 48,
   },
+  components: {
+    Select: {
+      colorBgContainer: '#111',
+      colorBorder: 'rgba(255, 255, 255, 0.08)',
+      selectorBg: '#111',
+      optionSelectedBg: 'rgba(168, 85, 247, 0.2)',
+      optionActiveBg: 'rgba(255, 255, 255, 0.05)',
+      activeBorderColor: 'rgba(255, 255, 255, 0.25)',
+      hoverBorderColor: 'rgba(255, 255, 255, 0.25)',
+    }
+  }
 };
 
 interface UniversalContactFormProps {
@@ -21,6 +34,7 @@ interface UniversalContactFormProps {
 }
 
 export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
+  const { lang, t } = useLang();
   const { notification } = App.useApp();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -138,10 +152,29 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
         </div>
 
         <Form.Item
+          name="category"
+          rules={[{ required: true, message: lang === 'es' ? 'Selecciona una categoría obligatoria' : 'Category is required' }]}
+          className={styles.formItemFull}
+          label={<span style={{ color: 'var(--color-text-secondary)', fontSize: '15px', fontWeight: 500, paddingBottom: '4px' }}>{lang === 'es' ? 'Soy un...' : 'I am a...'}</span>}
+        >
+          <Select
+            placeholder={lang === 'es' ? 'Selecciona una categoría' : 'Select a category'}
+            styles={{ popup: { root: { backgroundColor: '#111', border: '1px solid rgba(255, 255, 255, 0.08)' } } }}
+            virtual={false} /* Better blur/rendering on transparent modals */
+            options={[
+              { value: 'Provider', label: lang === 'es' ? 'Proveedor' : 'Provider' },
+              { value: 'Partner', label: lang === 'es' ? 'Socio' : 'Partner' },
+              { value: 'Collaborator', label: lang === 'es' ? 'Colaborador' : 'Collaborator' },
+              { value: 'Client', label: lang === 'es' ? 'Cliente' : 'Client' },
+            ]}
+          />
+        </Form.Item>
+
+        <Form.Item
           name="message"
           className={styles.formItemFull}
         >
-          <Input.TextArea placeholder="How can we help?" rows={4} className={styles.textarea} />
+          <Input.TextArea placeholder={lang === 'es' ? '¿Cómo podemos ayudarte?' : 'How can we help?'} rows={4} className={styles.textarea} />
         </Form.Item>
 
         <div className={styles.submitRow}>
