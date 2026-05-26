@@ -152,11 +152,11 @@ export function CookieBanner() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className={`${styles.banner} fixed bottom-4 left-4 right-4 w-auto max-w-none mx-auto flex flex-col gap-4 md:bottom-4 md:left-4 md:right-auto md:w-[420px]`}
+            className={`${styles.banner} fixed bottom-4 left-4 right-4 w-auto mx-auto flex flex-col gap-4 md:bottom-4 md:left-4 md:right-auto md:w-[420px]`}
           >
             <div className={styles.bannerContent}>
               <p className={styles.bannerText}>{t.bannerText}</p>
-              <div className={`${styles.bannerActions} flex flex-col gap-2 w-full md:flex-row md:gap-2`}>
+              <div className={`${styles.bannerActions} flex flex-col w-full gap-2 md:flex-row md:gap-2`}>
                 <button
                   type="button"
                   onClick={handleRejectOptional}
