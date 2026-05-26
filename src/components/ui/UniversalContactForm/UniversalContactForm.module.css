@@ -77,6 +77,28 @@
   cursor: not-allowed;
 }
 
+.checkboxItem {
+  margin-bottom: 0 !important;
+  margin-top: var(--space-2, 0.5rem);
+}
+
+.checkboxText {
+  color: var(--color-text-secondary, #a1a1aa);
+  font-size: 13px;
+  line-height: 1.5;
+  user-select: none;
+}
+
+.legalLink {
+  color: var(--color-primary, #a855f7);
+  text-decoration: underline !important;
+  transition: color var(--transition-fast, 0.2s);
+}
+
+.legalLink:hover {
+  color: var(--color-primary-dark, #9333ea) !important;
+}
+
 @media (max-width: 640px) {
   .row {
     grid-template-columns: 1fr;

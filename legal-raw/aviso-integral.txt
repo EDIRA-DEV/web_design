@@ -1,0 +1,413 @@
+=========================================
+EDIRA - INFORMACIÓN DE CONTROL LEGAL
+Responsable: Eduardo Rodrigo Silva Orozco
+Nombre Comercial: EDIRA
+Ubicación: Santiago de Querétaro, Qro., México
+Marco Legal: Conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su Reglamento
+Fecha de entrada en vigor: 12 de mayo de 2026
+Versión: 1.0
+=========================================
+
+AVISO DE PRIVACIDAD INTEGRAL DE EDIRA
+PRIMERO. IDENTIDAD Y DOMICILIO DEL RESPONSABLE
+El presente Aviso de Privacidad es emitido por Eduardo Rodrigo Silva Orozco,
+persona física con actividad empresarial que opera bajo la denominación comercial
+“EDIRA”
+, con domicilio para recibir notificaciones en la ciudad de Santiago de
+Querétaro, estado de Querétaro, México (en adelante,
+“el Responsable” o “EDIRA”).
+Para efectos de comunicación relativa al tratamiento de datos personales, el
+Responsable pone a disposición del titular los siguientes medios de contacto:
+▪
+Sitio web: https://www.edira.dev
+▪ Correo electrónico oficial: info@edira.dev
+▪ Teléfono +52 1 442 866 2242;
+EDIRA es una consultora tecnológica especializada en analítica de datos,
+inteligencia artificial y arquitectura digital. Los servicios que presta incluyen, de manera
+enunciativa mas no limitativa: arquitectura de datos en la nube, ingeniería de datos
+(procesos ETL/ELT e integraciones), analítica avanzada (dashboards y KPIs), inteligencia
+artificial predictiva, gobernanza de datos y asesoría ejecutiva en inteligencia de
+decisión (“Decision Intelligence”). La prestación de dichos servicios requiere
+necesariamente el tratamiento de datos personales, por lo que el presente documento
+regula integralmente dicho tratamiento.
+SEGUNDO. DATOS PERSONALES RECABADOS
+El Responsable recaba, almacena y, en su caso, trata las siguientes categorías
+de datos personales, de conformidad con el principio de mínima necesidad y
+proporcionalidad establecido en los artículos 6 y 12 de la LFPDPPP:
+A) DATOS DE IDENTIFICACIÓN PERSONAL▪ Nombre completo del titular o representante legal
+▪ Cargo o posición dentro de la organización
+▪ Empresa u organización a la que pertenece
+B) DATOS DE CONTACTO
+▪ Dirección de correo electrónico corporativo o personal
+▪ Número telefónico (fijo o móvil)
+▪ Ciudad, estado y país de residencia o domicilio empresarial
+ADVERTENCIA AL TITULAR: El Responsable prohíbe expresamente al titular el envío de datos sensibles —ya
+sea mediante formularios web, correo electrónico o cualquier otro medio de comunicación— sin haber
+obtenido previamente una autorización expresa y por escrito por parte de EDIRA. El envío no autorizado
+de datos sensibles será responsabilidad exclusiva del titular remitente, quedando EDIRA liberada de
+cualquier obligación o responsabilidad derivada de dicha conducta.Sin perjuicio de las obligaciones
+legales que correspondan al Responsable conforme a la legislación aplicable
+TERCERO. FINALIDADES DEL TRATAMIENTO
+El tratamiento de los datos personales recabados por EDIRA se realiza
+únicamente para las finalidades que se describen a continuación, las cuales se
+clasifican en: (A) finalidades primarias o necesarias para el cumplimiento de la relación
+contractual o precontractual, y (B) finalidades secundarias de naturaleza comercial o
+de mejora de servicios, para las cuales el titular puede negar su consentimiento
+conforme a la Cláusula Cuarta del presente Aviso.
+A) FINALIDADES PRIMARIAS (NECESARIAS)
+Las siguientes finalidades son indispensables para la prestación de los servicios
+de EDIRA y para el cumplimiento de las obligaciones legales y contractuales del
+Responsable. La negativa de consentimiento respecto de estas finalidades implica la
+imposibilidad de establecer o continuar la relación de servicios:▪ Atender, registrar y dar seguimiento a las solicitudes de información recibidas a
+través de formularios web, correo electrónico y comunicación directa.
+▪ Cumplir con las obligaciones legales y regulatorias aplicables al Responsable en
+materia fiscal, mercantil, civil y de protección de datos.
+▪ Resolver disputas, reclamaciones o controversias derivadas de la relación
+comercial.
+▪ Mantener comunicación operativa con el titular durante la vigencia del
+contrato de servicios.
+B) FINALIDADES SECUNDARIAS (COMERCIALES Y DE MEJORA)
+Las siguientes finalidades no son indispensables para la relación de servicios,
+pero permiten a EDIRA mejorar su oferta, personalizar la comunicación y desarrollar
+nuevas soluciones. El titular puede negar su consentimiento para estas finalidades
+mediante el mecanismo establecido en la Cláusula Cuarta sin que ello afecte la
+prestación de los servicios contratados:
+▪ Enviar información sobre nuevos servicios, actualizaciones de metodologías,
+casos de éxito y materiales especializados en analítica de datos e inteligencia
+artificial.
+▪ Realizar estudios internos de mercado, satisfacción del cliente y posicionamiento
+comercial de EDIRA.
+▪ Desarrollar perfiles generales (no individualizados) sobre sectores industriales y
+necesidades tecnológicas, con fines de mejora del portafolio de servicios.
+▪ Contactar al titular para ofrecerle servicios complementarios, actualizaciones o
+renovaciones de proyectos previamente ejecutados.
+▪ Utilizar testimonios o referencias del titular (con su consentimiento expreso
+previo) en materiales comerciales o de comunicación institucional de EDIRA.
+CUARTO. MECANISMO PARA NEGAR CONSENTIMIENTO A FINALIDADES SECUNDARIAS
+En cumplimiento del artículo 8 de la LFPDPPP, el titular tiene derecho a negar su
+consentimiento para el tratamiento de sus datos personales con fines secundarios oaccesorios, sin que dicha negativa afecte la relación de servicios que mantenga con
+EDIRA.
+Para ejercer este derecho, el titular deberá:
+▪ Enviar un correo electrónico a la dirección info@edira.dev con el asunto:
+“NEGATIVA FINALIDADES SECUNDARIAS – (NOMBRE COMPLETO)”
+.
+▪ Indicar en el cuerpo del mensaje: nombre completo, empresa a la que
+pertenece y descripción específica de las finalidades secundarias respecto de
+las cuales niega su consentimiento.
+▪ Incluir copia de identificación oficial vigente como medio de verificación de
+identidad.
+El Responsable procesará la solicitud en un plazo máximo de quince (15) días
+hábiles contados a partir de la recepción del correo electrónico, confirmando al titular
+la actualización de sus preferencias de tratamiento.
+QUINTO. USO DE COOKIES Y TECNOLOGÍAS DE RASTREO
+El sitio web de EDIRA ( www.edira.dev ) puede hacer uso de cookies, web
+beacons y tecnologías de rastreo similares con la finalidad de mejorar la experiencia
+de navegación y analizar el tráfico del sitio. A continuación se describe la tipología de
+dichas tecnologías:
+A) COOKIES ESENCIALES O TÉCNICAS
+Son aquellas indispensables para el correcto funcionamiento del sitio web.
+Permiten la navegación y el acceso a las secciones del portal. No pueden ser
+desactivadas sin afectar el funcionamiento del sitio. No requieren consentimiento
+previo del usuario, pues su instalación responde a fines estrictamente técnicos.B) COOKIES ANALÍTICAS
+Permiten cuantificar el número de visitantes, analizar el comportamiento de
+navegación y evaluar la efectividad del contenido publicado. Los datos recopilados
+son de carácter agregado y no permiten la identificación directa del usuario. EDIRA
+puede utilizar herramientas de terceros como plataformas equivalentes para este
+propósito. El uso de estas cookies requiere el consentimiento del usuario.
+C) COOKIES DE MARKETING O PERSONALIZACIÓN
+Permiten mostrar contenido relevante y ofertas personalizadas en función del
+perfil de navegación del usuario.
+El usuario puede gestionar y desactivar el uso de cookies desde la configuración
+de su navegador web. Sin embargo, la desactivación de cookies esenciales puede
+impedir el correcto funcionamiento del sitio. Para mayor información sobre la gestión
+de cookies en los principales navegadores, el titular puede consultar la configuración
+de privacidad de su herramienta de navegación.
+SEXTO. TRANSFERENCIA DE DATOS PERSONALES
+El Responsable podrá transferir datos personales a terceros únicamente en los
+supuestos y bajo las condiciones que se describen a continuación, de conformidad
+con los artículos 36 al 43 de la LFPDPPP y los artículos 67 al 75 de su Reglamento:
+A) TRANSFERENCIAS A PROVEEDORES TECNOLÓGICOS Y ENCARGADOS DE TRATAMIENTO
+Para la prestación de sus servicios, EDIRA hace uso de plataformas y
+proveedores tecnológicos que actúan como encargados del tratamiento en los
+términos del artículo 3, fracción IV de la LFPDPPP. Dichos proveedores pueden incluir,
+de manera enunciativa mas no limitativa:▪ Servicios de computación en la nube: Amazon Web Services (AWS), Microsoft
+Azure, Google Cloud Platform, u otros proveedores equivalentes, sujetos a sus
+propias políticas de privacidad y certificaciones de seguridad internacionales.
+▪ Herramientas de productividad y colaboración: Microsoft 365 (incluyendo
+Outlook y OneDrive), Teams u otras plataformas de trabajo colaborativo.
+▪ Plataformas de formularios y captación de leads: Microsoft Forms u
+herramientas equivalentes utilizadas para la recepción de solicitudes de
+información.
+▪ Herramientas de analítica e inteligencia de negocios: software de visualización
+de datos, plataformas de BI (Business Intelligence) y soluciones de inteligencia
+artificial, seleccionadas conforme a los requerimientos de cada proyecto.
+▪ Interfaces de programación de aplicaciones (APIs): conexiones con sistemas
+de terceros requeridas para la ejecución de integraciones de datos
+contratadas por el cliente.
+Todos los proveedores tecnológicos que actúan como encargados del tratamiento
+están sujetos a obligaciones contractuales de confidencialidad y protección de datos,
+conforme a lo establecido en el artículo 50 del Reglamento de la LFPDPPP.
+B) TRANSFERENCIAS PERMITIDAS SIN CONSENTIMIENTO DEL TITULAR
+De conformidad con el artículo 37 de la LFPDPPP, no se requerirá el
+consentimiento del titular para las transferencias que se realicen en los siguientes
+supuestos:
+▪ Cuando la transferencia esté prevista en una ley o tratado en el que México
+sea parte.
+▪ Cuando la transferencia sea efectuada a sociedades controladoras, subsidiarias
+o afiliadas bajo el control común del Responsable, o a una sociedad matriz o a
+cualquier sociedad del mismo grupo del Responsable que opere bajo los
+mismos procesos y políticas internas.
+▪ Cuando la transferencia sea necesaria por virtud de un contrato celebrado o
+por celebrarse en interés del titular, entre el Responsable y un tercero.▪ Cuando la transferencia sea necesaria o legalmente exigida para la
+salvaguarda de un interés público o para la procuración o administración de
+justicia.
+▪ Cuando la transferencia sea precisa para el reconocimiento, ejercicio o
+defensa de un derecho en un proceso judicial.
+▪ Cuando la transferencia sea precisa para el mantenimiento o cumplimiento
+de una relación jurídica entre el Responsable y el titular.
+C) PROHIBICIÓN DE VENTA DE DATOS
+EDIRA declara expresamente que NO vende, cede a título oneroso ni
+comercializa los datos personales de sus titulares a terceros ajenos a la relación de
+servicios. Cualquier transferencia de datos se realizará únicamente con la finalidad de
+cumplir los objetivos establecidos en el presente Aviso de Privacidad.
+SÉPTIMO. ALMACENAMIENTO, SEGURIDAD Y MEDIDAS DE PROTECCIÓN
+EDIRA implementa medidas de seguridad administrativas, técnicas y físicas para
+proteger los datos personales contra daño, pérdida, alteración, destrucción, uso,
+acceso o tratamiento no autorizado, conforme a lo establecido en el artículo 19 de la
+LFPDPPP y los artículos 57 al 63 de su Reglamento.
+A) MEDIDAS ADMINISTRATIVAS
+▪ Aplicación del principio de mínimo privilegio: únicamente el personal o
+colaboradores estrictamente necesarios tienen acceso a los datos personales
+de los titulares, en la medida indispensable para el desempeño de sus
+funciones.
+▪ Capacitación y concientización en protección de datos para el personal de
+EDIRA.
+▪ Establecimiento de políticas internas de manejo, tratamiento y eliminación de
+datos personales.▪ Suscripción de acuerdos de confidencialidad con colaboradores, contratistas y
+proveedores que tengan acceso a datos personales.
+B) MEDIDAS TÉCNICAS
+▪ Uso de plataformas con cifrado en tránsito (TLS/SSL) y en reposo para el
+almacenamiento de información.
+▪ Acceso a sistemas protegidos mediante autenticación multifactor (MFA)
+cuando la plataforma lo permita.
+▪ Configuración de permisos y roles de acceso en las herramientas de
+almacenamiento en la nube (OneDrive, AWS, Azure u otras).
+▪ Respaldo periódico de la información almacenada.
+C) CONSIDERACIONES SOBRE EL ALMACENAMIENTO ACTUAL
+EDIRA reconoce que su modelo operativo actual contempla el
+almacenamiento de datos personales principalmente en: (i) correo electrónico
+corporativo (Microsoft Outlook / plataforma equivalente), y (ii) archivos digitales en la
+plataforma OneDrive de Microsoft 365. El Responsable se compromete a:
+▪ Mantener dichas plataformas bajo los estándares de seguridad que el
+proveedor de servicios ofrece, incluyendo cifrado y control de accesos.
+▪ Migrar progresivamente hacia soluciones de almacenamiento estructurado con
+mayores controles de acceso, conforme el crecimiento del negocio lo
+requiera.
+▪ No almacenar información sensible o confidencial en formatos no protegidos o
+de acceso público.
+El Responsable advierte a los titulares que el correo electrónico, como medio de
+comunicación, conlleva riesgos inherentes de seguridad. EDIRA implementa las
+mejores prácticas disponibles en su plataforma, pero no puede garantizar la
+seguridad absoluta de las comunicaciones en tránsito externo. Se recomienda al
+titular abstenerse de enviar por correo electrónico información altamente
+confidencial sin cifrado adicional.OCTAVO. DERECHOS ARCO (ACCESO, RECTIFICACIÓN, CANCELACIÓN Y OPOSICIÓN)
+De conformidad con los artículos 22 al 35 de la LFPDPPP y los artículos 76 al 108
+de su Reglamento, el titular de los datos personales tiene reconocidos los siguientes
+derechos:
+A) DESCRIPCIÓN DE LOS DERECHOS ARCO
+▪ ACCESO: Derecho a conocer qué datos personales posee el Responsable,
+para qué finalidades los utiliza y a quiénes ha sido transferida dicha
+información.
+▪ RECTIFICACIÓN: Derecho a solicitar la corrección o actualización de datos
+personales que resulten inexactos, incompletos o desactualizados.
+▪ CANCELACIÓN: Derecho a solicitar la supresión de los datos personales del
+sistema de tratamiento del Responsable, una vez que hayan dejado de ser
+necesarios para la finalidad que motivó su recabación, o cuando el titular
+revoque su consentimiento.
+▪ OPOSICIÓN: Derecho a oponerse al tratamiento de los datos personales para
+finalidades específicas, cuando exista causa legítima para ello, o cuando el
+tratamiento se realice para finalidades secundarias.
+B) PROCEDIMIENTO PARA EL EJERCICIO DE DERECHOS ARCO
+Para ejercer cualquiera de los derechos antes descritos, el titular deberá dirigir
+una solicitud al Responsable a través del siguiente medio de contacto:
+▪ Correo electrónico: info@edira.dev
+▪ Asunto del correo: “SOLICITUD DERECHOS ARCO – (DERECHO SOLICITADO) –
+(NOMBRE COMPLETO)”
+La solicitud deberá contener, como mínimo, los siguientes elementos:▪ Nombre completo del titular y, en su caso, nombre del representante legal con
+acreditación de su personalidad jurídica.
+▪ Descripción clara y precisa del derecho ARCO que se desea ejercer.
+▪ Indicación de los datos personales respecto de los cuales se solicita el
+ejercicio del derecho, o del tratamiento que se desea limitar u oponerse.
+▪ Copia de identificación oficial vigente del titular (INE/IFE, pasaporte, cédula
+profesional u equivalente).
+▪ Cualquier documento que facilite la localización de los datos personales
+objeto de la solicitud.
+▪ Domicilio o correo electrónico para recibir la respuesta del Responsable.
+C) PLAZOS LEGALES
+El Responsable dará respuesta a la solicitud en los siguientes plazos, conforme a
+lo establecido en el artículo 32 de la LFPDPPP:
+▪ Plazo para responder sobre la procedencia de la solicitud: veinte (20) días
+hábiles contados a partir de la fecha de recepción.
+▪ Plazo para hacer efectiva la determinación adoptada: quince (15) días
+hábiles adicionales a partir de la comunicación de la respuesta.
+▪ En caso de solicitud de Acceso, el Responsable pondrá a disposición del titular
+los datos personales en formato comprensible, dentro del plazo indicado.
+El titular que considere que su solicitud ha sido atendida de forma incorrecta o que
+sus derechos no han sido debidamente tutelados, podrá interponer queja o
+denuncia ante el Instituto Nacional de Transparencia, Acceso a la Información y
+Protección de Datos Personales (INAI), a través del sitio web www.inai.org.mx,
+conforme al procedimiento establecido en los artículos 94 al 107 de la LFPDPPP.
+NOVENO. REVOCACIÓN DEL CONSENTIMIENTOEl titular podrá revocar en cualquier momento el consentimiento que haya
+otorgado para el tratamiento de sus datos personales, sin que se le atribuyan efectos
+retroactivos, conforme al artículo 8, párrafo cuarto de la LFPDPPP. La revocación del
+consentimiento deberá presentarse mediante escrito libre o correo electrónico dirigido
+a info@edira.dev indicando:
+▪ Nombre completo del titular.
+▪ Descripción del consentimiento que desea revocar y de los datos personales
+a los que se refiere dicha revocación.
+▪ Copia de identificación oficial vigente.
+El Responsable analizará la solicitud y comunicará al titular la procedencia o
+improcedencia de la revocación en un plazo de veinte (20) días hábiles. En aquellos
+casos en que el tratamiento de datos sea indispensable para el cumplimiento de una
+relación contractual vigente, la revocación podrá dar lugar a la terminación del
+contrato, sin responsabilidad para el Responsable.
+La revocación del consentimiento no tiene efectos retroactivos respecto de los
+tratamientos ya realizados antes de que la solicitud haya sido procedente. El
+Responsable podrá conservar los datos personales que sean necesarios para el
+cumplimiento de obligaciones legales o contractuales pendientes, incluso después
+de recibida la revocación.
+DÉCIMO. LIMITACIÓN DEL USO O DIVULGACIÓN DE DATOS PERSONALES
+El titular podrá solicitar al Responsable la limitación del uso o divulgación de sus
+datos personales cuando: (i) haya formulado una solicitud de cancelación que aún no
+haya sido resuelta, o (ii) exista controversia respecto del tratamiento que deba
+resolverse previamente. La solicitud deberá realizarse por escrito mediante correo
+electrónico a info@edira.dev con el asunto: “LIMITACIÓN DE USO Y DIVULGACIÓN”
+.
+El Responsable resolverá la solicitud en un plazo de veinte (20) días hábiles. Durante el
+periodo de resolución, el Responsable limitará el uso de los datos a aquellas finalidadesestrictamente necesarias para cumplir con obligaciones legales o contractuales
+vigentes.
+El Responsable cuenta con un mecanismo de registro de los titulares que han
+solicitado la limitación de uso o divulgación de sus datos, a fin de garantizar el respeto
+de dicha limitación en sus sistemas de tratamiento.
+DÉCIMO PRIMERO. CONSERVACIÓN Y ELIMINACIÓN DE DATOS PERSONALES
+Los datos personales recabados por EDIRA serán conservados únicamente
+durante el tiempo necesario para cumplir con las finalidades que motivaron su
+recabación y, en todo caso, mientras subsistan obligaciones legales, fiscales,
+contractuales o de cualquier naturaleza que exijan su resguardo. Los criterios de
+conservación son los siguientes:
+▪ Datos de contacto y prospección comercial (sin contrato formalizado): hasta
+doce (12) meses a partir del último contacto, salvo que el titular solicite su
+cancelación anticipada.
+▪ Datos con relevancia fiscal: hasta el plazo máximo establecido por el Código
+Fiscal de la Federación para la conservación de documentación contable y
+fiscal (actualmente cinco años, con posibilidad de ampliación en casos
+específicos).
+▪ Datos de navegación y cookies analíticas: conforme a las políticas del
+proveedor de la herramienta de analítica utilizada, sin exceder de veinticuatro
+(24) meses.
+Una vez transcurridos los plazos de conservación aplicables y satisfechas las
+obligaciones correspondientes, el Responsable procederá a la eliminación segura e
+irreversible de los datos personales, utilizando métodos que impidan su recuperación.
+DÉCIMO SEGUNDO. CAMBIOS AL AVISO DE PRIVACIDADEDIRA se reserva el derecho de actualizar, modificar o ampliar el presente Aviso
+de Privacidad en cualquier momento, con el propósito de reflejar cambios en sus
+prácticas de tratamiento de datos, en la legislación aplicable o en los servicios
+ofrecidos. Dichos cambios serán efectivos a partir de su publicación en el sitio web
+www.edira.dev
+El mecanismo de notificación de cambios al presente Aviso será el siguiente:
+▪ Publicación de la versión actualizada en el sitio web www.edira.dev, con
+indicación de la fecha de entrada en vigor de la nueva versión.
+▪ Cuando los cambios sean sustanciales -en particular, cuando impliquen el
+tratamiento de datos para finalidades distintas a las originalmente
+comunicadas o la transferencia a terceros no previstos en el aviso original-
+, el
+Responsable notificará al titular a través del correo electrónico registrado en
+sus bases de datos.
+La continuación del uso de los servicios de EDIRA o la ausencia de oposición
+expresa dentro de los quince (15) días hábiles siguientes a la notificación podrá
+entenderse como aceptación de los términos actualizados, en la medida permitida
+por la legislación aplicable, en los términos del artículo 14 de la LFPDPPP.
+DÉCIMO TERCERO. RESPONSABILIDAD DEL TITULAR POR DATOS PROPORCIONADOS
+El titular es el único responsable de la veracidad, exactitud, vigencia y legalidad
+de la información que proporcione a EDIRA a través de cualquier medio, incluyendo
+formularios web, correo electrónico y comunicación directa. A efecto de delimitar
+responsabilidades, el titular reconoce y acepta lo siguiente:
+▪ Datos de terceros: El titular no deberá proporcionar datos personales de
+terceros sin contar con autorización legal para ello. En caso de que el titular
+comparta datos personales de colaboradores, empleados u otras personas en
+el marco de un proyecto de consultoría, declara contar con el consentimiento
+correspondiente o con una base legal válida conforme a la LFPDPPP. ElResponsable no asume responsabilidad alguna por el tratamiento de datos de
+terceros proporcionados sin autorización.
+▪ Campos abiertos en formularios: Los formularios de contacto y diagnóstico de
+EDIRA pueden contener campos de texto libre. El titular se obliga bajo su
+responsabilidad a no incluir en dichos campos datos sensibles, información
+confidencial de terceros, secretos comerciales de empresas ajenas, ni
+información cuya divulgación implique incumplimiento de obligaciones legales
+o contractuales del propio titular. EDIRA no será responsable por el contenido
+que el titular decida incluir en campos no estructurados.
+▪ Exactitud de la información: El titular se obliga a notificar al Responsable
+cualquier cambio relevante en sus datos personales (especialmente datos de
+contacto), a fin de mantener la información actualizada. La falta de
+notificación oportuna de cambios en los datos no será imputable al
+Responsable.
+▪ Uso indebido del canal de comunicación: El titular se abstendrá de utilizar los
+canales de contacto de EDIRA (correo electrónico, formularios) para el envío
+de spam, códigos maliciosos o cualquier contenido ilícito. EDIRA se reserva el
+derecho de tomar las medidas legales y técnicas pertinentes ante cualquier
+uso indebido.
+DÉCIMO CUARTO. USO DE SERVICIOS DE TERCEROS Y LIMITACIÓN DE RESPONSABILIDAD
+EDIRA utiliza servicios, plataformas y herramientas de terceros para la operación
+de su negocio y la prestación de sus servicios de consultoría. A efecto de delimitar
+responsabilidades, el titular reconoce y acepta lo siguiente:
+A) PROVEEDORES DE TECNOLOGÍA EN LA NUBE
+El almacenamiento y procesamiento de datos en plataformas de nube (AWS,
+Azure, Google Cloud u otras) se rige por los términos, condiciones y políticas de
+privacidad de cada proveedor, los cuales son externos a EDIRA. El Responsable
+seleccionará proveedores que ofrezcan garantías razonables de seguridad y quecuenten con certificaciones reconocidas internacionalmente (ISO 27001, SOC 2 u
+equivalentes), pero no puede garantizar la conducta de dichos terceros más allá de
+las obligaciones contractuales pactadas con ellos.
+B) SITIOS WEB DE TERCEROS
+El sitio web de EDIRA puede contener enlaces o referencias a sitios web de
+terceros. Dichos sitios tienen sus propias políticas de privacidad y el Responsable no
+asume responsabilidad alguna por el tratamiento de datos que dichos terceros
+realicen. Se recomienda al titular revisar las políticas de privacidad de cada sitio que
+visite.
+C) FUERZA MAYOR Y CASO FORTUITO
+El Responsable no será responsable por brechas de seguridad, pérdida o
+alteración de datos personales que sean consecuencia de eventos de fuerza mayor o
+caso fortuito, incluyendo pero no limitándose a: ataques cibernéticos masivos de
+terceros, fallas en la infraestructura de proveedores de telecomunicaciones o eventos
+catastróficos que afecten los sistemas de los proveedores de nube utilizados. En tales
+supuestos, el Responsable notificará al titular de forma oportuna conforme al artículo
+20 de la LFPDPPP.
+DÉCIMO QUINTO. JURISDICCIÓN Y LEGISLACIÓN APLICABLE
+El presente Aviso de Privacidad se rige en su interpretación y aplicación por las
+disposiciones de la legislación mexicana vigente, en particular:
+▪ Ley Federal de Protección de Datos Personales en Posesión de los Particulares
+(LFPDPPP).
+▪ Reglamento de la Ley Federal de Protección de Datos Personales en Posesión
+de los Particulares.
+▪ Lineamientos del Aviso de Privacidad, emitidos por la autoridad competente
+en materia de transparencia y protección de datos personales en México,conforme a la autoridad competente en materia de protección de datos
+personales en México.
+▪ Recomendaciones en materia de seguridad de datos personales, emitidas
+por la autoridad competente en materia de protección de datos personales
+en México (anteriormente el Instituto Nacional de Transparencia, Acceso a la
+Información y Protección de Datos Personales —INAI—).
+▪ Código Civil Federal y Código de Comercio, en lo que resulten aplicables.
+▪ Demás normatividad federal aplicable en materia de protección de datos,
+privacidad, telecomunicaciones y comercio electrónico.
+Para cualquier controversia derivada del presente Aviso de Privacidad o del
+tratamiento de datos personales realizado por EDIRA, las partes se someterán a la
+jurisdicción de la autoridad administrativa competente y, en lo judicial, a los Tribunales
+Federales competentes con sede en la ciudad de Santiago de Querétaro, Querétaro,
+México, renunciando expresamente a cualquier otro fuero que pudiera
+corresponderles en razón de sus domicilios presentes o futuros.
+DECLARACIÓN DE VIGENCIA Y AUTENTICIDAD
+El presente Aviso de Privacidad Integral ha sido redactado conforme a la legislación
+mexicana vigente en materia de protección de datos personales y entra en vigor a
+partir del 12 de mayo de 2026. El Responsable se compromete a mantenerlo
+actualizado y disponible en el sitio web www.edira.dev.
+Eduardo Rodrigo Silva Orozco
+Responsable del Tratamiento de Datos Personales
+EDIRA — Consultoría Tecnológica en Analítica e Inteligencia Artificial
+Santiago de Querétaro, Querétaro, México | www.edira.dev | info@edira.dev

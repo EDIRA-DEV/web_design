@@ -1,0 +1,262 @@
+POLITICA DE COOKIES
+I. INTRODUCCIÓN
+La presente Política de Cookies regula el uso de cookies, web beacons y tecnologías
+análogas en el sitio web de EDIRA, disponible en https://www.edira.dev (el “Sitio”). Para efectos
+de esta Política, las cookies son archivos de datos que se almacenan en el dispositivo de la
+persona usuaria al navegar en un sitio de internet y que permiten intercambiar información de
+estado entre el navegador y el Sitio, incluyendo identificadores de sesión, autenticación,
+preferencias técnicas y otros datos asociados a la navegación. Cuando estas tecnologías
+permiten obtener datos personales o volver identificable a una persona, su uso queda sujeto a
+la normativa mexicana aplicable en materia de protección de datos personales y al deber de
+información reforzada respecto de los datos recabados, sus finalidades y la forma de
+deshabilitarlos.
+EDIRA opera un sitio corporativo orientado a la presentación de servicios de datos,
+inteligencia artificial y transformación digital, con un formulario de contacto como principal
+punto de interacción. Conforme a la información disponible y proporcionada para esta
+redacción, el Sitio no cuenta actualmente con registro de usuarios ni con pasarela de pagos en
+línea; el formulario de contacto recaba nombre, correo electrónico, teléfono, empresa, cargo,
+ubicación y mensaje, y se apoya en herramientas de terceros para formularios y
+almacenamiento. En consecuencia, el ecosistema de cookies del Sitio debe limitarse a
+finalidades compatibles con la navegación, la seguridad, la integridad del formulario, la
+medición del desempeño digital y, en su caso, acciones de mercadotecnia o atribución
+publicitaria sujetas a consentimiento.
+Esta Política complementa el Aviso de Privacidad Integral de EDIRA. Su finalidad es
+permitir que la persona usuaria tome decisiones informadas, libres y específicas sobre el uso de
+tecnologías de rastreo, de conformidad con los principios de información, finalidad,
+consentimiento, proporcionalidad y seguridad previstos en la legislación mexicana, así como
+con estándares internacionales de privacidad que exigen consentimiento válido para cookies
+opcionales, granularidad por finalidades, ausencia de casillas preactivadas y posibilidad de
+retiro del consentimiento con la misma facilidad con la que se otorgó.
+II. IDENTIDAD DEL RESPONSABLE DEL SITIO WEBEl responsable del tratamiento de datos personales y del uso de cookies en el sitio web
+https://www.edira.dev (en adelante, el “Sitio”) es Eduardo Rodrigo Silva Orozco, conocido
+por su nombre comercial como EDIRA, operación de servicios tecnológicos especializada en
+soluciones de datos e inteligencia artificial.
+Para efectos de cumplimiento normativo, el responsable deberá complementar la
+presente sección con su denominación legal completa, Registro Federal de Contribuyentes y
+domicilio.
+Para cualquier cuestión relacionada con esta política o con la protección de sus datos
+personales, puede contactar al responsable en el correo electrónico info@edira.dev o en el
+teléfono 4428662242
+III. ¿QUÉ SON LAS COOKIES?
+Las cookies son archivos de texto de pequeño tamaño que un sitio web guarda en su
+dispositivo al navegar por él. Estos archivos permiten que el Sitio reconozca su dispositivo en
+visitas posteriores, recuerde ciertas preferencias y facilite la navegación entre sus distintas
+secciones.
+Las cookies no contienen programas maliciosos ni permiten acceder a información
+almacenada en su dispositivo sin su consentimiento. Sin embargo, algunas cookies, en
+particular aquellas que permiten identificar o perfilar el comportamiento de una persona
+usuaria, pueden constituir datos personales conforme a la legislación mexicana.
+IV. TECNOLOGÍAS DE RASTREO UTILIZADAS EN EL SITIO
+Además de cookies, el Sitio puede emplear tecnologías de seguimiento similares que
+permiten su funcionamiento técnico y la obtención de información estadística sobre la
+interacción de las personas usuarias.
+Estas tecnologías se utilizan principalmente para:
+●
+Facilitar la navegación dentro del Sitio
+●
+Recordar configuraciones básicas o preferencias de visualización●
+Obtener información agregada sobre el uso del Sitio, como páginas visitadas o tiempo
+de permanencia
+Dado que el Sitio de EDIRA tiene un carácter informativo y de contacto sin registro de
+usuarios ni funcionalidades transaccionales, el uso de estas tecnologías se limita a lo
+estrictamente necesario para su operación y mejora continua.
+En caso de que se incorporen herramientas adicionales con finalidades analíticas más
+avanzadas, de personalización o de mercadotecnia, se recabará su consentimiento mediante
+los mecanismos habilitados en el propio Sitio.
+V. TIPOS DE COOKIES UTILIZADAS
+a) Cookies técnicas/ necesarias
+EDIRA utiliza cookies técnicas o estrictamente indispensables para hacer posible la
+navegación básica, sostener la seguridad del Sitio, administrar el estado del banner de
+consentimiento, preservar la integridad técnica del formulario de contacto y evitar usos
+indebidos o automatizados que comprometan la operación del Sitio. Estas cookies pueden
+almacenar, entre otros elementos, identificadores de sesión, tokens de seguridad, estado de
+consentimiento, preferencias técnicas básicas, información de balanceo de carga y
+parámetros temporales del formulario. Dado que su finalidad es permitir la prestación técnica
+del servicio solicitado por la persona usuaria, estas cookies pueden operar sin una aceptación
+separada, siempre que se limiten a lo estrictamente necesario, se informen de forma visible y
+ofrezcan mecanismos de deshabilitación cuando técnicamente proceda.
+Son para la prestación del servicio solicitado, seguridad del Sitio y cumplimiento del
+deber de información. Estas cookies no deben emplearse para fines de perfilado, publicidad o
+análisis extendido de comportamiento.
+b) Cookies analíticas
+EDIRA podrá utilizar cookies analíticas para medir el funcionamiento del Sitio, conocer
+de manera agregada cómo interactúan las personas usuarias con sus páginas, detectar
+errores, evaluar contenidos, medir fuentes de tráfico y mejorar la experiencia digital. Estas
+cookies pueden recabar, entre otros datos, dirección IP o una versión truncada de la misma
+según la configuración técnica aplicable, tipo de navegador, sistema operativo, fecha y horade acceso, páginas visitadas, tiempo de navegación, eventos de interacción, fuente de
+referencia y métricas de desempeño. Debido a que este tipo de cookies no es estrictamente
+necesario para el funcionamiento básico del Sitio, su uso deberá activarse únicamente cuando
+la persona usuaria otorgue un consentimiento previo, libre, informado, específico y revocable.
+Si la persona usuaria rechaza esta categoría, EDIRA no deberá cargar etiquetas
+analíticas no esenciales ni asociar la navegación a identificadores analíticos persistentes.
+c) Cookies de marketing y publicidad
+EDIRA podrá utilizar cookies de marketing o publicidad para medir la eficacia de
+campañas, atribuir conversiones, construir audiencias, limitar frecuencias de impacto,
+personalizar mensajes comerciales y realizar seguimiento publicitario entre sitios cuando así lo
+permita la configuración del navegador y la herramienta respectiva. Estas cookies pueden
+recabar identificadores publicitarios, identificadores de campaña, páginas visitadas, eventos
+de interacción, URL de referencia, información del dispositivo, navegador, dirección IP y señales
+de conversión asociadas a la navegación. Su uso puede implicar la intervención de terceros
+especializados en publicidad digital o medición publicitaria. Por su naturaleza, estas cookies
+sólo deberán activarse mediante consentimiento previo, granular, libre y revocable; la negativa
+de la persona usuaria no deberá impedir el acceso al contenido general del Sitio ni condicionar
+el uso del formulario de contacto que no dependa técnicamente de dichas cookies.
+La mera continuación de la navegación, el desplazamiento de la página o el cierre del
+aviso no constituyen, por sí solos, una aceptación válida de cookies opcionales.
+VI. INFORMACIÓN QUE PUEDEN RECOPILAR LAS COOKIES
+Las cookies y tecnologías de seguimiento utilizadas en el Sitio pueden recopilar
+información técnica y de navegación de manera automatizada, tales como:
+●
+Dirección IP y ubicación aproximada (país o ciudad)
+●
+Tipo de navegador, sistema operativo y dispositivo utilizado
+●
+Fecha y hora de acceso al Sitio
+●
+Páginas visitadas y rutas de navegación dentro del Sitio●
+Interacción con elementos específicos, como formularios de contacto o enlaces
+●
+Preferencias básicas de navegación o configuración
+Esta información se utiliza de manera agregada para fines técnicos y estadísticos, tales
+como mejorar el funcionamiento del Sitio, optimizar la experiencia de navegación y evaluar el
+desempeño de los contenidos y canales de contacto.
+En ningún caso estas tecnologías se utilizan, por sí mismas, para identificar directamente
+a las personas usuarias. No obstante, cuando la información recopilada pueda vincularse
+directa o indirectamente con una persona física, será considerada dato personal y se tratará
+conforme a lo dispuesto en el Aviso de Privacidad de EDIRA.
+VII. CONSENTIMIENTO Y PREFERENCIAS DEL USUARIO
+Al primer acceso al Sitio, EDIRA deberá desplegar un banner o módulo de
+consentimiento visible, claro y comprensible. Dicho mecanismo deberá permitir, como mínimo,
+aceptar, rechazar o configurar las cookies opcionales por categoría, distinguiendo con claridad
+entre cookies necesarias y cookies analíticas o de marketing. Las cookies necesarias podrán
+estar activas desde el inicio; en cambio, las cookies analíticas y de marketing deberán
+permanecer desactivadas hasta que la persona usuaria emita una acción afirmativa clara. El
+diseño del banner no deberá inducir de forma engañosa a la aceptación, no deberá utilizar
+casillas pre-marcadas y no deberá condicionar el acceso general al Sitio a la aceptación de
+cookies opcionales.
+EDIRA deberá ofrecer un mecanismo permanente y fácilmente accesible para
+modificar la elección realizada, idealmente mediante un enlace identificado como
+“Preferencias de cookies” en el pie del Sitio o en un elemento equivalente de acceso continuo.
+La revocación del consentimiento deberá ser tan sencilla como su otorgamiento y no deberá
+generar costos, cargas desproporcionadas ni degradaciones injustificadas del servicio público
+general del Sitio. La información relativa a las cookies estrictamente necesarias podrá mostrarse
+en una capa informativa separada o mediante un enlace visible desde la primera capa del
+banner, mientras que las categorías opcionales deberán presentarse con granularidad
+suficiente para que la persona usuaria pueda consentir unas y rechazar otras.La negativa o revocación del consentimiento respecto de cookies opcionales no
+afectará el acceso al contenido institucional del Sitio; únicamente podrá limitar funciones
+accesorias vinculadas con medición, atribución o personalización publicitaria. Si la persona
+usuaria cambia de opinión, podrá otorgar posteriormente el consentimiento a través del centro
+de preferencias del Sitio.
+VIII. COOKIES DE TERCEROS
+El Sitio puede incorporar servicios provistos por terceros para funcionalidades como
+alojamiento de formularios, infraestructura tecnológica, almacenamiento, medición analítica,
+atribución de campañas, seguridad, contenidos embebidos o funcionalidades
+complementarias. Como consecuencia, ciertos terceros pueden instalar cookies propias o
+ejecutar tecnologías equivalentes cuando la persona usuaria interactúa con el Sitio o con
+componentes integrados en él. En función del servicio concreto, estos terceros pueden actuar
+como encargados que tratan datos por cuenta de EDIRA o como terceros con políticas propias
+y finalidades autónomas respecto de determinadas operaciones.
+Cuando un tercero actúe como encargado, deberá tratar los datos únicamente
+conforme a las instrucciones de EDIRA, abstenerse de utilizarlos para fines distintos, mantener
+medidas de seguridad adecuadas y no subcontratar tratamientos sin autorización cuando ello
+sea jurídicamente exigible. Cuando exista una transferencia a un tercero distinto del
+encargado, el tratamiento deberá ajustarse a lo informado en el Aviso de Privacidad y el
+tercero receptor asumirá las obligaciones correlativas que correspondan conforme a la
+normativa aplicable. La persona usuaria reconoce que, al interactuar con herramientas o
+plataformas de terceros, puede quedar sujeta también a sus propias políticas de privacidad y
+cookies, por lo que EDIRA recomienda consultarlas antes de aceptar categorías opcionales.
+En la medida en que terceros operen infraestructura fuera del territorio nacional o
+mediante redes globales de procesamiento, el uso de sus servicios puede implicar acceso,
+almacenamiento o tratamiento transfronterizo de datos técnicos de navegación. EDIRA
+procurará que tales operaciones queden cubiertas por salvaguardas contractuales y
+organizacionales razonables, sin perjuicio de las obligaciones propias que correspondan a
+cada proveedor conforme a su marco jurídico y a sus políticas vigentes.
+IX. GESTIÓN Y DESACTIVACIÓN DE COOKIESAdemás del centro de preferencias del Sitio, la persona usuaria puede bloquear,
+permitir, restringir o eliminar cookies directamente desde la configuración de su navegador. Las
+rutas específicas pueden cambiar con cada versión del software, pero de manera general los
+principales navegadores ofrecen controles expresos de privacidad y cookies. La desactivación
+total de cookies puede afectar el funcionamiento correcto de ciertas secciones, incluida la
+persistencia de preferencias, el envío del formulario de contacto o la estabilidad técnica de
+algunos componentes del Sitio.
+Chrome permite gestionar cookies desde Configuración > Privacidad y seguridad >
+Cookies de terceros o mediante la función de borrado de datos de navegación. Asimismo,
+permite eliminar cookies existentes, bloquear cookies de terceros y configurar excepciones por
+sitio.
+Microsoft Edge permite administrar cookies desde Configuración > Privacidad, búsqueda
+y servicios, incluyendo la posibilidad de bloquear cookies, impedir cookies de terceros y
+eliminar datos almacenados.
+Firefox permite configurar la Protección mejorada contra rastreo y bloquear cookies de
+terceros o todas las cookies de seguimiento desde Privacidad y seguridad, así como eliminar
+datos del sitio cuando la persona usuaria lo considere necesario.
+Safari permite gestionar cookies mediante sus configuraciones de privacidad,
+incluyendo opciones para impedir el rastreo entre sitios y bloquear cookies de manera más
+restrictiva según el dispositivo o la política aplicada.
+Sin perjuicio de lo anterior, cuando un tercero ofrezca mecanismos propios de
+autoexclusión o configuración publicitaria, la persona usuaria podrá emplearlos
+adicionalmente; dichos mecanismos complementan, pero no sustituyen, las preferencias
+configuradas en el banner del Sitio o en el navegador.
+X.FINALIDADES DEL USO DE COOKIES
+EDIRA utiliza cookies y tecnologías de seguimiento para las siguientes finalidades:
+●
+Garantizar el correcto funcionamiento del Sitio, permitiendo la navegación adecuada
+entre sus secciones, la carga eficiente de contenidos y el uso del formulario de
+contacto.●
+Recordar configuraciones básicas de la persona usuaria, con el fin de facilitar una
+experiencia de navegación consistente dentro del Sitio.
+●
+Generar información estadística sobre el uso del Sitio, incluyendo número de visitantes,
+páginas consultadas, interacción con contenidos y uso del formulario de contacto, con
+el propósito de mejorar su funcionamiento y optimizar sus canales de comunicación.
+●
+Evaluar el desempeño del Sitio como herramienta de contacto y prospección
+comercial, permitiendo a EDIRA identificar áreas de mejora en la presentación de sus
+servicios y en la interacción con potenciales clientes.
+●
+Permitir, en su caso, la integración con servicios tecnológicos de terceros, necesarios
+para la operación del Sitio, tales como herramientas de analítica, formularios o
+infraestructura web, los cuales pueden utilizar cookies conforme a sus propias políticas.
+EDIRA no utiliza cookies para recabar datos personales sensibles ni para realizar perfiles
+individualizados con fines comerciales sin el consentimiento de la persona usuaria.
+XI. ACTUALIZACIONES DE LA POLÍTICA
+EDIRA podrá modificar, actualizar o sustituir la presente Política de Cookies cuando
+existan cambios en la legislación aplicable, en los criterios regulatorios, en la arquitectura
+tecnológica del Sitio, en los proveedores utilizados, en el modelo de negocio, en las finalidades
+del tratamiento o en las categorías de cookies implementadas. Toda modificación deberá
+publicarse en el Sitio con la fecha de última actualización correspondiente y, cuando la
+naturaleza del cambio así lo exija, deberá comunicarse mediante aviso visible, banner
+renovado, actualización del centro de preferencias o cualquier otro medio razonablemente
+eficaz.
+Si EDIRA incorpora nuevas finalidades que requieran consentimiento o modifica de
+forma sustancial las condiciones del tratamiento previamente informadas, deberá obtener
+nuevamente el consentimiento de la persona usuaria antes de activar las tecnologías
+opcionales relacionadas con ese cambio. El simple mantenimiento de una versión anterior del
+consentimiento no legitimará usos nuevos, incompatibles o más invasivos que los previamente
+aceptados.
+XII. RELACIÓN CON EL AVISO DE PRIVACIDADCuando las cookies y otras tecnologías de seguimiento utilizadas en el Sitio recolecten
+información que pueda identificar directa o indirectamente a una persona, dicha información
+será considerada dato personal y se tratará conforme a las finalidades, mecanismos y principios
+establecidos en el Aviso de Privacidad de EDIRA.
+El Aviso de Privacidad detalla, entre otros aspectos, las categorías de datos personales
+recabados, las finalidades de su tratamiento, la base legal aplicable, así como los derechos de
+acceso, rectificación, cancelación y oposición (ARCO) y los procedimientos para ejercerlos.
+La persona usuaria puede consultar el Aviso de Privacidad directamente en el Sitio o solicitarlo
+en cualquier momento a través del correo electrónico info@edira.dev.
+XIII. DATOS DE CONTACTO
+Para cualquier duda, comentario, solicitud relacionada con esta Política, ejercicio de
+derechos ARCO, revocación del consentimiento respecto de cookies opcionales u oposición al
+tratamiento para fines mercadotécnicos o publicitarios, la persona usuaria puede comunicarse
+con EDIRA a través del correo electrónico info@edira.dev. La solicitud deberá describir de
+manera clara el requerimiento planteado y, cuando resulte necesario, EDIRA podrá solicitar
+información mínima adicional para verificar identidad, ubicar registros o procesar
+adecuadamente la petición conforme a la normativa aplicable.
+EDIRA atenderá las solicitudes vinculadas con privacidad y cookies conforme a los
+mecanismos y plazos previstos por la legislación aplicable. Cuando la persona usuaria desee
+limitar el uso de sus datos para fines mercadotécnicos distintos del funcionamiento del Sitio,
+EDIRA podrá incluirla en su listado interno de exclusión. Adicionalmente, tratándose de
+llamadas o mensajes publicitarios en México, la persona usuaria puede considerar la inscripción
+de su número telefónico en el Registro Público para Evitar Publicidad de PROFECO.
+La presente Política deberá mantenerse disponible en un lugar visible del Sitio y
+consultarse conjuntamente con el Aviso de Privacidad Integral de EDIRA, a fin de ofrecer a las
+personas usuarias una visión completa y coherente del tratamiento de datos personales
+derivado de la navegación y del uso del formulario de contacto.
+Última actualización: 12 de mayo de 2026.

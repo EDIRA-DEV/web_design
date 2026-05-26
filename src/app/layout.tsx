@@ -5,6 +5,7 @@ import { SITE_CONFIG } from '@/lib/constants';
 import { LangProvider } from '@/lib/i18n';
 import { ContactModalProvider } from '@/providers/ContactModalContext';
 import { GlobalContactModal } from '@/providers/GlobalContactModal';
+import { CookieBanner } from '@/components/ui/CookieBanner';
 import { App } from 'antd';
 
 const inter = Inter({
@@ -39,6 +40,7 @@ export default function RootLayout({
             <App>
               {children}
               <GlobalContactModal />
+              <CookieBanner />
             </App>
           </ContactModalProvider>
         </LangProvider>

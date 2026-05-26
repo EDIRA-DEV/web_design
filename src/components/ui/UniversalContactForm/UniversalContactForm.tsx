@@ -1,8 +1,7 @@
 'use client';
 
-import { Form, Input, ConfigProvider, theme, App, Select } from 'antd';
+import { Form, Input, ConfigProvider, theme, App, Checkbox } from 'antd';
 import { useState } from 'react';
-import { useLang } from '@/lib/i18n';
 import styles from './UniversalContactForm.module.css';
 
 // Dark theme setup for ConfigProvider
@@ -34,7 +33,6 @@ interface UniversalContactFormProps {
 }
 
 export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
-  const { lang, t } = useLang();
   const { notification } = App.useApp();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -53,8 +51,8 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
 
       if (response.ok) {
         notification.success({
-          message: 'Success',
-          description: 'Your message has been sent successfully.',
+          message: 'Solicitud enviada',
+          description: 'Tu solicitud ha sido enviada con éxito. Nos pondremos en contacto contigo a la brevedad.',
           placement: 'top',
         });
         form.resetFields();
@@ -64,8 +62,8 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
       }
     } catch (error) {
       notification.error({
-        message: 'Error',
-        description: 'There was an error sending your message. Please try again.',
+        message: 'Error de envío',
+        description: 'Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.',
         placement: 'top',
       });
     } finally {
@@ -82,104 +80,99 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
         className={styles.formContainer}
         requiredMark={false}
       >
-        <div className={styles.row}>
-          <Form.Item
-            name="firstName"
-            rules={[{ required: true, message: 'First name is required' }]}
-            className={styles.formItem}
-          >
-            <Input placeholder="First Name*" className={styles.input} />
-          </Form.Item>
-          <Form.Item
-            name="lastName"
-            rules={[{ required: true, message: 'Last name is required' }]}
-            className={styles.formItem}
-          >
-            <Input placeholder="Last Name*" className={styles.input} />
-          </Form.Item>
-        </div>
+        {/* Nombre completo */}
+        <Form.Item
+          name="fullName"
+          rules={[{ required: true, message: 'El nombre completo es obligatorio' }]}
+          className={styles.formItemFull}
+        >
+          <Input placeholder="Nombre completo*" className={styles.input} />
+        </Form.Item>
 
+        {/* Correo electrónico y Teléfono de contacto */}
         <div className={styles.row}>
           <Form.Item
             name="email"
             rules={[
-              { required: true, message: 'Email is required' },
-              { type: 'email', message: 'Enter a valid email' }
+              { required: true, message: 'El correo electrónico es obligatorio' },
+              { type: 'email', message: 'Ingresa un correo electrónico válido' }
             ]}
             className={styles.formItem}
           >
-            <Input placeholder="E-mail*" className={styles.input} />
+            <Input placeholder="Correo electrónico*" className={styles.input} />
           </Form.Item>
           <Form.Item
             name="phone"
-            rules={[{ required: true, message: 'Phone number is required' }]}
+            rules={[{ required: true, message: 'El teléfono de contacto es obligatorio' }]}
             className={styles.formItem}
           >
-            <Input placeholder="Phone*" className={styles.input} />
+            <Input placeholder="Teléfono de contacto*" className={styles.input} />
           </Form.Item>
         </div>
 
+        {/* Empresa y Cargo / Puesto */}
         <div className={styles.row}>
           <Form.Item
             name="company"
-            rules={[{ required: true, message: 'Company is required' }]}
+            rules={[{ required: true, message: 'El nombre de la empresa es obligatorio' }]}
             className={styles.formItem}
           >
-            <Input placeholder="Company*" className={styles.input} />
+            <Input placeholder="Empresa*" className={styles.input} />
           </Form.Item>
           <Form.Item
             name="position"
             className={styles.formItem}
           >
-            <Input placeholder="Position" className={styles.input} />
+            <Input placeholder="Cargo / Puesto" className={styles.input} />
           </Form.Item>
         </div>
 
-        <div className={styles.row}>
-          <Form.Item
-            name="location"
-            rules={[{ required: true, message: 'Location is required' }]}
-            className={styles.formItem}
-          >
-            <Input placeholder="Location*" className={styles.input} />
-          </Form.Item>
-          <Form.Item
-            name="city"
-            className={styles.formItem}
-          >
-            <Input placeholder="City" className={styles.input} />
-          </Form.Item>
-        </div>
-
+        {/* Ubicación */}
         <Form.Item
-          name="category"
-          rules={[{ required: true, message: lang === 'es' ? 'Selecciona una categoría obligatoria' : 'Category is required' }]}
+          name="location"
+          rules={[{ required: true, message: 'La ubicación es obligatoria' }]}
           className={styles.formItemFull}
-          label={<span style={{ color: 'var(--color-text-secondary)', fontSize: '15px', fontWeight: 500, paddingBottom: '4px' }}>{lang === 'es' ? 'Soy un...' : 'I am a...'}</span>}
         >
-          <Select
-            placeholder={lang === 'es' ? 'Selecciona una categoría' : 'Select a category'}
-            styles={{ popup: { root: { backgroundColor: '#111', border: '1px solid rgba(255, 255, 255, 0.08)' } } }}
-            virtual={false} /* Better blur/rendering on transparent modals */
-            options={[
-              { value: 'Provider', label: lang === 'es' ? 'Proveedor' : 'Provider' },
-              { value: 'Partner', label: lang === 'es' ? 'Socio' : 'Partner' },
-              { value: 'Collaborator', label: lang === 'es' ? 'Colaborador' : 'Collaborator' },
-              { value: 'Client', label: lang === 'es' ? 'Cliente' : 'Client' },
-            ]}
-          />
+          <Input placeholder="Ubicación*" className={styles.input} />
         </Form.Item>
 
+        {/* Mensaje */}
         <Form.Item
           name="message"
           className={styles.formItemFull}
         >
-          <Input.TextArea placeholder={lang === 'es' ? '¿Cómo podemos ayudarte?' : 'How can we help?'} rows={4} className={styles.textarea} />
+          <Input.TextArea placeholder="Mensaje" rows={4} className={styles.textarea} />
+        </Form.Item>
+
+        {/* Casilla de Aceptación Legal */}
+        <Form.Item
+          name="agreement"
+          valuePropName="checked"
+          rules={[
+            {
+              validator: (_, value) =>
+                value ? Promise.resolve() : Promise.reject(new Error('Debes aceptar los Términos y Condiciones y el Aviso de Privacidad para continuar')),
+            },
+          ]}
+          className={styles.checkboxItem}
+        >
+          <Checkbox className={styles.checkbox}>
+            <span className={styles.checkboxText}>
+              Acepto los{' '}
+              <a href="/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className={styles.legalLink}>
+                Términos y Condiciones
+              </a>{' '}
+              y el tratamiento de mis datos personales por EDIRA para gestionar mi solicitud, de conformidad con el{' '}
+              <a href="/aviso-de-privacidad" target="_blank" rel="noopener noreferrer" className={styles.legalLink}>
+                Aviso de Privacidad Simplificado
+              </a>.
+            </span>
+          </Checkbox>
         </Form.Item>
 
         <div className={styles.submitRow}>
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? 'Sending...' : 'Get started'}
+            {loading ? 'Enviando...' : 'Enviar solicitud'}
           </button>
         </div>
       </Form>

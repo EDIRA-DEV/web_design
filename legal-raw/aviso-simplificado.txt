@@ -1,0 +1,54 @@
+=========================================
+EDIRA - INFORMACIÓN DE CONTROL LEGAL
+Responsable: Eduardo Rodrigo Silva Orozco
+Nombre Comercial: EDIRA
+Ubicación: Santiago de Querétaro, Qro., México
+Marco Legal: Conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su Reglamento
+Fecha de entrada en vigor: 12 de mayo de 2026
+Versión: 1.0
+=========================================
+
+AVISO DE PRIVACIDAD SIMPLIFICADO DE EDIRA
+I. RESPONSABLE DEL TRATAMIENTO DE DATOS PERSONALES
+Eduardo Rodrigo Silva Orozco Orozco, en su carácter de persona física con actividad
+empresarial, quien opera comercialmente bajo el nombre "EDIRA"
+, es responsable del
+tratamiento de los datos personales que se recaben a través de nuestros medios digitales y
+cualquier otro canal de contacto. El responsable se localiza en Santiago de Querétaro,
+Querétaro, México, con sitio web https://www.edira.dev , correo electrónico info@edira.dev y
+teléfono +52 1 442 866 2242;
+II. DATOS PERSONALES TRATADOS
+Edira, recaba y trata datos de identificación y contacto de representantes y clientes
+potenciales, así como información contenida en las bases de datos empresariales sobre
+empleados, proveedores u otras personas que nos proporcionan nuestros clientes.
+Dependiendo del proyecto, esa información puede incluir datos laborales, financieros y otros
+de carácter sensible que nuestros clientes almacenan en sus sistemas. Estos datos se tratan con
+estrictas medidas de seguridad y confidencialidad.
+III. FINALIDADES DEL TRATAMIENTO
+Los datos personales serán utilizados principalmente para: (i) evaluar y gestionar solicitudes de
+servicios; (ii) crear y administrar cuentas de cliente; (iii) diseñar, desarrollar, implementar y
+mantener soluciones de consultoría en manejo de datos, business intelligence, automatización
+e inteligencia artificial; (iv) gestionar proyectos y recursos, incluidos freelancers y proveedores
+asociados; (v) enviar comunicaciones sobre el servicio, acceso a plataformas, soporte técnico
+y actualizaciones; (vi) gestionar pagos, facturación y cumplimiento de obligaciones legales; y
+(vii) salvaguardar la seguridad de la información y prevenir fraudes o usos indebidos. De
+manera adicional, los datos de contacto podrán utilizarse para ofrecer información sobre
+nuevos servicios, eventos, contenidos, promociones o encuestas de satisfacción. Usted puede
+manifestar su negativa al uso de sus datos para estas finalidades adicionales en cualquier
+momento, enviando un correo a la dirección indicada.
+IV. OPCIONES Y MEDIOS PARA LIMITAR EL USO O DIVULGACIÓN DE DATOSSi desea limitar el uso o divulgación de sus datos personales para finalidades no esenciales, le
+pedimos enviar su solicitud al correo electrónico señalado. Asimismo, puede inscribirse en
+registros de exclusión publicitaria, cuando existan, para reducir la recepción de
+comunicaciones promocionales.
+V. MEDIOS PARA EJERCER DERECHOS ARCO Y REVOCAR CONSENTIMIENTO
+Usted tiene derecho a acceder, rectificar, cancelar u oponerse al tratamiento de sus datos
+personales, así como a revocar el consentimiento otorgado. Para ejercer estos derechos o
+plantear cualquier duda relacionada con el tratamiento de sus datos, deberá enviar la solicitud
+correspondiente al correo electrónico señalado, acreditando su identidad e indicando de
+manera expresa el derecho que desea ejercer. El procedimiento y requisitos para el ejercicio
+de estos derechos se encuentran detallados en nuestro Aviso de Privacidad Integral.
+VI. CONSULTA DEL AVISO DE PRIVACIDAD INTEGRAL
+Nuestro Aviso de Privacidad Integral, en el que se describe con mayor detalle el tratamiento de
+datos personales, los mecanismos para el ejercicio de derechos ARCO, los criterios de
+conservación de datos y los supuestos de transferencias nacionales e internacionales,se
+encuentra disponible para su consulta en el sitio web www.edira.dev o median
