@@ -152,29 +152,29 @@ export function CookieBanner() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className={styles.banner}
+            className={`${styles.banner} fixed bottom-4 left-4 right-4 w-auto max-w-none mx-auto flex flex-col gap-4 md:bottom-4 md:left-4 md:right-auto md:w-[420px]`}
           >
             <div className={styles.bannerContent}>
               <p className={styles.bannerText}>{t.bannerText}</p>
-              <div className={styles.bannerActions}>
+              <div className={`${styles.bannerActions} flex flex-col gap-2 w-full md:flex-row md:gap-2`}>
                 <button
                   type="button"
                   onClick={handleRejectOptional}
-                  className={`${styles.btn} ${styles.btnOutline}`}
+                  className={`${styles.btn} ${styles.btnOutline} w-full md:w-auto md:flex-1`}
                 >
                   {t.rejectOptional}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowSettings(true)}
-                  className={`${styles.btn} ${styles.btnOutline}`}
+                  className={`${styles.btn} ${styles.btnOutline} w-full md:w-auto md:flex-1`}
                 >
                   {t.configure}
                 </button>
                 <button
                   type="button"
                   onClick={handleAcceptAll}
-                  className={`${styles.btn} ${styles.btnPrimary}`}
+                  className={`${styles.btn} ${styles.btnPrimary} w-full md:w-auto md:flex-1`}
                 >
                   {t.acceptAll}
                 </button>

@@ -253,6 +253,7 @@
     margin-bottom: 0;
     scroll-snap-align: center;
     scroll-snap-stop: always;
+    scroll-margin-top: 100px;
   }
 
   .categoryItem:first-child {

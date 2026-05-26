@@ -176,6 +176,7 @@
     scroll-snap-stop: always;
     padding: var(--space-4) 0; /* Compacted vertical padding */
     will-change: height, opacity;
+    scroll-margin-top: 100px;
   }
 
   .mobileVideoWrapper {

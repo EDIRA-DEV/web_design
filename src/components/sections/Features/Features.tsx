@@ -63,55 +63,14 @@ export function Features() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
-  // Mobile scroll-spy logic
-  useEffect(() => {
-    if (!isMobile) return;
-
-    const handleMobileScroll = () => {
-      const center = window.innerHeight / 2;
-      let closestIndex = activeIndex;
-      let minDistance = Infinity;
-
-      itemRefs.current.forEach((el, index) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const elCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(center - elCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestIndex = index;
-        }
-      });
-
-      if (closestIndex !== activeIndex) {
-        setActiveIndex(closestIndex);
-      }
-    };
-
-    window.addEventListener('scroll', handleMobileScroll, { passive: true });
-    handleMobileScroll();
-
-    return () => window.removeEventListener('scroll', handleMobileScroll);
-  }, [isMobile, activeIndex]);
-
+  // Sync desktop video source
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
     if (isMobile) {
-      // Wait for the accordion expansion animation (400ms) to complete before scrolling
-      setTimeout(() => {
-        const element = itemRefs.current[index];
-        if (element) {
-          const header = document.querySelector('header');
-          const headerHeight = header ? header.offsetHeight : 80;
-          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - headerHeight - 16; // Discount header height and add spacing
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 400);
+      const element = itemRefs.current[index];
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       // Desktop sticky scroll mapping
       if (!containerRef.current) return;
