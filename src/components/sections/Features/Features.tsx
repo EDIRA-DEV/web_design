@@ -21,6 +21,7 @@ export function Features() {
   const [activeIndex, setActiveIndex] = useState(0);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const isClickScrolling = useRef(false);
 
   // Detect mobile view (< 768px)
   useEffect(() => {
@@ -31,6 +32,38 @@ export function Features() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Mobile ScrollSpy using IntersectionObserver
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -50% 0px', // targets top third of screen
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (isClickScrolling.current) return;
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = itemRefs.current.findIndex(el => el === entry.target);
+          if (index !== -1) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    }, observerOptions);
+
+    itemRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isMobile]);
 
   // Desktop sticky scroll mapping
   useEffect(() => {
@@ -63,14 +96,26 @@ export function Features() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
-  // Sync desktop video source
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
     if (isMobile) {
+      isClickScrolling.current = true;
       const element = itemRefs.current[index];
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const header = document.querySelector('header');
+        const headerHeight = header ? header.offsetHeight : 80;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetMargin = 50; // Courtesy margin of 50px
+        const targetY = elementPosition - headerHeight - offsetMargin;
+
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
       }
+      setTimeout(() => {
+        isClickScrolling.current = false;
+      }, 800);
     } else {
       // Desktop sticky scroll mapping
       if (!containerRef.current) return;
