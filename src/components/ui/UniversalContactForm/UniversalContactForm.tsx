@@ -2,6 +2,7 @@
 
 import { Form, Input, ConfigProvider, theme, App, Checkbox } from 'antd';
 import { useState } from 'react';
+import { useLang } from '@/lib/i18n';
 import styles from './UniversalContactForm.module.css';
 
 // Dark theme setup for ConfigProvider
@@ -33,6 +34,7 @@ interface UniversalContactFormProps {
 }
 
 export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
+  const { t } = useLang();
   const { notification } = App.useApp();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -51,8 +53,8 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
 
       if (response.ok) {
         notification.success({
-          message: 'Solicitud enviada',
-          description: 'Tu solicitud ha sido enviada con éxito. Nos pondremos en contacto contigo a la brevedad.',
+          message: t('form.success.title'),
+          description: t('form.success.desc'),
           placement: 'top',
         });
         form.resetFields();
@@ -62,8 +64,8 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
       }
     } catch (error) {
       notification.error({
-        message: 'Error de envío',
-        description: 'Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.',
+        message: t('form.error.title'),
+        description: t('form.error.desc'),
         placement: 'top',
       });
     } finally {
@@ -83,10 +85,10 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
         {/* Nombre completo */}
         <Form.Item
           name="fullName"
-          rules={[{ required: true, message: 'El nombre completo es obligatorio' }]}
+          rules={[{ required: true, message: t('form.fullName.required') }]}
           className={styles.formItemFull}
         >
-          <Input placeholder="Nombre completo*" className={styles.input} />
+          <Input placeholder={`${t('form.fullName')}*`} className={styles.input} />
         </Form.Item>
 
         {/* Correo electrónico y Teléfono de contacto */}
@@ -94,19 +96,19 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
           <Form.Item
             name="email"
             rules={[
-              { required: true, message: 'El correo electrónico es obligatorio' },
-              { type: 'email', message: 'Ingresa un correo electrónico válido' }
+              { required: true, message: t('form.email.required') },
+              { type: 'email', message: t('form.email.invalid') }
             ]}
             className={styles.formItem}
           >
-            <Input placeholder="Correo electrónico*" className={styles.input} />
+            <Input placeholder={`${t('form.email')}*`} className={styles.input} />
           </Form.Item>
           <Form.Item
             name="phone"
-            rules={[{ required: true, message: 'El teléfono de contacto es obligatorio' }]}
+            rules={[{ required: true, message: t('form.phone.required') }]}
             className={styles.formItem}
           >
-            <Input placeholder="Teléfono de contacto*" className={styles.input} />
+            <Input placeholder={`${t('form.phone')}*`} className={styles.input} />
           </Form.Item>
         </div>
 
@@ -114,26 +116,26 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
         <div className={styles.row}>
           <Form.Item
             name="company"
-            rules={[{ required: true, message: 'El nombre de la empresa es obligatorio' }]}
+            rules={[{ required: true, message: t('form.company.required') }]}
             className={styles.formItem}
           >
-            <Input placeholder="Empresa*" className={styles.input} />
+            <Input placeholder={`${t('form.company')}*`} className={styles.input} />
           </Form.Item>
           <Form.Item
             name="position"
             className={styles.formItem}
           >
-            <Input placeholder="Cargo / Puesto" className={styles.input} />
+            <Input placeholder={t('form.position')} className={styles.input} />
           </Form.Item>
         </div>
 
         {/* Ubicación */}
         <Form.Item
           name="location"
-          rules={[{ required: true, message: 'La ubicación es obligatoria' }]}
+          rules={[{ required: true, message: t('form.location.required') }]}
           className={styles.formItemFull}
         >
-          <Input placeholder="Ubicación*" className={styles.input} />
+          <Input placeholder={`${t('form.location')}*`} className={styles.input} />
         </Form.Item>
 
         {/* Mensaje */}
@@ -141,7 +143,7 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
           name="message"
           className={styles.formItemFull}
         >
-          <Input.TextArea placeholder="Mensaje" rows={4} className={styles.textarea} />
+          <Input.TextArea placeholder={t('form.message')} rows={4} className={styles.textarea} />
         </Form.Item>
 
         {/* Casilla de Aceptación Legal */}
@@ -151,28 +153,29 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
           rules={[
             {
               validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Debes aceptar los Términos y Condiciones y el Aviso de Privacidad para continuar')),
+                value ? Promise.resolve() : Promise.reject(new Error(t('form.agreement.error'))),
             },
           ]}
           className={styles.checkboxItem}
         >
           <Checkbox className={styles.checkbox}>
             <span className={styles.checkboxText}>
-              Acepto los{' '}
+              {t('form.agreement.part1')}
               <a href="/terminos-y-condiciones" target="_blank" rel="noopener noreferrer" className={styles.legalLink}>
-                Términos y Condiciones
-              </a>{' '}
-              y el tratamiento de mis datos personales por EDIRA para gestionar mi solicitud, de conformidad con el{' '}
+                {t('form.agreement.part2')}
+              </a>
+              {t('form.agreement.part3')}
               <a href="/aviso-de-privacidad" target="_blank" rel="noopener noreferrer" className={styles.legalLink}>
-                Aviso de Privacidad Simplificado
-              </a>.
+                {t('form.agreement.part4')}
+              </a>
+              {t('form.agreement.part5')}
             </span>
           </Checkbox>
         </Form.Item>
 
         <div className={styles.submitRow}>
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? 'Enviando...' : 'Enviar solicitud'}
+            {loading ? t('form.sending') : t('form.submit')}
           </button>
         </div>
       </Form>

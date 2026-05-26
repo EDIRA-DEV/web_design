@@ -7,7 +7,7 @@ import { useLang } from '@/lib/i18n';
 import styles from './Footer.module.css';
 
 export function Footer() {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
   const year = new Date().getFullYear();
 
   const handleOpenCookies = () => {
@@ -26,25 +26,25 @@ export function Footer() {
 
           <div className={styles.links}>
             <Link href="/aviso-de-privacidad" className={styles.link}>
-              {lang === 'es' ? 'Aviso de Privacidad' : 'Privacy Notice'}
+              {t('footer.privacyNotice')}
             </Link>
             <Link href="/politica-de-cookies" className={styles.link}>
-              {lang === 'es' ? 'Política de Cookies' : 'Cookie Policy'}
+              {t('footer.cookiePolicy')}
             </Link>
             <Link href="/terminos-y-condiciones" className={styles.link}>
-              {lang === 'es' ? 'Términos y Condiciones' : 'Terms & Conditions'}
+              {t('footer.termsConditions')}
             </Link>
             <button 
               type="button"
               onClick={handleOpenCookies}
               className={styles.cookieBtn}
             >
-              {lang === 'es' ? 'Preferencias de cookies' : 'Cookie Preferences'}
+              {t('footer.cookiePreferences')}
             </button>
           </div>
 
           <p className={styles.copy}>
-            &copy; {year} EDIRA. {lang === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}
+            &copy; {year} EDIRA. {t('footer.rights')}
           </p>
         </div>
       </Container>
