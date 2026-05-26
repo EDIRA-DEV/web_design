@@ -20,10 +20,24 @@ export function Features() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile view (< 768px)
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Desktop sticky scroll mapping
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleScroll = () => {
-      if (!containerRef.current || window.innerWidth <= 1024) return;
+      if (!containerRef.current || window.innerWidth < 768) return;
       
       const { top, height } = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -47,15 +61,48 @@ export function Features() {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
+
+  // Mobile scroll-spy logic
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleMobileScroll = () => {
+      const center = window.innerHeight / 2;
+      let closestIndex = activeIndex;
+      let minDistance = Infinity;
+
+      itemRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(center - elCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeIndex) {
+        setActiveIndex(closestIndex);
+      }
+    };
+
+    window.addEventListener('scroll', handleMobileScroll, { passive: true });
+    handleMobileScroll();
+
+    return () => window.removeEventListener('scroll', handleMobileScroll);
+  }, [isMobile, activeIndex]);
 
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
-    if (window.innerWidth <= 1024) {
-      // Mobile native snapping container scroll
-      if (itemRefs.current[index]) {
-        itemRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
+    if (isMobile) {
+      // Mobile tap scrolls item into center smoothly
+      setTimeout(() => {
+        if (itemRefs.current[index]) {
+          itemRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
     } else {
       // Desktop sticky scroll mapping
       if (!containerRef.current) return;
@@ -74,31 +121,9 @@ export function Features() {
     }
   };
 
-  const handleListScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    if (window.innerWidth > 1024) return;
-    const container = e.currentTarget;
-    const containerRect = container.getBoundingClientRect();
-    const containerCenter = containerRect.top + containerRect.height / 2;
-    let closestIndex = activeIndex;
-    let minDistance = Infinity;
-
-    itemRefs.current.forEach((el, index) => {
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const elCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(containerCenter - elCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    if (closestIndex !== activeIndex) {
-      setActiveIndex(closestIndex);
-    }
-  };
-
+  // Sync desktop video source
   useEffect(() => {
+    if (isMobile) return;
     const video = videoRef.current;
     if (!video) return;
     const newSrc = FEATURES_CONFIG[activeIndex].videoSrc;
@@ -107,7 +132,7 @@ export function Features() {
       video.load();
       video.play().catch(() => {});
     }
-  }, [activeIndex]);
+  }, [activeIndex, isMobile]);
 
   return (
     <section className={styles.section} ref={containerRef}>
@@ -122,7 +147,7 @@ export function Features() {
                 <span className={styles.italic}>{t('features.title3')}</span>
               </h2>
               
-              <div className={styles.list} onScroll={handleListScroll}>
+              <div className={styles.list}>
                 {FEATURES_CONFIG.map((feature, index) => {
                   const isActive = index === activeIndex;
                   return (
@@ -150,12 +175,21 @@ export function Features() {
                             transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
                             style={{ overflow: 'hidden' }}
                           >
+                            {isMobile && (
+                              <div className={styles.mobileVideoWrapper}>
+                                <video 
+                                  src={feature.videoSrc}
+                                  autoPlay 
+                                  loop 
+                                  muted 
+                                  playsInline
+                                  className={styles.video}
+                                />
+                              </div>
+                            )}
                             <p className={styles.itemDescription}>
                               {t(feature.descKey)}
                             </p>
-                            <Link href="/services" className={styles.learnMore}>
-                              {t('features.learnMore')} <span>›</span>
-                            </Link>
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -165,19 +199,21 @@ export function Features() {
               </div>
             </div>
 
-            <div className={styles.mediaCol}>
-              <div className={styles.videoWrapper}>
-                <video 
-                  ref={videoRef}
-                  src={FEATURES_CONFIG[0].videoSrc}
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline
-                  className={styles.video}
-                />
+            {!isMobile && (
+              <div className={styles.mediaCol}>
+                <div className={styles.videoWrapper}>
+                  <video 
+                    ref={videoRef}
+                    src={FEATURES_CONFIG[0].videoSrc}
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className={`${styles.video} ${(activeIndex === 1 || activeIndex === 3) ? styles.containVideo : ''}`}
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
           </div>
         </Container>

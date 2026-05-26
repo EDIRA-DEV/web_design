@@ -14,14 +14,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: SITE_CONFIG.name,
+  title: 'EDIRA | Tech Consulting Services',
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.url),
   openGraph: {
-    title: SITE_CONFIG.name,
+    title: 'EDIRA | Tech Consulting Services',
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
-    siteName: SITE_CONFIG.name,
+    siteName: 'EDIRA | Tech Consulting Services',
     type: 'website',
   },
 };
@@ -33,14 +33,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={inter.variable}>
-      <head>
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <meta name="apple-mobile-web-app-title" content="EDIRA" />
-        <link rel="manifest" href="/site.webmanifest" />
-      </head>
       <body>
         <LangProvider>
           <ContactModalProvider>

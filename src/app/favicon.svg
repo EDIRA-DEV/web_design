@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Capa_2" data-name="Capa 2" viewBox="0 0 589.72 592.17" width="589.72" height="592.17"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <style>
+      .cls-1 {
+        fill: url(#Degradado_sin_nombre);
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre" data-name="Degradado sin nombre" x1="480.83" y1="71.53" x2="109.34" y2="514.26" gradientTransform="translate(0 594) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a72ef4"></stop>
+      <stop offset=".5" stop-color="#1f43c2"></stop>
+      <stop offset="1" stop-color="#7736e4"></stop>
+    </linearGradient>
+  </defs><g id="Capa_2-2" data-name="Capa 2">
+    <g id="Capa_1-2" data-name="Capa 1-2">
+      <path class="cls-1" d="M237.34,242.44l57.35,33.4,146.02-85.97,89.49-52.88,59.52,34.56-163.02,94.06-131.82,76.36-112.95-65.35L0,171.49l157.95-91.8L294.81,0l63.38,37.03-51.82,30.52-184.64,108.18,58.15,33.57,127.98-75.76,107.04-63.61,56.89,33.27-174.83,103.66-59.61,35.59h-.01ZM529.87,272.37l-235.07,133.08-107.86-61.32-127.06-71.73L3.26,305.21l92.93,52.37,198.65,112.26,145.48-82.3,145.97-82.25-56.43-32.92h0ZM529.74,401.97l-235.02,127.35-158.91-86.33-75.79-40.95L3.39,434.16l191.01,103.44,100.48,54.57,119.04-64.65,172.17-93.37-56.36-32.18h0Z"></path>
+    </g>
+  </g><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

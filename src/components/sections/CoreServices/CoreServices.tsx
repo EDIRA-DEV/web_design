@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import styles from './CoreServices.module.css';
 import { Container } from '@/components/ui/Container/Container';
 import { useLang } from '@/lib/i18n';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Database, Cloud, Server, Zap, DollarSign,
   Network, Link, DownloadCloud, CheckCircle, TrendingUp,
@@ -37,7 +38,7 @@ const SERVICES_CONFIG = [
     { textKey: 'coreServices.item2.p3', customIcon: '/icons/analyticsDecision/informe-de-negocios.svg', icon: undefined },
   ]},
   { titleKey: 'coreServices.item3.title', descKey: 'coreServices.item3.desc', points: [
-    { textKey: 'coreServices.item3.p0', customIcon: '/icons/financialOperation/Profitability and cost analysis across business units.svg', icon: undefined },
+    { textKey: 'coreServices.item3.p0', customIcon: '/icons/financialOperation/profitability_and_cost_analysis.svg', icon: undefined },
     { textKey: 'coreServices.item3.p1', customIcon: '/icons/financialOperation/Financial forecasting and scenario modeling.svg', icon: undefined },
     { textKey: 'coreServices.item3.p2', customIcon: '/icons/financialOperation/Operational performance monitoring.svg', icon: undefined },
     { textKey: 'coreServices.item3.p3', customIcon: '/icons/financialOperation/Data‑driven pricing optimization.svg', icon: undefined },
@@ -65,11 +66,26 @@ const SERVICES_CONFIG = [
 export function CoreServices() {
   const { t } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile view (< 768px)
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Desktop sticky scroll mapping
+  useEffect(() => {
+    if (isMobile) return;
+
     const handleScroll = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || window.innerWidth < 768) return;
       
       const { top, height } = containerRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -93,7 +109,65 @@ export function CoreServices() {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
+
+  // Mobile scroll-spy logic (centered viewport spy)
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const handleMobileScroll = () => {
+      const center = window.innerHeight / 2;
+      let closestIndex = activeIndex;
+      let minDistance = Infinity;
+
+      itemRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(center - elCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeIndex) {
+        setActiveIndex(closestIndex);
+      }
+    };
+
+    window.addEventListener('scroll', handleMobileScroll, { passive: true });
+    handleMobileScroll();
+
+    return () => window.removeEventListener('scroll', handleMobileScroll);
+  }, [isMobile, activeIndex]);
+
+  const handleItemClick = (index: number) => {
+    setActiveIndex(index);
+    if (isMobile) {
+      // Mobile tap scrolls item into center smoothly
+      setTimeout(() => {
+        if (itemRefs.current[index]) {
+          itemRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 50);
+    } else {
+      // Desktop sticky scroll mapping
+      if (!containerRef.current) return;
+      const { top } = containerRef.current.getBoundingClientRect();
+      const absoluteTop = window.scrollY + top;
+      const height = containerRef.current.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollableDistance = height - windowHeight;
+      const itemsCount = SERVICES_CONFIG.length;
+      const progress = (index + 0.5) / itemsCount; 
+      
+      window.scrollTo({
+        top: absoluteTop + (progress * scrollableDistance),
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section className={styles.section} ref={containerRef}>
@@ -113,54 +187,95 @@ export function CoreServices() {
                 {SERVICES_CONFIG.map((service, index) => {
                   const isActive = index === activeIndex;
                   return (
-                    <div 
+                    <motion.div 
                       key={index} 
+                      ref={(el: HTMLDivElement | null) => { itemRefs.current[index] = el; }}
                       className={`${styles.categoryItem} ${isActive ? styles.activeCategory : ''}`}
+                      onClick={() => handleItemClick(index)}
+                      initial={false}
+                      animate={{ opacity: isActive ? 1 : 0.4 }}
+                      transition={{ duration: 0.4 }}
+                      style={{ cursor: 'pointer' }}
                     >
-                      <h3 className={styles.categoryTitle}>{t(service.titleKey)}</h3>
-                      <div className={styles.descriptionWrapper}>
-                        <div className={styles.descriptionInner}>
-                          <p className={styles.descriptionText}>
-                            {t(service.descKey)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                      <motion.h3 
+                        className={styles.categoryTitle}
+                        animate={{ color: isActive ? 'var(--color-text)' : 'var(--color-text-secondary)' }}
+                      >
+                        {t(service.titleKey)}
+                      </motion.h3>
+                      <AnimatePresence initial={false}>
+                        {isActive && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: 'auto', opacity: 1, marginTop: 12 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                            style={{ overflow: 'hidden' }}
+                          >
+                            <p className={styles.descriptionText}>
+                              {t(service.descKey)}
+                            </p>
+                            {isMobile && (
+                              <div className={styles.mobileTimeline}>
+                                <div className={styles.timelineLine}></div>
+                                {service.points.map((point: any, pIndex) => {
+                                  const Icon = point.icon;
+                                  return (
+                                    <div key={pIndex} className={styles.timelinePoint}>
+                                      <div className={styles.pointIcon}>
+                                        {point.customIcon ? (
+                                          <img src={point.customIcon} alt="" className={styles.iconElement} />
+                                        ) : (
+                                          Icon && <Icon className={styles.iconElement} />
+                                        )}
+                                      </div>
+                                      <p className={styles.pointText}>{t(point.textKey)}</p>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
                   );
                 })}
               </div>
             </div>
 
-            <div className={styles.rightCol}>
-              <div className={styles.timelineContainer}>
-                {SERVICES_CONFIG.map((service, index) => {
-                  const isActive = index === activeIndex;
-                  return (
-                    <div 
-                      key={index} 
-                      className={`${styles.timelineGroup} ${isActive ? styles.activeTimelineGroup : ''}`}
-                    >
-                      <div className={styles.timelineLine}></div>
-                      {service.points.map((point: any, pIndex) => {
-                        const Icon = point.icon;
-                        return (
-                          <div key={pIndex} className={styles.timelinePoint}>
-                            <div className={styles.pointIcon}>
-                              {point.customIcon ? (
-                                <img src={point.customIcon} alt="" className={styles.iconElement} />
-                              ) : (
-                                Icon && <Icon className={styles.iconElement} />
-                              )}
+            {!isMobile && (
+              <div className={styles.rightCol}>
+                <div className={styles.timelineContainer}>
+                  {SERVICES_CONFIG.map((service, index) => {
+                    const isActive = index === activeIndex;
+                    return (
+                      <div 
+                        key={index} 
+                        className={`${styles.timelineGroup} ${isActive ? styles.activeTimelineGroup : ''}`}
+                      >
+                        <div className={styles.timelineLine}></div>
+                        {service.points.map((point: any, pIndex) => {
+                          const Icon = point.icon;
+                          return (
+                            <div key={pIndex} className={styles.timelinePoint}>
+                              <div className={styles.pointIcon}>
+                                {point.customIcon ? (
+                                  <img src={point.customIcon} alt="" className={styles.iconElement} />
+                                ) : (
+                                  Icon && <Icon className={styles.iconElement} />
+                                )}
+                              </div>
+                              <p className={styles.pointText}>{t(point.textKey)}</p>
                             </div>
-                            <p className={styles.pointText}>{t(point.textKey)}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
           </div>
         </Container>

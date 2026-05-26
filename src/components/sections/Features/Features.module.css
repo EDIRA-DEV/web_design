@@ -113,19 +113,26 @@
   overflow: hidden; /* Fix layout overflow on Safari */
   position: relative; /* Make sure borders behave */
   transform: translateZ(0); /* Force GPU acceleration */
-  /* Removed border, background-color, and box-shadow for seamless blending */
   background: transparent;
+}
+
+.videoWrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block; /* Removes inline gap at bottom */
 }
 
 .video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* Removes inline gap at bottom */
+  display: block;
 }
 
 /* Responsive adjustments */
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
   .section {
     height: auto;
   }
@@ -158,21 +165,41 @@
   .list {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    height: 55vh;
-    scroll-snap-type: y mandatory;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-bottom: var(--space-12);
-  }
-
-  .list::-webkit-scrollbar {
-    display: none;
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+    padding-bottom: 0;
   }
 
   .item {
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    flex: 0 0 auto;
+    padding: var(--space-4) 0; /* Compacted vertical padding */
+    will-change: height, opacity;
+  }
+
+  .mobileVideoWrapper {
+    width: 100%;
+    height: auto; /* Uses natural height of video to avoid vertical blank spaces */
+    overflow: hidden;
+    border-radius: 12px;
+    margin-bottom: var(--space-3);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .mobileVideoWrapper video {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Prevent cropping on mobile only */
+    object-position: center;
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .containVideo {
+    object-fit: contain !important;
   }
 }
