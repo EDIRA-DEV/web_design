@@ -145,12 +145,21 @@ export function CoreServices() {
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
     if (isMobile) {
-      // Mobile tap scrolls item into center smoothly
+      // Wait for the accordion expansion animation (400ms) to complete before scrolling
       setTimeout(() => {
-        if (itemRefs.current[index]) {
-          itemRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const element = itemRefs.current[index];
+        if (element) {
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.offsetHeight : 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - headerHeight - 16; // Discount header height and add spacing
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 50);
+      }, 400);
     } else {
       // Desktop sticky scroll mapping
       if (!containerRef.current) return;
