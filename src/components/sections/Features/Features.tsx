@@ -66,17 +66,15 @@ export function Features() {
   const handleItemClick = (index: number) => {
     setActiveIndex(index);
     if (isMobile) {
-      const element = itemRefs.current[index];
-      if (element) {
-        const header = document.querySelector('header');
-        const navbarHeight = header ? header.offsetHeight : 80;
-        const targetY = element.getBoundingClientRect().top + window.scrollY - navbarHeight - 40;
-
-        window.scrollTo({
-          top: targetY,
-          behavior: 'smooth'
-        });
-      }
+      setTimeout(() => {
+        const element = itemRefs.current[index];
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      }, 100);
     } else {
       // Desktop sticky scroll mapping
       if (!containerRef.current) return;
