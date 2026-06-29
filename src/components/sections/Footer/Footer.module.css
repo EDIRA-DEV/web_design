@@ -52,9 +52,29 @@
   color: var(--color-text);
 }
 
-.copy {
-  font-size: var(--text-xs);
+.socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  justify-content: center;
+}
+
+.socialLink {
   color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialLink:hover {
+  color: var(--color-primary);
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
 }
 
 @media (min-width: 768px) {
@@ -67,5 +87,8 @@
     flex-direction: row;
     gap: var(--space-6);
     margin-block: 0;
+  }
+  .socials {
+    justify-content: flex-end;
   }
 }
