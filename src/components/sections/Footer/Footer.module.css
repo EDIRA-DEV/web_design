@@ -13,7 +13,7 @@
 }
 
 .copyright {
-  font-size: var(--text-sm);
+  font-size: 0.8rem;
   color: var(--color-text-muted);
 }
 

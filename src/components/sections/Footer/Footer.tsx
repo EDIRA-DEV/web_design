@@ -20,7 +20,7 @@ export function Footer() {
         <div className={styles.inner}>
           {/* Left Block */}
           <div className={styles.copyright}>
-            © 2026 EDIRA. All rights reserved.
+            © {new Date().getFullYear()} EDIRA. {t('footer.rights')}
           </div>
 
           {/* Center Block */}
