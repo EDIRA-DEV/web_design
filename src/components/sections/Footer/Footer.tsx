@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container/Container';
-import { SITE_CONFIG, NAV_LINKS } from '@/lib/constants';
 import { useLang } from '@/lib/i18n';
 import styles from './Footer.module.css';
 
 export function Footer() {
-  const { lang, t } = useLang();
-  const year = new Date().getFullYear();
+  const { t } = useLang();
 
   const handleOpenCookies = () => {
     if (typeof window !== 'undefined') {
@@ -20,10 +18,12 @@ export function Footer() {
     <footer className={styles.footer}>
       <Container>
         <div className={styles.inner}>
-          <Link href="/" className={styles.logo}>
-            EDIRA
-          </Link>
+          {/* Left Block */}
+          <div className={styles.copyright}>
+            © 2026 EDIRA. All rights reserved.
+          </div>
 
+          {/* Center Block */}
           <div className={styles.links}>
             <Link href="/aviso-de-privacidad" className={styles.link}>
               {t('footer.privacyNotice')}
@@ -43,6 +43,7 @@ export function Footer() {
             </button>
           </div>
 
+          {/* Right Block */}
           <div className={styles.socials}>
             <a
               href="https://www.linkedin.com/company/ediradev/"
