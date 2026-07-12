@@ -23,10 +23,11 @@ export function AnalyticsTracker() {
       .slice(2, 10)}`;
 
     // ── 2. Browser-side Pixel event (with deduplication Event ID) ───────────
-    // @ts-expect-error – fbq is injected globally by the Meta Pixel snippet
-    if (typeof window.fbq === 'function') {
-      // @ts-expect-error
-      window.fbq('track', 'PageView', {}, { eventID: pageViewId });
+    // Cast window to access fbq, which is injected globally by the Meta Pixel snippet.
+    type FbqWindow = Window & { fbq?: (...args: unknown[]) => void };
+    const win = window as FbqWindow;
+    if (typeof win.fbq === 'function') {
+      win.fbq('track', 'PageView', {}, { eventID: pageViewId });
     }
 
     // ── 3. Server-side CAPI event (fire-and-forget) ──────────────────────────

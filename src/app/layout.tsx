@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { SITE_CONFIG } from '@/lib/constants';
 import { LangProvider } from '@/lib/i18n';
 import { ContactModalProvider } from '@/providers/ContactModalContext';
 import { GlobalContactModal } from '@/providers/GlobalContactModal';
@@ -9,6 +8,7 @@ import { CookieBanner } from '@/components/ui/CookieBanner';
 import { AnalyticsTracker } from '@/components/analytics/AnalyticsTracker';
 import { App } from 'antd';
 import Script from 'next/script';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,14 +17,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'EDIRA | Tech Consulting Services',
-  description: SITE_CONFIG.description,
-  metadataBase: new URL(SITE_CONFIG.url),
+  title: 'EDIRA | Consultoría Tecnológica y Desarrollo de Software',
+  description: 'Ingeniería de software a medida, arquitectura digital e infraestructura para empresas.',
+  metadataBase: new URL('https://edira.dev'),
+  verification: {
+    google: 'Z0oGw_L8T9g5YyIZ_ddTUbEA09bn3-csYnGnSPIr7lI',
+  },
   openGraph: {
-    title: 'EDIRA | Tech Consulting Services',
-    description: SITE_CONFIG.description,
-    url: SITE_CONFIG.url,
-    siteName: 'EDIRA | Tech Consulting Services',
+    title: 'EDIRA | Consultoría Tecnológica',
+    description: 'Ingeniería de software a medida corporativa.',
+    url: 'https://edira.dev',
+    siteName: 'EDIRA',
+    images: [
+      {
+        url: 'https://edira.dev/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'EDIRA Share Image',
+      },
+    ],
+    locale: 'es_ES',
     type: 'website',
   },
 };
@@ -115,6 +127,9 @@ export default function RootLayout({
             </noscript>
           </>
         )}
+
+        {/* Google Analytics 4 — loads after interactive, does not block render */}
+        <GoogleAnalytics gaId="G-0XJMCV552V" />
       </body>
     </html>
   );
