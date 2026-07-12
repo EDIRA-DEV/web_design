@@ -44,10 +44,10 @@ export function Footer() {
           </div>
 
           <div className={styles.socials}>
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.linkedin.com/company/ediradev/"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.socialLink}
               aria-label="LinkedIn"
             >
@@ -57,10 +57,10 @@ export function Footer() {
                 <circle cx="4" cy="4" r="2" />
               </svg>
             </a>
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://x.com/edira_dev"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.socialLink}
               aria-label="X (Twitter)"
             >
@@ -69,10 +69,10 @@ export function Footer() {
                 <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
               </svg>
             </a>
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.instagram.com/edira_dev/"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.socialLink}
               aria-label="Instagram"
             >
@@ -82,10 +82,10 @@ export function Footer() {
                 <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
               </svg>
             </a>
-            <a 
-              href="#" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.facebook.com/profile.php?id=61591107226141"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.socialLink}
               aria-label="Facebook"
             >

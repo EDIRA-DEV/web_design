@@ -6,6 +6,7 @@ import { LangProvider } from '@/lib/i18n';
 import { ContactModalProvider } from '@/providers/ContactModalContext';
 import { GlobalContactModal } from '@/providers/GlobalContactModal';
 import { CookieBanner } from '@/components/ui/CookieBanner';
+import { AnalyticsTracker } from '@/components/analytics/AnalyticsTracker';
 import { App } from 'antd';
 import Script from 'next/script';
 
@@ -45,6 +46,7 @@ export default function RootLayout({
               {children}
               <GlobalContactModal />
               <CookieBanner />
+              <AnalyticsTracker />
             </App>
           </ContactModalProvider>
         </LangProvider>
@@ -65,7 +67,7 @@ export default function RootLayout({
                   s.parentNode.insertBefore(t,s)}(window, document,'script',
                   'https://connect.facebook.net/en_US/fbevents.js');
                   fbq('init', '${fbPixelId}');
-                  fbq('track', 'PageView');
+                  /* PageView is dispatched by AnalyticsTracker with Event ID deduplication */
                 `,
               }}
             />
