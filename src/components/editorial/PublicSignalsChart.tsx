@@ -90,26 +90,44 @@ export function PublicSignalsChart() {
     const viewportH = window.innerHeight;
 
     /*
-     * progress = 0  →  chart enters from viewport bottom (rect.top = viewportH)
-     * progress = 1  →  chart top reaches viewport top  (rect.top = 0)
-     *                  i.e. the chart is about to START exiting the viewport.
+     * Account for sticky headers that consume vertical space:
+     *   - Navbar:       ~72px   (always present)
+     *   - MobileSubNav: ~49px   (mobile only, hidden on ≥1024px)
      *
-     * completeAt = viewportH — the exact scroll distance the chart travels
-     * from "just entering" to "top aligned with viewport top".
+     * We read the actual height of any sticky/fixed elements above
+     * the content area, so the calculation remains accurate on both
+     * desktop (only Navbar) and mobile (Navbar + MobileSubNav).
+     */
+    const navbarEl  = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
+    const subNavEl  = document.querySelector('[class*="MobileEditorialSubNav-module"]') as HTMLElement | null;
+    const navbarH   = navbarEl ? navbarEl.offsetHeight : 72;
+    const subNavH   = (subNavEl && subNavEl.offsetHeight > 0) ? subNavEl.offsetHeight : 0;
+    const headerOffset = navbarH + subNavH;
+
+    /*
+     * Usable viewport height = space below all sticky headers
+     * progress = 0  →  chart bottom enters usable viewport (rect.top = viewportH)
+     * progress = 1  →  chart center aligns with center of usable viewport
+     *                  → bars fully visible, at max, chart still on screen
      *
-     * Timeline:
-     *   traveled = 0          → rect.top = viewportH   (chart entering)
-     *   traveled = viewportH  → rect.top = 0            (bars at max, chart still visible)
-     *   traveled > viewportH  → progress stays at 1     (chart exiting, bars pinned at max)
+     * completeAt: distance the chart travels from entering the viewport
+     * to reaching its center-aligned position in the visible area.
+     *
+     * Chart center Y relative to viewport:
+     *   chartCenterY = rect.top + rect.height / 2
+     * Center of usable viewport:
+     *   visibleCenterY = headerOffset + (viewportH - headerOffset) / 2
+     *
+     * traveled = viewportH - rect.top  (how much chart has scrolled into view from bottom)
+     * completeAt = distance from "entering bottom" to "chart center = visible center"
+     *            = viewportH - (headerOffset + (viewportH - headerOffset) / 2 - rect.height / 2)
+     *            = (viewportH + headerOffset) / 2 + rect.height / 2
      */
     const traveled   = viewportH - rect.top;
-    const completeAt = viewportH; // bars reach max when chart top hits viewport top
+    const usableH    = viewportH - headerOffset;
+    const completeAt = usableH * 0.55; // bars complete at ~55% of usable viewport scroll
 
     const p = clamp01(traveled / completeAt);
-    // Debug: remove after confirming animation works
-    if (typeof window !== 'undefined') {
-      (window as Window & { __chartProg?: number }).__chartProg = p;
-    }
     setScrollProgress(p);
   }, []);
 
