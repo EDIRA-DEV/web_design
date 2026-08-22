@@ -1,0 +1,46 @@
+/* ============================================================
+   EditorialNextButton — Gradient pill CTA → next section
+   ============================================================ */
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: var(--font-medium);
+  font-size: var(--text-sm);
+  padding: 0.625rem var(--space-6);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.nextBtn:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+.arrow {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.nextBtn:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ── Print ── */
+@media print {
+  .footer {
+    display: none !important;
+  }
+}

@@ -1,0 +1,85 @@
+/* ============================================================
+   Section00ExecutiveSummary — Intro quote with violet callout
+   ============================================================ */
+
+.section {
+  margin-bottom: var(--space-20);
+}
+
+/* ── Section Header ── */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-size: var(--text-xl);
+  font-weight: var(--font-medium);
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.divider {
+  flex-grow: 1;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Lead ── */
+.lead {
+  font-size: var(--text-lg);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-8);
+  max-width: 740px;
+}
+
+/* ── Quote Callout ── */
+.quoteBlock {
+  position: relative;
+  /* Deep dark canvas matching #0a0a0f palette */
+  background-color: #0a0a0f;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-8) var(--space-10);
+  margin: 0;
+}
+
+/* Left accent line */
+.quoteAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.quoteText {
+  font-family: serif;
+  font-style: italic;
+  font-size: var(--text-xl);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Print ── */
+@media print {
+  .section {
+    break-inside: avoid;
+  }
+  .quoteBlock {
+    border: 1px solid #8b5cf6;
+  }
+}

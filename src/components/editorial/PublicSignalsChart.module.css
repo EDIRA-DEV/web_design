@@ -1,0 +1,259 @@
+/* ============================================================
+   PublicSignalsChart — Scroll-driven dual-bar chart
+   
+   ALL animation is driven by JS scroll progress.
+   CSS has NO transitions on bars or labels —
+   the 60fps rAF loop provides smoothness instead.
+   ============================================================ */
+
+/* ── Outer wrapper ── */
+.wrapper {
+  position: relative;
+  background-color: #0d0d12;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: var(--space-6);
+  margin-block: var(--space-8);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .wrapper { padding: var(--space-8); }
+}
+
+/* Decorative ambient glow */
+.ambientGlow {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Eyebrow */
+.eyebrow {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: var(--space-8);
+}
+
+/* ── 3-column grid ── */
+.chartGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  padding-bottom: var(--space-6);
+  margin-bottom: var(--space-2);
+}
+
+.col:not(:last-child) {
+  border-right: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 480px) {
+  .chartGrid { grid-template-columns: 1fr; }
+  .col:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    padding-bottom: var(--space-8);
+    margin-bottom: var(--space-6);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: var(--space-4);
+}
+
+/* ── Chart canvas (180px tall = CHART_H) ── */
+.canvas {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Gridlines */
+.gridlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gridline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+/* Bars row */
+.barsRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 100%;
+}
+
+/* ─────────────────────────────────────────
+   barSlot — the 180px tall positioning context for each bar.
+   position: relative so the absolutely-positioned .barVal
+   tracks the bar tip via `bottom: barH + 6px` (set inline).
+   ───────────────────────────────────────── */
+.barSlot {
+  position: relative;
+  display: flex;
+  align-items: flex-end;           /* bar sticks to the bottom */
+  width: 40px;
+  min-width: 24px;
+  max-width: 52px;
+  height: 100%;                    /* 180px from canvas */
+}
+
+/* ─────────────────────────────────────────
+   Value label — tracks bar tip.
+   `bottom` overridden by inline style to = barHeight + 6px.
+   `opacity` overridden by inline style proportional to scroll.
+   NO CSS transition — scroll-driven at 60fps via rAF.
+   ───────────────────────────────────────── */
+.barVal {
+  position: absolute;
+  bottom: 0;                       /* overridden inline */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  pointer-events: none;
+  /* tabular-nums prevents layout shift as digits change */
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────
+   Bar visual element.
+   `height` driven by JS inline style (0px → maxPx with scroll).
+   NO transform, NO CSS transition — scroll gives us 60fps.
+   ───────────────────────────────────────── */
+.bar {
+  width: 100%;
+  /* height set inline */
+  border-radius: 2px 2px 0 0;
+  cursor: default;
+}
+
+/* Base / Actual — steel dark */
+.barBase {
+  background-color: #222736;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 200ms ease;
+}
+.barBase:hover { background-color: #2d3448; }
+
+/* Target / 2030 — gradient violet */
+.barTarget {
+  background: linear-gradient(to top, #7c3aed 0%, #a855f7 100%);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+  transition: filter 200ms ease, box-shadow 200ms ease;
+}
+.barTarget:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.55);
+}
+
+/* ── X-axis labels ── */
+.xAxisRow {
+  display: flex;
+  gap: var(--space-2);
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.xLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.35;
+  flex: 1;
+  max-width: 52px;
+}
+
+/* ── Column title ── */
+.colTitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  line-height: 1.45;
+  margin-top: var(--space-3);
+}
+
+/* ── Growth tag — opacity driven inline by scroll ── */
+.growthTag {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: #a855f7;
+  text-align: center;
+  margin-top: 0.75rem;
+  /* opacity set inline; no CSS transition (scroll-driven) */
+}
+
+/* ── Footnote ── */
+.footnote {
+  position: relative;
+  z-index: 1;
+  font-size: var(--text-xs);
+  color: #64748b;
+  font-style: italic;
+  line-height: 1.65;
+  margin-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1rem;
+}
+
+/* ── Print: force bars and labels to final state ── */
+@media print {
+  .wrapper {
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+  }
+  .ambientGlow { display: none; }
+  .bar {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .barVal, .growthTag { opacity: 1 !important; }
+}

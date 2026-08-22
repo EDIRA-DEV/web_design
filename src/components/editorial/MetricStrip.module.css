@@ -1,0 +1,113 @@
+/* ============================================================
+   MetricStrip — 4-metric horizontal bar with count-up animation
+   ============================================================ */
+
+/* ── Container ── */
+.strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-block: var(--space-6);
+  gap: var(--space-4) 0;
+}
+
+@media (min-width: 640px) {
+  .strip {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+}
+
+/* ── Individual cell ── */
+.cell {
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .cellDivider {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ── Eyebrow label ── */
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+  /* Matches: font-mono text-[10px] text-slate-500 uppercase tracking-wider */
+}
+
+/* ── Value row ── */
+.value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);     /* text-xl */
+  font-weight: var(--font-semibold); /* font-semibold */
+  color: var(--color-text);      /* text-white */
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1px;
+  line-height: 1.2;
+  /* tabular-nums prevents layout shift as digits change during animation */
+  font-variant-numeric: tabular-nums;
+}
+
+/* Prefix — "US$" — same visual weight as number */
+.prefix {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+/* The animated counter digit string */
+.number {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+/* Suffix — "M" — same visual weight */
+.suffix {
+  font-size: var(--text-xl);
+  font-weight: var(--font-semibold);
+  color: var(--color-text);
+}
+
+/* Unit badge — "m²" — smaller, muted */
+.unit {
+  font-size: var(--text-sm);
+  font-weight: var(--font-normal);
+  color: var(--color-text-muted);
+  margin-left: 2px;
+  align-self: flex-end;
+  padding-bottom: 2px;
+}
+
+/* ── Secondary unit label below value ── */
+.unitLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: var(--font-normal);
+  margin-top: var(--space-1);
+  line-height: 1.35;
+}
+
+/* ── Print ── */
+@media print {
+  .strip {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    break-inside: avoid;
+  }
+
+  .cellDivider {
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+  }
+}

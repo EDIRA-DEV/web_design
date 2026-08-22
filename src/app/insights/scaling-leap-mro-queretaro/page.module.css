@@ -1,0 +1,75 @@
+/* ============================================================
+   Page layout — Editorial report with fixed sidebar
+   ============================================================ */
+
+/* Wrapper: sidebar (fixed) + scrollable main */
+.pageWrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  /* selection accent matching brand */
+  accent-color: var(--color-primary);
+}
+
+/* ── Main scroll area ── */
+.mainContent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: var(--space-24);
+  /* Push content below fixed Navbar */
+  padding-top: var(--header-height);
+}
+
+/* On desktop, offset left to clear the fixed sidebar */
+@media (min-width: 1024px) {
+  .mainContent {
+    margin-left: 256px;
+  }
+}
+
+/* ── Article column ── */
+.article {
+  width: 100%;
+  max-width: 850px;
+  padding-inline: var(--space-6);
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-20);
+  /* Improve ::selection everywhere in the article */
+}
+
+.article ::selection {
+  background-color: var(--color-primary-light);
+  color: var(--color-text);
+}
+
+@media (min-width: 1024px) {
+  .article {
+    padding-inline: var(--space-12);
+    padding-top: var(--space-20);
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .mainContent {
+    margin-left: 0;
+    padding-top: 0;
+  }
+
+  .article {
+    max-width: 100%;
+    padding-inline: 2cm;
+    padding-top: 1cm;
+  }
+
+  /* Force clean page break between major sections */
+  .article section {
+    break-before: page;
+  }
+
+  /* First section (hero + 00) should NOT have a forced break */
+  .article > *:first-child {
+    break-before: avoid;
+  }
+}
