@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Section01Evidence.module.css';
 import { PublicSignalsChart } from './PublicSignalsChart';
+import { MaskRevealText, ScrambleText, BlurRevealText } from './TextAnimations';
 
 const REFERENCES = [
   { ref: '[2]', text: 'Consolidated MRO footprint expansion to 50k sqm.' },
@@ -14,9 +15,13 @@ export function Section01Evidence() {
       {/* ── Section Header ── */}
       <div className={styles.sectionHeader}>
         <span className={styles.sectionNumber} aria-hidden="true">01</span>
-        <h2 id="section-01-title" className={styles.sectionTitle}>
-          Evidence &amp; Case for Change
-        </h2>
+        <MaskRevealText
+          as="h2"
+          id="section-01-title"
+          className={styles.sectionTitle}
+          text="Evidence & Case for Change"
+          delay={80}
+        />
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
@@ -29,12 +34,12 @@ export function Section01Evidence() {
             {/* Giant opening quotation mark */}
             <span className={styles.openQuote} aria-hidden="true">&ldquo;</span>
 
-            {/* Strategic thesis */}
-            <p className={styles.thesisText}>
+            {/* Strategic thesis with Blur Reveal Animation */}
+            <BlurRevealText as="p" className={styles.thesisText} delay={150}>
               The challenge is to synchronize demand, effective capacity, WIP, test-cell
               access, certified skills, parts, quality, and cost-to-serve—before the
               constrained resource becomes a missed commitment.
-            </p>
+            </BlurRevealText>
 
             {/* Attribution */}
             <div className={styles.attribution}>
@@ -49,9 +54,11 @@ export function Section01Evidence() {
         {/* ── RIGHT COLUMN (7 cols) — Essay + Metrics Card + Refs ── */}
         <div className={styles.rightCol}>
 
-          {/* Essay eyebrow + display headline */}
+          {/* Essay eyebrow with Scramble decoder + display headline */}
           <div className={styles.essayHeader}>
-            <p className={styles.essayEyebrow}>01 // OFFICIAL EVIDENCE</p>
+            <p className={styles.essayEyebrow}>
+              <ScrambleText text="01 // OFFICIAL EVIDENCE" triggerOnView />
+            </p>
             <h3 className={styles.essayTitle}>The Scale of Escalation</h3>
           </div>
 

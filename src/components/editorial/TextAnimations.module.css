@@ -1,0 +1,108 @@
+/* ============================================================
+   TextAnimations — Kinetic Typography & Motion Utilities
+   ============================================================ */
+
+/* ── 1. Mask Reveal Text ── */
+.maskContainer {
+  display: block;
+}
+
+.maskWordWrapper {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  margin-right: 0.28em;
+  padding-bottom: 0.08em; /* Avoid font descender clipping */
+}
+
+.maskWordWrapper:last-child {
+  margin-right: 0;
+}
+
+.maskWord {
+  display: inline-block;
+  transform: translate3d(0, 108%, 0);
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.maskRevealed .maskWord {
+  transform: translate3d(0, 0, 0);
+}
+
+/* ── 2. Scramble / Decoder Text ── */
+.scrambleContainer {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  will-change: contents;
+}
+
+/* ── 3. Blur Reveal Text ── */
+.blurReveal {
+  filter: blur(12px);
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition:
+    filter 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1200ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, opacity, transform;
+}
+
+.blurRevealed {
+  filter: blur(0px);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ── 4. Pure CSS Violet Shimmer (Decision Intelligence) ── */
+.textVioletShimmer {
+  font-style: italic;
+  font-weight: 400;
+  font-family: serif;
+  background: linear-gradient(
+    90deg,
+    #8b5cf6 0%,
+    #a855f7 20%,
+    #e9d5ff 45%,
+    #ffffff 50%,
+    #e9d5ff 55%,
+    #a855f7 80%,
+    #8b5cf6 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: violetShimmer 5s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes violetShimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+/* ── Print Overrides: Show All Text Immediately Without Effects ── */
+@media print {
+  .maskWord {
+    transform: none !important;
+  }
+  .blurReveal {
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .textVioletShimmer {
+    background: none !important;
+    -webkit-text-fill-color: #8b5cf6 !important;
+    color: #8b5cf6 !important;
+  }
+}
