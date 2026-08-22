@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Navbar } from '@/components/sections/Navbar/Navbar';
 import { Footer } from '@/components/sections/Footer/Footer';
 import { EditorialSidebar } from '@/components/editorial/EditorialSidebar';
+import { AmbientVioletGlow } from '@/components/editorial/AmbientVioletGlow';
 import { EditorialHero } from '@/components/editorial/EditorialHero';
 import { Section00ExecutiveSummary } from '@/components/editorial/Section00ExecutiveSummary';
 import { Section01Evidence } from '@/components/editorial/Section01Evidence';
@@ -51,6 +52,9 @@ export default function ScalingLeapMROPage() {
 
       {/* Two-column editorial layout: fixed sidebar + scrolling article */}
       <div className={styles.pageWrapper}>
+        {/* Background ambient lighting */}
+        <AmbientVioletGlow />
+
         {/* Fixed sidebar — renders above lg only */}
         <EditorialSidebar />
 

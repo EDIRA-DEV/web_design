@@ -13,6 +13,8 @@
 
 /* ── Main scroll area ── */
 .mainContent {
+  position: relative;
+  z-index: 1;
   width: 100%;
   display: flex;
   justify-content: center;
