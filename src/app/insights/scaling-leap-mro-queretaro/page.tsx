@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Navbar } from '@/components/sections/Navbar/Navbar';
 import { Footer } from '@/components/sections/Footer/Footer';
 import { EditorialSidebar } from '@/components/editorial/EditorialSidebar';
+import { MobileEditorialSubNav } from '@/components/editorial/MobileEditorialSubNav';
 import { AmbientVioletGlow } from '@/components/editorial/AmbientVioletGlow';
 import { EditorialHero } from '@/components/editorial/EditorialHero';
 import { Section00ExecutiveSummary } from '@/components/editorial/Section00ExecutiveSummary';
@@ -49,6 +50,9 @@ export default function ScalingLeapMROPage() {
     <>
       {/* Global Navbar — sits above everything at z-index 1000 */}
       <Navbar />
+
+      {/* Sticky Mobile Sub-Navbar: Chapter Selector + Download/Share actions (lg:hidden) */}
+      <MobileEditorialSubNav />
 
       {/* Two-column editorial layout: fixed sidebar + scrolling article */}
       <div className={styles.pageWrapper}>
