@@ -1,0 +1,416 @@
+/* ============================================================
+   Section03DataFoundation — Editorial Chapter 03
+   EDIRA Design System — Dark Obsidian × Neon Violet tokens
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.section {
+  margin-bottom: var(--space-20);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION HEADER (same pattern as Chapter 02)
+   ══════════════════════════════════════════════════════════ */
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+  padding-top: 0.35em;
+}
+
+.sectionTitle {
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  flex: 1;
+}
+
+.divider {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sectionHeader {
+    align-items: center;
+  }
+  .sectionTitle {
+    white-space: nowrap;
+    font-size: var(--text-4xl);
+  }
+  .divider {
+    display: block;
+    flex-grow: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEAD PROSE
+   ══════════════════════════════════════════════════════════ */
+.leadProse {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 75ch;
+  margin-bottom: var(--space-12);
+}
+
+/* ══════════════════════════════════════════════════════════
+   MEDALLION PIPELINE WRAPPER
+   ══════════════════════════════════════════════════════════ */
+.pipelineWrapper {
+  position: relative;
+  margin-bottom: var(--space-16);
+}
+
+/* Horizontal connector track — desktop only */
+.connectorTrack {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .connectorTrack {
+    display: block;
+    position: absolute;
+    top: 26px; /* aligns with badge center */
+    left: 0;
+    right: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .connectorLine {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(139, 92, 246, 0.3) 8%,
+      rgba(139, 92, 246, 0.3) 92%,
+      transparent 100%
+    );
+  }
+}
+
+/* ─── Pipeline card grid ─── */
+.pipelineGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .pipelineGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+@media (min-width: 1024px) {
+  .pipelineGrid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+}
+
+/* ─── Individual layer card ─── */
+.layerCard {
+  position: relative;
+  background-color: #0a0a0f;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  cursor: default;
+  overflow: hidden;
+}
+
+.layerCard:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 6px 30px rgba(121, 40, 202, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Accented card (Ingestion + Decision) */
+.layerCardAccent {
+  background-color: #0d0a18;
+  border-color: rgba(139, 92, 246, 0.32);
+  box-shadow: 0 0 24px rgba(121, 40, 202, 0.08), inset 0 0 20px rgba(121, 40, 202, 0.04);
+}
+
+.layerCardAccent:hover {
+  border-color: rgba(168, 85, 247, 0.55);
+  box-shadow: 0 8px 40px rgba(121, 40, 202, 0.22);
+}
+
+/* Small violet glow orb behind accented cards */
+.layerCardAccent::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 80px;
+  background: radial-gradient(ellipse at center, rgba(121, 40, 202, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── Layer badge (01–07) ─── */
+.layerBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.layerCardAccent .layerBadge {
+  background-color: rgba(121, 40, 202, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.layerBadgeText {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.layerCardAccent .layerBadgeText {
+  color: #a855f7;
+}
+
+/* ─── Layer title ─── */
+.layerTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Icon cluster ─── */
+.iconCluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.iconItem {
+  color: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.layerCardAccent .iconItem {
+  color: #a855f7;
+}
+
+.layerCard:hover .iconItem {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.layerCardAccent:hover .iconItem {
+  color: #c4b5fd;
+}
+
+/* ─── Description ─── */
+.layerDescription {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* ─── Divider ─── */
+.layerDivider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.layerCardAccent .layerDivider {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+
+/* ─── Control objective ─── */
+.controlObjectiveLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.55;
+}
+
+.controlObjectiveText {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.controlObjectiveAccent {
+  color: #a855f7;
+  font-weight: 600;
+}
+
+/* ─── Card connector arrow ─── */
+.cardArrow {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .cardArrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 26px;
+    right: -15px;
+    width: 22px;
+    height: 22px;
+    z-index: 2;
+    color: rgba(139, 92, 246, 0.5);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN PRINCIPLES GRID — 3 columns
+   ══════════════════════════════════════════════════════════ */
+.principlesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+
+@media (min-width: 640px) {
+  .principlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .principlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-10);
+  }
+}
+
+.principleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background-color: #080810;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xl);
+}
+
+.principleBlock:hover {
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+.principleTag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a855f7;
+}
+
+.principleTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.principleBody {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PLATFORM CALLOUT
+   ══════════════════════════════════════════════════════════ */
+.platformCallout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  background-color: #060608;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: var(--space-5) var(--space-6);
+}
+
+.calloutIcon {
+  flex-shrink: 0;
+  color: rgba(139, 92, 246, 0.7);
+  margin-top: 2px;
+  display: flex;
+}
+
+.calloutContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.calloutLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.calloutBody {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════════════════════ */
+@media print {
+  .section {
+    break-before: page;
+  }
+  .layerCardAccent {
+    border-color: #8b5cf6;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .cardArrow {
+    display: none;
+  }
+}
