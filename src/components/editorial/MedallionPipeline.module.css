@@ -1,15 +1,25 @@
 /* ============================================================
-   MedallionPipeline — 3-card carousel with animated connectors
+   MedallionPipeline — Adaptive carousel (1 mobile / 3 desktop)
+   Features: Border Beam hover, directional arrow animation,
+   overflow guard for mobile, Framer Motion slide transitions.
    EDIRA Design System — Dark Obsidian × Neon Violet
    ============================================================ */
 
-/* ── Root container ── */
+/* ── 1. OVERFLOW GUARD ── */
+/* Prevents the carousel from creating horizontal scroll on mobile */
+.outerGuard {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* ── 2. ROOT CONTAINER ── */
 .root {
   position: relative;
   background: rgba(8, 8, 14, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 28px;
+  padding: 24px 20px 28px;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   box-shadow:
@@ -18,13 +28,13 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   TOP CONTROLS BAR
+   3. CONTROLS BAR
    ───────────────────────────────────────────────────────────── */
 .controlsBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .pipelineLabel {
@@ -35,8 +45,8 @@
 
 .pipelineLabelText {
   font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #a855f7;
@@ -44,7 +54,7 @@
 
 .pipelineRange {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: rgba(255, 255, 255, 0.35);
 }
 
@@ -62,40 +72,40 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition:
-    border-color 0.2s ease,
-    color 0.2s ease,
-    background-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.22s ease,
+    color 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .navBtn:hover:not(:disabled) {
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(139, 92, 246, 0.1);
   border-color: rgba(139, 92, 246, 0.5);
   color: #ffffff;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
 }
 
 .navBtn:disabled {
-  opacity: 0.28;
+  opacity: 0.2;
   cursor: not-allowed;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   PAGE DOTS
+   4. PAGE DOTS
    ───────────────────────────────────────────────────────────── */
 .pageDots {
   display: flex;
   gap: 6px;
   justify-content: center;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .pageDot {
-  width: 24px;
-  height: 4px;
+  width: 20px;
+  height: 3px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.1);
   border: none;
@@ -106,236 +116,166 @@
 
 .pageDotActive {
   background: #a855f7;
-  width: 32px;
+  width: 30px;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   DESKTOP: 3-column grid with arrow connectors
+   5. CARD VIEWPORT (clips slide animation overflow)
    ───────────────────────────────────────────────────────────── */
-.desktopGrid {
-  display: none; /* hidden on mobile */
+.cardViewport {
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. CARD ROW (animated container)
+   ───────────────────────────────────────────────────────────── */
+.cardRow {
+  display: flex;
   align-items: stretch;
-  gap: 0; /* arrows sit between cards */
-}
-
-@media (min-width: 768px) {
-  .desktopGrid {
-    display: flex;
-  }
-}
-
-/* ─── Arrow connector ─── */
-.arrowConnector {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 44px;
-  position: relative;
-}
-
-/* Connecting line behind arrow */
-.arrowConnector::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    rgba(139, 92, 246, 0.25),
-    rgba(168, 85, 247, 0.5),
-    rgba(139, 92, 246, 0.25)
-  );
-  transform: translateY(-50%);
-}
-
-/* Pulsing glow orb behind the arrow */
-.arrowConnector::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(121, 40, 202, 0.35) 0%, transparent 70%);
-  animation: arrowPulse 2s ease-in-out infinite;
-}
-
-.arrowIcon {
-  color: rgba(168, 85, 247, 0.8);
-  position: relative;
-  z-index: 1;
-  animation: arrowPulse 2s ease-in-out infinite;
-  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
-}
-
-@keyframes arrowPulse {
-  0%, 100% {
-    opacity: 0.7;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
+  gap: 0;
+  width: 100%;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   MOBILE: horizontal snap scroll
-   ───────────────────────────────────────────────────────────── */
-.mobileScroll {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 8px;
-}
-
-.mobileScroll::-webkit-scrollbar {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .mobileScroll {
-    display: none; /* hidden on desktop */
-  }
-}
-
-.mobileSnapItem {
-  flex: 0 0 85vw;
-  max-width: 360px;
-  scroll-snap-align: center;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   STAGE CARD
+   7. STAGE CARD
    ───────────────────────────────────────────────────────────── */
 .card {
   position: relative;
   flex: 1;
-  min-height: 340px;
+  min-height: 320px;
   background: #09090e;
   border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 16px;
-  padding: 28px 24px 24px;
-  padding-top: 40px; /* room for floating badge */
+  padding: 28px 22px 22px;
+  padding-top: 42px; /* space for floating badge */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;              /* contains the border beam */
+  cursor: default;
   transition:
     border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
-  cursor: default;
+    box-shadow 0.3s ease;
 }
 
+/* Subtle lift on hover — the border beam handles the glow */
 .card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ─── Active / highlighted card ─── */
-.cardActive {
-  background: #0d0a17;
-  border-color: rgba(168, 85, 247, 0.65);
-  box-shadow:
-    0 0 28px rgba(121, 40, 202, 0.2),
-    0 0 60px rgba(121, 40, 202, 0.06),
-    inset 0 0 20px rgba(121, 40, 202, 0.05);
-}
-
-.cardActive:hover {
-  border-color: rgba(168, 85, 247, 0.85);
-  box-shadow:
-    0 0 36px rgba(121, 40, 202, 0.28),
-    0 0 80px rgba(121, 40, 202, 0.1);
-}
-
-/* Top-left ambient glow for active cards */
-.cardActive::before {
-  content: '';
+/* ──────────────────────────────────────────────────────────────
+   8. BORDER BEAM  (traveling light on card perimeter)
+   The element covers the full card. Its ::before is a rotating
+   conic gradient masked to only show near the edge, creating the
+   "light traveling around the border" illusion.
+   ────────────────────────────────────────────────────────────── */
+.borderBeam {
   position: absolute;
-  top: -60px;
-  left: -30px;
-  width: 180px;
-  height: 140px;
-  background: radial-gradient(ellipse at center, rgba(121, 40, 202, 0.18) 0%, transparent 70%);
+  inset: -1px;               /* sits just outside the card */
+  border-radius: inherit;
   pointer-events: none;
-  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  /* Rotating conic gradient — violet beam around perimeter */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(168, 85, 247, 0.8) 40deg,
+    rgba(232, 121, 249, 0.95) 70deg,
+    rgba(168, 85, 247, 0.8) 100deg,
+    transparent 140deg,
+    transparent 360deg
+  );
+  /* Mask: only show 1–2 px ring at the edge */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 1.5px;
+  animation: beamRotate 3s linear infinite;
+  animation-play-state: paused; /* starts on hover */
+}
+
+/* Activate beam on parent hover */
+.card:hover .borderBeam {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@keyframes beamRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 
 /* ─────────────────────────────────────────────────────────────
-   FLOATING BADGE
+   9. FLOATING BADGE  (all neutral by default)
    ───────────────────────────────────────────────────────────── */
 .badge {
   position: absolute;
-  top: -14px;
-  left: 20px;
-  padding: 2px 12px;
+  top: -13px;
+  left: 18px;
+  padding: 2px 11px;
   border-radius: 100px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.04em;
   background: #101016;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.4);
-  transition: all 0.3s ease;
+  transition:
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
 }
 
-.badgeActive {
-  background: #181028;
-  border-color: #a855f7;
+/* Badge turns violet when parent is hovered */
+.card:hover .badge {
+  background: #170e26;
+  border-color: rgba(168, 85, 247, 0.7);
   color: #d8b4fe;
-  box-shadow:
-    0 0 12px rgba(168, 85, 247, 0.5),
-    0 0 24px rgba(168, 85, 247, 0.15);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.45);
 }
 
 /* ─────────────────────────────────────────────────────────────
-   CARD BODY
+   10. CARD BODY
    ───────────────────────────────────────────────────────────── */
 .cardBody {
   display: flex;
   flex-direction: column;
-  gap: 0;
   flex: 1;
 }
 
 .cardTitle {
-  font-size: 1.1875rem;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
   letter-spacing: -0.015em;
-  margin: 0 0 16px 0;
+  margin: 0 0 14px 0;
 }
 
-/* ─── Icon row ─── */
 .iconRow {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 9px;
+  margin-bottom: 14px;
 }
 
 .iconDefault {
-  color: rgba(255, 255, 255, 0.3);
-  transition: color 0.2s ease;
+  color: rgba(255, 255, 255, 0.28);
+  transition: color 0.25s ease;
 }
 
-.iconActive {
-  color: #a855f7;
-  filter: drop-shadow(0 0 4px rgba(168, 85, 247, 0.5));
+/* Icons go purple on card hover */
+.card:hover .iconDefault {
+  color: rgba(168, 85, 247, 0.7);
 }
 
-/* ─── Description ─── */
 .cardDescription {
   font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.45);
@@ -345,56 +285,118 @@
 }
 
 /* ─────────────────────────────────────────────────────────────
-   CARD FOOTER
+   11. CARD FOOTER
    ───────────────────────────────────────────────────────────── */
 .cardFooter {
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .footerDivider {
   width: 100%;
   height: 1px;
   background: rgba(255, 255, 255, 0.07);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
+  transition: background-color 0.25s ease;
 }
 
-.cardActive .footerDivider {
-  background: rgba(168, 85, 247, 0.18);
+.card:hover .footerDivider {
+  background: rgba(168, 85, 247, 0.2);
 }
 
 .controlObjective {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.3);
   margin: 0;
+  transition: color 0.25s ease;
 }
 
-.controlObjectiveActive {
+.card:hover .controlObjective {
   color: #c084fc;
-  font-weight: 600;
 }
 
 /* ─────────────────────────────────────────────────────────────
-   PRINT
+   12. ARROW CONNECTOR  (directional left-to-right flow)
+   ───────────────────────────────────────────────────────────── */
+.arrowConnector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  position: relative;
+}
+
+/* Clean line — no blurred orbs */
+.arrowConnector::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  right: 6px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(139, 92, 246, 0.2),
+    rgba(168, 85, 247, 0.45),
+    rgba(139, 92, 246, 0.2)
+  );
+  transform: translateY(-50%);
+}
+
+.arrowIcon {
+  color: rgba(139, 92, 246, 0.65);
+  position: relative;
+  z-index: 1;
+  /* Directional: slides right then resets — conveys data flow */
+  animation: arrowFlow 1.8s ease-in-out infinite;
+}
+
+@keyframes arrowFlow {
+  0%   { transform: translateX(-4px); opacity: 0.4; }
+  50%  { transform: translateX(2px);  opacity: 1;   }
+  100% { transform: translateX(-4px); opacity: 0.4; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   13. RESPONSIVE — Mobile single card layout
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .root {
+    padding: 20px 16px 24px;
+    border-radius: 16px;
+  }
+
+  .card {
+    min-height: 280px;
+    border-radius: 14px;
+    padding: 28px 18px 18px;
+    padding-top: 38px;
+  }
+
+  .cardTitle {
+    font-size: 1.0625rem;
+  }
+
+  .arrowConnector {
+    display: none; /* hidden on mobile — 1 card at a time */
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   14. PRINT
    ───────────────────────────────────────────────────────────── */
 @media print {
   .navButtons,
   .pageDots,
-  .arrowConnector {
+  .arrowConnector,
+  .borderBeam {
     display: none;
   }
-  .desktopGrid {
+  .cardRow {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
-  }
-  .mobileScroll {
-    display: none;
-  }
-  .cardActive {
-    border-color: #8b5cf6;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
   }
 }
