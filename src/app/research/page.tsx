@@ -7,20 +7,22 @@ import { AmbientVioletGlow } from '@/components/editorial/AmbientVioletGlow';
 import { EditorialHero } from '@/components/editorial/EditorialHero';
 import { Section00ExecutiveSummary } from '@/components/editorial/Section00ExecutiveSummary';
 import { Section01Evidence } from '@/components/editorial/Section01Evidence';
+import { Section02ProblemStatement } from '@/components/editorial/Section02ProblemStatement';
 import { EditorialPlaceholders } from '@/components/editorial/EditorialPlaceholders';
 import { EditorialNextButton } from '@/components/editorial/EditorialNextButton';
+import { FloatingActionDock } from '@/components/editorial/FloatingActionDock';
 import styles from './page.module.css';
 
 /* ─── SEO Metadata ─── */
 export const metadata: Metadata = {
-  title: 'Scaling LEAP MRO in Querétaro: A Decision Intelligence Blueprint | EDIRA',
+  title: 'Scaling LEAP MRO in Querétaro: A Decision Intelligence Blueprint | EDIRA Research',
   description:
     'How Decision Intelligence transforms MRO capacity, throughput, and value realization for a US$140M, 50,000 m² LEAP engine overhaul facility in Querétaro, Mexico.',
   openGraph: {
-    title: 'Scaling LEAP MRO in Querétaro | EDIRA Executive Insight',
+    title: 'Scaling LEAP MRO in Querétaro | EDIRA Research',
     description:
       'Decision Intelligence blueprint for 350 LEAP shop visits/year and 2,000-person workforce ramp-up.',
-    url: 'https://edira.dev/insights/scaling-leap-mro-queretaro',
+    url: 'https://edira.dev/research',
     siteName: 'EDIRA',
     images: [
       {
@@ -34,6 +36,7 @@ export const metadata: Metadata = {
     type: 'article',
   },
   keywords: [
+    'Research',
     'MRO',
     'LEAP engine',
     'Querétaro aerospace',
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
 };
 
 /* ─── Page ─── */
-export default function ScalingLeapMROPage() {
+export default function ResearchPage() {
   return (
     <>
       {/* Global Navbar — sits above everything at z-index 1000 */}
@@ -74,7 +77,10 @@ export default function ScalingLeapMROPage() {
             {/* 03 — Evidence & Case for Change (asymmetric 5|7 grid) */}
             <Section01Evidence />
 
-            {/* 04-09 — Anchor placeholders for sections 02-07 */}
+            {/* 04 — Problem Statement, Hypothesis & Decision Scope */}
+            <Section02ProblemStatement />
+
+            {/* 05-09 — Anchor placeholders for sections 03-07 */}
             <EditorialPlaceholders />
 
             {/* Footer CTA → next section */}
@@ -82,6 +88,9 @@ export default function ScalingLeapMROPage() {
           </article>
         </main>
       </div>
+
+      {/* Floating Action Dock (Desktop >= md) */}
+      <FloatingActionDock />
 
       {/* Site-wide footer */}
       <Footer />

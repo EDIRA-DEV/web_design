@@ -1,0 +1,134 @@
+/* ============================================================
+   FloatingActionDock — Independent Circular Glass Bubbles
+   Fixed bottom-right corner for desktop (hidden on mobile < md)
+   ============================================================ */
+
+.dockWrapper {
+  position: fixed;
+  bottom: var(--space-8, 32px);
+  right: var(--space-8, 32px);
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .dockWrapper {
+    display: flex;
+  }
+}
+
+/* ── Bubble Wrapper (relative for tooltip anchoring) ── */
+.bubbleWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Circular Glass Bubble Button ── */
+.bubbleBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(13, 13, 18, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  color: var(--color-text-secondary, #94a3b8);
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition:
+    border-color 0.3s ease-out,
+    background-color 0.3s ease-out,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease-out,
+    color 0.2s ease-out;
+}
+
+.bubbleBtn:hover {
+  border-color: rgba(139, 92, 246, 0.5);
+  background-color: rgba(46, 16, 101, 0.25);
+  transform: scale(1.1);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(121, 40, 202, 0.35);
+  color: #ffffff;
+}
+
+.bubbleBtn:active {
+  transform: scale(0.95);
+}
+
+.bubbleBtn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ── Bubble Icon ── */
+.bubbleIcon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.bubbleBtn:hover .bubbleIcon {
+  color: #ffffff;
+}
+
+/* ── Tooltip to the Left (anchored right-14 / 56px) ── */
+.tooltip {
+  position: absolute;
+  right: 56px;
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  padding: 5px 10px;
+  border-radius: var(--radius-md, 6px);
+  background-color: rgba(24, 24, 27, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  color: #e4e4e7;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition:
+    opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+}
+
+/* Tooltip arrow pointing right */
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgba(24, 24, 27, 0.92);
+}
+
+/* Reveal tooltip when hovering the bubble wrapper */
+.bubbleWrapper:hover .tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Print ── */
+@media print {
+  .dockWrapper {
+    display: none !important;
+  }
+}

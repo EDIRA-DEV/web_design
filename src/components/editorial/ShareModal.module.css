@@ -1,0 +1,251 @@
+/* ============================================================
+   ShareModal — EDIRA Design System
+   Dark glassmorphism modal with violet brand accents.
+   ============================================================ */
+
+/* ── Backdrop: full-screen dim + blur ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+/* ── Modal container ── */
+.modal {
+  background-color: #0c0c12;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 0 0 1px rgba(139, 92, 246, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(121, 40, 202, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle top violet gradient tint */
+.modal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── Header row ── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.headerIcon {
+  color: var(--color-primary);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Close button */
+.closeBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+  color: var(--color-text);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Hairline divider ── */
+.divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.06);
+  margin-bottom: var(--space-5);
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* ── Social Row ── */
+.socialRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.socialBtn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-fast);
+}
+
+.socialBtn:hover {
+  background-color: rgba(139, 92, 246, 0.18);
+  border-color: rgba(139, 92, 246, 0.5);
+  color: #c4b5fd;
+  transform: translateY(-2px);
+}
+
+.socialBtn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.socialBtn:active {
+  transform: translateY(0);
+}
+
+/* ── Copy Row ── */
+.copyRow {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.urlInput {
+  flex: 1;
+  min-width: 0;
+  background-color: #0a0a10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 10px var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: border-color var(--transition-fast);
+}
+
+.urlInput:focus {
+  outline: none;
+  border-color: rgba(139, 92, 246, 0.5);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.copyBtn {
+  flex-shrink: 0;
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+  white-space: nowrap;
+}
+
+.copyBtn:hover {
+  background-color: rgba(139, 92, 246, 0.12);
+  border-color: rgba(139, 92, 246, 0.35);
+  color: var(--color-text);
+}
+
+.copyBtn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* COPIED! success state */
+.copyBtnSuccess {
+  background-color: rgba(139, 92, 246, 0.22) !important;
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  color: #c4b5fd !important;
+}
+
+.copiedContent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Footer watermark ── */
+.footerNote {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.2);
+  text-align: center;
+  margin-top: var(--space-5);
+  text-transform: uppercase;
+}
+
+/* ── Print ── */
+@media print {
+  .backdrop {
+    display: none !important;
+  }
+}

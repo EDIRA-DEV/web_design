@@ -1,47 +1,118 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './EditorialSidebar.module.css';
 
-interface NavItem {
+/* ─────────────────────────────────────────────────────────────
+   SECTION REGISTRY
+   Maps DOM section IDs to display metadata.
+   IDs must match the `id` attributes on the <section> elements.
+   ───────────────────────────────────────────────────────────── */
+interface NavSection {
   id: string;
   number: string;
-  line1: string;
-  line2?: string;
-  line3?: string;
+  title: string;
 }
 
-const NAV_ITEMS: NavItem[] = [
-  { id: 'section-01', number: '01', line1: 'Official Evidence', line2: '& Strategic Case' },
-  { id: 'section-02', number: '02', line1: 'Problem Statement', line2: '& Decision Scope' },
-  { id: 'section-03', number: '03', line1: 'Data Foundation &', line2: 'Medallion', line3: 'Architecture' },
-  { id: 'section-04', number: '04', line1: 'Governance &', line2: 'Semantic Models' },
-  { id: 'section-05', number: '05', line1: 'Power BI MRO', line2: 'Control Tower' },
-  { id: 'section-06', number: '06', line1: 'Applied AI &', line2: 'Schedule', line3: 'Optimization' },
-  { id: 'section-07', number: '07', line1: 'Value Realization', line2: '& Availability', line3: 'Formulas' },
+const SECTIONS: NavSection[] = [
+  { id: 'section-01', number: '01', title: 'OFFICIAL EVIDENCE & STRATEGIC CASE' },
+  { id: 'section-02', number: '02', title: 'PROBLEM STATEMENT & DECISION SCOPE' },
+  { id: 'section-03', number: '03', title: 'DATA FOUNDATION & MEDALLION ARCHITECTURE' },
+  { id: 'section-04', number: '04', title: 'GOVERNANCE & SEMANTIC MODELS' },
+  { id: 'section-05', number: '05', title: 'POWER BI MRO CONTROL TOWER' },
+  { id: 'section-06', number: '06', title: 'APPLIED AI & SCHEDULE OPTIMIZATION' },
+  { id: 'section-07', number: '07', title: 'VALUE REALIZATION & FORMULAS' },
 ];
 
-export function EditorialSidebar() {
-  const [activeSection, setActiveSection] = useState<string>('section-01');
+/* ─────────────────────────────────────────────────────────────
+   SCROLL OFFSET — compensates for fixed 72px Navbar
+   ───────────────────────────────────────────────────────────── */
+const HEADER_OFFSET = 88; // 72px navbar + 16px breathing room
+
+/* ─────────────────────────────────────────────────────────────
+   useSectionProgress
+   Computes 0–100 progress for a given section based on how far
+   the viewport has scrolled through its height. Returns 0 for
+   inactive sections and a live percentage for the active one.
+   ───────────────────────────────────────────────────────────── */
+function useSectionProgress(activeId: string): number {
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const sectionIds = ['section-00', 'section-01', 'section-02', 'section-03',
-                        'section-04', 'section-05', 'section-06', 'section-07'];
+    const update = () => {
+      const el = document.getElementById(activeId);
+      if (!el) { setProgress(0); return; }
 
+      const rect = el.getBoundingClientRect();
+      const sectionTop = window.scrollY + rect.top;
+      const sectionHeight = el.offsetHeight;
+      const scrolled = window.scrollY - sectionTop + HEADER_OFFSET;
+      const pct = Math.min(100, Math.max(0, (scrolled / sectionHeight) * 100));
+      setProgress(pct);
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [activeId]);
+
+  return progress;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PROGRESS BAR — animated underline for the active nav item
+   ───────────────────────────────────────────────────────────── */
+function ProgressBar({ progress }: { progress: number }) {
+  return (
+    <div className={styles.progressTrack} aria-hidden="true">
+      <motion.div
+        className={styles.progressFill}
+        initial={{ scaleX: 0, originX: 0 }}
+        animate={{ scaleX: progress / 100 }}
+        transition={{ type: 'spring', stiffness: 80, damping: 20, mass: 0.5 }}
+        style={{ transformOrigin: 'left center' }}
+      />
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   MAIN COMPONENT
+   ───────────────────────────────────────────────────────────── */
+export function EditorialSidebar() {
+  const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
+  const progressForActive = useSectionProgress(activeId);
+  const isClickScrolling = useRef(false);
+
+  /* ── ScrollSpy via IntersectionObserver ── */
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        // Skip observer updates while a click-scroll is in flight
+        if (isClickScrolling.current) return;
+
+        // Use the most recent intersecting entry with the largest intersection ratio
+        let best: IntersectionObserverEntry | null = null;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const id = entry.target.id;
-            // Only set nav active if it's section-01+
-            if (id !== 'section-00') setActiveSection(id);
+            if (!best || entry.intersectionRatio > best.intersectionRatio) {
+              best = entry;
+            }
           }
         });
+
+        if (best) {
+          setActiveId((best as IntersectionObserverEntry).target.id);
+        }
       },
-      { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+      {
+        rootMargin: '-20% 0px -50% 0px',
+        threshold: [0, 0.1, 0.25, 0.5],
+      }
     );
 
-    sectionIds.forEach((id) => {
+    SECTIONS.forEach(({ id }) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -49,56 +120,79 @@ export function EditorialSidebar() {
     return () => observer.disconnect();
   }, []);
 
-  const handleDownloadPDF = () => {
-    window.print();
-  };
+  /* ── Smooth scroll on click with header offset compensation ── */
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+      e.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Mark as programmatic scroll to pause observer
+      isClickScrolling.current = true;
+      setActiveId(id);
+
+      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Resume observer after the smooth scroll settles (~800ms)
+      setTimeout(() => {
+        isClickScrolling.current = false;
+      }, 900);
+    },
+    []
+  );
 
   return (
-    <aside className={styles.sidebar}>
-      <div className={styles.top}>
-        <p className={styles.topLabel}>Executive Summary</p>
-        <nav className={styles.nav} aria-label="Report sections">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeSection === item.id;
-            return (
+    <aside className={styles.sidebar} aria-label="Report navigation">
+
+      {/* ── Top label ── */}
+      <p className={styles.reportLabel}>EDIRA RESEARCH</p>
+
+      {/* ── Nav list ── */}
+      <nav className={styles.nav} aria-label="Sections">
+        {SECTIONS.map((section) => {
+          const isActive = activeId === section.id;
+
+          return (
+            <div key={section.id} className={styles.navItem}>
               <a
-                key={item.id}
-                href={`#${item.id}`}
+                href={`#${section.id}`}
+                onClick={(e) => handleNavClick(e, section.id)}
                 className={`${styles.navLink} ${isActive ? styles.navLinkActive : styles.navLinkInactive}`}
                 aria-current={isActive ? 'true' : undefined}
               >
+                {/* Number */}
                 <span className={`${styles.navNumber} ${isActive ? styles.navNumberActive : ''}`}>
-                  {item.number}
+                  {section.number}
                 </span>
-                <span className={styles.navText}>
-                  {item.line1}
-                  {item.line2 && <><br />{item.line2}</>}
-                  {item.line3 && <><br />{item.line3}</>}
+
+                {/* Title */}
+                <span className={styles.navTitle}>
+                  {section.title}
                 </span>
               </a>
-            );
-          })}
-        </nav>
-      </div>
 
-      <div className={styles.bottom}>
-        <button onClick={handleDownloadPDF} className={styles.pdfBtn} type="button" aria-label="Download PDF">
-          <span className={styles.pdfBtnLabel}>Download PDF</span>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-        </button>
-      </div>
+              {/* Progress bar — only rendered for active item */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    key={section.id + '-progress'}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ProgressBar progress={progressForActive} />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Divider — hairline separator below each item */}
+              <div className={styles.divider} aria-hidden="true" />
+            </div>
+          );
+        })}
+      </nav>
     </aside>
   );
 }

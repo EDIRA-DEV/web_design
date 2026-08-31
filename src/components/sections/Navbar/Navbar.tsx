@@ -15,6 +15,7 @@ const NAV_KEYS = [
   { key: 'nav.services', href: '/services' },
   { key: 'nav.industries', href: '/industries' },
   { key: 'nav.insights', href: '/insights' },
+  { key: 'nav.research', href: '/research' },
   { key: 'nav.aboutUs', href: '/about-us' },
   { key: 'nav.careers', href: '/careers' },
 ];

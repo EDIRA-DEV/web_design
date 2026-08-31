@@ -1,5 +1,5 @@
 /* ============================================================
-   Page layout — Editorial report with fixed sidebar
+   Page layout — Editorial report with fixed sidebar (Research)
    ============================================================ */
 
 /* Wrapper: sidebar (fixed) + scrollable main */
@@ -38,7 +38,6 @@
   padding-inline: var(--space-6);
   padding-top: var(--space-12);
   padding-bottom: var(--space-20);
-  /* Improve ::selection everywhere in the article */
 }
 
 .article ::selection {

@@ -55,12 +55,18 @@
 
 .nav {
   display: none;
-  gap: var(--space-8);
+  gap: var(--space-5);
   /* Absolute centering setup for the nav */
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    gap: var(--space-8);
+  }
 }
 
 .navLink {

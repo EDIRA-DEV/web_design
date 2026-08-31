@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { ShareModal } from './ShareModal';
 import styles from './MobileEditorialSubNav.module.css';
 
 interface Chapter {
@@ -25,6 +26,7 @@ export function MobileEditorialSubNav() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>('section-01');
   const [copied, setCopied] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   // Scroll sync: update active chapter as user scrolls
@@ -205,8 +207,9 @@ export function MobileEditorialSubNav() {
           <button
             type="button"
             className={styles.actionBtn}
-            onClick={handleShare}
+            onClick={() => setIsShareOpen(true)}
             aria-label="Share article"
+            aria-haspopup="dialog"
           >
             {/* Share icon */}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -235,6 +238,9 @@ export function MobileEditorialSubNav() {
           Link copied
         </div>
       )}
+
+      {/* Share modal — shared with desktop sidebar */}
+      <ShareModal isOpen={isShareOpen} onClose={() => setIsShareOpen(false)} />
     </>
   );
 }

@@ -193,3 +193,271 @@ section[class*="ArticleHero_hero"]::after {
   pointer-events: none;
   z-index: 6;
 }
+
+/* ============================================
+   EDIRA Interactive Grid Cards
+   ============================================ */
+@keyframes ediraTilePulse {
+  0%, 12.5%, 100% { opacity: 1; }
+  25%, 82.5% { opacity: 0; }
+}
+
+.edira-tile-card {
+  position: relative;
+  background-color: #0d0d12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.edira-tile-card .background-mesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 60% 5%, black 0%, black 15%, transparent 60%);
+  mask-image: radial-gradient(circle at 60% 5%, black 0%, black 15%, transparent 60%);
+}
+
+/* Oculto por defecto con transición suave al atenuarse */
+.edira-tile-card .tiles,
+.edira-tile-card .shine-layer,
+.edira-tile-card .grid-line {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.edira-tile-card .shine-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.edira-tile-card .shine-orb {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  width: 150%;
+  padding-bottom: 150%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.2;
+  background: conic-gradient(
+    from 205deg at 50% 50%,
+    rgba(121, 40, 202, 0) 0deg,
+    #7928ca 25deg,
+    rgba(168, 85, 247, 0.25) 295deg,
+    rgba(121, 40, 202, 0) 360deg
+  );
+}
+
+.edira-tile-card .grid-tile {
+  position: absolute;
+  background-color: rgba(168, 85, 247, 0.09);
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+/* Posiciones de las 10 tiles */
+.edira-tile-card .tile-1 { top: 0; left: 0; height: 10%; width: 22.5%; }
+.edira-tile-card .tile-2 { top: 0; left: 22.5%; height: 10%; width: 27.5%; }
+.edira-tile-card .tile-3 { top: 0; left: 50%; height: 10%; width: 27.5%; }
+.edira-tile-card .tile-4 { top: 0; left: 77.5%; height: 10%; width: 22.5%; }
+.edira-tile-card .tile-5 { top: 10%; left: 0; height: 22.5%; width: 22.5%; }
+.edira-tile-card .tile-6 { top: 10%; left: 22.5%; height: 22.5%; width: 27.5%; }
+.edira-tile-card .tile-7 { top: 10%; left: 50%; height: 22.5%; width: 27.5%; }
+.edira-tile-card .tile-8 { top: 10%; left: 77.5%; height: 22.5%; width: 22.5%; }
+.edira-tile-card .tile-9 { top: 32.5%; left: 50%; height: 22.5%; width: 27.5%; }
+.edira-tile-card .tile-10 { top: 32.5%; left: 77.5%; height: 22.5%; width: 22.5%; }
+
+.edira-tile-card .tile-4, .edira-tile-card .tile-6, .edira-tile-card .tile-10 { animation-delay: -2s; }
+.edira-tile-card .tile-3, .edira-tile-card .tile-5, .edira-tile-card .tile-8 { animation-delay: -4s; }
+.edira-tile-card .tile-2, .edira-tile-card .tile-9 { animation-delay: -6s; }
+
+/* Líneas de la retícula */
+.edira-tile-card .grid-line {
+  position: absolute;
+  inset: 0;
+}
+.edira-tile-card .grid-line:before,
+.edira-tile-card .grid-line:after {
+  content: '';
+  position: absolute;
+  background-color: rgba(168, 85, 247, 0.25);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.edira-tile-card .grid-line:before { left: 0; right: 0; height: 1px; transform-origin: 0 50%; transform: scaleX(0); }
+.edira-tile-card .grid-line:after { top: 0; bottom: 0; width: 1px; transform-origin: 50% 0; transform: scaleY(0); }
+
+.edira-tile-card .line-1:before { top: 10%; }
+.edira-tile-card .line-1:after { left: 22.5%; }
+.edira-tile-card .line-2:before { top: 32.5%; }
+.edira-tile-card .line-2:after { left: 50%; }
+.edira-tile-card .line-3:before { top: 55%; }
+.edira-tile-card .line-3:after { right: 22.5%; }
+
+/* Contenido de la tarjeta */
+.edira-tile-card .card-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.edira-tile-card .card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.edira-tile-card .card-icon-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  transition: all 0.4s ease;
+}
+
+.edira-tile-card .card-category-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a855f7;
+  background-color: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.edira-tile-card .card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 12px;
+}
+
+.edira-tile-card .card-signals {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edira-tile-card .signal-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edira-tile-card .signal-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.edira-tile-card .signal-text {
+  font-size: 0.8125rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+}
+
+.edira-tile-card .decision-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.edira-tile-card .decision-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a855f7;
+}
+
+.edira-tile-card .decision-text {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+/* ACTIVACIÓN EN SCROLL (MOBILE VIA .is-active) */
+.edira-tile-card.is-active {
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 0 30px rgba(121, 40, 202, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+.edira-tile-card.is-active .card-icon-bubble {
+  color: #c4b5fd;
+  background-color: rgba(121, 40, 202, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+.edira-tile-card.is-active .decision-text {
+  color: #c4b5fd;
+}
+.edira-tile-card.is-active .shine-layer { opacity: 1; }
+.edira-tile-card.is-active .tiles { opacity: 1; transition-delay: 0.1s; }
+.edira-tile-card.is-active .grid-tile { animation-name: ediraTilePulse; }
+.edira-tile-card.is-active .grid-line { opacity: 1; }
+.edira-tile-card.is-active .grid-line:before { transform: scaleX(1); }
+.edira-tile-card.is-active .grid-line:after { transform: scaleY(1); }
+.edira-tile-card.is-active .line-1:before, .edira-tile-card.is-active .line-1:after { transition-delay: 0s; }
+.edira-tile-card.is-active .line-2:before, .edira-tile-card.is-active .line-2:after { transition-delay: 0.12s; }
+.edira-tile-card.is-active .line-3:before, .edira-tile-card.is-active .line-3:after { transition-delay: 0.24s; }
+
+/* ACTIVACIÓN EXCLUSIVA EN HOVER PARA DESKTOP */
+@media (hover: hover) and (pointer: fine) {
+  .edira-tile-card:hover {
+    border-color: rgba(168, 85, 247, 0.4);
+    box-shadow: 0 0 30px rgba(121, 40, 202, 0.15), 0 8px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-2px);
+  }
+  .edira-tile-card:hover .card-icon-bubble {
+    color: #c4b5fd;
+    background-color: rgba(121, 40, 202, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+  .edira-tile-card:hover .decision-text {
+    color: #c4b5fd;
+  }
+  .edira-tile-card:hover .shine-layer { opacity: 1; }
+  .edira-tile-card:hover .tiles { opacity: 1; transition-delay: 0.1s; }
+  .edira-tile-card:hover .grid-tile { animation-name: ediraTilePulse; }
+  .edira-tile-card:hover .grid-line { opacity: 1; }
+  .edira-tile-card:hover .grid-line:before { transform: scaleX(1); }
+  .edira-tile-card:hover .grid-line:after { transform: scaleY(1); }
+  .edira-tile-card:hover .line-1:before, .edira-tile-card:hover .line-1:after { transition-delay: 0s; }
+  .edira-tile-card:hover .line-2:before, .edira-tile-card:hover .line-2:after { transition-delay: 0.12s; }
+  .edira-tile-card:hover .line-3:before, .edira-tile-card:hover .line-3:after { transition-delay: 0.24s; }
+}
+
