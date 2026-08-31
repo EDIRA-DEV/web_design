@@ -8,6 +8,7 @@ import { EditorialHero } from '@/components/editorial/EditorialHero';
 import { Section00ExecutiveSummary } from '@/components/editorial/Section00ExecutiveSummary';
 import { Section01Evidence } from '@/components/editorial/Section01Evidence';
 import { Section02ProblemStatement } from '@/components/editorial/Section02ProblemStatement';
+import { Section03DataFoundation } from '@/components/editorial/Section03DataFoundation';
 import { EditorialPlaceholders } from '@/components/editorial/EditorialPlaceholders';
 import { EditorialNextButton } from '@/components/editorial/EditorialNextButton';
 import { FloatingActionDock } from '@/components/editorial/FloatingActionDock';
@@ -80,7 +81,10 @@ export default function ResearchPage() {
             {/* 04 — Problem Statement, Hypothesis & Decision Scope */}
             <Section02ProblemStatement />
 
-            {/* 05-09 — Anchor placeholders for sections 03-07 */}
+            {/* 05 — Data Foundation & Medallion Architecture */}
+            <Section03DataFoundation />
+
+            {/* 06-09 — Anchor placeholders for sections 04-07 */}
             <EditorialPlaceholders />
 
             {/* Footer CTA → next section */}
