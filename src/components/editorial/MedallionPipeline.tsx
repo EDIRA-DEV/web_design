@@ -205,32 +205,35 @@ export function MedallionPipeline() {
             >
               {visibleStages.map((stage, idx) => (
                 <React.Fragment key={stage.step}>
-                  {/* ─── Stage card ─── */}
-                  <div
-                    className={styles.card}
-                    aria-label={`Stage ${stage.step}: ${stage.name}`}
-                  >
-                    {/* Border beam overlay (activated on hover via CSS) */}
-                    <div className={styles.borderBeam} aria-hidden="true" />
+                  {/* ─── Card wrapper: relative, no overflow-hidden (so badge is never clipped) ─── */}
+                  <div className={styles.cardWrapper}>
+                    {/* Floating badge lives on the wrapper, above the overflow-hidden card */}
+                    <div className={styles.badge} aria-hidden="true">{stage.step}</div>
 
-                    {/* Floating badge */}
-                    <div className={styles.badge}>{stage.step}</div>
+                    {/* Card: overflow-hidden only here (contains border beam) */}
+                    <div
+                      className={styles.card}
+                      aria-label={`Stage ${stage.step}: ${stage.name}`}
+                    >
+                      {/* Border beam overlay (activated on hover via CSS) */}
+                      <div className={styles.borderBeam} aria-hidden="true" />
 
-                    {/* Body */}
-                    <div className={styles.cardBody}>
-                      <h3 className={styles.cardTitle}>{stage.name}</h3>
-                      <div className={styles.iconRow} aria-hidden="true">
-                        {stage.icons.map((Icon, i) => (
-                          <Icon key={i} size={15} className={styles.iconDefault} />
-                        ))}
+                      {/* Body */}
+                      <div className={styles.cardBody}>
+                        <h3 className={styles.cardTitle}>{stage.name}</h3>
+                        <div className={styles.iconRow} aria-hidden="true">
+                          {stage.icons.map((Icon, i) => (
+                            <Icon key={i} size={15} className={styles.iconDefault} />
+                          ))}
+                        </div>
+                        <p className={styles.cardDescription}>{stage.description}</p>
                       </div>
-                      <p className={styles.cardDescription}>{stage.description}</p>
-                    </div>
 
-                    {/* Footer */}
-                    <div className={styles.cardFooter}>
-                      <div className={styles.footerDivider} />
-                      <p className={styles.controlObjective}>{stage.controlObjective}</p>
+                      {/* Footer */}
+                      <div className={styles.cardFooter}>
+                        <div className={styles.footerDivider} />
+                        <p className={styles.controlObjective}>{stage.controlObjective}</p>
+                      </div>
                     </div>
                   </div>
 
