@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, PanInfo } from 'framer-motion';
 import {
   ChevronLeft,
   ChevronRight,
@@ -116,6 +116,20 @@ export function MedallionPipeline() {
     setCurrentIndex((p) => Math.max(p - stepSize, 0));
   };
 
+  const handleDragEnd = (
+    _e: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    const swipeThreshold = 40;
+    const velocityThreshold = 400;
+
+    if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
+      goNext();
+    } else if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
+      goPrev();
+    }
+  };
+
   /* Which cards to render */
   const visibleStages = isMobile
     ? [STAGES[currentIndex]]
@@ -190,7 +204,7 @@ export function MedallionPipeline() {
           ))}
         </div>
 
-        {/* ── Animated card group ── */}
+        {/* ── Animated card group with touch / drag swipe gestures ── */}
         <div className={styles.cardViewport}>
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -201,6 +215,10 @@ export function MedallionPipeline() {
               initial="enter"
               animate="center"
               exit="exit"
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
               transition={{ duration: 0.32, ease: [0.4, 0, 0.2, 1] }}
             >
               {visibleStages.map((stage, idx) => (

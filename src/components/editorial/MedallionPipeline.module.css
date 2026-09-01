@@ -136,6 +136,12 @@
   align-items: stretch;
   gap: 0;
   width: 100%;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.cardRow:active {
+  cursor: grabbing;
 }
 
 /* ─────────────────────────────────────────────────────────────
