@@ -233,57 +233,7 @@ const KPI_NODES: KpiNode[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────────────────────
-   SEMANTIC DEFINITION LEDGER — 8 Contract Fields
-   ───────────────────────────────────────────────────────────── */
-interface ContractField {
-  field: string;
-  description: string;
-  example: string;
-}
 
-const CONTRACT_FIELDS: ContractField[] = [
-  {
-    field: 'Business Definition',
-    description: 'Plain-language statement of what the KPI measures and why it matters operationally.',
-    example: 'Hours elapsed from induction check-in to final release stamp.',
-  },
-  {
-    field: 'Grain',
-    description: 'The most granular level at which the measure is computed and stored.',
-    example: 'Shop visit \u00d7 workscope tier \u00d7 engine family \u00d7 week.',
-  },
-  {
-    field: 'Numerator / Denominator',
-    description: 'Explicit DAX or SQL expressions for both parts of a ratio measure.',
-    example: 'CALCULATE(SUM(Visits[TAT_Hours]), USERELATIONSHIP(...))',
-  },
-  {
-    field: 'Exclusions',
-    description: 'Events or records intentionally removed from the calculation scope.',
-    example: 'Customer-caused holds, AOG-priority overrides, regulatory suspensions.',
-  },
-  {
-    field: 'Time Logic',
-    description: 'Calendar dimension relationships, fiscal vs. calendar year, and time-intelligence patterns.',
-    example: 'Rolling 13-week window; excludes weekends from constraint loss.',
-  },
-  {
-    field: 'Owner',
-    description: 'Named role accountable for the KPI definition, threshold setting, and reconciliation.',
-    example: 'MRO Operations Lead (primary) / Planning Manager (backup).',
-  },
-  {
-    field: 'Threshold',
-    description: 'Quantified alert or SLA boundary that triggers governance action when breached.',
-    example: 'P80 TAT \u2264 contractual ceiling; red if +10% above target.',
-  },
-  {
-    field: 'Reconciliation Test',
-    description: 'Automated assertion that confirms the measure matches source-system totals.',
-    example: 'ASSERT SUM(TAT_Hours) = [ERP_Actual_Hours] \u00b1 0.1%.',
-  },
-];
 
 /* ─────────────────────────────────────────────────────────────
    NODE CARD  (whileInView progressive activation)
@@ -417,28 +367,7 @@ function TracingBeam({
   );
 }
 
-/* ─────────────────────────────────────────────────────────────
-   CONTRACT FIELD ROW
-   ───────────────────────────────────────────────────────────── */
-function ContractFieldRow({ field, index }: { field: ContractField; index: number }) {
-  return (
-    <motion.tr
-      className={styles.tableRow}
-      initial={{ opacity: 0, x: -12 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: index * 0.055 }}
-    >
-      <td className={styles.tableCellField}>
-        <span className={styles.fieldBadge}>{field.field}</span>
-      </td>
-      <td className={styles.tableCellDesc}>{field.description}</td>
-      <td className={styles.tableCellExample}>
-        <code className={styles.exampleCode}>{field.example}</code>
-      </td>
-    </motion.tr>
-  );
-}
+
 
 /* ─────────────────────────────────────────────────────────────
    MAIN SECTION COMPONENT
@@ -552,48 +481,7 @@ export function Section04SemanticMetrics() {
         </div>
       </div>
 
-      {/* ══ SEMANTIC CONTRACT DEFINITION LEDGER ══ */}
-      <motion.div
-        className={styles.ledgerWrapper}
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {/* Ledger header */}
-        <div className={styles.ledgerHeader}>
-          <div className={styles.ledgerHeaderLeft}>
-            <span className={styles.ledgerEyebrow}>DEFINITION LEDGER</span>
-            <h3 className={styles.ledgerTitle}>8-Field Calculation Contract</h3>
-          </div>
-          <div className={styles.ledgerHeaderRight} aria-hidden="true">
-            <div className={styles.ledgerStatusDot} />
-            <span className={styles.ledgerStatus}>SEMANTIC LAYER ACTIVE</span>
-          </div>
-        </div>
 
-        {/* Table */}
-        <div
-          className={styles.tableWrapper}
-          role="region"
-          aria-label="KPI calculation contract fields"
-        >
-          <table className={styles.dataTable}>
-            <thead>
-              <tr className={styles.tableHead}>
-                <th className={styles.tableHeadCell} scope="col">Contract Field</th>
-                <th className={styles.tableHeadCell} scope="col">Requirement</th>
-                <th className={styles.tableHeadCell} scope="col">TAT Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              {CONTRACT_FIELDS.map((field, idx) => (
-                <ContractFieldRow key={field.field} field={field} index={idx} />
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </motion.div>
 
       {/* ══ GOVERNANCE GATE CALLOUT ══ */}
       <motion.div
