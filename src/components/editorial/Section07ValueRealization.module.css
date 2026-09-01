@@ -1,0 +1,440 @@
+/* ============================================================
+   Section07ValueRealization — Editorial Chapter 07
+   EDIRA Design System — Dark Obsidian × Neon Violet tokens
+   ============================================================ */
+
+.section {
+  margin-bottom: var(--space-20);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION HEADER
+   ══════════════════════════════════════════════════════════ */
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+  padding-top: 0.35em;
+}
+
+.sectionTitle {
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  flex: 1;
+}
+
+.divider {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sectionHeader { align-items: center; }
+  .sectionTitle { font-size: var(--text-4xl); }
+  .divider {
+    display: block;
+    flex-grow: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEAD PROSE
+   ══════════════════════════════════════════════════════════ */
+.leadProse {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 75ch;
+  margin-bottom: var(--space-10);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DOMAIN → KPI → DECISION TABLE
+   ══════════════════════════════════════════════════════════ */
+.domainTableWrapper {
+  margin-bottom: var(--space-12);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  background-color: rgba(8, 10, 29, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+.domainTableHead {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .domainTableHead {
+    display: grid;
+    grid-template-columns: 140px 1fr 240px;
+    padding: 10px var(--space-5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+}
+
+.domainHeadCell {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  padding: 2px var(--space-2);
+}
+
+/* Domain row */
+.domainRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-left: 3px solid transparent;
+  transition: background-color 0.2s ease;
+  cursor: default;
+}
+
+.domainRow:last-child {
+  border-bottom: none;
+}
+
+.domainRow:hover {
+  background-color: rgba(168, 85, 247, 0.03);
+}
+
+@media (min-width: 768px) {
+  .domainRow {
+    display: grid;
+    grid-template-columns: 140px 1fr 240px;
+    align-items: center;
+    gap: 0;
+    flex-direction: unset;
+  }
+}
+
+.domainRow--violet  { border-left-color: rgba(168, 85, 247, 0.5); }
+.domainRow--cyan    { border-left-color: rgba(56, 189, 248, 0.45); }
+.domainRow--emerald { border-left-color: rgba(52, 211, 153, 0.45); }
+.domainRow--amber   { border-left-color: rgba(245, 158, 11, 0.45); }
+.domainRow--rose    { border-left-color: rgba(244, 114, 182, 0.45); }
+
+.domainName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #ffffff;
+  padding-right: var(--space-3);
+}
+
+.domainRow--violet .domainName  { color: #C084FC; }
+.domainRow--cyan .domainName    { color: #7DD3FC; }
+.domainRow--emerald .domainName { color: #6EE7B7; }
+.domainRow--amber .domainName   { color: #FCD34D; }
+.domainRow--rose .domainName    { color: #F9A8D4; }
+
+.kpiFamily {
+  font-size: 0.8125rem;
+  color: rgba(203, 213, 225, 0.75);
+  line-height: 1.55;
+  padding: 0 var(--space-3);
+}
+
+.decisionText {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-style: italic;
+  line-height: 1.5;
+  padding: 0 var(--space-3);
+}
+
+/* ══════════════════════════════════════════════════════════
+   TWO-COLUMN SCENARIO + EQUATIONS
+   ══════════════════════════════════════════════════════════ */
+.scenarioGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .scenarioGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ── Scenario card ── */
+.scenarioCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background-color: rgba(16, 21, 56, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.scenarioTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #A855F7;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.scenarioBody {
+  font-size: 0.875rem;
+  color: rgba(203, 213, 225, 0.8);
+  line-height: 1.7;
+}
+
+/* Formula box */
+.formulaBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background-color: rgba(168, 85, 247, 0.06);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.formulaLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.6);
+}
+
+.formulaExpression {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.formulaBase {
+  font-family: var(--font-mono);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.formulaOp {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: rgba(168, 85, 247, 0.6);
+}
+
+.formulaImprovement {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #C084FC;
+  font-style: italic;
+}
+
+.scenarioDisclaimer {
+  font-size: 0.6875rem;
+  color: rgba(148, 163, 184, 0.5);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── Equations card ── */
+.equationsCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background-color: rgba(16, 21, 56, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.equationsTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #38BDF8;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+.equationsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.equationItem {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.equationBullet {
+  color: #A855F7;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+  line-height: 1.5;
+}
+
+.equationText {
+  font-size: 0.8125rem;
+  color: rgba(203, 213, 225, 0.8);
+  line-height: 1.65;
+}
+
+.equationName {
+  font-weight: 700;
+  color: #7DD3FC;
+}
+
+.equationFormula {
+  color: rgba(203, 213, 225, 0.72);
+}
+
+/* ══════════════════════════════════════════════════════════
+   DONUT RINGS
+   ══════════════════════════════════════════════════════════ */
+.donutSection {
+  margin-top: var(--space-4);
+}
+
+.donutRings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-10);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+.donutWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.donutSvg {
+  width: 136px;
+  height: 136px;
+  overflow: visible;
+  filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.3));
+}
+
+.donutValue {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 800;
+  dominant-baseline: central;
+  letter-spacing: -0.03em;
+}
+
+.donutLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.7);
+}
+
+/* ══════════════════════════════════════════════════════════
+   HORIZONTAL GAUGE
+   ══════════════════════════════════════════════════════════ */
+.gaugeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.gaugeTrack {
+  position: relative;
+  height: 10px;
+  background-color: rgba(37, 45, 102, 0.6);
+  border-radius: var(--radius-full);
+  overflow: visible;
+}
+
+.gaugeFill {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to right, #5B21B6, #7C3AED, #A855F7, #C084FC);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+}
+
+.gaugeMarker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gaugeMarkerTick {
+  width: 2px;
+  height: 18px;
+  background-color: rgba(168, 85, 247, 0.7);
+  border-radius: 1px;
+  margin: 0 auto;
+  transform: translateY(-4px);
+}
+
+.gaugeScale {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+}
+
+.gaugeScaleLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: rgba(148, 163, 184, 0.5);
+  letter-spacing: 0.04em;
+}
+
+.gaugeNote {
+  font-size: 0.6875rem;
+  color: rgba(148, 163, 184, 0.45);
+  text-align: center;
+  font-style: italic;
+  margin-top: var(--space-1);
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════════════════════ */
+@media print {
+  .section { break-before: page; }
+  .domainTableWrapper,
+  .scenarioCard,
+  .equationsCard { border-color: #262626; }
+  .donutSvg { filter: none; }
+}

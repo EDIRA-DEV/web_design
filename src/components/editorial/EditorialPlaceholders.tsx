@@ -8,7 +8,6 @@ interface PlaceholderSection {
 }
 
 const PLACEHOLDER_SECTIONS: PlaceholderSection[] = [
-  { id: 'section-04', number: '04', title: 'Governance & Semantic Models' },
   { id: 'section-05', number: '05', title: 'Power BI MRO Control Tower' },
   { id: 'section-06', number: '06', title: 'Applied AI & Schedule Optimization' },
   { id: 'section-07', number: '07', title: 'Value Realization & Availability Formulas' },

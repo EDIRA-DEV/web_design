@@ -9,7 +9,10 @@ import { Section00ExecutiveSummary } from '@/components/editorial/Section00Execu
 import { Section01Evidence } from '@/components/editorial/Section01Evidence';
 import { Section02ProblemStatement } from '@/components/editorial/Section02ProblemStatement';
 import { Section03DataFoundation } from '@/components/editorial/Section03DataFoundation';
-import { EditorialPlaceholders } from '@/components/editorial/EditorialPlaceholders';
+import { Section04SemanticMetrics } from '@/components/editorial/Section04SemanticMetrics';
+import { Section05ControlTower } from '@/components/editorial/Section05ControlTower';
+import { Section06AIOptimization } from '@/components/editorial/Section06AIOptimization';
+import { Section07ValueRealization } from '@/components/editorial/Section07ValueRealization';
 import { EditorialNextButton } from '@/components/editorial/EditorialNextButton';
 import { FloatingActionDock } from '@/components/editorial/FloatingActionDock';
 import styles from './page.module.css';
@@ -84,8 +87,17 @@ export default function ResearchPage() {
             {/* 05 — Data Foundation & Medallion Architecture */}
             <Section03DataFoundation />
 
-            {/* 06-09 — Anchor placeholders for sections 04-07 */}
-            <EditorialPlaceholders />
+            {/* 06 — Semantic Metrics & Calculation Contracts */}
+            <Section04SemanticMetrics />
+
+            {/* 07 — Power BI MRO Control Tower: from visibility to action */}
+            <Section05ControlTower />
+
+            {/* 08 — AI & Optimization: how the models would work */}
+            <Section06AIOptimization />
+
+            {/* 09 — KPI and value realization model */}
+            <Section07ValueRealization />
 
             {/* Footer CTA → next section */}
             <EditorialNextButton href="#section-02" label="Next" />

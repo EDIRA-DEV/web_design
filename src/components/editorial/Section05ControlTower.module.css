@@ -1,0 +1,498 @@
+/* ============================================================
+   Section05ControlTower — Editorial Chapter 05
+   EDIRA Design System — Dark Obsidian × Neon Violet tokens
+   ============================================================ */
+
+/* ── Section wrapper ── */
+.section {
+  margin-bottom: var(--space-20);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SECTION HEADER  (mirrors Ch04 pattern)
+   ══════════════════════════════════════════════════════════ */
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-primary);
+  flex-shrink: 0;
+  padding-top: 0.35em;
+}
+
+.sectionTitle {
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  flex: 1;
+}
+
+.divider {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sectionHeader {
+    align-items: center;
+  }
+  .sectionTitle {
+    white-space: nowrap;
+    font-size: var(--text-4xl);
+  }
+  .divider {
+    display: block;
+    flex-grow: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* ── Subtitle ── */
+.sectionSubtitle {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #A855F7;
+  letter-spacing: 0.005em;
+  margin-bottom: var(--space-5);
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEAD PROSE
+   ══════════════════════════════════════════════════════════ */
+.leadProse {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: var(--leading-relaxed);
+  max-width: 75ch;
+  margin-bottom: var(--space-10);
+}
+
+/* ══════════════════════════════════════════════════════════
+   TOWER PAGE MATRIX
+   ══════════════════════════════════════════════════════════ */
+.matrixWrapper {
+  margin-bottom: var(--space-12);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  background-color: rgba(10, 8, 24, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+/* ── Tower Row ── */
+.towerRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+  cursor: default;
+}
+
+.towerRow:last-child {
+  border-bottom: none;
+}
+
+.towerRow:hover {
+  background-color: rgba(168, 85, 247, 0.04);
+}
+
+@media (min-width: 768px) {
+  .towerRow {
+    grid-template-columns: 180px 1fr 1px 1fr;
+    align-items: start;
+    gap: 0;
+  }
+}
+
+/* ── Accent left border ── */
+.towerRow--violet {
+  border-left: 3px solid rgba(168, 85, 247, 0.5);
+}
+.towerRow--cyan {
+  border-left: 3px solid rgba(56, 189, 248, 0.4);
+}
+.towerRow--emerald {
+  border-left: 3px solid rgba(52, 211, 153, 0.4);
+}
+
+/* ── Page meta (label + title) ── */
+.towerPageMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-right: var(--space-4);
+  padding-bottom: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .towerPageMeta {
+    padding-bottom: 0;
+    padding-top: 2px;
+  }
+}
+
+.towerPageNum {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(168, 85, 247, 0.7);
+}
+
+.towerRow--cyan .towerPageNum  { color: rgba(56, 189, 248, 0.7); }
+.towerRow--emerald .towerPageNum { color: rgba(52, 211, 153, 0.7); }
+
+.towerPageTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* ── Integrates column ── */
+.towerIntegrates {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: var(--space-5);
+  padding-bottom: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .towerIntegrates {
+    padding-bottom: 0;
+    padding-left: var(--space-2);
+  }
+}
+
+/* ── Vertical divider ── */
+.towerDivider {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .towerDivider {
+    display: block;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.06);
+    align-self: stretch;
+    margin: 0 var(--space-4);
+  }
+}
+
+/* ── Decision column ── */
+.towerDecision {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .towerDecision {
+    padding-left: var(--space-2);
+  }
+}
+
+/* ── Shared label/body ── */
+.towerLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.towerBody {
+  font-size: 0.8125rem;
+  color: rgba(203, 213, 225, 0.8);
+  line-height: 1.6;
+}
+
+.towerDecisionText {
+  color: rgba(255, 255, 255, 0.75);
+  font-style: italic;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ALERT-TO-ACTION WORKFLOW
+   ══════════════════════════════════════════════════════════ */
+.workflowSection {
+  margin-bottom: var(--space-10);
+}
+
+.workflowHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.workflowHeaderAccent {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #7C3AED, #A855F7);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
+  flex-shrink: 0;
+}
+
+.workflowTitle {
+  font-size: clamp(var(--text-xl), 3vw, var(--text-2xl));
+  font-weight: var(--font-bold);
+  color: #A855F7;
+  letter-spacing: -0.02em;
+}
+
+/* ── Steps container ── */
+.workflowSteps {
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .workflowSteps {
+    padding-left: var(--space-4);
+  }
+}
+
+/* ── Individual step wrapper ── */
+.stepWrapper {
+  position: relative;
+}
+
+.stepRow {
+  display: grid;
+  grid-template-columns: 40px 52px 1fr;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding-bottom: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .stepRow {
+    grid-template-columns: 48px 60px 1fr;
+    gap: var(--space-5);
+  }
+}
+
+/* ── Step left (number + connector) ── */
+.stepLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-top: 4px;
+}
+
+.stepNumber {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 800;
+  color: #A855F7;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+.stepConnector {
+  width: 1px;
+  flex-grow: 1;
+  min-height: 40px;
+  background: linear-gradient(to bottom, rgba(168, 85, 247, 0.4), rgba(168, 85, 247, 0.08));
+  margin-top: var(--space-2);
+  position: relative;
+  /* Dashed simulation via repeating-linear-gradient */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(168, 85, 247, 0.45) 0px,
+    rgba(168, 85, 247, 0.45) 4px,
+    transparent 4px,
+    transparent 10px
+  );
+}
+
+/* ── Icon circle ── */
+.stepIconWrap {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepIconWrap--violet {
+  background: linear-gradient(135deg, #5B21B6 0%, #7C3AED 50%, #A855F7 100%);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.stepIconWrap--cyan {
+  background: linear-gradient(135deg, #0c4a6e 0%, #0ea5e9 50%, #38BDF8 100%);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.stepIconWrap--emerald {
+  background: linear-gradient(135deg, #064e3b 0%, #10b981 50%, #34D399 100%);
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.3), 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.stepIconRing {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(168, 85, 247, 0.4);
+  pointer-events: none;
+}
+
+.stepIconWrap--cyan .stepIconRing   { border-color: rgba(56, 189, 248, 0.4); }
+.stepIconWrap--emerald .stepIconRing { border-color: rgba(52, 211, 153, 0.4); }
+
+.stepIconInner {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Step content ── */
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 6px;
+}
+
+.stepTitle {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.stepTitle--violet  { color: #A855F7; }
+.stepTitle--cyan    { color: #38BDF8; }
+.stepTitle--emerald { color: #34D399; }
+
+.stepDesc {
+  font-size: 0.875rem;
+  color: rgba(203, 213, 225, 0.75);
+  line-height: 1.65;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROLE-BASED CADENCE
+   ══════════════════════════════════════════════════════════ */
+.cadenceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background-color: rgba(10, 8, 24, 0.75);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5) var(--space-6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@media (min-width: 768px) {
+  .cadenceBlock {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-8);
+  }
+}
+
+.cadenceLeft {
+  flex-shrink: 0;
+}
+
+.cadenceLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #A855F7;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .cadenceLabel {
+    font-size: 1.0625rem;
+  }
+}
+
+.cadenceRight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
+
+.cadenceBody {
+  font-size: 0.9rem;
+  color: rgba(203, 213, 225, 0.85);
+  line-height: 1.7;
+}
+
+/* ── Non-Negotiable Design Rule ── */
+.designRule {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.designRuleIcon {
+  flex-shrink: 0;
+  color: #A855F7;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.designRuleText {
+  font-size: 0.8125rem;
+  color: rgba(221, 214, 254, 0.85);
+  line-height: 1.6;
+}
+
+.designRuleStrong {
+  font-weight: 700;
+  color: #C084FC;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════════════════════ */
+@media print {
+  .section {
+    break-before: page;
+  }
+  .matrixWrapper,
+  .cadenceBlock {
+    border-color: #262626;
+  }
+}
