@@ -16,6 +16,8 @@
   position: relative;
   z-index: 1;
   width: 100%;
+  flex: 1;
+  min-width: 0;
   display: flex;
   justify-content: center;
   padding-bottom: var(--space-24);
@@ -23,10 +25,9 @@
   padding-top: 0;
 }
 
-/* On desktop, offset left to clear the fixed sidebar */
+/* On desktop, clear top for navbar */
 @media (min-width: 1024px) {
   .mainContent {
-    margin-left: 256px;
     padding-top: var(--header-height);
   }
 }
