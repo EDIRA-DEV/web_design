@@ -55,29 +55,38 @@
   color: var(--color-primary);
 }
 
-/* ── Hero Figure / Image ── */
+/* ── Hero Figure / Video ── */
 .heroFigure {
+  position: relative;
   width: 100%;
   border-radius: var(--radius-xl);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: rgba(255, 255, 255, 0.03);
   margin-bottom: var(--space-10);
-  /* Fallback gradient when image is missing */
-  background-image: radial-gradient(
-    circle at 60% 40%,
-    rgba(139, 92, 246, 0.25) 0%,
-    rgba(31, 67, 194, 0.15) 50%,
-    transparent 100%
-  );
+  aspect-ratio: 21 / 9;
 }
 
-.heroImage {
+.heroVideo {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  aspect-ratio: 21 / 9;
   display: block;
+}
+
+/* Seamless bottom-fade overlay — transitions the video into the page bg */
+.heroVideoFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--color-bg) 100%
+  );
+  pointer-events: none;
 }
 
 /* ── Print ── */

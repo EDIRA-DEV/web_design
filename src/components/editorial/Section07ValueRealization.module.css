@@ -344,8 +344,8 @@
 .donutSvg {
   width: 136px;
   height: 136px;
+  /* overflow: visible lets the glow filter bleed outside the SVG bounds */
   overflow: visible;
-  filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.3));
 }
 
 .donutValue {
@@ -354,6 +354,8 @@
   font-weight: 800;
   dominant-baseline: central;
   letter-spacing: -0.03em;
+  /* tabular-nums prevents layout shift as digits tick */
+  font-variant-numeric: tabular-nums;
 }
 
 .donutLabel {
@@ -363,6 +365,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(168, 85, 247, 0.7);
+  /* opacity is driven by JS scroll progress — no CSS transition */
 }
 
 /* ══════════════════════════════════════════════════════════

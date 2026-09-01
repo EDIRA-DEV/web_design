@@ -1,9 +1,54 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { MaskRevealText, ScrambleText, BlurRevealText } from './TextAnimations';
 import styles from './Section07ValueRealization.module.css';
+
+/* ─────────────────────────────────────────────────────────────
+   SHARED SCROLL-PROGRESS HOOK
+   Identical pattern to PublicSignalsChart — pure rAF-driven,
+   no framer-motion spring lag.
+   progress 0 = element bottom just enters viewport
+   progress 1 = element center aligns with visible viewport center
+   ───────────────────────────────────────────────────────────── */
+function useScrollProgress(ref: React.RefObject<Element | null>) {
+  const [progress, setProgress] = useState(0);
+  const rafRef = useRef<number | null>(null);
+
+  function clamp01(v: number) { return Math.max(0, Math.min(1, v)); }
+
+  const compute = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    const rect      = el.getBoundingClientRect();
+    const viewportH = window.innerHeight;
+    const navbarEl  = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
+    const subNavEl  = document.querySelector('[class*="MobileEditorialSubNav-module"]') as HTMLElement | null;
+    const navbarH   = navbarEl  ? navbarEl.offsetHeight  : 72;
+    const subNavH   = (subNavEl && subNavEl.offsetHeight > 0) ? subNavEl.offsetHeight : 0;
+    const headerOffset = navbarH + subNavH;
+    const usableH   = viewportH - headerOffset;
+    const traveled  = viewportH - rect.top;
+    const completeAt = usableH * 0.55;
+    setProgress(clamp01(traveled / completeAt));
+  }, [ref]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(compute);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    compute();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
+  }, [compute]);
+
+  return progress;
+}
 
 /* ─────────────────────────────────────────────────────────────
    DOMAIN → KPI → DECISION TABLE — 6 domains
@@ -88,7 +133,22 @@ const VALUE_EQUATIONS: ValueEquation[] = [
 ];
 
 /* ─────────────────────────────────────────────────────────────
-   ANIMATED DONUT RING (SVG)
+   GRADIENT DEFINITIONS PER RING
+   index 0 → light violet   (3.5)
+   index 1 → medium violet  (10.5)
+   index 2 → deep violet    (17.5)
+   ───────────────────────────────────────────────────────────── */
+const DONUT_GRADIENTS = [
+  // Light — pastel lavender
+  { from: '#DDD6FE', via: '#C4B5FD', to: '#A78BFA' },
+  // Medium
+  { from: '#A855F7', via: '#8B5CF6', to: '#7C3AED' },
+  // Dark — deep indigo
+  { from: '#7C3AED', via: '#6D28D9', to: '#4C1D95' },
+];
+
+/* ─────────────────────────────────────────────────────────────
+   ANIMATED DONUT RING — scroll-driven, matches PublicSignalsChart
    ───────────────────────────────────────────────────────────── */
 interface DonutProps {
   value: number;        // Display value (e.g. 3.5)
@@ -98,38 +158,53 @@ interface DonutProps {
 }
 
 function AnimatedDonut({ value, maxValue, label, index }: DonutProps) {
-  const ref = useRef<SVGSVGElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const [animated, setAnimated] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+  // Use the shared scroll hook — progress 0→1 drives everything
+  const progress = useScrollProgress(svgRef);
 
-  useEffect(() => {
-    if (isInView && !animated) setAnimated(true);
-  }, [isInView, animated]);
-
-  const R = 52;
-  const cx = 68;
-  const cy = 68;
+  const R            = 52;
+  const cx           = 68;
+  const cy           = 68;
   const circumference = 2 * Math.PI * R;
-  const fillRatio = value / maxValue;
-  const dashLength = fillRatio * circumference;
+
+  /*
+   * Stagger: ring i starts filling a bit after ring i-1.
+   * colStart shifts the zero-point of each ring's local progress.
+   */
+  const colStart   = index * 0.06;
+  const localProg  = Math.max(0, Math.min(1, colStart < 1 ? (progress - colStart) / (1 - colStart) : progress));
+
+  // Arc fill
+  const fillRatio  = value / maxValue;
+  const dashLength = fillRatio * circumference * localProg;
+
+  // Counter — pure function of scroll progress
+  const displayVal = (value * localProg).toFixed(1);
+
+  // Label alpha fades in once ring is > 10% filled
+  const labelAlpha = Math.max(0, Math.min(1, (localProg - 0.10) / 0.15));
+
+  const grad = DONUT_GRADIENTS[index];
+  const gradId = `donut-grad-${index}`;
+  const glowId = `donut-glow-${index}`;
 
   return (
     <div className={styles.donutWrapper}>
       <svg
-        ref={ref}
+        ref={svgRef}
         className={styles.donutSvg}
         viewBox="0 0 136 136"
-        aria-label={`${value} visit-equivalents at ${label} improvement`}
+        aria-label={`${displayVal} visit-equivalents at ${label} improvement`}
         role="img"
       >
         <defs>
-          <linearGradient id={`donut-grad-${index}`} x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#7C3AED" />
-            <stop offset="60%" stopColor="#A855F7" />
-            <stop offset="100%" stopColor="#C084FC" />
+          <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stopColor={grad.from} />
+            <stop offset="50%"  stopColor={grad.via}  />
+            <stop offset="100%" stopColor={grad.to}   />
           </linearGradient>
-          <filter id={`donut-glow-${index}`}>
-            <feGaussianBlur stdDeviation="3" result="blur" />
+          <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -137,49 +212,40 @@ function AnimatedDonut({ value, maxValue, label, index }: DonutProps) {
           </filter>
         </defs>
 
-        {/* Background track */}
+        {/* Background track — same dark grey as the PublicSignalsChart bars */}
         <circle
           cx={cx} cy={cy} r={R}
           fill="none"
-          stroke="rgba(37, 45, 102, 0.7)"
+          stroke="#222736"
           strokeWidth="16"
         />
 
-        {/* Animated fill arc */}
-        <motion.circle
+        {/* Scroll-driven fill arc */}
+        <circle
           cx={cx} cy={cy} r={R}
           fill="none"
-          stroke={`url(#donut-grad-${index})`}
+          stroke={`url(#${gradId})`}
           strokeWidth="16"
           strokeLinecap="round"
-          strokeDasharray={`${dashLength} ${circumference}`}
-          strokeDashoffset={circumference / 4}   /* start at 12-o'clock */
-          filter={`url(#donut-glow-${index})`}
-          initial={{ strokeDasharray: `0 ${circumference}` }}
-          animate={animated
-            ? { strokeDasharray: `${dashLength} ${circumference}` }
-            : { strokeDasharray: `0 ${circumference}` }
-          }
-          transition={{
-            duration: 1.4,
-            ease: [0.16, 1, 0.3, 1],
-            delay: index * 0.2,
-          }}
+          /* rotate so the arc starts at 12-o'clock */
+          transform={`rotate(-90 ${cx} ${cy})`}
+          strokeDasharray={`${dashLength} ${circumference - dashLength}`}
+          filter={`url(#${glowId})`}
         />
 
-        {/* Center value */}
+        {/* Center counter — animated with scroll */}
         <text
           x={cx} y={cy + 6}
           textAnchor="middle"
           className={styles.donutValue}
           fill="#ffffff"
         >
-          {value}
+          {displayVal}
         </text>
       </svg>
 
-      {/* Bottom label */}
-      <span className={styles.donutLabel}>{label}</span>
+      {/* Bottom label fades in with the ring */}
+      <span className={styles.donutLabel} style={{ opacity: labelAlpha }}>{label}</span>
     </div>
   );
 }

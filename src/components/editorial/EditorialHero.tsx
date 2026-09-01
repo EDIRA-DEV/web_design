@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import styles from './EditorialHero.module.css';
 import { MetricStrip } from './MetricStrip';
 import { MaskRevealText, ScrambleText, VioletShimmer } from './TextAnimations';
@@ -25,16 +24,19 @@ export function EditorialHero() {
         Blueprint for Capacity, Throughput, and Value Realization
       </MaskRevealText>
 
-      {/* ── Hero Turbine Image ── */}
-      <figure className={styles.heroFigure}>
-        <Image
-          src="/images/insights/leap-turbine-hero.png"
-          alt="LEAP turbine core inside the Querétaro MRO facility — cinematic wide shot"
-          width={1700}
-          height={728}
-          className={styles.heroImage}
-          priority
-        />
+      {/* ── Hero Research Video ── */}
+      <figure className={styles.heroFigure} aria-label="Research video — LEAP MRO facility">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className={styles.heroVideo}
+        >
+          <source src="/videos/research1.mov" type="video/mp4" />
+        </video>
+        {/* Bottom fade — seamless transition into section background */}
+        <div className={styles.heroVideoFade} aria-hidden="true" />
       </figure>
 
       {/* ── 4-Metric Strip (animated count-up) ── */}
