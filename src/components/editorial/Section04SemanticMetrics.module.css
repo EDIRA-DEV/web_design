@@ -110,6 +110,14 @@
   border-radius: var(--radius-lg);
   width: fit-content;
   flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .govControlPill {
+    width: 100%;
+    min-height: 44px;
+  }
 }
 
 .govControlIcon {
@@ -213,15 +221,25 @@
   }
 }
 
-/* ── Management Outcome badge (lavender pill) ── */
+/* ── Management Outcome badge (standard uniform lavender pill) ── */
 .govOutcomeBadge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding: 6px 14px;
+  justify-content: center;
+  padding: 8px 16px;
   background-color: rgba(168, 85, 247, 0.1);
   border: 1px solid rgba(196, 132, 252, 0.3);
   border-radius: var(--radius-full);
   width: fit-content;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .govOutcomeBadge {
+    width: 100%;
+    min-height: 48px;
+  }
 }
 
 .govOutcomeText {
