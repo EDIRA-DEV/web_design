@@ -127,18 +127,75 @@
   letter-spacing: -0.005em;
 }
 
-/* ── Arrow connector ── */
+/* ── Arrow connector (visible on both mobile and desktop with directional animation) ── */
 .govArrow {
-  display: none;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  color: rgba(168, 85, 247, 0.5);
+  justify-content: flex-start;
+  color: #A855F7;
   flex-shrink: 0;
+  padding: 2px 0;
+  margin-left: 12px;
+  width: fit-content;
+  animation: arrowPulseMobile 2.2s ease-in-out infinite;
+}
+
+.govArrowFirst {
+  animation-delay: 0s;
+}
+
+.govArrowSecond {
+  animation-delay: 0.35s;
+}
+
+.govArrowSvg {
+  width: 18px;
+  height: 18px;
+  transform: rotate(90deg);
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.65));
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+@keyframes arrowPulseMobile {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+    color: #A855F7;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+    color: #C084FC;
+  }
 }
 
 @media (min-width: 900px) {
   .govArrow {
     display: flex;
+    justify-content: center;
+    padding: 0;
+    margin-left: 0;
+    width: auto;
+    animation: arrowPulseDesktop 2.2s ease-in-out infinite;
+  }
+
+  .govArrowSvg {
+    transform: rotate(0deg);
+    width: 20px;
+    height: 20px;
+  }
+
+  @keyframes arrowPulseDesktop {
+    0%, 100% {
+      transform: translateX(0);
+      opacity: 0.7;
+      color: #A855F7;
+    }
+    50% {
+      transform: translateX(4px);
+      opacity: 1;
+      color: #C084FC;
+    }
   }
 }
 

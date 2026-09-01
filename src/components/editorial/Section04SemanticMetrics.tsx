@@ -127,9 +127,9 @@ function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }
         <span className={styles.govControlLabel}>{row.control}</span>
       </div>
 
-      {/* Arrow */}
-      <div className={styles.govArrow} aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Arrow 1 */}
+      <div className={`${styles.govArrow} ${styles.govArrowFirst}`} aria-hidden="true">
+        <svg className={styles.govArrowSvg} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
           <polyline points="12 5 19 12 12 19"/>
         </svg>
@@ -138,9 +138,9 @@ function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }
       {/* Mechanism (plain text body) */}
       <p className={styles.govMechanism}>{row.mechanism}</p>
 
-      {/* Arrow */}
-      <div className={styles.govArrow} aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Arrow 2 */}
+      <div className={`${styles.govArrow} ${styles.govArrowSecond}`} aria-hidden="true">
+        <svg className={styles.govArrowSvg} width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
           <polyline points="12 5 19 12 12 19"/>
         </svg>
