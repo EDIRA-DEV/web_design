@@ -10,6 +10,151 @@ import { MaskRevealText, ScrambleText, BlurRevealText } from './TextAnimations';
 import styles from './Section04SemanticMetrics.module.css';
 
 /* ─────────────────────────────────────────────────────────────
+   GOVERNANCE MECHANISMS — Control → Mechanism → Management Outcome
+   ───────────────────────────────────────────────────────────── */
+interface GovernanceRow {
+  id: string;
+  control: string;
+  mechanism: string;
+  managementOutcome: string;
+  icon: React.ReactNode;
+}
+
+const OwnershipIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+    <circle cx="12" cy="7" r="4"/>
+  </svg>
+);
+const CatalogueIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+  </svg>
+);
+const ContractIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
+    <polyline points="10 9 9 9 8 9"/>
+  </svg>
+);
+const SecurityIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  </svg>
+);
+const QualityIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+);
+const ModelGovIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="3"/>
+    <circle cx="12" cy="12" r="7"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+  </svg>
+);
+
+const GOVERNANCE_ROWS: GovernanceRow[] = [
+  {
+    id: 'ownership',
+    control: 'Ownership',
+    mechanism: 'Executive owner, data owner, steward, product owner',
+    managementOutcome: 'Fast issue resolution and accountability',
+    icon: <OwnershipIcon />,
+  },
+  {
+    id: 'catalogue-lineage',
+    control: 'Catalogue & Lineage',
+    mechanism: 'Purview or equivalent; business glossary; source-to-KPI lineage',
+    managementOutcome: 'Trust and impact analysis',
+    icon: <CatalogueIcon />,
+  },
+  {
+    id: 'data-contracts',
+    control: 'Data contracts',
+    mechanism: 'Schema, keys, semantics, cadence, quality SLA, change policy',
+    managementOutcome: 'Predictable producer-consumer interface',
+    icon: <ContractIcon />,
+  },
+  {
+    id: 'security',
+    control: 'Security',
+    mechanism: 'Entra/RBAC, least privilege, RLS/OLS, encryption, retention',
+    managementOutcome: 'Controlled access and compliance',
+    icon: <SecurityIcon />,
+  },
+  {
+    id: 'quality',
+    control: 'Quality',
+    mechanism: 'DQ thresholds, exception queues, root cause, remediation SLA',
+    managementOutcome: 'Known fitness for use',
+    icon: <QualityIcon />,
+  },
+  {
+    id: 'model-governance',
+    control: 'Model governance',
+    mechanism: 'Approval, versioning, validation, drift, explainability, audit',
+    managementOutcome: 'Safe, monitored AI decisions',
+    icon: <ModelGovIcon />,
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
+   GOVERNANCE ROW CARD
+   ───────────────────────────────────────────────────────────── */
+function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }) {
+  return (
+    <motion.div
+      className={styles.govRow}
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.075 }}
+      aria-label={`${row.control}: ${row.mechanism} → ${row.managementOutcome}`}
+    >
+      {/* Control pill (dark navy, bold, icon) */}
+      <div className={styles.govControlPill}>
+        <span className={styles.govControlIcon} aria-hidden="true">{row.icon}</span>
+        <span className={styles.govControlLabel}>{row.control}</span>
+      </div>
+
+      {/* Arrow */}
+      <div className={styles.govArrow} aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+
+      {/* Mechanism (plain text body) */}
+      <p className={styles.govMechanism}>{row.mechanism}</p>
+
+      {/* Arrow */}
+      <div className={styles.govArrow} aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </div>
+
+      {/* Management Outcome (lavender badge) */}
+      <div className={styles.govOutcomeBadge}>
+        <span className={styles.govOutcomeText}>{row.managementOutcome}</span>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
    KPI NODE DATA — Full 8-field calculation contract
    ───────────────────────────────────────────────────────────── */
 interface KpiNode {
@@ -315,17 +460,6 @@ export function Section04SemanticMetrics() {
       className={styles.section}
       aria-labelledby="section-04-title"
     >
-      {/* ══ PREVIOUS SECTION PLACEHOLDER ══ */}
-      <div
-        className={styles.previousPlaceholder}
-        role="note"
-        aria-label="Section 04.1 placeholder"
-      >
-        <span className={styles.placeholderLabel}>
-          [ Section 04.1 &bull; Data Governance Operating Mechanisms Placeholder ]
-        </span>
-      </div>
-
       {/* ══ SECTION HEADER ══ */}
       <div className={styles.sectionHeader}>
         <span className={styles.sectionNumber} aria-hidden="true">
@@ -337,17 +471,62 @@ export function Section04SemanticMetrics() {
           className={styles.sectionTitle}
           triggerOnView
         >
-          Semantic Metrics &amp; Calculation Contracts
+          Governance and semantic model: one version of the decision
         </MaskRevealText>
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
       {/* ══ LEAD PROSE ══ */}
       <BlurRevealText as="p" className={styles.leadProse} delay={80}>
-        The Power BI semantic model should calculate KPIs once and reuse them across pages, alerts,
-        exports, and models. Each measure requires a business definition, grain,
-        numerator/denominator, exclusions, time logic, owner, threshold, and reconciliation test.
+        Data governance is an operating mechanism, not a documentation exercise. It defines who
+        owns a metric, which source is authoritative, how freshness and quality are measured, and
+        who may access engine-, customer-, employee-, or financial-level detail.
       </BlurRevealText>
+
+      {/* ══ GOVERNANCE MECHANISM TABLE ══ */}
+      <motion.div
+        className={styles.govWrapper}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        role="region"
+        aria-label="Data governance operating mechanisms"
+      >
+        {/* Column headers */}
+        <div className={styles.govHeader} aria-hidden="true">
+          <span className={styles.govHeaderControl}>Control</span>
+          <span className={styles.govHeaderMech}>Mechanism</span>
+          <span className={styles.govHeaderOutcome}>Management outcome</span>
+        </div>
+
+        {/* Rows */}
+        <div className={styles.govRows}>
+          {GOVERNANCE_ROWS.map((row, idx) => (
+            <GovernanceRowCard key={row.id} row={row} index={idx} />
+          ))}
+        </div>
+      </motion.div>
+
+      {/* ══ SUB-HEADING: SEMANTIC METRICS ══ */}
+      <motion.div
+        className={styles.subSectionHeader}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className={styles.subSectionAccent} aria-hidden="true" />
+        <div className={styles.subSectionText}>
+          <span className={styles.subSectionEyebrow}>SECTION 04.2</span>
+          <h3 className={styles.subSectionTitle}>Semantic metrics & calculation contracts</h3>
+          <p className={styles.subSectionBody}>
+            The Power BI semantic model should calculate KPIs once and reuse them across pages,
+            alerts, exports, and models. Each measure requires a business definition, grain,
+            numerator/denominator, exclusions, time logic, owner, threshold, and reconciliation test.
+          </p>
+        </div>
+      </motion.div>
 
       {/* ══ CIRCUIT PIPELINE (Tracing Beam + Node Grid) ══ */}
       <div className={styles.pipelineWrapper} ref={containerRef}>
