@@ -394,14 +394,14 @@ export function Section04SemanticMetrics() {
         <span className={styles.sectionNumber} aria-hidden="true">
           <ScrambleText text="04" triggerOnView duration={320} />
         </span>
-        <MaskRevealText
-          id="section-04-title"
-          as="h2"
-          className={styles.sectionTitle}
-          triggerOnView
-        >
-          Governance and semantic model: one version of the decision
-        </MaskRevealText>
+        <h2 id="section-04-title" className={styles.sectionTitle}>
+          <MaskRevealText as="span" className={styles.titleLine} triggerOnView>
+            Governance and semantic model:
+          </MaskRevealText>
+          <MaskRevealText as="span" className={styles.titleLine} triggerOnView delay={120}>
+            one version of the decision
+          </MaskRevealText>
+        </h2>
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
