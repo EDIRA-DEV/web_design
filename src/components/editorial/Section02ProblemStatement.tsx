@@ -186,16 +186,18 @@ export function Section02ProblemStatement() {
 
         {/* RIGHT — Figure preview + Descriptive prose */}
         <div className={styles.problemRight}>
-          {/* Rounded preview surface */}
+          {/* Rounded preview surface with research video */}
           <figure className={styles.problemFigure} aria-label="MRO shop floor visual reference">
-            <div className={styles.problemImagePlaceholder} aria-hidden="true">
-              <div className={styles.placeholderGrid} aria-hidden="true">
-                {Array.from({ length: 9 }).map((_, i) => (
-                  <div key={i} className={styles.placeholderCell} />
-                ))}
-              </div>
-              <div className={styles.placeholderGlow} aria-hidden="true" />
-            </div>
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.problemVideo}
+            >
+              <source src="/videos/research2.mov" type="video/mp4" />
+            </video>
+            <div className={styles.problemVideoFade} aria-hidden="true" />
           </figure>
 
           {/* Body prose — right column */}
