@@ -1,8 +1,40 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import { ShareModal } from './ShareModal';
 import styles from './MobileEditorialSubNav.module.css';
+
+/* ── Per-chapter reading progress (mirrors desktop sidebar logic) ── */
+function useSectionProgress(activeId: string): number {
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const el = document.getElementById(activeId);
+      if (!el) { setProgress(0); return; }
+
+      const navbarEl  = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
+      const subNavEl  = document.querySelector('[class*="MobileEditorialSubNav-module"]') as HTMLElement | null;
+      const navbarH   = navbarEl  ? navbarEl.offsetHeight  : 72;
+      const subNavH   = subNavEl  ? subNavEl.offsetHeight  : 48;
+      const offset    = navbarH + subNavH;
+
+      const rect          = el.getBoundingClientRect();
+      const sectionTop    = window.scrollY + rect.top;
+      const sectionHeight = el.offsetHeight;
+      const scrolled      = window.scrollY - sectionTop + offset;
+      const pct = Math.min(100, Math.max(0, (scrolled / sectionHeight) * 100));
+      setProgress(pct);
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [activeId]);
+
+  return progress;
+}
 
 interface Chapter {
   id: string;
@@ -28,6 +60,7 @@ export function MobileEditorialSubNav() {
   const [copied, setCopied] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const progress = useSectionProgress(activeId);
 
   // Scroll sync: update active chapter as user scrolls
   useEffect(() => {
@@ -162,6 +195,16 @@ export function MobileEditorialSubNav() {
             <polyline points="6 9 12 15 18 9" />
           </svg>
         </button>
+
+        {/* ── Reading Progress Bar ── */}
+        <div className={styles.progressTrack} aria-hidden="true">
+          <motion.div
+            className={styles.progressFill}
+            animate={{ scaleX: progress / 100 }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20, mass: 0.5 }}
+            style={{ transformOrigin: 'left center' }}
+          />
+        </div>
 
         {/* ── Full-Width Chapter Dropdown Panel ── */}
         {isOpen && (

@@ -18,6 +18,27 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  /* needed for the absolute-positioned progress bar */
+  overflow: visible;
+}
+
+/* ── Reading Progress Bar — sits at the bottom edge of the nav strip ── */
+.progressTrack {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to right, #7c3aed, #c084fc);
+  transform-origin: left center;
+  /* scaleX driven by framer-motion */
 }
 
 /* Hide on desktop (≥ 1024px) — sidebar takes over */
