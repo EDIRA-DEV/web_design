@@ -17,44 +17,62 @@ function clamp01(v: number): number {
   return Math.max(0, Math.min(1, v));
 }
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
    Data
    ───────────────────────────────────────────────────────────── */
 interface ChartMetric {
-  colTitle: string;
-  baseLabel: string;
+  colTitleEn: string;
+  colTitleEs: string;
+  baseLabelEn: string;
+  baseLabelEs: string;
   baseValue: number;
-  targetLabel: string;
+  targetLabelEn: string;
+  targetLabelEs: string;
   targetValue: number;
-  growthTag: string;
+  growthTagEn: string;
+  growthTagEs: string;
 }
 
 const CHART_H = 180; // px — fixed canvas height
 
 const METRICS: ChartMetric[] = [
   {
-    colTitle: 'Annual LEAP\nShop Visits',
-    baseLabel: 'Implied Prior',
+    colTitleEn: 'Annual LEAP\nShop Visits',
+    colTitleEs: 'Shop Visits LEAP\nAnuales',
+    baseLabelEn: 'Prior Est.',
+    baseLabelEs: 'Estimado Previo',
     baseValue: 200,
-    targetLabel: '2030 Target',
+    targetLabelEn: '2030 Target',
+    targetLabelEs: 'Meta 2030',
     targetValue: 350,
-    growthTag: '+75% Implied',
+    growthTagEn: '+75% Implied',
+    growthTagEs: '+75% Implícito',
   },
   {
-    colTitle: 'SAESA\nWorkforce',
-    baseLabel: 'Current',
+    colTitleEn: 'SAESA\nWorkforce',
+    colTitleEs: 'Fuerza Laboral\nSAESA',
+    baseLabelEn: 'Current',
+    baseLabelEs: 'Actual',
     baseValue: 1450,
-    targetLabel: '2030 Target',
+    targetLabelEn: '2030 Target',
+    targetLabelEs: 'Meta 2030',
     targetValue: 2000,
-    growthTag: '+38% Planned',
+    growthTagEn: '+38% Planned',
+    growthTagEs: '+38% Planificado',
   },
   {
-    colTitle: 'LEAP Fleet\nin Service',
-    baseLabel: 'Current',
+    colTitleEn: 'LEAP Fleet\nin Service',
+    colTitleEs: 'Flota LEAP\nen Servicio',
+    baseLabelEn: 'Current',
+    baseLabelEs: 'Actual',
     baseValue: 10000,
-    targetLabel: '2030 Est.',
+    targetLabelEn: '2030 Est.',
+    targetLabelEs: 'Est. 2030',
     targetValue: 20000,
-    growthTag: '~2× Fleet',
+    growthTagEn: '~2× Fleet',
+    growthTagEs: '~2× Flota',
   },
 ];
 
@@ -62,21 +80,10 @@ const GRIDLINE_PCTS = [75, 50, 25];
 
 /* ─────────────────────────────────────────────────────────────
    PublicSignalsChart
-
-   SCROLL-DRIVEN animation — every property is a pure function
-   of the user's current scroll position:
-
-   scrollProgress = 0  →  chart just enters the bottom of viewport
-   scrollProgress = 1  →  chart just exits the top of viewport
-
-   The user's scroll directly drives:
-     • Bar heights (0px → maxPx)
-     • Animated counter values (0 → finalValue)
-     • Label / growth-tag opacity (0 → 1)
-
-   Throttled with requestAnimationFrame to avoid jank.
    ───────────────────────────────────────────────────────────── */
 export function PublicSignalsChart() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [scrollProgress, setScrollProgress] = useState(0);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const rafRef    = useRef<number | null>(null);
@@ -89,61 +96,37 @@ export function PublicSignalsChart() {
     const rect      = el.getBoundingClientRect();
     const viewportH = window.innerHeight;
 
-    /*
-     * Account for sticky headers that consume vertical space:
-     *   - Navbar:       ~72px   (always present)
-     *   - MobileSubNav: ~49px   (mobile only, hidden on ≥1024px)
-     *
-     * We read the actual height of any sticky/fixed elements above
-     * the content area, so the calculation remains accurate on both
-     * desktop (only Navbar) and mobile (Navbar + MobileSubNav).
-     */
     const navbarEl  = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
     const subNavEl  = document.querySelector('[class*="MobileEditorialSubNav-module"]') as HTMLElement | null;
     const navbarH   = navbarEl ? navbarEl.offsetHeight : 72;
     const subNavH   = (subNavEl && subNavEl.offsetHeight > 0) ? subNavEl.offsetHeight : 0;
     const headerOffset = navbarH + subNavH;
 
-    /*
-     * Usable viewport height = space below all sticky headers
-     * progress = 0  →  chart bottom enters usable viewport (rect.top = viewportH)
-     * progress = 1  →  chart center aligns with center of usable viewport
-     *                  → bars fully visible, at max, chart still on screen
-     *
-     * completeAt: distance the chart travels from entering the viewport
-     * to reaching its center-aligned position in the visible area.
-     *
-     * Chart center Y relative to viewport:
-     *   chartCenterY = rect.top + rect.height / 2
-     * Center of usable viewport:
-     *   visibleCenterY = headerOffset + (viewportH - headerOffset) / 2
-     *
-     * traveled = viewportH - rect.top  (how much chart has scrolled into view from bottom)
-     * completeAt = distance from "entering bottom" to "chart center = visible center"
-     *            = viewportH - (headerOffset + (viewportH - headerOffset) / 2 - rect.height / 2)
-     *            = (viewportH + headerOffset) / 2 + rect.height / 2
-     */
-    const traveled   = viewportH - rect.top;
     const usableH    = viewportH - headerOffset;
-    const completeAt = usableH * 0.55; // bars complete at ~55% of usable viewport scroll
+    const traveled   = viewportH - rect.top;
+    const completeAt = usableH * 0.55; 
 
-    const p = clamp01(traveled / completeAt);
-    setScrollProgress(p);
+    const raw = traveled / completeAt;
+    setScrollProgress(clamp01(raw));
   }, []);
 
   /* ── Scroll listener (rAF-throttled, passive) ── */
   useEffect(() => {
-    const onScroll = () => {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    const handleScroll = () => {
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
       rafRef.current = requestAnimationFrame(computeProgress);
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    computeProgress(); // seed on mount
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    computeProgress(); 
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      window.removeEventListener('scroll', handleScroll);
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+      }
     };
   }, [computeProgress]);
 
@@ -152,55 +135,49 @@ export function PublicSignalsChart() {
       <div className={styles.ambientGlow} aria-hidden="true" />
 
       <p className={styles.eyebrow}>
-        PUBLIC SIGNALS POINT TO A MULTI-RESOURCE RAMP-UP
+        {isEs
+          ? 'LAS SEÑALES PÚBLICAS INDICAN UN RAMP-UP MULTI-RECURSO'
+          : 'PUBLIC SIGNALS INDICATE MULTI-RESOURCE RAMP-UP'}
       </p>
 
       <div className={styles.chartGrid}>
         {METRICS.map((m, colIdx) => {
-          /*
-           * Column stagger: col 1 starts immediately, col 2 after 4%
-           * of total scroll, col 3 after 8%.  All three finish at
-           * progress = 1 so the data feels fully revealed simultaneously.
-           */
           const colStart = colIdx * 0.04;
           const colProg  = clamp01(
             colStart < 1 ? (scrollProgress - colStart) / (1 - colStart) : scrollProgress
           );
 
-          /*
-           * Within-column stagger: left (base) bar leads right (target)
-           * bar by ~5 scroll-percent, matching the requested 150ms visual delay.
-           */
           const baseProg   = colProg;
           const targetProg = clamp01((colProg - 0.05) / 0.95);
 
-          /* Bar heights in px */
           const maxBaseH  = Math.round((m.baseValue / m.targetValue) * CHART_H);
           const baseH     = Math.round(maxBaseH   * baseProg);
           const targetH   = Math.round(CHART_H    * targetProg);
 
-          /* Animated counter values — pure function of scroll */
           const baseCount   = m.baseValue   * baseProg;
           const targetCount = m.targetValue * targetProg;
 
-          /* Label opacity: fades in once bar is >8% grown */
           const baseAlpha   = clamp01((baseProg   - 0.08) / 0.12);
           const targetAlpha = clamp01((targetProg - 0.08) / 0.12);
           const tagAlpha    = clamp01((targetProg - 0.15) / 0.15);
 
+          const colTitle = isEs ? m.colTitleEs : m.colTitleEn;
+          const baseLabel = isEs ? m.baseLabelEs : m.baseLabelEn;
+          const targetLabel = isEs ? m.targetLabelEs : m.targetLabelEn;
+          const growthTag = isEs ? m.growthTagEs : m.growthTagEn;
+
           return (
-            <div key={m.colTitle} className={styles.col}>
+            <div key={m.colTitleEn} className={styles.col}>
 
               {/* ── Chart canvas: gridlines + bars ── */}
-              <div className={styles.canvas}>
+              <div className={styles.canvasArea} style={{ height: `${CHART_H}px` }}>
 
-                {/* Horizontal dashed gridlines */}
                 <div className={styles.gridlines} aria-hidden="true">
                   {GRIDLINE_PCTS.map((pct) => (
                     <div
                       key={pct}
                       className={styles.gridline}
-                      style={{ bottom: `${pct}%` }}
+                      style={{ bottom: `${(pct / 100) * CHART_H}px` }}
                     />
                   ))}
                 </div>
@@ -209,11 +186,6 @@ export function PublicSignalsChart() {
 
                   {/* ── LEFT: Base / Actual bar ── */}
                   <div className={styles.barSlot}>
-                    {/*
-                     * Value label tracks bar tip: bottom = barHeight + 6px.
-                     * As bar grows, label rises with it.
-                     * Opacity follows baseProg so it fades in with the bar.
-                     */}
                     <span
                       className={styles.barVal}
                       style={{
@@ -228,7 +200,7 @@ export function PublicSignalsChart() {
                       className={`${styles.bar} ${styles.barBase}`}
                       style={{ height: `${baseH}px` }}
                       role="img"
-                      aria-label={`${m.baseLabel}: ${fmt(baseCount)}`}
+                      aria-label={`${baseLabel}: ${fmt(baseCount)}`}
                     />
                   </div>
 
@@ -248,7 +220,7 @@ export function PublicSignalsChart() {
                       className={`${styles.bar} ${styles.barTarget}`}
                       style={{ height: `${targetH}px` }}
                       role="img"
-                      aria-label={`${m.targetLabel}: ${fmt(targetCount)}`}
+                      aria-label={`${targetLabel}: ${fmt(targetCount)}`}
                     />
                   </div>
 
@@ -257,13 +229,13 @@ export function PublicSignalsChart() {
 
               {/* X-axis labels */}
               <div className={styles.xAxisRow}>
-                <span className={styles.xLabel}>{m.baseLabel}</span>
-                <span className={styles.xLabel}>{m.targetLabel}</span>
+                <span className={styles.xLabel}>{baseLabel}</span>
+                <span className={styles.xLabel}>{targetLabel}</span>
               </div>
 
               {/* Column title */}
               <p className={styles.colTitle}>
-                {m.colTitle.split('\n').map((line, i, arr) => (
+                {colTitle.split('\n').map((line, i, arr) => (
                   <React.Fragment key={i}>
                     {line}
                     {i < arr.length - 1 && <br />}
@@ -276,7 +248,7 @@ export function PublicSignalsChart() {
                 className={styles.growthTag}
                 style={{ opacity: tagAlpha }}
               >
-                {m.growthTag}
+                {growthTag}
               </p>
 
             </div>
@@ -285,9 +257,9 @@ export function PublicSignalsChart() {
       </div>
 
       <p className={styles.footnote}>
-        Source: Compiled from Safran 2024–2026 Strategic Outlook and Querétaro Aerospace Cluster
-        official statements. Growth rates derived from publicly available projections and capacity
-        announcements.
+        Fuente: Compilado del Panorama Estratégico 2024–2026 de Safran y declaraciones oficiales del
+        Clúster Aeroespacial de Querétaro. Tasas de crecimiento derivadas de proyecciones y
+        anuncios de capacidad de acceso público.
       </p>
     </div>
   );

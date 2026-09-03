@@ -5,20 +5,26 @@ import { motion } from 'framer-motion';
 import { MaskRevealText, ScrambleText, BlurRevealText } from './TextAnimations';
 import styles from './Section06AIOptimization.module.css';
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
    AI USE-CASE TABLE — 5 rows
    ───────────────────────────────────────────────────────────── */
 interface ModelPill {
-  label: string;
+  labelEn: string;
+  labelEs: string;
   color: 'violet' | 'cyan' | 'emerald' | 'amber';
 }
 
 interface AIUseCase {
   id: string;
-  useCase: string;
-  inputs: string;
+  useCaseEn: string;
+  useCaseEs: string;
+  inputsEn: string;
+  inputsEs: string;
   modelApproach: ModelPill[];
-  decisionOutput: string;
+  decisionOutputEn: string;
+  decisionOutputEs: string;
   icon: React.ReactNode;
 }
 
@@ -54,57 +60,72 @@ const SimIcon = () => (
 const AI_USE_CASES: AIUseCase[] = [
   {
     id: 'demand-forecast',
-    useCase: 'Demand forecast',
-    inputs: 'Historical arrivals, installed base, flight hours, contracts, scope',
+    useCaseEn: 'Demand forecast',
+    useCaseEs: 'Pronóstico de demanda',
+    inputsEn: 'Historical arrivals, installed base, flight hours, contracts, scope',
+    inputsEs: 'Llegadas históricas, base instalada, horas de vuelo, contratos, alcance',
     modelApproach: [
-      { label: 'Hierarchical time series', color: 'violet' },
-      { label: 'Gradient boosting', color: 'violet' },
+      { labelEn: 'Hierarchical time series', labelEs: 'Series de tiempo jerárquicas', color: 'violet' },
+      { labelEn: 'Gradient boosting', labelEs: 'Gradient boosting', color: 'violet' },
     ],
-    decisionOutput: 'Induction & capacity plan',
+    decisionOutputEn: 'Induction & capacity plan',
+    decisionOutputEs: 'Plan de Induction & capacidad',
     icon: <CheckIcon />,
   },
   {
     id: 'tat-release-risk',
-    useCase: 'TAT / release risk',
-    inputs: 'Queue age, workscope, shortages, rework, skill coverage',
+    useCaseEn: 'TAT / release risk',
+    useCaseEs: 'Riesgo TAT / liberación',
+    inputsEn: 'Queue age, workscope, shortages, rework, skill coverage',
+    inputsEs: 'Antigüedad de cola, workscope, faltantes, Rework, cobertura de habilidades',
     modelApproach: [
-      { label: 'Supervised classification', color: 'cyan' },
-      { label: 'Regression', color: 'cyan' },
+      { labelEn: 'Supervised classification', labelEs: 'Clasificación supervisada', color: 'cyan' },
+      { labelEn: 'Regression', labelEs: 'Regresión', color: 'cyan' },
     ],
-    decisionOutput: 'Prioritize or escalate visits',
+    decisionOutputEn: 'Prioritize or escalate visits',
+    decisionOutputEs: 'Priorizar o escalar visitas',
     icon: <ClockIcon />,
   },
   {
     id: 'bottleneck-anomaly',
-    useCase: 'Bottleneck / anomaly',
-    inputs: 'Stage duration, queue age, utilization, downtime',
+    useCaseEn: 'Bottleneck / anomaly',
+    useCaseEs: 'Cuello de botella / anomalía',
+    inputsEn: 'Stage duration, queue age, utilization, downtime',
+    inputsEs: 'Duración por etapa, antigüedad de cola, utilización, paros',
     modelApproach: [
-      { label: 'Control limits', color: 'amber' },
-      { label: 'Anomaly detection', color: 'amber' },
+      { labelEn: 'Control limits', labelEs: 'Límites de control', color: 'amber' },
+      { labelEn: 'Anomaly detection', labelEs: 'Detección de anomalías', color: 'amber' },
     ],
-    decisionOutput: 'Intervene & rebalance flow',
+    decisionOutputEn: 'Intervene & rebalance flow',
+    decisionOutputEs: 'Intervenir y rebalancear flujo',
     icon: <GridIcon />,
   },
   {
     id: 'schedule-optimization',
-    useCase: 'Schedule optimization',
-    inputs: 'Bays, cell, labor certifications, tooling, parts, due dates',
+    useCaseEn: 'Schedule optimization',
+    useCaseEs: 'Optimización de calendario',
+    inputsEn: 'Bays, cell, labor certifications, tooling, parts, due dates',
+    inputsEs: 'Bahías, celda, certificaciones de mano de obra, herramientas, refacciones, fechas',
     modelApproach: [
-      { label: 'MILP / Constraint prog.', color: 'emerald' },
-      { label: 'OR-Tools', color: 'emerald' },
+      { labelEn: 'MILP / Constraint prog.', labelEs: 'MILP / Prog. de restricciones', color: 'emerald' },
+      { labelEn: 'OR-Tools', labelEs: 'OR-Tools', color: 'emerald' },
     ],
-    decisionOutput: 'Select feasible schedule',
+    decisionOutputEn: 'Select feasible schedule',
+    decisionOutputEs: 'Seleccionar calendario factible',
     icon: <CalendarIcon />,
   },
   {
     id: 'capacity-simulation',
-    useCase: 'Capacity simulation',
-    inputs: 'Arrival variability, process times, failures, availability',
+    useCaseEn: 'Capacity simulation',
+    useCaseEs: 'Simulación de capacidad',
+    inputsEn: 'Arrival variability, process times, failures, availability',
+    inputsEs: 'Variabilidad de llegadas, tiempos de proceso, fallas, disponibilidad',
     modelApproach: [
-      { label: 'Monte Carlo', color: 'violet' },
-      { label: 'Discrete event sim.', color: 'violet' },
+      { labelEn: 'Monte Carlo', labelEs: 'Monte Carlo', color: 'violet' },
+      { labelEn: 'Discrete event sim.', labelEs: 'Simulación de eventos discretos', color: 'violet' },
     ],
-    decisionOutput: 'Test ramp-up & CAPEX',
+    decisionOutputEn: 'Test ramp-up & CAPEX',
+    decisionOutputEs: 'Evaluar Ramp-up & CAPEX',
     icon: <SimIcon />,
   },
 ];
@@ -114,46 +135,64 @@ const AI_USE_CASES: AIUseCase[] = [
    ───────────────────────────────────────────────────────────── */
 interface LoopStage {
   num: string;
-  title: string;
-  control: string;
-  gateOutput: string;
+  titleEn: string;
+  titleEs: string;
+  controlEn: string;
+  controlEs: string;
+  gateOutputEn: string;
+  gateOutputEs: string;
   accent: 'violet' | 'cyan' | 'emerald' | 'amber' | 'slate';
 }
 
 const LOOP_STAGES: LoopStage[] = [
   {
     num: '1.',
-    title: 'TRAIN',
-    control: 'Time-based train/val/test split; leakage prevention',
-    gateOutput: 'Reproducible baseline',
+    titleEn: 'TRAIN',
+    titleEs: 'ENTRENAR',
+    controlEn: 'Time-based train/val/test split; leakage prevention',
+    controlEs: 'División temporal entrenamiento/validación/prueba; prevención de fuga',
+    gateOutputEn: 'Reproducible baseline',
+    gateOutputEs: 'Línea base reproducible',
     accent: 'violet',
   },
   {
     num: '2.',
-    title: 'VALIDATE',
-    control: 'Accuracy plus cost of false positives/negatives',
-    gateOutput: 'Decision-event thresholds',
+    titleEn: 'VALIDATE',
+    titleEs: 'VALIDAR',
+    controlEn: 'Accuracy plus cost of false positives/negatives',
+    controlEs: 'Exactitud más costo de falsos positivos/negativos',
+    gateOutputEn: 'Decision-event thresholds',
+    gateOutputEs: 'Umbrales de evento de decisión',
     accent: 'cyan',
   },
   {
     num: '3.',
-    title: 'EXPLAIN',
-    control: 'Drivers, SHAP rules, confidence, freshness',
-    gateOutput: 'Reasons user can challenge',
+    titleEn: 'EXPLAIN',
+    titleEs: 'EXPLICAR',
+    controlEn: 'Drivers, SHAP rules, confidence, freshness',
+    controlEs: 'Factores causales, reglas SHAP, confianza, frescura',
+    gateOutputEn: 'Reasons user can challenge',
+    gateOutputEs: 'Razones que el usuario puede cuestionar',
     accent: 'violet',
   },
   {
     num: '4.',
-    title: 'APPROVE',
-    control: 'Model-risk & business owner sign-off',
-    gateOutput: 'Controlled deployment',
+    titleEn: 'APPROVE',
+    titleEs: 'APROBAR',
+    controlEn: 'Model-risk & business owner sign-off',
+    controlEs: 'Aval del riesgo del modelo y del dueño del negocio',
+    gateOutputEn: 'Controlled deployment',
+    gateOutputEs: 'Despliegue controlado',
     accent: 'emerald',
   },
   {
     num: '5.',
-    title: 'MONITOR',
-    control: 'Drift, bias, override, uptime, outcomes',
-    gateOutput: 'Retrain, recalibrate, retire',
+    titleEn: 'MONITOR',
+    titleEs: 'MONITOREAR',
+    controlEn: 'Drift, bias, override, uptime, outcomes',
+    controlEs: 'Deriva, sesgo, anulación, disponibilidad, resultados',
+    gateOutputEn: 'Retrain, recalibrate, retire',
+    gateOutputEs: 'Reentrenar, recalibrar o retirar',
     accent: 'amber',
   },
 ];
@@ -164,8 +203,10 @@ const LOOP_STAGES: LoopStage[] = [
 interface Guardrail {
   id: string;
   icon: React.ReactNode;
-  title: string;
-  body: string;
+  titleEn: string;
+  titleEs: string;
+  bodyEn: string;
+  bodyEs: string;
 }
 
 const AuthGateIcon = () => (
@@ -191,20 +232,32 @@ const GUARDRAILS: Guardrail[] = [
   {
     id: 'human-authority',
     icon: <AuthGateIcon />,
-    title: 'Human Authority Gate',
-    body: 'Models recommend or prioritize; authorized roles commit schedules, overtime, supplier and resource decisions. Overrides are logged with rationale.',
+    titleEn: 'Human Authority Gate',
+    titleEs: 'Compuerta de Autoridad Humana',
+    bodyEn:
+      'Models recommend or prioritize; authorized roles commit schedules, overtime, supplier and resource decisions. Overrides are logged with rationale.',
+    bodyEs:
+      'Los modelos recomiendan o priorizan; los roles autorizados confirman calendarios, horas extra, decisiones de proveedor y de recursos. Las anulaciones quedan registradas con justificación.',
   },
   {
     id: 'audit-decision',
     icon: <AuditIcon />,
-    title: 'Audit & Decision',
-    body: 'Every recommendation records inputs, model version, confidence, explanation, user identity, and final decision for full traceability.',
+    titleEn: 'Audit & Decision',
+    titleEs: 'Auditoría & Decisión',
+    bodyEn:
+      'Every recommendation records inputs, model version, confidence, explanation, user identity, and final decision for full traceability.',
+    bodyEs:
+      'Cada recomendación registra entradas, versión del modelo, confianza, explicación, identidad del usuario y decisión final para trazabilidad completa.',
   },
   {
     id: 'deterministic-fallbacks',
     icon: <FallbackIcon />,
-    title: 'Deterministic Fallbacks',
-    body: 'Fallback rules keep operations safe when data is stale, a pipeline fails, or model confidence falls below the operational threshold.',
+    titleEn: 'Deterministic Fallbacks',
+    titleEs: 'Salvaguardas Determinísticas',
+    bodyEn:
+      'Fallback rules keep operations safe when data is stale, a pipeline fails, or model confidence falls below the operational threshold.',
+    bodyEs:
+      'Las reglas de respaldo mantienen las operaciones seguras cuando los datos están desactualizados, un Pipeline falla o la confianza del modelo cae por debajo del umbral operativo.',
   },
 ];
 
@@ -212,6 +265,9 @@ const GUARDRAILS: Guardrail[] = [
    MAIN COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function Section06AIOptimization() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
+
   return (
     <section
       id="section-06"
@@ -224,21 +280,22 @@ export function Section06AIOptimization() {
           <ScrambleText text="06" triggerOnView duration={320} />
         </span>
         <MaskRevealText
+          key={`s06-title-${lang}`}
           id="section-06-title"
           as="h2"
           className={styles.sectionTitle}
           triggerOnView
         >
-          AI and optimization: how the models would work
+          {isEs ? 'IA y optimización: cómo operarían los modelos' : 'AI and optimization: how the models would work'}
         </MaskRevealText>
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
       {/* ══ LEAD PROSE ══ */}
-      <BlurRevealText as="p" className={styles.leadProse} delay={80}>
-        AI is introduced only after the governed event history and decision process exist. The
-        objective is not autonomous control; it is earlier risk detection, feasible option
-        generation, and consistent evaluation of trade-offs with a human decision-maker in the loop.
+      <BlurRevealText key={`s06-lead-${lang}`} as="p" className={styles.leadProse} delay={80}>
+        {isEs
+          ? 'La IA se introduce únicamente después de que exista el historial de eventos gobernado y el proceso de decisión. El objetivo no es el control autónomo; es la detección temprana de riesgos, la generación de opciones factibles y la evaluación consistente de trade-offs con un decisor humano en el circuito.'
+          : 'AI is introduced only after the governed event history and decision process exist. The objective is not autonomous control; it is earlier risk detection, feasible option generation, and consistent evaluation of trade-offs with a human decision-maker in the loop.'}
       </BlurRevealText>
 
       {/* ══ AI USE CASE TABLE ══ */}
@@ -249,14 +306,14 @@ export function Section06AIOptimization() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         role="region"
-        aria-label="AI use-case model table"
+        aria-label={isEs ? 'Tabla de modelos de casos de uso de IA' : 'AI use-case model table'}
       >
         {/* Table header */}
         <div className={styles.tableHead} aria-hidden="true">
-          <span className={styles.tableHeadCell}>USE CASE</span>
-          <span className={styles.tableHeadCell}>INPUTS</span>
-          <span className={styles.tableHeadCell}>MODEL APPROACH</span>
-          <span className={styles.tableHeadCell}>DECISION OUTPUT</span>
+          <span className={styles.tableHeadCell}>{isEs ? 'CASO DE USO' : 'USE CASE'}</span>
+          <span className={styles.tableHeadCell}>{isEs ? 'ENTRADAS' : 'INPUTS'}</span>
+          <span className={styles.tableHeadCell}>{isEs ? 'ENFOQUE DEL MODELO' : 'MODEL APPROACH'}</span>
+          <span className={styles.tableHeadCell}>{isEs ? 'SALIDA DE DECISIÓN' : 'DECISION OUTPUT'}</span>
         </div>
 
         {/* Table rows */}
@@ -272,20 +329,20 @@ export function Section06AIOptimization() {
             {/* Use case */}
             <div className={styles.useCaseCell}>
               <span className={styles.useCaseIcon} aria-hidden="true">{uc.icon}</span>
-              <span className={styles.useCaseName}>{uc.useCase}</span>
+              <span className={styles.useCaseName}>{isEs ? uc.useCaseEs : uc.useCaseEn}</span>
             </div>
 
             {/* Inputs */}
-            <p className={styles.inputsCell}>{uc.inputs}</p>
+            <p className={styles.inputsCell}>{isEs ? uc.inputsEs : uc.inputsEn}</p>
 
             {/* Model approach pills */}
             <div className={styles.pillsCell}>
               {uc.modelApproach.map((pill) => (
                 <span
-                  key={pill.label}
+                  key={pill.labelEn}
                   className={`${styles.modelPill} ${styles['modelPill--' + pill.color]}`}
                 >
-                  {pill.label}
+                  {isEs ? pill.labelEs : pill.labelEn}
                 </span>
               ))}
             </div>
@@ -293,7 +350,9 @@ export function Section06AIOptimization() {
             {/* Decision output */}
             <div className={styles.outputCell}>
               <span className={styles.outputArrow} aria-hidden="true">›</span>
-              <span className={styles.outputText}>{uc.decisionOutput}</span>
+              <span className={styles.outputText}>
+                {isEs ? uc.decisionOutputEs : uc.decisionOutputEn}
+              </span>
             </div>
           </motion.div>
         ))}
@@ -303,10 +362,16 @@ export function Section06AIOptimization() {
       <div className={styles.loopSection}>
         <div className={styles.loopHeader}>
           <div className={styles.loopHeaderAccent} aria-hidden="true" />
-          <h3 className={styles.loopTitle}>Production operating loop</h3>
+          <h3 className={styles.loopTitle}>
+            {isEs ? 'Ciclo de producción en operación' : 'Production operating loop'}
+          </h3>
         </div>
 
-        <div className={styles.loopStages} role="list" aria-label="Production operating loop stages">
+        <div
+          className={styles.loopStages}
+          role="list"
+          aria-label={isEs ? 'Etapas del ciclo de producción en operación' : 'Production operating loop stages'}
+        >
           {LOOP_STAGES.map((stage, idx) => (
             <motion.div
               key={stage.num}
@@ -329,19 +394,25 @@ export function Section06AIOptimization() {
               {/* Stage number + title */}
               <div className={styles.loopCardHeader}>
                 <span className={styles.loopStageNum}>{stage.num}</span>
-                <span className={styles.loopStageName}>{stage.title}</span>
+                <span className={styles.loopStageName}>
+                  {isEs ? stage.titleEs : stage.titleEn}
+                </span>
               </div>
 
               {/* Control */}
               <div className={styles.loopCardSection}>
                 <span className={styles.loopCardLabel}>CONTROL</span>
-                <p className={styles.loopCardBody}>{stage.control}</p>
+                <p className={styles.loopCardBody}>{isEs ? stage.controlEs : stage.controlEn}</p>
               </div>
 
               {/* Gate / Output */}
               <div className={styles.loopCardSection}>
-                <span className={`${styles.loopCardLabel} ${styles.loopGateLabel}`}>GATE / OUTPUT</span>
-                <p className={`${styles.loopCardBody} ${styles.loopGateBody}`}>{stage.gateOutput}</p>
+                <span className={`${styles.loopCardLabel} ${styles.loopGateLabel}`}>
+                  {isEs ? 'COMPUERTA / SALIDA' : 'GATE / OUTPUT'}
+                </span>
+                <p className={`${styles.loopCardBody} ${styles.loopGateBody}`}>
+                  {isEs ? stage.gateOutputEs : stage.gateOutputEn}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -354,7 +425,7 @@ export function Section06AIOptimization() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          aria-label="Closed-loop feedback description"
+          aria-label={isEs ? 'Descripción de retroalimentación en bucle cerrado' : 'Closed-loop feedback description'}
         >
           <motion.span
             className={styles.closedLoopIcon}
@@ -368,7 +439,9 @@ export function Section06AIOptimization() {
             </svg>
           </motion.span>
           <span className={styles.closedLoopText}>
-            Closed-Loop Feedback: Continuous Telemetry, Operational Auditing & Automated Retraining Triggers
+            {isEs
+              ? 'Retroalimentación de Bucle Cerrado: Telemetría Continua, Auditoría Operativa y Disparadores Automatizados de Reentrenamiento'
+              : 'Closed-Loop Feedback: Continuous Telemetry, Operational Auditing & Automated Retraining Triggers'}
           </span>
         </motion.div>
       </div>
@@ -377,10 +450,16 @@ export function Section06AIOptimization() {
       <div className={styles.guardrailsSection}>
         <div className={styles.guardrailsHeader}>
           <div className={styles.guardrailsHeaderAccent} aria-hidden="true" />
-          <h3 className={styles.guardrailsTitle}>Human authority and guardrails</h3>
+          <h3 className={styles.guardrailsTitle}>
+            {isEs ? 'Autoridad humana y salvaguardas' : 'Human authority and guardrails'}
+          </h3>
         </div>
 
-        <div className={styles.guardrailsGrid} role="list" aria-label="Human authority guardrails">
+        <div
+          className={styles.guardrailsGrid}
+          role="list"
+          aria-label={isEs ? 'Salvaguardas de autoridad humana' : 'Human authority guardrails'}
+        >
           {GUARDRAILS.map((g, idx) => (
             <motion.div
               key={g.id}
@@ -395,8 +474,8 @@ export function Section06AIOptimization() {
               <div className={styles.guardrailIconWrap} aria-hidden="true">
                 {g.icon}
               </div>
-              <h4 className={styles.guardrailTitle}>{g.title}</h4>
-              <p className={styles.guardrailBody}>{g.body}</p>
+              <h4 className={styles.guardrailTitle}>{isEs ? g.titleEs : g.titleEn}</h4>
+              <p className={styles.guardrailBody}>{isEs ? g.bodyEs : g.bodyEn}</p>
             </motion.div>
           ))}
         </div>

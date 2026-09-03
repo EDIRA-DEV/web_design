@@ -9,16 +9,6 @@ import {
 import { MaskRevealText, ScrambleText, BlurRevealText } from './TextAnimations';
 import styles from './Section04SemanticMetrics.module.css';
 
-/* ─────────────────────────────────────────────────────────────
-   GOVERNANCE MECHANISMS — Control → Mechanism → Management Outcome
-   ───────────────────────────────────────────────────────────── */
-interface GovernanceRow {
-  id: string;
-  control: string;
-  mechanism: string;
-  managementOutcome: string;
-  icon: React.ReactNode;
-}
 
 const OwnershipIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -63,47 +53,81 @@ const ModelGovIcon = () => (
   </svg>
 );
 
+import { useLang } from '@/lib/i18n';
+
+/* ─────────────────────────────────────────────────────────────
+   GOVERNANCE MECHANISM TABLE DATA
+   ───────────────────────────────────────────────────────────── */
+interface GovernanceRow {
+  id: string;
+  controlEn: string;
+  controlEs: string;
+  mechanismEn: string;
+  mechanismEs: string;
+  managementOutcomeEn: string;
+  managementOutcomeEs: string;
+  icon: React.ReactNode;
+}
+
 const GOVERNANCE_ROWS: GovernanceRow[] = [
   {
     id: 'ownership',
-    control: 'Ownership',
-    mechanism: 'Executive owner, data owner, steward, product owner',
-    managementOutcome: 'Fast issue resolution and accountability',
+    controlEn: 'Ownership',
+    controlEs: 'Propiedad',
+    mechanismEn: 'Executive owner, data owner, steward, product owner',
+    mechanismEs: 'Propietario ejecutivo, dueño de datos, administrador, dueño de producto',
+    managementOutcomeEn: 'Fast issue resolution and accountability',
+    managementOutcomeEs: 'Resolución ágil de problemas y rendición de cuentas',
     icon: <OwnershipIcon />,
   },
   {
     id: 'catalogue-lineage',
-    control: 'Catalogue & Lineage',
-    mechanism: 'Purview or equivalent; business glossary; source-to-KPI lineage',
-    managementOutcome: 'Trust and impact analysis',
+    controlEn: 'Catalogue & Lineage',
+    controlEs: 'Catálogo & Lineage',
+    mechanismEn: 'Purview or equivalent; business glossary; source-to-KPI lineage',
+    mechanismEs: 'Purview o equivalente; glosario de negocio; Lineage fuente-a-KPI',
+    managementOutcomeEn: 'Trust and impact analysis',
+    managementOutcomeEs: 'Confianza y análisis de impacto',
     icon: <CatalogueIcon />,
   },
   {
     id: 'data-contracts',
-    control: 'Data contracts',
-    mechanism: 'Schema, keys, semantics, cadence, quality SLA, change policy',
-    managementOutcome: 'Predictable producer-consumer interface',
+    controlEn: 'Data contracts',
+    controlEs: 'Data Contracts',
+    mechanismEn: 'Schema, keys, semantics, cadence, quality SLA, change policy',
+    mechanismEs: 'Esquema, claves, semántica, cadencia, SLA de calidad, política de cambios',
+    managementOutcomeEn: 'Predictable producer-consumer interface',
+    managementOutcomeEs: 'Interfaz productor-consumidor predecible',
     icon: <ContractIcon />,
   },
   {
     id: 'security',
-    control: 'Security',
-    mechanism: 'Entra/RBAC, least privilege, RLS/OLS, encryption, retention',
-    managementOutcome: 'Controlled access and compliance',
+    controlEn: 'Security',
+    controlEs: 'Seguridad',
+    mechanismEn: 'Entra/RBAC, least privilege, RLS/OLS, encryption, retention',
+    mechanismEs: 'Entra/RBAC, mínimo privilegio, RLS/OLS, cifrado, retención',
+    managementOutcomeEn: 'Controlled access and compliance',
+    managementOutcomeEs: 'Acceso controlado y cumplimiento normativo',
     icon: <SecurityIcon />,
   },
   {
     id: 'quality',
-    control: 'Quality',
-    mechanism: 'DQ thresholds, exception queues, root cause, remediation SLA',
-    managementOutcome: 'Known fitness for use',
+    controlEn: 'Quality',
+    controlEs: 'Calidad',
+    mechanismEn: 'DQ thresholds, exception queues, root cause, remediation SLA',
+    mechanismEs: 'Umbrales DQ, colas de excepción, causa raíz, SLA de remediación',
+    managementOutcomeEn: 'Known fitness for use',
+    managementOutcomeEs: 'Aptitud de uso conocida y verificada',
     icon: <QualityIcon />,
   },
   {
     id: 'model-governance',
-    control: 'Model governance',
-    mechanism: 'Approval, versioning, validation, drift, explainability, audit',
-    managementOutcome: 'Safe, monitored AI decisions',
+    controlEn: 'Model governance',
+    controlEs: 'Gobernanza de modelos',
+    mechanismEn: 'Approval, versioning, validation, drift, explainability, audit',
+    mechanismEs: 'Aprobación, versionado, validación, deriva, explicabilidad, auditoría',
+    managementOutcomeEn: 'Safe, monitored AI decisions',
+    managementOutcomeEs: 'Decisiones de IA seguras y monitoreadas',
     icon: <ModelGovIcon />,
   },
 ];
@@ -111,7 +135,19 @@ const GOVERNANCE_ROWS: GovernanceRow[] = [
 /* ─────────────────────────────────────────────────────────────
    GOVERNANCE ROW CARD
    ───────────────────────────────────────────────────────────── */
-function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }) {
+function GovernanceRowCard({
+  row,
+  index,
+  isEs,
+}: {
+  row: GovernanceRow;
+  index: number;
+  isEs: boolean;
+}) {
+  const control = isEs ? row.controlEs : row.controlEn;
+  const mechanism = isEs ? row.mechanismEs : row.mechanismEn;
+  const outcome = isEs ? row.managementOutcomeEs : row.managementOutcomeEn;
+
   return (
     <motion.div
       className={styles.govRow}
@@ -119,12 +155,12 @@ function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.075 }}
-      aria-label={`${row.control}: ${row.mechanism} → ${row.managementOutcome}`}
+      aria-label={`${control}: ${mechanism} → ${outcome}`}
     >
       {/* Control pill (dark navy, bold, icon) */}
       <div className={styles.govControlPill}>
         <span className={styles.govControlIcon} aria-hidden="true">{row.icon}</span>
-        <span className={styles.govControlLabel}>{row.control}</span>
+        <span className={styles.govControlLabel}>{control}</span>
       </div>
 
       {/* Arrow 1 */}
@@ -136,7 +172,7 @@ function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }
       </div>
 
       {/* Mechanism (plain text body) */}
-      <p className={styles.govMechanism}>{row.mechanism}</p>
+      <p className={styles.govMechanism}>{mechanism}</p>
 
       {/* Arrow 2 */}
       <div className={`${styles.govArrow} ${styles.govArrowSecond}`} aria-hidden="true">
@@ -148,25 +184,32 @@ function GovernanceRowCard({ row, index }: { row: GovernanceRow; index: number }
 
       {/* Management Outcome (lavender badge) */}
       <div className={styles.govOutcomeBadge}>
-        <span className={styles.govOutcomeText}>{row.managementOutcome}</span>
+        <span className={styles.govOutcomeText}>{outcome}</span>
       </div>
     </motion.div>
   );
 }
 
 /* ─────────────────────────────────────────────────────────────
-   KPI NODE DATA — Full 8-field calculation contract
+   KPI METRIC NODES (5 items: 3 top row, 2 bottom row)
    ───────────────────────────────────────────────────────────── */
 interface KpiNode {
   id: string;
   step: string;
-  title: string;
-  subtitle: string;
-  coreLogic: string;
-  guardrail: string;
-  grain: string;
-  owner: string;
-  threshold: string;
+  titleEn: string;
+  titleEs: string;
+  subtitleEn: string;
+  subtitleEs: string;
+  coreLogicEn: string;
+  coreLogicEs: string;
+  guardrailEn: string;
+  guardrailEs: string;
+  grainEn: string;
+  grainEs: string;
+  ownerEn: string;
+  ownerEs: string;
+  thresholdEn: string;
+  thresholdEs: string;
   accentColor: 'violet' | 'cyan' | 'emerald';
 }
 
@@ -174,71 +217,112 @@ const KPI_NODES: KpiNode[] = [
   {
     id: 'tat',
     step: '01',
-    title: 'TAT',
-    subtitle: 'Turn-Around Time',
-    coreLogic: 'Release timestamp \u2212 Induction timestamp.',
-    guardrail: 'Median + P80/P90 by scope.',
-    grain: 'Shop visit \u00b7 workscope tier \u00b7 engine family',
-    owner: 'MRO Operations Lead',
-    threshold: 'P80 \u2264 contractual TAT; median \u2264 baseline \u22125%',
+    titleEn: 'TAT',
+    titleEs: 'TAT',
+    subtitleEn: 'Turn-Around Time',
+    subtitleEs: 'Tiempo de Ciclo (TAT)',
+    coreLogicEn: 'Release timestamp \u2212 Induction timestamp.',
+    coreLogicEs: 'Timestamp de liberación \u2212 Timestamp de Induction.',
+    guardrailEn: 'Median + P80/P90 by scope.',
+    guardrailEs: 'Mediana + P80/P90 por alcance.',
+    grainEn: 'Shop visit \u00b7 workscope tier \u00b7 engine family',
+    grainEs: 'Shop visit \u00b7 nivel de workscope \u00b7 familia de motor',
+    ownerEn: 'MRO Operations Lead',
+    ownerEs: 'Líder de Operaciones MRO',
+    thresholdEn: 'P80 \u2264 contractual TAT; median \u2264 baseline \u22125%',
+    thresholdEs: 'P80 \u2264 TAT contractual; mediana \u2264 base \u22125%',
     accentColor: 'violet',
   },
   {
     id: 'effective-capacity',
     step: '02',
-    title: 'Effective Cap.',
-    subtitle: 'Effective Capacity',
-    coreLogic: 'Nominal time less planned / unplanned constraint loss.',
-    guardrail: 'Never infer from nominal capacity alone.',
-    grain: 'Bay \u00b7 shift \u00b7 week',
-    owner: 'Planning & Scheduling Manager',
-    threshold: 'Utilisation \u2265 85% of effective cap.',
+    titleEn: 'Effective Cap.',
+    titleEs: 'Cap. Efectiva',
+    subtitleEn: 'Effective Capacity',
+    subtitleEs: 'Capacidad Efectiva',
+    coreLogicEn: 'Nominal time less planned / unplanned constraint loss.',
+    coreLogicEs: 'Tiempo nominal menos pérdidas por restricción planificada / no planificada.',
+    guardrailEn: 'Never infer from nominal capacity alone.',
+    guardrailEs: 'Nunca inferir solo de la capacidad nominal.',
+    grainEn: 'Bay \u00b7 shift \u00b7 week',
+    grainEs: 'Bahía \u00b7 turno \u00b7 semana',
+    ownerEn: 'Planning & Scheduling Manager',
+    ownerEs: 'Gerente de Planeación y Programación',
+    thresholdEn: 'Utilisation \u2265 85% of effective cap.',
+    thresholdEs: 'Utilización \u2265 85% de la cap. efectiva.',
     accentColor: 'cyan',
   },
   {
     id: 'wip-aging',
     step: '03',
-    title: 'WIP Aging',
-    subtitle: 'Work-in-Process Age',
-    coreLogic: 'Current time \u2212 Current-stage entry time.',
-    guardrail: 'Threshold by stage and workscope.',
-    grain: 'Shop-visit \u00b7 stage \u00b7 day',
-    owner: 'Production Control',
-    threshold: 'No visit > 120% of stage TAT target',
+    titleEn: 'WIP Aging',
+    titleEs: 'Antigüedad WIP',
+    subtitleEn: 'Work-in-Process Age',
+    subtitleEs: 'Antigüedad del Work-in-Process',
+    coreLogicEn: 'Current time \u2212 Current-stage entry time.',
+    coreLogicEs: 'Hora actual \u2212 Hora de entrada a la etapa actual.',
+    guardrailEn: 'Threshold by stage and workscope.',
+    guardrailEs: 'Umbral por etapa y workscope.',
+    grainEn: 'Shop-visit \u00b7 stage \u00b7 day',
+    grainEs: 'Shop visit \u00b7 etapa \u00b7 día',
+    ownerEn: 'Production Control',
+    ownerEs: 'Control de Producción',
+    thresholdEn: 'No visit > 120% of stage TAT target',
+    thresholdEs: 'Ninguna visita > 120% del objetivo TAT por etapa',
     accentColor: 'violet',
   },
   {
     id: 'skill-coverage',
     step: '04',
-    title: 'Skill Coverage',
-    subtitle: 'Workforce Skill Coverage',
-    coreLogic: 'Nominal time less planned / unplanned constraint loss.',
-    guardrail: 'By skill, shift, and horizon.',
-    grain: 'Skill cluster \u00b7 shift \u00b7 week',
-    owner: 'Workforce Planning Lead',
-    threshold: 'Coverage \u2265 95% of demand across all critical skills',
+    titleEn: 'Skill Coverage',
+    titleEs: 'Cobertura de Habilidades',
+    subtitleEn: 'Workforce Skill Coverage',
+    subtitleEs: 'Cobertura de Habilidades Certificadas',
+    coreLogicEn: 'Nominal time less planned / unplanned constraint loss.',
+    coreLogicEs: 'Tiempo nominal menos pérdida por restricción planificada / no planificada.',
+    guardrailEn: 'By skill, shift, and horizon.',
+    guardrailEs: 'Por habilidad, turno y horizonte.',
+    grainEn: 'Skill cluster \u00b7 shift \u00b7 week',
+    grainEs: 'Clúster de habilidad \u00b7 turno \u00b7 semana',
+    ownerEn: 'Workforce Planning Lead',
+    ownerEs: 'Líder de Planeación de Fuerza Laboral',
+    thresholdEn: 'Coverage \u2265 95% of demand across all critical skills',
+    thresholdEs: 'Cobertura \u2265 95% de la demanda en todas las habilidades críticas',
     accentColor: 'emerald',
   },
   {
     id: 'shortage-exposure',
     step: '05',
-    title: 'Shortage Exp.',
-    subtitle: 'Parts Shortage Exposure',
-    coreLogic: 'Planned visit hours at risk from missing parts.',
-    guardrail: 'Avoid simple part-count metrics.',
-    grain: 'Shop-visit \u00b7 part-class \u00b7 week',
-    owner: 'Supply Chain Intelligence',
-    threshold: 'Exposure hours \u2264 2% of scheduled production hrs',
+    titleEn: 'Shortage Exp.',
+    titleEs: 'Exposición a Faltantes',
+    subtitleEn: 'Parts Shortage Exposure',
+    subtitleEs: 'Exposición a Faltantes de Refacciones',
+    coreLogicEn: 'Planned visit hours at risk from missing parts.',
+    coreLogicEs: 'Horas de visita planificadas en riesgo por refacciones faltantes.',
+    guardrailEn: 'Avoid simple part-count metrics.',
+    guardrailEs: 'Evitar métricas simples de conteo de piezas.',
+    grainEn: 'Shop-visit \u00b7 part-class \u00b7 week',
+    grainEs: 'Shop visit \u00b7 clase de refacción \u00b7 semana',
+    ownerEn: 'Supply Chain Intelligence',
+    ownerEs: 'Inteligencia de Cadena de Suministro',
+    thresholdEn: 'Exposure hours \u2264 2% of scheduled production hrs',
+    thresholdEs: 'Horas en exposición \u2264 2% de las horas de producción programadas',
     accentColor: 'cyan',
   },
 ];
 
-
-
 /* ─────────────────────────────────────────────────────────────
    NODE CARD  (whileInView progressive activation)
    ───────────────────────────────────────────────────────────── */
-function KpiCard({ node, index }: { node: KpiNode; index: number }) {
+function KpiCard({ node, index, isEs }: { node: KpiNode; index: number; isEs: boolean }) {
+  const title = isEs ? node.titleEs : node.titleEn;
+  const subtitle = isEs ? node.subtitleEs : node.subtitleEn;
+  const coreLogic = isEs ? node.coreLogicEs : node.coreLogicEn;
+  const grain = isEs ? node.grainEs : node.grainEn;
+  const owner = isEs ? node.ownerEs : node.ownerEn;
+  const guardrail = isEs ? node.guardrailEs : node.guardrailEn;
+  const threshold = isEs ? node.thresholdEs : node.thresholdEn;
+
   return (
     <motion.div
       className={`${styles.nodeCard} ${styles['nodeCard--' + node.accentColor]}`}
@@ -279,33 +363,41 @@ function KpiCard({ node, index }: { node: KpiNode; index: number }) {
 
       {/* Node header */}
       <div className={styles.nodeTitleGroup}>
-        <h3 className={styles.nodeTitle}>{node.title}</h3>
-        <span className={styles.nodeSubtitle}>{node.subtitle}</span>
+        <h3 className={styles.nodeTitle}>{title}</h3>
+        <span className={styles.nodeSubtitle}>{subtitle}</span>
       </div>
 
       {/* Core Logic */}
       <div className={styles.nodeBlock}>
-        <span className={styles.nodeBlockLabel}>CORE LOGIC:</span>
-        <p className={styles.nodeBlockBody}>{node.coreLogic}</p>
+        <span className={styles.nodeBlockLabel}>
+          {isEs ? 'LÓGICA CENTRAL:' : 'CORE LOGIC:'}
+        </span>
+        <p className={styles.nodeBlockBody}>{coreLogic}</p>
       </div>
 
       {/* Meta row: grain + owner */}
       <div className={styles.nodeMeta}>
         <div className={styles.nodeMetaItem}>
-          <span className={styles.nodeMetaLabel}>GRAIN</span>
-          <span className={styles.nodeMetaValue}>{node.grain}</span>
+          <span className={styles.nodeMetaLabel}>
+            {isEs ? 'GRANULARIDAD' : 'GRAIN'}
+          </span>
+          <span className={styles.nodeMetaValue}>{grain}</span>
         </div>
         <div className={styles.nodeMetaItem}>
-          <span className={styles.nodeMetaLabel}>OWNER</span>
-          <span className={styles.nodeMetaValue}>{node.owner}</span>
+          <span className={styles.nodeMetaLabel}>
+            {isEs ? 'PROPIETARIO' : 'OWNER'}
+          </span>
+          <span className={styles.nodeMetaValue}>{owner}</span>
         </div>
       </div>
 
       {/* Guardrail + threshold */}
       <div className={styles.guardrailBox}>
-        <span className={styles.guardrailLabel}>GUARDRAIL:</span>
-        <p className={styles.guardrailBody}>{node.guardrail}</p>
-        <span className={styles.thresholdPill}>{node.threshold}</span>
+        <span className={styles.guardrailLabel}>
+          {isEs ? 'SALVAGUARDA:' : 'GUARDRAIL:'}
+        </span>
+        <p className={styles.guardrailBody}>{guardrail}</p>
+        <span className={styles.thresholdPill}>{threshold}</span>
       </div>
 
       {/* Subtle corner glow */}
@@ -373,6 +465,8 @@ function TracingBeam({
    MAIN SECTION COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function Section04SemanticMetrics() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -395,21 +489,21 @@ export function Section04SemanticMetrics() {
           <ScrambleText text="04" triggerOnView duration={320} />
         </span>
         <h2 id="section-04-title" className={styles.sectionTitle}>
-          <MaskRevealText as="span" className={styles.titleLine} triggerOnView>
-            Governance and semantic model:
+          <MaskRevealText key={`s04-title1-${lang}`} as="span" className={styles.titleLine} triggerOnView>
+            {isEs ? 'Gobernanza y modelo semántico:' : 'Governance and semantic model:'}
           </MaskRevealText>
-          <MaskRevealText as="span" className={styles.titleLine} triggerOnView delay={120}>
-            one version of the decision
+          <MaskRevealText key={`s04-title2-${lang}`} as="span" className={styles.titleLine} triggerOnView delay={120}>
+            {isEs ? 'una sola versión de la decisión' : 'one version of the decision'}
           </MaskRevealText>
         </h2>
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
       {/* ══ LEAD PROSE ══ */}
-      <BlurRevealText as="p" className={styles.leadProse} delay={80}>
-        Data governance is an operating mechanism, not a documentation exercise. It defines who
-        owns a metric, which source is authoritative, how freshness and quality are measured, and
-        who may access engine-, customer-, employee-, or financial-level detail.
+      <BlurRevealText key={`s04-lead-${lang}`} as="p" className={styles.leadProse} delay={80}>
+        {isEs
+          ? 'La gobernanza de datos es un mecanismo operativo, no un ejercicio documental. Define quién es dueño de una métrica, cuál fuente es autoritativa, cómo se mide la frescura y la calidad, y quién puede acceder a detalle a nivel de motor, cliente, empleado o financiero.'
+          : 'Data governance is an operating mechanism, not a documentation exercise. It defines who owns a metric, which source is authoritative, how freshness and quality are measured, and who may access engine-, customer-, employee-, or financial-level detail.'}
       </BlurRevealText>
 
       {/* ══ GOVERNANCE MECHANISM TABLE ══ */}
@@ -420,19 +514,19 @@ export function Section04SemanticMetrics() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         role="region"
-        aria-label="Data governance operating mechanisms"
+        aria-label={isEs ? 'Mecanismos operativos de gobernanza de datos' : 'Data governance operating mechanisms'}
       >
         {/* Column headers */}
         <div className={styles.govHeader} aria-hidden="true">
           <span className={styles.govHeaderControl}>Control</span>
-          <span className={styles.govHeaderMech}>Mechanism</span>
-          <span className={styles.govHeaderOutcome}>Management outcome</span>
+          <span className={styles.govHeaderMech}>{isEs ? 'Mecanismo' : 'Mechanism'}</span>
+          <span className={styles.govHeaderOutcome}>{isEs ? 'Resultado de gestión' : 'Management outcome'}</span>
         </div>
 
         {/* Rows */}
         <div className={styles.govRows}>
           {GOVERNANCE_ROWS.map((row, idx) => (
-            <GovernanceRowCard key={row.id} row={row} index={idx} />
+            <GovernanceRowCard key={row.id} row={row} index={idx} isEs={isEs} />
           ))}
         </div>
       </motion.div>
@@ -447,12 +541,16 @@ export function Section04SemanticMetrics() {
       >
         <div className={styles.subSectionAccent} aria-hidden="true" />
         <div className={styles.subSectionText}>
-          <span className={styles.subSectionEyebrow}>SECTION 04.2</span>
-          <h3 className={styles.subSectionTitle}>Semantic metrics & calculation contracts</h3>
+          <span className={styles.subSectionEyebrow}>
+            {isEs ? 'SECCIÓN 04.2' : 'SECTION 04.2'}
+          </span>
+          <h3 className={styles.subSectionTitle}>
+            {isEs ? 'Métricas semánticas y contratos de cálculo' : 'Semantic metrics & calculation contracts'}
+          </h3>
           <p className={styles.subSectionBody}>
-            The Power BI semantic model should calculate KPIs once and reuse them across pages,
-            alerts, exports, and models. Each measure requires a business definition, grain,
-            numerator/denominator, exclusions, time logic, owner, threshold, and reconciliation test.
+            {isEs
+              ? 'El modelo semántico de Power BI debe calcular los KPIs una sola vez y reutilizarlos en páginas, alertas, exportaciones y modelos. Cada medida requiere una definición de negocio, granularidad, numerador/denominador, exclusiones, lógica temporal, propietario, umbral y prueba de reconciliación.'
+              : 'The Power BI semantic model should calculate KPIs once and reuse them across pages, alerts, exports, and models. Each measure requires a business definition, grain, numerator/denominator, exclusions, time logic, owner, threshold, and reconciliation test.'}
           </p>
         </div>
       </motion.div>
@@ -467,7 +565,7 @@ export function Section04SemanticMetrics() {
         {/* ── ROW 1: Nodes 1–3 ── */}
         <div className={styles.nodeRow} aria-label="KPI metrics row 1">
           {topRow.map((node, idx) => (
-            <KpiCard key={node.id} node={node} index={idx} />
+            <KpiCard key={node.id} node={node} index={idx} isEs={isEs} />
           ))}
         </div>
 
@@ -476,12 +574,10 @@ export function Section04SemanticMetrics() {
           className={`${styles.nodeRow} ${styles.nodeRowReversed}`}
           aria-label="KPI metrics row 2"
         >
-          <KpiCard key={bottomRow[0].id} node={bottomRow[0]} index={3} />
-          <KpiCard key={bottomRow[1].id} node={bottomRow[1]} index={4} />
+          <KpiCard key={bottomRow[0].id} node={bottomRow[0]} index={3} isEs={isEs} />
+          <KpiCard key={bottomRow[1].id} node={bottomRow[1]} index={4} isEs={isEs} />
         </div>
       </div>
-
-
 
       {/* ══ GOVERNANCE GATE CALLOUT ══ */}
       <motion.div
@@ -491,7 +587,7 @@ export function Section04SemanticMetrics() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         role="note"
-        aria-label="Governance gate requirement"
+        aria-label={isEs ? 'Requisito de compuerta de gobernanza' : 'Governance gate requirement'}
       >
         <div className={styles.gateBorderPulse} aria-hidden="true" />
 
@@ -513,16 +609,28 @@ export function Section04SemanticMetrics() {
           </div>
           <div className={styles.gateTextGroup}>
             <p className={styles.gateBody}>
-              <strong className={styles.gateStrong}>Governance gate:</strong>{' '}
-              A KPI or model is not production-ready until its owner, lineage, quality threshold,
-              security classification, and decision use are approved.
+              <strong className={styles.gateStrong}>
+                {isEs ? 'Compuerta de gobernanza:' : 'Governance gate:'}
+              </strong>{' '}
+              {isEs
+                ? 'Un KPI o modelo no está listo para producción hasta que su propietario, Lineage, umbral de calidad, clasificación de seguridad y uso de decisión sean aprobados.'
+                : 'A KPI or model is not production-ready until its owner, lineage, quality threshold, security classification, and decision use are approved.'}
             </p>
             {/* Three gate check badges */}
             <div className={styles.gateChecks} aria-label="Gate checklist">
               {[
-                { label: 'Owner + Lineage', color: 'violet' },
-                { label: 'Quality Threshold', color: 'cyan' },
-                { label: 'Security Classification', color: 'emerald' },
+                {
+                  label: isEs ? 'Propietario + Lineage' : 'Owner + Lineage',
+                  color: 'violet',
+                },
+                {
+                  label: isEs ? 'Umbral de Calidad' : 'Quality Threshold',
+                  color: 'cyan',
+                },
+                {
+                  label: isEs ? 'Clasificación de Seguridad' : 'Security Classification',
+                  color: 'emerald',
+                },
               ].map((check) => (
                 <div
                   key={check.label}

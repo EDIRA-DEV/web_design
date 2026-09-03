@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { ShareModal } from './ShareModal';
 import styles from './MobileEditorialSubNav.module.css';
 
+import { useLang } from '@/lib/i18n';
+
 /* ── Per-chapter reading progress (mirrors desktop sidebar logic) ── */
 function useSectionProgress(activeId: string): number {
   const [progress, setProgress] = useState(0);
@@ -39,22 +41,98 @@ function useSectionProgress(activeId: string): number {
 interface Chapter {
   id: string;
   number: string;
-  shortTitle: string;
-  fullTitle: string;
+  shortTitleEn: string;
+  shortTitleEs: string;
+  fullTitleEn: string;
+  fullTitleEs: string;
 }
 
 const CHAPTERS: Chapter[] = [
-  { id: 'section-00', number: '00', shortTitle: 'EXECUTIVE SUMMARY', fullTitle: 'Executive Summary' },
-  { id: 'section-01', number: '01', shortTitle: 'EVIDENCE & CASE', fullTitle: 'Official Evidence & Strategic Case' },
-  { id: 'section-02', number: '02', shortTitle: 'PROBLEM STATEMENT', fullTitle: 'Problem Statement & Decision Scope' },
-  { id: 'section-03', number: '03', shortTitle: 'DATA FOUNDATION', fullTitle: 'Data Foundation & Medallion Architecture' },
-  { id: 'section-04', number: '04', shortTitle: 'GOVERNANCE & SEMANTIC', fullTitle: 'Governance & Semantic Models' },
-  { id: 'section-05', number: '05', shortTitle: 'POWER BI CONTROL TOWER', fullTitle: 'Power BI MRO Control Tower' },
-  { id: 'section-06', number: '06', shortTitle: 'APPLIED AI & SCHEDULE', fullTitle: 'Applied AI & Schedule Optimization' },
-  { id: 'section-07', number: '07', shortTitle: 'VALUE REALIZATION', fullTitle: 'Value Realization & Availability Formulas' },
+  {
+    id: 'section-00',
+    number: '00',
+    shortTitleEn: 'EXECUTIVE SUMMARY',
+    shortTitleEs: 'RESUMEN EJECUTIVO',
+    fullTitleEn: 'Executive Summary',
+    fullTitleEs: 'Resumen Ejecutivo',
+  },
+  {
+    id: 'section-01',
+    number: '01',
+    shortTitleEn: 'OFFICIAL EVIDENCE',
+    shortTitleEs: 'EVIDENCIA Y CASO',
+    fullTitleEn: 'Official Evidence & Strategic Case',
+    fullTitleEs: 'Evidencia Oficial y Caso Estratégico',
+  },
+  {
+    id: 'section-02',
+    number: '02',
+    shortTitleEn: 'PROBLEM STATEMENT',
+    shortTitleEs: 'PLANTEAMIENTO',
+    fullTitleEn: 'Problem Statement & Decision Scope',
+    fullTitleEs: 'Planteamiento del Problema y Alcance de Decisión',
+  },
+  {
+    id: 'section-03',
+    number: '03',
+    shortTitleEn: 'DATA FOUNDATION',
+    shortTitleEs: 'DATOS Y MEDALLION',
+    fullTitleEn: 'Data Foundation & Medallion Architecture',
+    fullTitleEs: 'Fundación de Datos y Medallion Architecture',
+  },
+  {
+    id: 'section-04',
+    number: '04',
+    shortTitleEn: 'SEMANTIC METRICS',
+    shortTitleEs: 'GOBERNANZA Y SEMÁNTICA',
+    fullTitleEn: 'Governance & Semantic Models',
+    fullTitleEs: 'Gobernanza y Semantic Models',
+  },
+  {
+    id: 'section-05',
+    number: '05',
+    shortTitleEn: 'CONTROL TOWER',
+    shortTitleEs: 'TORRE DE CONTROL',
+    fullTitleEn: 'Power BI MRO Control Tower',
+    fullTitleEs: 'Torre de Control MRO en Power BI',
+  },
+  {
+    id: 'section-06',
+    number: '06',
+    shortTitleEn: 'APPLIED AI',
+    shortTitleEs: 'IA APLICADA',
+    fullTitleEn: 'Applied AI & Schedule Optimization',
+    fullTitleEs: 'IA Aplicada y Optimización de Calendario',
+  },
+  {
+    id: 'section-07',
+    number: '07',
+    shortTitleEn: 'VALUE REALIZATION',
+    shortTitleEs: 'MATERIALIZACIÓN',
+    fullTitleEn: 'Value Realization & ROI Model',
+    fullTitleEs: 'Materialización de Valor y Fórmulas',
+  },
+  {
+    id: 'section-08',
+    number: '08',
+    shortTitleEn: 'DELIVERY MODEL',
+    shortTitleEs: 'MODELO 8D',
+    fullTitleEn: 'EDIRA Delivery Model: 8D Framework',
+    fullTitleEs: 'Modelo de Entrega EDIRA: Marco 8D',
+  },
+  {
+    id: 'official-references',
+    number: 'REF',
+    shortTitleEn: 'REFERENCES',
+    shortTitleEs: 'REFERENCIAS',
+    fullTitleEn: 'Official References & Sources',
+    fullTitleEs: 'Referencias Oficiales y Fuentes',
+  },
 ];
 
 export function MobileEditorialSubNav() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [isOpen, setIsOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>('section-01');
   const [copied, setCopied] = useState(false);
@@ -118,6 +196,8 @@ export function MobileEditorialSubNav() {
   }, [isOpen]);
 
   const activeChapter = CHAPTERS.find((ch) => ch.id === activeId) || CHAPTERS[1];
+  const activeShortTitle = isEs ? activeChapter.shortTitleEs : activeChapter.shortTitleEn;
+  const activeFullTitle = isEs ? activeChapter.fullTitleEs : activeChapter.fullTitleEn;
 
   const handleSelectChapter = (id: string) => {
     setIsOpen(false);
@@ -166,7 +246,7 @@ export function MobileEditorialSubNav() {
       <nav
         ref={navRef}
         className={styles.subNav}
-        aria-label="Mobile editorial navigation"
+        aria-label={isEs ? 'Navegación editorial móvil' : 'Mobile editorial navigation'}
         style={{ position: 'sticky' }}
       >
         {/* ── Chapter Selector Trigger ── */}
@@ -176,10 +256,14 @@ export function MobileEditorialSubNav() {
           onClick={() => setIsOpen((prev) => !prev)}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-label={`Chapter ${activeChapter.number}: ${activeChapter.fullTitle}. Tap to navigate`}
+          aria-label={
+            isEs
+              ? `Capítulo ${activeChapter.number}: ${activeFullTitle}. Toca para navegar`
+              : `Chapter ${activeChapter.number}: ${activeFullTitle}. Tap to navigate`
+          }
         >
           <span className={styles.chapterNumber}>{activeChapter.number}</span>
-          <span className={styles.chapterTitle}>{activeChapter.shortTitle}</span>
+          <span className={styles.chapterTitle}>{activeShortTitle}</span>
           <svg
             className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`}
             width="12"
@@ -208,10 +292,15 @@ export function MobileEditorialSubNav() {
 
         {/* ── Full-Width Chapter Dropdown Panel ── */}
         {isOpen && (
-          <div className={styles.dropdown} role="listbox" aria-label="Chapter list">
+          <div
+            className={styles.dropdown}
+            role="listbox"
+            aria-label={isEs ? 'Lista de capítulos' : 'Chapter list'}
+          >
             <ul className={styles.dropdownList}>
               {CHAPTERS.map((ch) => {
                 const isActive = ch.id === activeId;
+                const fullTitle = isEs ? ch.fullTitleEs : ch.fullTitleEn;
                 return (
                   <li key={ch.id} role="none">
                     <button
@@ -222,7 +311,7 @@ export function MobileEditorialSubNav() {
                       aria-selected={isActive}
                     >
                       <span className={styles.itemNumber}>{ch.number}</span>
-                      <span className={styles.itemTitle}>{ch.fullTitle}</span>
+                      <span className={styles.itemTitle}>{fullTitle}</span>
                     </button>
                   </li>
                 );
@@ -235,23 +324,34 @@ export function MobileEditorialSubNav() {
         <div className={styles.actions}>
           <button
             type="button"
-            className={styles.actionBtn}
+            className={styles.downloadBtn}
             onClick={handleDownload}
-            aria-label="Download PDF"
+            aria-label={isEs ? 'Descargar PDF' : 'Download PDF'}
           >
-            {/* Download icon */}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              className={styles.downloadIcon}
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
+            <span className={styles.downloadText}>{isEs ? 'Descargar' : 'Download'}</span>
           </button>
 
           <button
             type="button"
             className={styles.actionBtn}
             onClick={() => setIsShareOpen(true)}
-            aria-label="Share article"
+            aria-label={isEs ? 'Compartir artículo' : 'Share article'}
             aria-haspopup="dialog"
           >
             {/* Share icon */}
@@ -278,7 +378,7 @@ export function MobileEditorialSubNav() {
       {/* "Link copied" toast */}
       {copied && (
         <div className={styles.copiedToast} role="status" aria-live="polite">
-          Link copied
+          {isEs ? 'Enlace copiado' : 'Link copied'}
         </div>
       )}
 

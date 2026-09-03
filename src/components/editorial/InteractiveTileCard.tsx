@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { LucideIcon } from 'lucide-react';
 
+import { useLang } from '@/lib/i18n';
+
 export interface InteractiveTileCardProps {
   title: string;
   categoryTag?: string;
@@ -18,6 +20,8 @@ export const InteractiveTileCard: React.FC<InteractiveTileCardProps> = ({
   decisionEnabled,
   icon,
 }) => {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const cardRef = useRef<HTMLDivElement>(null);
   const [isActive, setIsActive] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
@@ -121,11 +125,15 @@ export const InteractiveTileCard: React.FC<InteractiveTileCardProps> = ({
 
           <div className="card-signals">
             <div className="signal-block">
-              <span className="signal-label">Leading Signal</span>
+              <span className="signal-label">
+                {isEs ? 'Señal predictiva' : 'Leading Signal'}
+              </span>
               <p className="signal-text">{leadingSignal}</p>
             </div>
             <div className="decision-block">
-              <span className="decision-label">Decision Enabled</span>
+              <span className="decision-label">
+                {isEs ? 'Decisión habilitada' : 'Decision Enabled'}
+              </span>
               <p className="decision-text">{decisionEnabled}</p>
             </div>
           </div>

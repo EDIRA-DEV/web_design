@@ -30,9 +30,12 @@
   font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
   font-weight: var(--font-bold);
   color: var(--color-text);
-  line-height: 1.12;
+  line-height: 1.15;
   letter-spacing: -0.025em;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .divider {
@@ -41,17 +44,15 @@
 
 @media (min-width: 1024px) {
   .sectionHeader {
-    align-items: center;
+    align-items: flex-start;
   }
   .sectionTitle {
-    white-space: nowrap;
+    white-space: normal;
     font-size: var(--text-4xl);
+    line-height: 1.15;
   }
   .divider {
-    display: block;
-    flex-grow: 1;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.08);
+    display: none;
   }
 }
 

@@ -5,7 +5,11 @@ import { motion } from 'framer-motion';
 import { ShareModal } from './ShareModal';
 import styles from './FloatingActionDock.module.css';
 
+import { useLang } from '@/lib/i18n';
+
 export function FloatingActionDock() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const handleDownload = () => {
@@ -19,7 +23,7 @@ export function FloatingActionDock() {
         initial={{ opacity: 0, y: 20, scale: 0.9 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ type: 'spring', stiffness: 280, damping: 24, delay: 0.2 }}
-        aria-label="Document actions"
+        aria-label={isEs ? 'Acciones del documento' : 'Document actions'}
         role="region"
       >
         {/* ── Bubble 1: Download PDF ── */}
@@ -28,7 +32,7 @@ export function FloatingActionDock() {
             type="button"
             className={styles.bubbleBtn}
             onClick={handleDownload}
-            aria-label="Download PDF"
+            aria-label={isEs ? 'Descargar PDF' : 'Download PDF'}
           >
             <svg
               className={styles.bubbleIcon}
@@ -50,7 +54,7 @@ export function FloatingActionDock() {
 
           {/* Left-floating tooltip */}
           <span className={styles.tooltip} role="tooltip">
-            Download PDF
+            {isEs ? 'Descargar PDF' : 'Download PDF'}
           </span>
         </div>
 
@@ -60,7 +64,7 @@ export function FloatingActionDock() {
             type="button"
             className={styles.bubbleBtn}
             onClick={() => setIsShareOpen(true)}
-            aria-label="Share paper"
+            aria-label={isEs ? 'Compartir paper' : 'Share paper'}
             aria-haspopup="dialog"
             aria-expanded={isShareOpen}
           >
@@ -86,7 +90,7 @@ export function FloatingActionDock() {
 
           {/* Left-floating tooltip */}
           <span className={styles.tooltip} role="tooltip">
-            Share paper
+            {isEs ? 'Compartir paper' : 'Share paper'}
           </span>
         </div>
       </motion.div>

@@ -27,59 +27,82 @@ import {
 } from 'lucide-react';
 import styles from './MedallionPipeline.module.css';
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
    STAGE DATA  (no more hardcoded "active" — all cards neutral)
    ───────────────────────────────────────────────────────────── */
 interface Stage {
   step: string;
-  name: string;
+  nameEn: string;
+  nameEs: string;
   icons: React.ComponentType<{ size?: number; className?: string }>[];
-  description: string;
-  controlObjective: string;
+  descriptionEn: string;
+  descriptionEs: string;
+  controlObjectiveEn: string;
+  controlObjectiveEs: string;
 }
 
 const STAGES: Stage[] = [
   {
     step: '01',
-    name: 'Source Systems',
+    nameEn: 'Source Systems',
+    nameEs: 'Sistemas Fuente',
     icons: [Database, Settings, Cpu, FileText, Network],
-    description: 'MRO/ERP, MES/EAM, QMS, WMS, HR/LMS, Finance, suppliers',
-    controlObjective: 'Control objective: Operational events and master data',
+    descriptionEn: 'MRO/ERP, MES/EAM, QMS, WMS, HR/LMS, Finance, suppliers',
+    descriptionEs: 'MRO/ERP, MES/EAM, QMS, WMS, HR/LMS, Finanzas, proveedores',
+    controlObjectiveEn: 'Control objective: Operational events and master data',
+    controlObjectiveEs: 'Objetivo de control: Eventos operativos y datos maestros',
   },
   {
     step: '02',
-    name: 'Ingestion',
+    nameEn: 'Ingestion',
+    nameEs: 'Ingestion',
     icons: [ArrowLeftRight, Cloud, Lock, Share2],
-    description: 'Batch, CDC, APIs, secure files, event streams',
-    controlObjective: 'Control objective: Reliable, monitored movement',
+    descriptionEn: 'Batch, CDC, APIs, secure files, Event Streams',
+    descriptionEs: 'Batch, CDC, APIs, archivos seguros, Event Streams',
+    controlObjectiveEn: 'Control objective: Reliable, monitored movement',
+    controlObjectiveEs: 'Objetivo de control: Movimiento confiable y monitoreado',
   },
   {
     step: '03',
-    name: 'Bronze / Raw',
+    nameEn: 'Bronze / Raw',
+    nameEs: 'Bronze / Raw',
     icons: [FileCheck],
-    description: 'Immutable source-aligned history & raw telemetry',
-    controlObjective: 'Control objective: Traceability and replay',
+    descriptionEn: 'Source-aligned immutable history and raw telemetry',
+    descriptionEs: 'Historial inmutable alineado a la fuente y telemetría cruda',
+    controlObjectiveEn: 'Control objective: Traceability and reproducibility',
+    controlObjectiveEs: 'Objetivo de control: Trazabilidad y reproducibilidad',
   },
   {
     step: '04',
-    name: 'Silver / Conformed',
+    nameEn: 'Silver / Conformed',
+    nameEs: 'Silver / Conformed',
     icons: [Key, Wrench, Calendar],
-    description: 'Keys, units, time zones, deduplication, validated schemas',
-    controlObjective: 'Control objective: Single version of operational truth',
+    descriptionEn: 'Keys, units, timezones, deduplication, validated schemas',
+    descriptionEs: 'Claves, unidades, zonas horarias, deduplicación, esquemas validados',
+    controlObjectiveEn: 'Control objective: Single operational truth',
+    controlObjectiveEs: 'Objetivo de control: Fuente única de verdad operativa',
   },
   {
     step: '05',
-    name: 'Gold / Semantic',
+    nameEn: 'Gold / Semantic',
+    nameEs: 'Gold / Semantic',
     icons: [TrendingUp, PieChart, BarChart3],
-    description: 'Business-ready aggregates: TAT, OEE, WIP index, margin variance',
-    controlObjective: 'Control objective: Certified, documented metrics',
+    descriptionEn: 'Business-ready aggregates: TAT, OEE, WIP index, margin variance',
+    descriptionEs: 'Agregados listos para el negocio: TAT, OEE, índice WIP, varianza de margen',
+    controlObjectiveEn: 'Control objective: Certified, documented metrics',
+    controlObjectiveEs: 'Objetivo de control: Métricas certificadas y documentadas',
   },
   {
     step: '06',
-    name: 'Consumption Layer',
+    nameEn: 'Consumption Layer',
+    nameEs: 'Capa de Consumo',
     icons: [Layers, Sparkles],
-    description: 'Semantic models, Power BI Direct Lake, AI agent & prescriptive APIs',
-    controlObjective: 'Control objective: Actionable, explainable recommendations',
+    descriptionEn: 'Semantic models, Power BI Direct Lake, AI agent & prescriptive APIs',
+    descriptionEs: 'Semantic models, Power BI Direct Lake, agente de IA y APIs prescriptivas',
+    controlObjectiveEn: 'Control objective: Actionable, explainable recommendations',
+    controlObjectiveEs: 'Objetivo de control: Recomendaciones accionables y explicables',
   },
 ];
 
@@ -89,6 +112,8 @@ const TOTAL = STAGES.length; // 6
    COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function MedallionPipeline() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
@@ -135,10 +160,11 @@ export function MedallionPipeline() {
     ? [STAGES[currentIndex]]
     : STAGES.slice(currentIndex, currentIndex + 3);
 
-  /* Label: "1 of 6" on mobile / "1–3 of 6" on desktop */
+  /* Label: "1 de 6" / "1 of 6" */
+  const ofWord = isEs ? 'de' : 'of';
   const rangeLabel = isMobile
-    ? `${currentIndex + 1} of ${TOTAL}`
-    : `${currentIndex + 1}–${Math.min(currentIndex + 3, TOTAL)} of ${TOTAL}`;
+    ? `${currentIndex + 1} ${ofWord} ${TOTAL}`
+    : `${currentIndex + 1}–${Math.min(currentIndex + 3, TOTAL)} ${ofWord} ${TOTAL}`;
 
   /* Framer motion variants */
   const containerVariants = {
@@ -161,7 +187,9 @@ export function MedallionPipeline() {
         {/* ── Controls bar ── */}
         <div className={styles.controlsBar}>
           <div className={styles.pipelineLabel}>
-            <span className={styles.pipelineLabelText}>Pipeline View:</span>
+            <span className={styles.pipelineLabelText}>
+              {isEs ? 'Vista del Pipeline:' : 'Pipeline View:'}
+            </span>
             <span className={styles.pipelineRange}>{rangeLabel}</span>
           </div>
           <div className={styles.navButtons}>
@@ -169,7 +197,7 @@ export function MedallionPipeline() {
               className={styles.navBtn}
               onClick={goPrev}
               disabled={currentIndex === 0}
-              aria-label="Previous stage"
+              aria-label={isEs ? 'Etapas anteriores' : 'Previous stage'}
             >
               <ChevronLeft size={16} />
             </button>
@@ -177,7 +205,7 @@ export function MedallionPipeline() {
               className={styles.navBtn}
               onClick={goNext}
               disabled={currentIndex >= maxIndex}
-              aria-label="Next stage"
+              aria-label={isEs ? 'Siguientes etapas' : 'Next stage'}
             >
               <ChevronRight size={16} />
             </button>
@@ -231,26 +259,32 @@ export function MedallionPipeline() {
                     {/* Card: overflow-hidden only here (contains border beam) */}
                     <div
                       className={styles.card}
-                      aria-label={`Stage ${stage.step}: ${stage.name}`}
+                      aria-label={`Stage ${stage.step}: ${isEs ? stage.nameEs : stage.nameEn}`}
                     >
                       {/* Border beam overlay (activated on hover via CSS) */}
                       <div className={styles.borderBeam} aria-hidden="true" />
 
                       {/* Body */}
                       <div className={styles.cardBody}>
-                        <h3 className={styles.cardTitle}>{stage.name}</h3>
+                        <h3 className={styles.cardTitle}>
+                          {isEs ? stage.nameEs : stage.nameEn}
+                        </h3>
                         <div className={styles.iconRow} aria-hidden="true">
                           {stage.icons.map((Icon, i) => (
                             <Icon key={i} size={15} className={styles.iconDefault} />
                           ))}
                         </div>
-                        <p className={styles.cardDescription}>{stage.description}</p>
+                        <p className={styles.cardDescription}>
+                          {isEs ? stage.descriptionEs : stage.descriptionEn}
+                        </p>
                       </div>
 
                       {/* Footer */}
                       <div className={styles.cardFooter}>
                         <div className={styles.footerDivider} />
-                        <p className={styles.controlObjective}>{stage.controlObjective}</p>
+                        <p className={styles.controlObjective}>
+                          {isEs ? stage.controlObjectiveEs : stage.controlObjectiveEn}
+                        </p>
                       </div>
                     </div>
                   </div>

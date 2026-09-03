@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './EditorialSidebar.module.css';
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
    SECTION REGISTRY
    Maps DOM section IDs to display metadata.
@@ -12,17 +14,20 @@ import styles from './EditorialSidebar.module.css';
 interface NavSection {
   id: string;
   number: string;
-  title: string;
+  titleEn: string;
+  titleEs: string;
 }
 
 const SECTIONS: NavSection[] = [
-  { id: 'section-01', number: '01', title: 'OFFICIAL EVIDENCE & STRATEGIC CASE' },
-  { id: 'section-02', number: '02', title: 'PROBLEM STATEMENT & DECISION SCOPE' },
-  { id: 'section-03', number: '03', title: 'DATA FOUNDATION & MEDALLION ARCHITECTURE' },
-  { id: 'section-04', number: '04', title: 'GOVERNANCE & SEMANTIC MODELS' },
-  { id: 'section-05', number: '05', title: 'POWER BI MRO CONTROL TOWER' },
-  { id: 'section-06', number: '06', title: 'APPLIED AI & SCHEDULE OPTIMIZATION' },
-  { id: 'section-07', number: '07', title: 'VALUE REALIZATION & FORMULAS' },
+  { id: 'section-01', number: '01', titleEn: 'OFFICIAL EVIDENCE & STRATEGIC CASE', titleEs: 'EVIDENCIA OFICIAL Y CASO ESTRATÉGICO' },
+  { id: 'section-02', number: '02', titleEn: 'PROBLEM STATEMENT & DECISION SCOPE', titleEs: 'PLANTEAMIENTO DEL PROBLEMA Y ALCANCE DE DECISIÓN' },
+  { id: 'section-03', number: '03', titleEn: 'DATA FOUNDATION & MEDALLION ARCHITECTURE', titleEs: 'FUNDACIÓN DE DATOS Y MEDALLION ARCHITECTURE' },
+  { id: 'section-04', number: '04', titleEn: 'GOVERNANCE & SEMANTIC MODELS', titleEs: 'GOBERNANZA Y SEMANTIC MODELS' },
+  { id: 'section-05', number: '05', titleEn: 'POWER BI MRO CONTROL TOWER', titleEs: 'TORRE DE CONTROL MRO EN POWER BI' },
+  { id: 'section-06', number: '06', titleEn: 'APPLIED AI & SCHEDULE OPTIMIZATION', titleEs: 'IA APLICADA Y OPTIMIZACIÓN DE CALENDARIO' },
+  { id: 'section-07', number: '07', titleEn: 'VALUE REALIZATION & FORMULAS', titleEs: 'MATERIALIZACIÓN DE VALOR Y FÓRMULAS' },
+  { id: 'section-08', number: '08', titleEn: 'EDIRA DELIVERY MODEL (8D)', titleEs: 'MODELO DE ENTREGA EDIRA (8D)' },
+  { id: 'official-references', number: 'REF', titleEn: 'OFFICIAL REFERENCES', titleEs: 'REFERENCIAS OFICIALES' },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -81,6 +86,8 @@ function ProgressBar({ progress }: { progress: number }) {
    MAIN COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function EditorialSidebar() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
   const progressForActive = useSectionProgress(activeId);
   const isClickScrolling = useRef(false);
@@ -143,15 +150,16 @@ export function EditorialSidebar() {
   );
 
   return (
-    <aside className={styles.sidebar} aria-label="Report navigation">
+    <aside className={styles.sidebar} aria-label={isEs ? 'Navegación del reporte' : 'Report navigation'}>
 
       {/* ── Top label ── */}
       <p className={styles.reportLabel}>EDIRA RESEARCH</p>
 
       {/* ── Nav list ── */}
-      <nav className={styles.nav} aria-label="Sections">
+      <nav className={styles.nav} aria-label={isEs ? 'Secciones' : 'Sections'}>
         {SECTIONS.map((section) => {
           const isActive = activeId === section.id;
+          const sectionTitle = isEs ? section.titleEs : section.titleEn;
 
           return (
             <div key={section.id} className={styles.navItem}>
@@ -168,7 +176,7 @@ export function EditorialSidebar() {
 
                 {/* Title */}
                 <span className={styles.navTitle}>
-                  {section.title}
+                  {sectionTitle}
                 </span>
               </a>
 

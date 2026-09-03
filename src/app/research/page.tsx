@@ -13,6 +13,8 @@ import { Section04SemanticMetrics } from '@/components/editorial/Section04Semant
 import { Section05ControlTower } from '@/components/editorial/Section05ControlTower';
 import { Section06AIOptimization } from '@/components/editorial/Section06AIOptimization';
 import { Section07ValueRealization } from '@/components/editorial/Section07ValueRealization';
+import { EightDDeliveryModel } from '@/components/editorial/EightDDeliveryModel';
+import { OfficialReferences } from '@/components/editorial/OfficialReferences';
 import { EditorialNextButton } from '@/components/editorial/EditorialNextButton';
 import { FloatingActionDock } from '@/components/editorial/FloatingActionDock';
 import styles from './page.module.css';
@@ -99,8 +101,14 @@ export default function ResearchPage() {
             {/* 09 — KPI and value realization model */}
             <Section07ValueRealization />
 
-            {/* Footer CTA → next section */}
-            <EditorialNextButton href="#section-02" label="Next" />
+            {/* 10 — VIII. EDIRA delivery model: full 8D through sustained value */}
+            <EightDDeliveryModel />
+
+            {/* 11 — Official References */}
+            <OfficialReferences />
+
+            {/* Footer CTA → top of article */}
+            <EditorialNextButton href="#section-01" label="Top" />
           </article>
         </main>
       </div>

@@ -54,12 +54,15 @@ function useCountUp(
   return value;
 }
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
    Metric configuration
    ───────────────────────────────────────────────────────────── */
 interface MetricConfig {
   /** Uppercase eyebrow label */
-  label: string;
+  labelEn: string;
+  labelEs: string;
   /** Target numeric value to count up to */
   numericValue: number;
   /** Text rendered before the number, same weight/size — e.g. "US$" */
@@ -69,7 +72,8 @@ interface MetricConfig {
   /** Smaller badge after the number — e.g. "m²" */
   unit?: string;
   /** Secondary label line below the number — e.g. "LEAP Visits/Year" */
-  unitLabel?: string;
+  unitLabelEn?: string;
+  unitLabelEs?: string;
   /** Apply en-US thousands formatting: 50000 → "50,000" */
   formatCommas?: boolean;
   /** Stagger delay before this column's animation starts (ms) */
@@ -78,27 +82,32 @@ interface MetricConfig {
 
 const METRICS: MetricConfig[] = [
   {
-    label: 'Investment',
+    labelEn: 'Investment',
+    labelEs: 'Inversión',
     numericValue: 140,
     prefix: 'US$',
     suffix: 'M',
     delay: 0,
   },
   {
-    label: 'Footprint',
+    labelEn: 'Footprint',
+    labelEs: 'Huella',
     numericValue: 50000,
     unit: 'm²',
     formatCommas: true,
     delay: 80,
   },
   {
-    label: 'Throughput',
+    labelEn: 'Throughput',
+    labelEs: 'Throughput',
     numericValue: 350,
-    unitLabel: 'LEAP Visits/Year',
+    unitLabelEn: 'LEAP Visits/Year',
+    unitLabelEs: 'Visitas LEAP/Año',
     delay: 160,
   },
   {
-    label: 'Target Horizon',
+    labelEn: 'Target Horizon',
+    labelEs: 'Horizonte',
     numericValue: 2030,
     delay: 240,
   },
@@ -111,9 +120,10 @@ interface MetricItemProps {
   config: MetricConfig;
   isLast: boolean;
   enabled: boolean;
+  isEs: boolean;
 }
 
-function MetricItem({ config, isLast, enabled }: MetricItemProps) {
+function MetricItem({ config, isLast, enabled, isEs }: MetricItemProps) {
   const count = useCountUp(config.numericValue, 1800, enabled, config.delay);
 
   /* Format: optionally add thousands commas */
@@ -121,13 +131,16 @@ function MetricItem({ config, isLast, enabled }: MetricItemProps) {
     ? count.toLocaleString('en-US')
     : String(count);
 
+  const label = isEs ? config.labelEs : config.labelEn;
+  const unitLabel = isEs ? config.unitLabelEs : config.unitLabelEn;
+
   return (
     <div
       className={`${styles.cell} ${!isLast ? styles.cellDivider : ''}`}
       role="listitem"
     >
       {/* ── Eyebrow label ── */}
-      <p className={styles.label}>{config.label}</p>
+      <p className={styles.label}>{label}</p>
 
       {/* ── Value row ── */}
       <p className={styles.value}>
@@ -144,8 +157,8 @@ function MetricItem({ config, isLast, enabled }: MetricItemProps) {
       </p>
 
       {/* ── Secondary unit label ── */}
-      {config.unitLabel && (
-        <p className={styles.unitLabel}>{config.unitLabel}</p>
+      {unitLabel && (
+        <p className={styles.unitLabel}>{unitLabel}</p>
       )}
     </div>
   );
@@ -157,6 +170,8 @@ function MetricItem({ config, isLast, enabled }: MetricItemProps) {
    (with per-column stagger delays).
    ───────────────────────────────────────────────────────────── */
 export function MetricStrip() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
   const [animated, setAnimated] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
 
@@ -183,14 +198,15 @@ export function MetricStrip() {
       ref={stripRef}
       className={styles.strip}
       role="list"
-      aria-label="Key facility metrics"
+      aria-label={isEs ? 'Métricas clave de la instalación' : 'Key facility metrics'}
     >
       {METRICS.map((m, i) => (
         <MetricItem
-          key={m.label}
+          key={m.labelEn}
           config={m}
           isLast={i === METRICS.length - 1}
           enabled={animated}
+          isEs={isEs}
         />
       ))}
     </div>

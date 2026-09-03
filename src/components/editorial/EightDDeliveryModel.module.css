@@ -1,0 +1,613 @@
+/* ============================================================
+   EightDDeliveryModel — Section 08: 8D Delivery Methodology
+   Full EDIRA Obsidian & Neon Purple Design Token Compliance
+   ============================================================ */
+
+.section {
+  width: 100%;
+  max-width: 100%;
+  margin-top: var(--space-20, 5rem);
+  margin-bottom: var(--space-20, 5rem);
+  scroll-margin-top: calc(var(--header-height, 72px) + 2rem);
+}
+
+/* ══════════════════════════════════════════════════════════
+   1. SECTION HEADER (matching Chapters 00–07)
+   ══════════════════════════════════════════════════════════ */
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-8, 2rem);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono, monospace);
+  font-size: var(--text-sm, 0.875rem);
+  color: var(--color-primary, #8b5cf6);
+  flex-shrink: 0;
+  padding-top: 0.35em;
+}
+
+.sectionTitle {
+  font-size: clamp(var(--text-3xl, 1.875rem), 5vw, var(--text-5xl, 3rem));
+  font-weight: var(--font-bold, 700);
+  color: var(--color-text, #ffffff);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.divider {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .sectionHeader {
+    align-items: flex-start;
+  }
+  .sectionTitle {
+    white-space: normal;
+    font-size: var(--text-4xl, 2.25rem);
+    line-height: 1.15;
+  }
+  .divider {
+    display: none;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEAD PROSE
+   ══════════════════════════════════════════════════════════ */
+.leadProse {
+  font-size: 1rem;
+  color: var(--color-text-secondary, #cbd5e1);
+  line-height: var(--leading-relaxed, 1.75);
+  max-width: 75ch;
+  margin-bottom: var(--space-10, 2.5rem);
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. UNIFIED 8D INTERACTIVE CONTAINER
+   ══════════════════════════════════════════════════════════ */
+.engineContainer {
+  position: relative;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(8, 8, 14, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  overflow: hidden;
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.8),
+              0 0 40px -10px rgba(121, 40, 202, 0.18);
+  margin-bottom: var(--space-12, 3rem);
+}
+
+/* Wheel wrapper */
+.wheelWrapper {
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 380px;
+}
+
+@media (min-width: 768px) {
+  .wheelWrapper {
+    padding: 2.5rem 2rem 3rem;
+    min-height: 480px;
+  }
+}
+
+.wheelSvgBox {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.wheelSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 25px rgba(121, 40, 202, 0.2));
+}
+
+.sectorGroup {
+  cursor: pointer;
+  outline: none;
+}
+
+.sectorPath {
+  transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease, filter 0.25s ease;
+}
+
+.sectorText {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-anchor: middle;
+  pointer-events: none;
+  transition: fill 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  .sectorText {
+    font-size: 12.5px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   ACTIVE PHASE INSPECTOR PANEL
+   ══════════════════════════════════════════════════════════ */
+.inspector {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 10, 16, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .inspector {
+    padding: 2rem;
+  }
+}
+
+.inspectorHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (min-width: 768px) {
+  .inspectorHeader {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.inspectorIdentity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconBadge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background: rgba(59, 7, 100, 0.4);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c084fc;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(121, 40, 202, 0.25);
+}
+
+.stageBadge {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  background: rgba(168, 85, 247, 0.2);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #e9d5ff;
+}
+
+.phaseTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0.25rem 0 0 0;
+  line-height: 1.25;
+}
+
+@media (min-width: 768px) {
+  .phaseTitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Stepper Controls */
+.stepperControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+}
+
+@media (min-width: 768px) {
+  .stepperControls {
+    align-self: center;
+  }
+}
+
+.stepperLabel {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  margin-right: 0.25rem;
+}
+
+.stepperActiveNum {
+  color: #c084fc;
+  font-weight: 700;
+}
+
+.stepPrevBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.stepPrevBtn:hover {
+  color: #ffffff;
+  border-color: rgba(168, 85, 247, 0.5);
+  background: rgba(121, 40, 202, 0.15);
+}
+
+.stepNextBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  background: rgba(59, 7, 100, 0.45);
+  color: #e9d5ff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.stepNextBtn:hover {
+  background: rgba(121, 40, 202, 0.35);
+  border-color: rgba(168, 85, 247, 0.6);
+  color: #ffffff;
+}
+
+/* 2-Column Criteria Grid */
+.criteriaGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .criteriaGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+}
+
+.criteriaCard {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s ease;
+}
+
+.criteriaCard:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.criteriaEyebrowZinc {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #71717a;
+  margin-bottom: 0.5rem;
+}
+
+.criteriaEyebrowPurple {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #c084fc;
+  margin-bottom: 0.5rem;
+}
+
+.criteriaBody {
+  font-size: 0.875rem;
+  color: #d4d4d8;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.criteriaGateText {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.criteriaFooterZinc {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.625rem;
+  color: #71717a;
+  letter-spacing: 0.06em;
+}
+
+.criteriaFooterPurple {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.625rem;
+  color: rgba(192, 132, 252, 0.85);
+  letter-spacing: 0.06em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. CAPABILITY MATRIX TABLE
+   ══════════════════════════════════════════════════════════ */
+.matrixSection {
+  margin-bottom: var(--space-10, 2.5rem);
+}
+
+.matrixHeader {
+  margin-bottom: 1.25rem;
+}
+
+.matrixEyebrow {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #a855f7;
+  margin-bottom: 0.35rem;
+}
+
+.matrixTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 14, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  -webkit-overflow-scrolling: touch;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px;
+}
+
+.tableHead {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.thCap {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c084fc;
+}
+
+.thRole {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a1a1aa;
+}
+
+.thPhase {
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a1a1aa;
+  text-align: right;
+}
+
+.tableRow {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.tableRowActive {
+  background: rgba(121, 40, 202, 0.16) !important;
+}
+
+.tdCap {
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+  color: #ffffff;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.bullet {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bulletActive {
+  background-color: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+.bulletInactive {
+  background-color: #52525b;
+}
+
+.tdRole {
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  color: #a1a1aa;
+  line-height: 1.5;
+}
+
+.tdPhase {
+  padding: 1rem 1.25rem;
+  text-align: right;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c084fc;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. STRATEGIC SYNTHESIS CALLOUT
+   ══════════════════════════════════════════════════════════ */
+.synthesisCard {
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .synthesisCard {
+    flex-direction: row;
+    gap: 1.25rem;
+    padding: 1.75rem;
+  }
+}
+
+.synthesisIconBadge {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  background: rgba(59, 7, 100, 0.4);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c084fc;
+  flex-shrink: 0;
+}
+
+.synthesisContent {
+  flex: 1;
+}
+
+.synthesisEyebrow {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #71717a;
+  margin-bottom: 0.35rem;
+}
+
+.synthesisText {
+  font-size: 0.875rem;
+  color: #d4d4d8;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Print Overrides */
+@media print {
+  .engineContainer,
+  .tableWrapper,
+  .synthesisCard {
+    background: transparent !important;
+    border: 1px solid #000000 !important;
+    box-shadow: none !important;
+  }
+  .title,
+  .phaseTitle,
+  .matrixTitle {
+    color: #000000 !important;
+  }
+  .subtitle,
+  .criteriaBody,
+  .tdRole,
+  .synthesisText {
+    color: #333333 !important;
+  }
+}

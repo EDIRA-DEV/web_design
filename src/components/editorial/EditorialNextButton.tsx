@@ -1,19 +1,34 @@
+'use client';
+
 import React from 'react';
 import styles from './EditorialNextButton.module.css';
+import { useLang } from '@/lib/i18n';
 
 interface EditorialNextButtonProps {
   href?: string;
+  labelEn?: string;
+  labelEs?: string;
   label?: string;
 }
 
 export function EditorialNextButton({
   href = '#section-02',
-  label = 'Next',
+  labelEn = 'Next',
+  labelEs = 'Siguiente',
+  label,
 }: EditorialNextButtonProps) {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
+  const displayLabel = label || (isEs ? labelEs : labelEn);
+
   return (
     <footer className={styles.footer}>
-      <a href={href} className={styles.nextBtn} aria-label={`Continue to ${label}`}>
-        <span>{label}</span>
+      <a
+        href={href}
+        className={styles.nextBtn}
+        aria-label={isEs ? `Continuar a ${displayLabel}` : `Continue to ${displayLabel}`}
+      >
+        <span>{displayLabel}</span>
         <svg
           className={styles.arrow}
           width="16"

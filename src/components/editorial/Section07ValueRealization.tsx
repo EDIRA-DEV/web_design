@@ -50,57 +50,83 @@ function useScrollProgress(ref: React.RefObject<Element | null>) {
   return progress;
 }
 
+import { useLang } from '@/lib/i18n';
+
 /* ─────────────────────────────────────────────────────────────
-   DOMAIN → KPI → DECISION TABLE — 6 domains
+   DOMAIN → KPI → DECISION TABLE — 7 domains
    ───────────────────────────────────────────────────────────── */
 interface KpiDomain {
-  domain: string;
-  kpiFamily: string;
-  decision: string;
+  domainEn: string;
+  domainEs: string;
+  kpiFamilyEn: string;
+  kpiFamilyEs: string;
+  decisionEn: string;
+  decisionEs: string;
   accent: 'violet' | 'cyan' | 'emerald' | 'amber' | 'rose';
 }
 
 const KPI_DOMAINS: KpiDomain[] = [
   {
-    domain: 'Demand',
-    kpiFamily: 'Forecast accuracy/bias',
-    decision: 'Reallocate slots or capacity',
+    domainEn: 'Demand',
+    domainEs: 'Demanda',
+    kpiFamilyEn: 'Forecast accuracy/bias',
+    kpiFamilyEs: 'Precisión/sesgo del pronóstico',
+    decisionEn: 'Reallocate slots or capacity',
+    decisionEs: 'Reasignar slots o capacidad',
     accent: 'violet',
   },
   {
-    domain: 'Flow',
-    kpiFamily: 'Throughput, TAT, P50/P80, WIP aging',
-    decision: 'Recover visit plan',
+    domainEn: 'Flow',
+    domainEs: 'Flujo',
+    kpiFamilyEn: 'Throughput, TAT, P50/P80, WIP age',
+    kpiFamilyEs: 'Throughput, TAT, P50/P80, antigüedad WIP',
+    decisionEn: 'Recover visit plan',
+    decisionEs: 'Recuperar plan de visita',
     accent: 'cyan',
   },
   {
-    domain: 'Capacity',
-    kpiFamily: 'Effective capacity, utilization, constraint loss',
-    decision: 'Commit realistic output',
+    domainEn: 'Capacity',
+    domainEs: 'Capacidad',
+    kpiFamilyEn: 'Effective capacity, utilisation, constraint loss',
+    kpiFamilyEs: 'Capacidad efectiva, utilización, pérdida por restricción',
+    decisionEn: 'Commit realistic output',
+    decisionEs: 'Comprometer un output realista',
     accent: 'violet',
   },
   {
-    domain: 'Workforce',
-    kpiFamily: 'Certified-skill coverage, productive hours, overtime',
-    decision: 'Move, train, hire, or authorize overtime',
+    domainEn: 'Workforce',
+    domainEs: 'Fuerza Laboral',
+    kpiFamilyEn: 'Certified-skill coverage, productive hrs, overtime',
+    kpiFamilyEs: 'Cobertura de habilidades certificadas, horas productivas, horas extra',
+    decisionEn: 'Shift, train, hire, or authorise OT',
+    decisionEs: 'Reubicar, capacitar, contratar o autorizar horas extra',
     accent: 'emerald',
   },
   {
-    domain: 'Material',
-    kpiFamily: 'Shortage exposure, supplier OTD/quality, expedite cost',
-    decision: 'Protect critical kits',
+    domainEn: 'Material',
+    domainEs: 'Material',
+    kpiFamilyEn: 'Shortage exposure, supplier OTD/quality, expedite cost',
+    kpiFamilyEs: 'Exposición a faltantes, OTD/calidad del proveedor, costo de urgencias',
+    decisionEn: 'Protect critical kits',
+    decisionEs: 'Proteger kits críticos',
     accent: 'amber',
   },
   {
-    domain: 'Quality',
-    kpiFamily: 'First-pass yield, NCR, rework hours',
-    decision: 'Contain repeat failure',
+    domainEn: 'Quality',
+    domainEs: 'Calidad',
+    kpiFamilyEn: 'First-pass yield, NCRs, rework hours',
+    kpiFamilyEs: 'Rendimiento de primer paso, NCR, horas de Rework',
+    decisionEn: 'Contain recurring failure',
+    decisionEs: 'Contener la falla recurrente',
     accent: 'rose',
   },
   {
-    domain: 'Finance',
-    kpiFamily: 'Cost/visit variance, contribution, benefit realization',
-    decision: 'Prioritize value-protecting action',
+    domainEn: 'Finance',
+    domainEs: 'Finanzas',
+    kpiFamilyEn: 'Cost/visit variance, contribution, benefits realization',
+    kpiFamilyEs: 'Varianza costo/visita, contribución, realización de beneficios',
+    decisionEn: 'Prioritize value-protecting action',
+    decisionEs: 'Priorizar acción que protege el valor',
     accent: 'emerald',
   },
 ];
@@ -109,26 +135,36 @@ const KPI_DOMAINS: KpiDomain[] = [
    FINANCE EQUATIONS
    ───────────────────────────────────────────────────────────── */
 interface ValueEquation {
-  name: string;
-  formula: string;
+  nameEn: string;
+  nameEs: string;
+  formulaEn: string;
+  formulaEs: string;
 }
 
 const VALUE_EQUATIONS: ValueEquation[] = [
   {
-    name: 'Throughput value',
-    formula: 'incremental completed visits × approved contribution margin per visit.',
+    nameEn: 'Throughput Value',
+    nameEs: 'Valor por Throughput',
+    formulaEn: 'Additional visits completed × approved contribution margin per visit.',
+    formulaEs: 'Visitas adicionales completadas × margen de contribución aprobado por visita.',
   },
   {
-    name: 'TAT/WIP value',
-    formula: 'validated cycle-time reduction × approved daily carrying or financing cost.',
+    nameEn: 'TAT/WIP Value',
+    nameEs: 'Valor TAT/WIP',
+    formulaEn: 'Validated cycle time reduction × approved daily holding or financing cost.',
+    formulaEs: 'Reducción de tiempo de ciclo validada × costo diario de carga o financiamiento aprobado.',
   },
   {
-    name: 'Labor value',
-    formula: 'avoided overtime + productive-hour gain − implementation and operating cost.',
+    nameEn: 'Labor Value',
+    nameEs: 'Valor de Mano de Obra',
+    formulaEn: 'Avoided overtime + productive-hour gain − implementation and operating cost.',
+    formulaEs: 'Horas extra evitadas + ganancia en horas productivas − costo de implementación y operación.',
   },
   {
-    name: 'CAPEX value',
-    formula: 'deferred/avoided investment, only when a governed capacity model supports the decision.',
+    nameEn: 'CAPEX Value',
+    nameEs: 'Valor CAPEX',
+    formulaEn: 'Deferred/avoided capital expenditure, only where a governed capacity model supports the decision.',
+    formulaEs: 'Inversión diferida/evitada, solo cuando un modelo de capacidad gobernado sustenta la decisión.',
   },
 ];
 
@@ -259,7 +295,7 @@ const GAUGE_MARKERS = [
   { value: 17.5, label: '5 pp', pct: (17.5 / 20) * 100 },
 ];
 
-function HorizontalGauge() {
+function HorizontalGauge({ isEs }: { isEs: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -292,9 +328,11 @@ function HorizontalGauge() {
         <span className={styles.gaugeScaleLabel}>17.5</span>
         <span className={styles.gaugeScaleLabel}>20</span>
       </div>
-      <p className={styles.gaugeNote}>
-        Visit-equivalents of theoretical capacity · 350-visit/year target
-      </p>
+        <p className={styles.gaugeNote}>
+          {isEs
+            ? 'Equivalentes de visita de capacidad teórica · objetivo 350 visitas/año'
+            : 'Theoretical capacity visit-equivalents · 350 visits/year target'}
+        </p>
     </div>
   );
 }
@@ -303,6 +341,9 @@ function HorizontalGauge() {
    MAIN COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function Section07ValueRealization() {
+  const { lang } = useLang();
+  const isEs = lang === 'es';
+
   return (
     <section
       id="section-07"
@@ -315,21 +356,22 @@ export function Section07ValueRealization() {
           <ScrambleText text="07" triggerOnView duration={320} />
         </span>
         <MaskRevealText
+          key={`s07-title-${lang}`}
           id="section-07-title"
           as="h2"
           className={styles.sectionTitle}
           triggerOnView
         >
-          KPI and value realization model
+          {isEs ? 'KPI y modelo de materialización de valor' : 'KPI and value realization model'}
         </MaskRevealText>
         <div className={styles.divider} aria-hidden="true" />
       </div>
 
       {/* ══ LEAD PROSE ══ */}
-      <BlurRevealText as="p" className={styles.leadProse} delay={80}>
-        The KPI layer links leading indicators, operational outcomes, and financial value. Every
-        measure needs an owner, threshold, cadence, drill path, and action. Benefits must progress
-        through four states: potential, validated, approved, and realized.
+      <BlurRevealText key={`s07-lead-${lang}`} as="p" className={styles.leadProse} delay={80}>
+        {isEs
+          ? 'La capa KPI conecta indicadores predictivos, resultados operativos y valor financiero. Cada medida necesita un propietario, umbral, cadencia, ruta de drill-down y acción. Los beneficios deben avanzar por cuatro estados: potencial, validado, aprobado y realizado.'
+          : 'The KPI layer connects predictive signals, operational outcomes, and financial value. Every measure needs an owner, threshold, cadence, drill-down path, and action. Benefits must progress through four states: pipeline, validated, approved, and realized.'}
       </BlurRevealText>
 
       {/* ══ DOMAIN → KPI → DECISION TABLE ══ */}
@@ -340,28 +382,28 @@ export function Section07ValueRealization() {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         role="region"
-        aria-label="KPI domain decision table"
+        aria-label={isEs ? 'Tabla de decisión de dominios KPI' : 'KPI domain decision table'}
       >
         {/* Table head */}
         <div className={styles.domainTableHead} aria-hidden="true">
-          <span className={styles.domainHeadCell}>DOMAIN</span>
-          <span className={styles.domainHeadCell}>KPI FAMILY</span>
-          <span className={styles.domainHeadCell}>DECISION</span>
+          <span className={styles.domainHeadCell}>{isEs ? 'DOMINIO' : 'DOMAIN'}</span>
+          <span className={styles.domainHeadCell}>{isEs ? 'FAMILIA KPI' : 'KPI FAMILY'}</span>
+          <span className={styles.domainHeadCell}>{isEs ? 'DECISIÓN' : 'DECISION'}</span>
         </div>
 
         {/* Rows */}
         {KPI_DOMAINS.map((row, idx) => (
           <motion.div
-            key={row.domain}
+            key={row.domainEn}
             className={`${styles.domainRow} ${styles['domainRow--' + row.accent]}`}
             initial={{ opacity: 0, x: -12 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-30px' }}
             transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1], delay: idx * 0.065 }}
           >
-            <span className={styles.domainName}>{row.domain}</span>
-            <p className={styles.kpiFamily}>{row.kpiFamily}</p>
-            <p className={styles.decisionText}>{row.decision}</p>
+            <span className={styles.domainName}>{isEs ? row.domainEs : row.domainEn}</span>
+            <p className={styles.kpiFamily}>{isEs ? row.kpiFamilyEs : row.kpiFamilyEn}</p>
+            <p className={styles.decisionText}>{isEs ? row.decisionEs : row.decisionEn}</p>
           </motion.div>
         ))}
       </motion.div>
@@ -376,25 +418,31 @@ export function Section07ValueRealization() {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h3 className={styles.scenarioTitle}>Illustrative public-data scenario</h3>
+          <h3 className={styles.scenarioTitle}>
+            {isEs ? 'Escenario ilustrativo con datos públicos' : 'Illustrative public-data scenario'}
+          </h3>
           <p className={styles.scenarioBody}>
-            Applied to the stated target of 350 annual visits, a 1, 3, or 5 percentage-point
-            improvement in effective availability corresponds to 3.5, 10.5, or 17.5
-            visit-equivalents of theoretical capacity.
+            {isEs
+              ? 'Aplicado al objetivo declarado de 350 visitas anuales, una mejora de 1, 3 o 5 puntos porcentuales en disponibilidad efectiva corresponde a 3.5, 10.5 o 17.5 equivalentes de capacidad teórica.'
+              : 'Applied to the stated 350-visit target, a 1, 3, or 5 percentage point improvement in effective capacity corresponds to 3.5, 10.5, or 17.5 theoretical capacity equivalents.'}
           </p>
 
           {/* Formula highlight */}
           <div className={styles.formulaBox} aria-label="Formula: 350 times improvement">
-            <span className={styles.formulaLabel}>Formula</span>
+            <span className={styles.formulaLabel}>{isEs ? 'Fórmula' : 'Formula'}</span>
             <div className={styles.formulaExpression}>
               <span className={styles.formulaBase}>350</span>
               <span className={styles.formulaOp}>×</span>
-              <span className={styles.formulaImprovement}>improvement</span>
+              <span className={styles.formulaImprovement}>
+                {isEs ? 'mejora' : 'improvement'}
+              </span>
             </div>
           </div>
 
           <p className={styles.scenarioDisclaimer}>
-            Sources: Illustrative arithmetic only, not a Safran forecast or benefit claim.
+            {isEs
+              ? 'Fuentes: Aritmética ilustrativa únicamente, no constituye un pronóstico o compromiso de beneficio de Safran.'
+              : 'Sources: Illustrative arithmetic only, not a Safran forecast or benefit commitment.'}
           </p>
         </motion.div>
 
@@ -406,15 +454,24 @@ export function Section07ValueRealization() {
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
         >
-          <h3 className={styles.equationsTitle}>Finance-approved value equations</h3>
-          <ul className={styles.equationsList} aria-label="Finance-approved value equations">
+          <h3 className={styles.equationsTitle}>
+            {isEs ? 'Ecuaciones de valor aprobadas por Finanzas' : 'Finance-approved value equations'}
+          </h3>
+          <ul
+            className={styles.equationsList}
+            aria-label={isEs ? 'Ecuaciones de valor aprobadas por Finanzas' : 'Finance-approved value equations'}
+          >
             {VALUE_EQUATIONS.map((eq) => (
-              <li key={eq.name} className={styles.equationItem}>
+              <li key={eq.nameEn} className={styles.equationItem}>
                 <span className={styles.equationBullet} aria-hidden="true">•</span>
                 <div className={styles.equationText}>
-                  <strong className={styles.equationName}>{eq.name}</strong>
+                  <strong className={styles.equationName}>
+                    {isEs ? eq.nameEs : eq.nameEn}
+                  </strong>
                   {' – '}
-                  <span className={styles.equationFormula}>{eq.formula}</span>
+                  <span className={styles.equationFormula}>
+                    {isEs ? eq.formulaEs : eq.formulaEn}
+                  </span>
                 </div>
               </li>
             ))}
@@ -429,7 +486,7 @@ export function Section07ValueRealization() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.5 }}
-        aria-label="Value realization donut charts"
+        aria-label={isEs ? 'Gráficos de dona de realización de valor' : 'Value realization donut charts'}
       >
         <div className={styles.donutRings}>
           <AnimatedDonut value={3.5}  maxValue={20} label="1 pp" index={0} />
@@ -438,7 +495,7 @@ export function Section07ValueRealization() {
         </div>
 
         {/* Horizontal gauge bar */}
-        <HorizontalGauge />
+        <HorizontalGauge isEs={isEs} />
       </motion.div>
     </section>
   );
