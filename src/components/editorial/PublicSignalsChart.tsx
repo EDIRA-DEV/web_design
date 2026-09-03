@@ -257,9 +257,9 @@ export function PublicSignalsChart() {
       </div>
 
       <p className={styles.footnote}>
-        Fuente: Compilado del Panorama Estratégico 2024–2026 de Safran y declaraciones oficiales del
-        Clúster Aeroespacial de Querétaro. Tasas de crecimiento derivadas de proyecciones y
-        anuncios de capacidad de acceso público.
+        {isEs
+          ? 'Fuente: Compilado del Panorama Estratégico 2024–2026 de Safran y declaraciones oficiales del Clúster Aeroespacial de Querétaro. Tasas de crecimiento derivadas de proyecciones y anuncios de capacidad de acceso público.'
+          : 'Source: Compiled from Safran 2024–2026 Strategic Outlook and official disclosures from the Querétaro Aerospace Cluster. Growth rates derived from publicly available capacity announcements and projections.'}
       </p>
     </div>
   );
