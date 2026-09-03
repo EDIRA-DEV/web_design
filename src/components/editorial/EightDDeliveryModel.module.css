@@ -590,6 +590,38 @@
   margin: 0;
 }
 
+.typingContainer {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.typingText {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #c084fc;
+  padding-right: 0.25rem;
+  animation: typing 3.5s steps(60, end) infinite alternate, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  70%, 100% {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #c084fc;
+  }
+}
+
 /* Print Overrides */
 @media print {
   .engineContainer,

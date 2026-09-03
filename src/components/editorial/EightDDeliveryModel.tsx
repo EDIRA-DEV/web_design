@@ -376,7 +376,11 @@ export const EightDDeliveryModel: React.FC = () => {
             {t.section08.synthesisTitle}
           </span>
           <p className={styles.synthesisText}>
-            {t.section08.synthesis}
+            <span className={styles.typingContainer}>
+              <span className={styles.typingText}>
+                {t.section08.synthesis}
+              </span>
+            </span>
           </p>
         </div>
       </div>
