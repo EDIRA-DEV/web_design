@@ -6,6 +6,9 @@
 .section {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: clip;
   margin-top: var(--space-20, 5rem);
   margin-bottom: var(--space-20, 5rem);
   scroll-margin-top: calc(var(--header-height, 72px) + 2rem);
@@ -392,6 +395,11 @@
    3. CAPABILITY MATRIX TABLE
    ══════════════════════════════════════════════════════════ */
 .matrixSection {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
   margin-bottom: var(--space-10, 2.5rem);
 }
 
@@ -419,20 +427,43 @@
 }
 
 .tableWrapper {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   overflow-x: auto;
+  overscroll-behavior: contain;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(8, 8, 14, 0.6);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.35) transparent;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 5px;
+}
+
+.tableWrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 3px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 3px;
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  min-width: 600px;
+  min-width: 580px;
 }
 
 .tableHead {
@@ -609,6 +640,38 @@
   }
   50% {
     opacity: 0;
+  }
+}
+
+/* Mobile Viewport Lock & Contained Table Scroll */
+@media (max-width: 640px) {
+  .matrixSection {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .tableWrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior: contain;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
+  }
+
+  .table {
+    min-width: 520px;
+  }
+
+  .thCap, .thRole, .thPhase {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.6875rem;
+  }
+
+  .tdCap, .tdRole, .tdPhase {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.8125rem;
   }
 }
 
