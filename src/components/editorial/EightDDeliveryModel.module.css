@@ -588,37 +588,27 @@
   color: #d4d4d8;
   line-height: 1.65;
   margin: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 
-.typingContainer {
+.typewriterCursor {
   display: inline-block;
-  max-width: 100%;
+  width: 2px;
+  height: 1.15em;
+  background-color: #c084fc;
+  margin-left: 3px;
+  vertical-align: -0.15em;
+  animation: cursorBlink 0.85s infinite;
 }
 
-.typingText {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid #c084fc;
-  padding-right: 0.25rem;
-  animation: typing 3.5s steps(60, end) infinite alternate, blink 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  0% {
-    width: 0;
-  }
-  70%, 100% {
-    width: 100%;
-  }
-}
-
-@keyframes blink {
-  from, to {
-    border-color: transparent;
+@keyframes cursorBlink {
+  0%, 100% {
+    opacity: 1;
   }
   50% {
-    border-color: #c084fc;
+    opacity: 0;
   }
 }
 

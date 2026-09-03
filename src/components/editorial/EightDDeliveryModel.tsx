@@ -15,7 +15,7 @@ import {
   ChevronRight, 
   Lightbulb 
 } from 'lucide-react';
-import { MaskRevealText, BlurRevealText } from './TextAnimations';
+import { MaskRevealText, BlurRevealText, TypewriterText } from './TextAnimations';
 import styles from './EightDDeliveryModel.module.css';
 
 interface PhaseConfig {
@@ -376,11 +376,13 @@ export const EightDDeliveryModel: React.FC = () => {
             {t.section08.synthesisTitle}
           </span>
           <p className={styles.synthesisText}>
-            <span className={styles.typingContainer}>
-              <span className={styles.typingText}>
-                {t.section08.synthesis}
-              </span>
-            </span>
+            <TypewriterText 
+              key={`typewriter-${lang}`}
+              text={t.section08.synthesis}
+              cursorClassName={styles.typewriterCursor}
+              speed={14}
+              delay={200}
+            />
           </p>
         </div>
       </div>

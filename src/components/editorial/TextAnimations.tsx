@@ -271,3 +271,84 @@ export function VioletShimmer({ children, className = '' }: VioletShimmerProps) 
     </em>
   );
 }
+
+/* ─────────────────────────────────────────────────────────────
+   5. TypewriterText
+   Progressive character-by-character reveal with responsive
+   wrapping and blinking neon purple cursor caret.
+   ───────────────────────────────────────────────────────────── */
+
+interface TypewriterTextProps {
+  text: string;
+  className?: string;
+  cursorClassName?: string;
+  speed?: number; // ms per character
+  delay?: number; // ms initial delay
+  triggerOnView?: boolean;
+}
+
+export function TypewriterText({
+  text,
+  className = '',
+  cursorClassName = '',
+  speed = 14,
+  delay = 150,
+  triggerOnView = true,
+}: TypewriterTextProps) {
+  const [charIndex, setCharIndex] = useState(0);
+  const [hasStarted, setHasStarted] = useState(!triggerOnView);
+  const containerRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (!triggerOnView) return;
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [triggerOnView]);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+    setCharIndex(0);
+
+    const timeout = setTimeout(() => {
+      const timer = setInterval(() => {
+        setCharIndex((prev) => {
+          if (prev >= text.length) {
+            clearInterval(timer);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, speed);
+
+      return () => clearInterval(timer);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [hasStarted, text, speed, delay]);
+
+  const displayed = text.slice(0, charIndex);
+
+  return (
+    <span ref={containerRef} className={className}>
+      {displayed}
+      <span
+        aria-hidden="true"
+        className={cursorClassName}
+      />
+    </span>
+  );
+}
+
