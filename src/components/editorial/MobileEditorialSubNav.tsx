@@ -249,7 +249,14 @@ export function MobileEditorialSubNav() {
     }, 900);
   };
 
-  const handleDownload = () => window.print();
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/docs/EDIRA_Whitepaper_H2_2026.pdf';
+    link.download = 'EDIRA_Whitepaper_H2_2026.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const handleShare = async () => {
     const shareData = {

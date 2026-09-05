@@ -13,7 +13,12 @@ export function FloatingActionDock() {
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const handleDownload = () => {
-    window.print();
+    const link = document.createElement('a');
+    link.href = '/docs/EDIRA_Whitepaper_H2_2026.pdf';
+    link.download = 'EDIRA_Whitepaper_H2_2026.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
