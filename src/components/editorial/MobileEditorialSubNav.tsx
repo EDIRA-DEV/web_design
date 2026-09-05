@@ -7,37 +7,6 @@ import styles from './MobileEditorialSubNav.module.css';
 
 import { useLang } from '@/lib/i18n';
 
-/* ── Per-chapter reading progress (mirrors desktop sidebar logic) ── */
-function useSectionProgress(activeId: string): number {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const update = () => {
-      const el = document.getElementById(activeId);
-      if (!el) { setProgress(0); return; }
-
-      const navbarEl  = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
-      const subNavEl  = document.querySelector('[class*="MobileEditorialSubNav-module"]') as HTMLElement | null;
-      const navbarH   = navbarEl  ? navbarEl.offsetHeight  : 72;
-      const subNavH   = subNavEl  ? subNavEl.offsetHeight  : 48;
-      const offset    = navbarH + subNavH;
-
-      const rect          = el.getBoundingClientRect();
-      const sectionTop    = window.scrollY + rect.top;
-      const sectionHeight = el.offsetHeight;
-      const scrolled      = window.scrollY - sectionTop + offset;
-      const pct = Math.min(100, Math.max(0, (scrolled / sectionHeight) * 100));
-      setProgress(pct);
-    };
-
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, [activeId]);
-
-  return progress;
-}
-
 interface Chapter {
   id: string;
   number: string;
@@ -134,31 +103,88 @@ export function MobileEditorialSubNav() {
   const { lang } = useLang();
   const isEs = lang === 'es';
   const [isOpen, setIsOpen] = useState(false);
-  const [activeId, setActiveId] = useState<string>('section-01');
+  const [activeId, setActiveId] = useState<string>(CHAPTERS[0].id);
+  const [progress, setProgress] = useState<number>(0);
   const [copied, setCopied] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
-  const progress = useSectionProgress(activeId);
+  const isClickScrolling = useRef(false);
 
-  // Scroll sync: update active chapter as user scrolls
+  // Synchronized scroll spy and reading progress
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
+    let ticking = false;
+
+    const updateScroll = () => {
+      if (isClickScrolling.current) return;
+
+      const navbarEl = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
+      const subNavEl = navRef.current;
+      const navbarH = navbarEl ? navbarEl.offsetHeight : 72;
+      const subNavH = subNavEl ? subNavEl.offsetHeight : 48;
+      const readingLine = navbarH + subNavH + 16;
+
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+      const docH = document.documentElement.scrollHeight;
+
+      // Bottom of page: lock to final chapter at 100%
+      if (scrollY + windowH >= docH - 50) {
+        setActiveId(CHAPTERS[CHAPTERS.length - 1].id);
+        setProgress(100);
+        return;
+      }
+
+      // Check if user is in Hero area above first chapter
+      const firstEl = document.getElementById(CHAPTERS[0].id);
+      if (firstEl) {
+        const firstRect = firstEl.getBoundingClientRect();
+        if (firstRect.top > readingLine) {
+          setActiveId(CHAPTERS[0].id);
+          setProgress(0);
+          return;
+        }
+      }
+
+      // Find active chapter spanning the reading line
+      for (let i = 0; i < CHAPTERS.length; i++) {
+        const ch = CHAPTERS[i];
+        const el = document.getElementById(ch.id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        const isCurrent =
+          (rect.top <= readingLine && rect.bottom > readingLine) ||
+          (i === CHAPTERS.length - 1 && rect.top <= readingLine);
+
+        if (isCurrent) {
+          setActiveId(ch.id);
+          const sectionHeight = Math.max(el.offsetHeight, 1);
+          const scrolledInSection = readingLine - rect.top;
+          const pct = Math.min(100, Math.max(0, (scrolledInSection / sectionHeight) * 100));
+          setProgress(pct);
+          break;
+        }
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScroll();
+          ticking = false;
         });
-      },
-      { rootMargin: '-20% 0px -65% 0px', threshold: 0 }
-    );
+        ticking = true;
+      }
+    };
 
-    CHAPTERS.forEach((ch) => {
-      const el = document.getElementById(ch.id);
-      if (el) observer.observe(el);
-    });
+    updateScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   // Close on outside click/touch or Escape
@@ -204,6 +230,10 @@ export function MobileEditorialSubNav() {
     const el = document.getElementById(id);
     if (!el) return;
 
+    isClickScrolling.current = true;
+    setActiveId(id);
+    setProgress(0);
+
     // Calculate combined header height dynamically
     const navbarEl = document.querySelector('[class*="Navbar-module"]') as HTMLElement | null;
     const subNavEl = navRef.current;
@@ -213,6 +243,10 @@ export function MobileEditorialSubNav() {
 
     const y = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: 'smooth' });
+
+    setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 900);
   };
 
   const handleDownload = () => window.print();
@@ -285,7 +319,7 @@ export function MobileEditorialSubNav() {
           <motion.div
             className={styles.progressFill}
             animate={{ scaleX: progress / 100 }}
-            transition={{ type: 'spring', stiffness: 80, damping: 20, mass: 0.5 }}
+            transition={{ ease: 'easeOut', duration: 0.08 }}
             style={{ transformOrigin: 'left center' }}
           />
         </div>

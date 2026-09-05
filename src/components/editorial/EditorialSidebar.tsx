@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styles from './EditorialSidebar.module.css';
 
 import { useLang } from '@/lib/i18n';
@@ -19,6 +19,7 @@ interface NavSection {
 }
 
 const SECTIONS: NavSection[] = [
+  { id: 'section-00', number: '00', titleEn: 'EXECUTIVE SUMMARY', titleEs: 'RESUMEN EJECUTIVO' },
   { id: 'section-01', number: '01', titleEn: 'OFFICIAL EVIDENCE & STRATEGIC CASE', titleEs: 'EVIDENCIA OFICIAL Y CASO ESTRATÉGICO' },
   { id: 'section-02', number: '02', titleEn: 'PROBLEM STATEMENT & DECISION SCOPE', titleEs: 'PLANTEAMIENTO DEL PROBLEMA Y ALCANCE DE DECISIÓN' },
   { id: 'section-03', number: '03', titleEn: 'DATA FOUNDATION & MEDALLION ARCHITECTURE', titleEs: 'FUNDACIÓN DE DATOS Y MEDALLION ARCHITECTURE' },
@@ -36,95 +37,85 @@ const SECTIONS: NavSection[] = [
 const HEADER_OFFSET = 88; // 72px navbar + 16px breathing room
 
 /* ─────────────────────────────────────────────────────────────
-   useSectionProgress
-   Computes 0–100 progress for a given section based on how far
-   the viewport has scrolled through its height. Returns 0 for
-   inactive sections and a live percentage for the active one.
-   ───────────────────────────────────────────────────────────── */
-function useSectionProgress(activeId: string): number {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const update = () => {
-      const el = document.getElementById(activeId);
-      if (!el) { setProgress(0); return; }
-
-      const rect = el.getBoundingClientRect();
-      const sectionTop = window.scrollY + rect.top;
-      const sectionHeight = el.offsetHeight;
-      const scrolled = window.scrollY - sectionTop + HEADER_OFFSET;
-      const pct = Math.min(100, Math.max(0, (scrolled / sectionHeight) * 100));
-      setProgress(pct);
-    };
-
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
-  }, [activeId]);
-
-  return progress;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   PROGRESS BAR — animated underline for the active nav item
-   ───────────────────────────────────────────────────────────── */
-function ProgressBar({ progress }: { progress: number }) {
-  return (
-    <div className={styles.progressTrack} aria-hidden="true">
-      <motion.div
-        className={styles.progressFill}
-        initial={{ scaleX: 0, originX: 0 }}
-        animate={{ scaleX: progress / 100 }}
-        transition={{ type: 'spring', stiffness: 80, damping: 20, mass: 0.5 }}
-        style={{ transformOrigin: 'left center' }}
-      />
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────────────────────
    MAIN COMPONENT
    ───────────────────────────────────────────────────────────── */
 export function EditorialSidebar() {
   const { lang } = useLang();
   const isEs = lang === 'es';
   const [activeId, setActiveId] = useState<string>(SECTIONS[0].id);
-  const progressForActive = useSectionProgress(activeId);
+  const [progress, setProgress] = useState<number>(0);
   const isClickScrolling = useRef(false);
 
-  /* ── ScrollSpy via IntersectionObserver ── */
+  /* ── Synchronized ScrollSpy & Progress Tracker ── */
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // Skip observer updates while a click-scroll is in flight
-        if (isClickScrolling.current) return;
+    let ticking = false;
 
-        // Use the most recent intersecting entry with the largest intersection ratio
-        let best: IntersectionObserverEntry | null = null;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (!best || entry.intersectionRatio > best.intersectionRatio) {
-              best = entry;
-            }
-          }
-        });
+    const updateScroll = () => {
+      if (isClickScrolling.current) return;
 
-        if (best) {
-          setActiveId((best as IntersectionObserverEntry).target.id);
-        }
-      },
-      {
-        rootMargin: '-20% 0px -50% 0px',
-        threshold: [0, 0.1, 0.25, 0.5],
+      const readingLine = HEADER_OFFSET + 32;
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+      const docH = document.documentElement.scrollHeight;
+
+      // If at bottom of page, anchor to final section at 100%
+      if (scrollY + windowH >= docH - 50) {
+        setActiveId(SECTIONS[SECTIONS.length - 1].id);
+        setProgress(100);
+        return;
       }
-    );
 
-    SECTIONS.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+      // Check if user is in Hero section above section-00
+      const firstEl = document.getElementById(SECTIONS[0].id);
+      if (firstEl) {
+        const firstRect = firstEl.getBoundingClientRect();
+        if (firstRect.top > readingLine) {
+          setActiveId(SECTIONS[0].id);
+          setProgress(0);
+          return;
+        }
+      }
 
-    return () => observer.disconnect();
+      // Find the active section currently spanning the reading line
+      for (let i = 0; i < SECTIONS.length; i++) {
+        const sec = SECTIONS[i];
+        const el = document.getElementById(sec.id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        const isCurrent =
+          (rect.top <= readingLine && rect.bottom > readingLine) ||
+          (i === SECTIONS.length - 1 && rect.top <= readingLine);
+
+        if (isCurrent) {
+          setActiveId(sec.id);
+          const sectionHeight = Math.max(el.offsetHeight, 1);
+          const scrolledInSection = readingLine - rect.top;
+          const pct = Math.min(100, Math.max(0, (scrolledInSection / sectionHeight) * 100));
+          setProgress(pct);
+          break;
+        }
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    updateScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   /* ── Smooth scroll on click with header offset compensation ── */
@@ -137,6 +128,7 @@ export function EditorialSidebar() {
       // Mark as programmatic scroll to pause observer
       isClickScrolling.current = true;
       setActiveId(id);
+      setProgress(0);
 
       const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
       window.scrollTo({ top, behavior: 'smooth' });
@@ -180,23 +172,19 @@ export function EditorialSidebar() {
                 </span>
               </a>
 
-              {/* Progress bar — only rendered for active item */}
-              <AnimatePresence>
-                {isActive && (
+              {/* Progress bar — animated violet bar when active, hairline divider when inactive */}
+              {isActive ? (
+                <div className={styles.progressTrack} aria-hidden="true">
                   <motion.div
-                    key={section.id + '-progress'}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <ProgressBar progress={progressForActive} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Divider — hairline separator below each item */}
-              <div className={styles.divider} aria-hidden="true" />
+                    className={styles.progressFill}
+                    style={{ transformOrigin: 'left center' }}
+                    animate={{ scaleX: progress / 100 }}
+                    transition={{ ease: 'easeOut', duration: 0.08 }}
+                  />
+                </div>
+              ) : (
+                <div className={styles.divider} aria-hidden="true" />
+              )}
             </div>
           );
         })}
