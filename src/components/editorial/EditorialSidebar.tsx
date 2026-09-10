@@ -28,7 +28,7 @@ const SECTIONS: NavSection[] = [
   { id: 'section-06', number: '06', titleEn: 'APPLIED AI & SCHEDULE OPTIMIZATION', titleEs: 'IA APLICADA Y OPTIMIZACIÓN DE CALENDARIO' },
   { id: 'section-07', number: '07', titleEn: 'VALUE REALIZATION & FORMULAS', titleEs: 'MATERIALIZACIÓN DE VALOR Y FÓRMULAS' },
   { id: 'section-08', number: '08', titleEn: 'EDIRA DELIVERY MODEL (8D)', titleEs: 'MODELO DE ENTREGA EDIRA (8D)' },
-  { id: 'official-references', number: 'REF', titleEn: 'OFFICIAL REFERENCES', titleEs: 'REFERENCIAS OFICIALES' },
+  { id: 'endnotes', number: 'REF', titleEn: 'ENDNOTES', titleEs: 'NOTAS FINALES' },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -122,16 +122,30 @@ export function EditorialSidebar() {
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       e.preventDefault();
-      const el = document.getElementById(id);
+
+      // REF links to the #endnotes section inside EditorialFootnotes.
+      // We dispatch a custom event so the accordion can open itself before scroll.
+      const targetId = id;
+      const el = document.getElementById(targetId);
       if (!el) return;
+
+      if (id === 'endnotes') {
+        window.dispatchEvent(new CustomEvent('edira:open-endnotes'));
+      }
 
       // Mark as programmatic scroll to pause observer
       isClickScrolling.current = true;
       setActiveId(id);
       setProgress(0);
 
-      const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
-      window.scrollTo({ top, behavior: 'smooth' });
+      // Small delay so the accordion panel can start opening before scroll settles
+      const scrollDelay = id === 'endnotes' ? 80 : 0;
+      setTimeout(() => {
+        const freshEl = document.getElementById(targetId);
+        if (!freshEl) return;
+        const top = freshEl.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, scrollDelay);
 
       // Resume observer after the smooth scroll settles (~800ms)
       setTimeout(() => {

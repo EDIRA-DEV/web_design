@@ -90,12 +90,12 @@ const CHAPTERS: Chapter[] = [
     fullTitleEs: 'Modelo de Entrega EDIRA: Marco 8D',
   },
   {
-    id: 'official-references',
+    id: 'endnotes',
     number: 'REF',
-    shortTitleEn: 'REFERENCES',
-    shortTitleEs: 'REFERENCIAS',
-    fullTitleEn: 'Official References & Sources',
-    fullTitleEs: 'Referencias Oficiales y Fuentes',
+    shortTitleEn: 'ENDNOTES',
+    shortTitleEs: 'NOTAS FINALES',
+    fullTitleEn: 'Endnotes',
+    fullTitleEs: 'Notas Finales',
   },
 ];
 
@@ -229,6 +229,10 @@ export function MobileEditorialSubNav() {
     setIsOpen(false);
     const el = document.getElementById(id);
     if (!el) return;
+
+    if (id === 'endnotes') {
+      window.dispatchEvent(new CustomEvent('edira:open-endnotes'));
+    }
 
     isClickScrolling.current = true;
     setActiveId(id);

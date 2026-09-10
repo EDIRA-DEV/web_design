@@ -9,10 +9,9 @@ import styles from './OfficialReferences.module.css';
 interface ReferenceSource {
   id: string;
   refIndex: string;
-  author: string;
-  year: string;
   title: string;
-  sourceNote?: string;
+  textEn: string;
+  textEs: string;
   url: string;
   categoryEn: string;
   categoryEs: string;
@@ -22,86 +21,79 @@ const REFERENCES_DATA: ReferenceSource[] = [
   {
     id: 'ref-1',
     refIndex: '[1]',
-    author: 'Safran',
-    year: 'n.d.',
-    title: 'Mexico: The number one employer in the Mexican aerospace industry',
-    sourceNote: 'Retrieved August 15, 2026',
-    url: 'https://www.safran-group.com/countries/mexico',
-    categoryEn: 'Corporate Disclosures',
-    categoryEs: 'Divulgación Corporativa',
-  },
-  {
-    id: 'ref-2',
-    refIndex: '[2]',
-    author: 'Safran',
-    year: '2024, July 24',
     title: 'Safran to strengthen its footprint in Querétaro (Mexico) with new engine maintenance and production capacities',
-    sourceNote: 'Official Press Release',
+    textEn: 'Safran, “Safran to strengthen its footprint in Querétaro (Mexico) with new engine maintenance and production capacities,” July 24, 2024, ',
+    textEs: 'Safran, “Safran to strengthen its footprint in Querétaro (Mexico) with new engine maintenance and production capacities”, 24 de julio de 2024, ',
     url: 'https://www.safran-group.com/pressroom/safran-strengthen-its-footprint-queretaro-mexico-new-engine-maintenance-and-production-capacities-2024-07-22',
     categoryEn: 'Facility Expansion',
     categoryEs: 'Expansión de Instalaciones',
   },
   {
-    id: 'ref-3',
-    refIndex: '[3]',
-    author: 'Safran',
-    year: '2026a, June 3',
-    title: 'Exane CEO Conference',
-    sourceNote: 'Investor presentation',
-    url: 'https://www.safran-group.com/download/media/451166',
-    categoryEn: 'Investor Relations',
-    categoryEs: 'Relación con Inversionistas',
-  },
-  {
-    id: 'ref-4',
-    refIndex: '[4]',
-    author: 'Safran',
-    year: '2026b, July 1',
+    id: 'ref-2',
+    refIndex: '[2]',
     title: 'Safran opens new maintenance shop in Querétaro (Mexico), strengthening its MRO hub in the Americas',
-    sourceNote: 'Official Press Release',
+    textEn: 'Safran, “Safran opens new maintenance shop in Querétaro (Mexico), strengthening its MRO hub in the Americas,” July 1, 2026, ',
+    textEs: 'Safran, “Safran opens new maintenance shop in Querétaro (Mexico), strengthening its MRO hub in the Americas”, 1 de julio de 2026, ',
     url: 'https://www.safran-group.com/pressroom/safran-opens-new-maintenance-shop-queretaro-mexico-strengthening-its-mro-hub-americas-2026-06-30',
     categoryEn: 'Shop Commissioning',
     categoryEs: 'Inauguración de Taller',
   },
   {
-    id: 'ref-5',
-    refIndex: '[5]',
-    author: 'Safran',
-    year: '2026c, February 13',
+    id: 'ref-3',
+    refIndex: '[3]',
+    title: 'Safran strengthens its footprint in Mexico with two new plants in Querétaro and Chihuahua',
+    textEn: 'Safran, “Safran strengthens its footprint in Mexico with two new plants in Querétaro and Chihuahua,” July 2, 2026, ',
+    textEs: 'Safran, “Safran strengthens its footprint in Mexico with two new plants in Querétaro and Chihuahua”, 2 de julio de 2026, ',
+    url: 'https://www.safran-group.com/news/safran-strengthens-its-footprint-mexico-two-new-plants-queretaro-and-chihuahua-2026-07-02',
+    categoryEn: 'Industrial Footprint',
+    categoryEs: 'Huella Industrial',
+  },
+  {
+    id: 'ref-4',
+    refIndex: '[4]',
     title: 'Safran reports excellent financial performance in 2025 and raises its 2028 ambitions',
-    sourceNote: 'Financial Disclosure',
+    textEn: 'Safran, “Safran reports excellent financial performance in 2025 and raises its 2028 ambitions,” February 13, 2026, ',
+    textEs: 'Safran, “Safran reports excellent financial performance in 2025 and raises its 2028 ambitions”, 13 de febrero de 2026, ',
     url: 'https://www.safran-group.com/pressroom/safran-reports-excellent-financial-performance-2025-and-raises-its-2028-ambitions-2026-02-13',
     categoryEn: 'Financial Performance',
     categoryEs: 'Desempeño Financiero',
   },
   {
-    id: 'ref-6',
-    refIndex: '[6]',
-    author: 'Safran',
-    year: '2026d, July 28',
+    id: 'ref-5',
+    refIndex: '[5]',
     title: 'Safran reports its first-half 2026 results',
-    sourceNote: 'H1 2026 Earnings Report',
+    textEn: 'Safran, “Safran reports its first-half 2026 results,” July 28, 2026, ',
+    textEs: 'Safran, “Safran reports its first-half 2026 results”, 28 de julio de 2026, ',
     url: 'https://www.safran-group.com/pressroom/safran-reports-its-first-half-2026-results-2026-07-28',
     categoryEn: 'Earnings Release',
     categoryEs: 'Reporte de Resultados',
   },
   {
+    id: 'ref-6',
+    refIndex: '[6]',
+    title: 'Exane CEO Conference',
+    textEn: 'Safran, “Exane CEO Conference” [Investor presentation], June 3, 2026, ',
+    textEs: 'Safran, “Exane CEO Conference” [Presentación para inversionistas], 3 de junio de 2026, ',
+    url: 'https://www.safran-group.com/download/media/451166',
+    categoryEn: 'Investor Relations',
+    categoryEs: 'Relación con Inversionistas',
+  },
+  {
     id: 'ref-7',
     refIndex: '[7]',
-    author: 'Safran',
-    year: '2026e, July 2',
-    title: 'Safran strengthens its footprint in Mexico with two new plants in Querétaro and Chihuahua',
-    sourceNote: 'Industrial News',
-    url: 'https://www.safran-group.com/news/safran-strengthens-its-footprint-mexico-two-new-plants-queretaro-and-chihuahua-2026-07-02',
-    categoryEn: 'Industrial Footprint',
-    categoryEs: 'Huella Industrial',
+    title: 'Mexico: The number one employer in the Mexican aerospace industry',
+    textEn: 'Safran, “Mexico: The number one employer in the Mexican aerospace industry,” accessed August 15, 2026, ',
+    textEs: 'Safran, “Mexico: The number one employer in the Mexican aerospace industry”, consultado el 15 de agosto de 2026, ',
+    url: 'https://www.safran-group.com/countries/mexico',
+    categoryEn: 'Corporate Disclosures',
+    categoryEs: 'Divulgación Corporativa',
   },
 ];
 
 export const OfficialReferences: React.FC = () => {
   const { lang, isEs } = useLanguage();
 
-  const title = isEs ? 'Referencias Oficiales' : 'Official References';
+  const title = isEs ? 'Notas finales' : 'Endnotes';
   const lead = isEs
     ? 'Fuentes corporativas oficiales, reportes regulatorios, presentaciones a inversionistas y comunicados industriales primarios utilizados para fundamentar los modelos operativos y económicos de este white paper.'
     : 'Primary corporate releases, regulatory filings, investor presentations, and industrial disclosures utilized to ground the operational and economic models in this white paper.';
@@ -134,57 +126,50 @@ export const OfficialReferences: React.FC = () => {
 
       {/* ── References List ── */}
       <ol className={styles.list}>
-        {REFERENCES_DATA.map((item) => (
-          <li key={item.id} className={styles.card}>
-            <div className={styles.refBadge} aria-hidden="true">
-              {item.refIndex}
-            </div>
+        {REFERENCES_DATA.map((item) => {
+          const textBeforeUrl = isEs ? item.textEs : item.textEn;
+          const category = isEs ? item.categoryEs : item.categoryEn;
 
-            <div className={styles.content}>
-              <div className={styles.metaRow}>
-                <span className={styles.authorDate}>
-                  {item.author}. ({item.year})
-                </span>
-                <span className={styles.categoryTag}>
-                  {isEs ? item.categoryEs : item.categoryEn}
-                </span>
+          return (
+            <li key={item.id} id={item.id} className={styles.card}>
+              <div className={styles.refBadge} aria-hidden="true">
+                {item.refIndex}
               </div>
 
-              <h3 className={styles.citationTitle}>
-                {item.title}
-              </h3>
+              <div className={styles.content}>
+                <div className={styles.metaRow}>
+                  <span className={styles.categoryTag}>
+                    {category}
+                  </span>
+                </div>
 
-              {item.sourceNote && (
-                <p className={styles.citationDetails}>
-                  {item.sourceNote}
+                <p className={styles.citationText}>
+                  <span className={styles.citationProse}>{textBeforeUrl}</span>
+                  <a 
+                    href={item.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className={styles.inlineLink}
+                    aria-label={`${item.title} (${viewSourceText})`}
+                  >
+                    {item.url}
+                  </a>
                 </p>
-              )}
-
-              <div className={styles.urlRow}>
-                <a 
-                  href={item.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={styles.link}
-                  aria-label={`${item.title} (${viewSourceText})`}
-                >
-                  <span>{item.url}</span>
-                </a>
               </div>
-            </div>
 
-            <a
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.actionBtn}
-              aria-label={`${viewSourceText}: ${item.title}`}
-            >
-              <span>{viewSourceText}</span>
-              <ExternalLink size={13} aria-hidden="true" />
-            </a>
-          </li>
-        ))}
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.actionBtn}
+                aria-label={`${viewSourceText}: ${item.title}`}
+              >
+                <span>{viewSourceText}</span>
+                <ExternalLink size={13} aria-hidden="true" />
+              </a>
+            </li>
+          );
+        })}
       </ol>
     </section>
   );

@@ -14,8 +14,8 @@ import { Section05ControlTower } from '@/components/editorial/Section05ControlTo
 import { Section06AIOptimization } from '@/components/editorial/Section06AIOptimization';
 import { Section07ValueRealization } from '@/components/editorial/Section07ValueRealization';
 import { EightDDeliveryModel } from '@/components/editorial/EightDDeliveryModel';
-import { OfficialReferences } from '@/components/editorial/OfficialReferences';
-import { EditorialNextButton } from '@/components/editorial/EditorialNextButton';
+import { EditorialFootnotes } from '@/components/editorial/EditorialFootnotes';
+import { ResearchSubscribeCTA } from '@/components/editorial/ResearchSubscribeCTA';
 import { FloatingActionDock } from '@/components/editorial/FloatingActionDock';
 import styles from './page.module.css';
 
@@ -104,11 +104,11 @@ export default function ResearchPage() {
             {/* 10 — VIII. EDIRA delivery model: full 8D through sustained value */}
             <EightDDeliveryModel />
 
-            {/* 11 — Official References */}
-            <OfficialReferences />
+            {/* 11 — Editorial Footnotes: Byline · Endnotes · Disclosures · Copyright */}
+            <EditorialFootnotes />
 
-            {/* Footer CTA → top of article */}
-            <EditorialNextButton href="#section-01" label="Top" />
+            {/* 12 — Research newsletter CTA */}
+            <ResearchSubscribeCTA />
           </article>
         </main>
       </div>

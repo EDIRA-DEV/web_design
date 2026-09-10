@@ -160,6 +160,36 @@
   line-height: 1.2;
 }
 
+.citationText {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #f1f5f9;
+  margin: 0;
+  word-break: normal;
+}
+
+.citationProse {
+  color: #f1f5f9;
+  font-weight: 400;
+}
+
+.inlineLink {
+  display: inline;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8125rem;
+  color: #c084fc;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(192, 132, 252, 0.45);
+  word-break: break-all;
+  transition: all 0.15s ease;
+}
+
+.inlineLink:hover {
+  color: #ffffff;
+  text-decoration-color: #ffffff;
+}
+
 .citationTitle {
   font-size: 0.9375rem;
   font-weight: 600;

@@ -1,0 +1,282 @@
+/* ═══════════════════════════════════════════════════════════════
+   EditorialFootnotes.module.css
+   Deloitte-style collapsible footer — EDIRA dark branding
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Wrapper ── */
+.wrapper {
+  width: 100%;
+  margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BYLINE BAR
+   ════════════════════════════════════════════════════════════════ */
+.bylineBar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem 0 2.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bylineLeft {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.bylineLabel {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+  padding-top: 0.15rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.bylineGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 2.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.bylineEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bylineEntryLabel {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.bylineEntryValue {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.4;
+}
+
+/* ── Utility action buttons (Share / Print) ── */
+.utilityActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.utilityBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.utilityBtn:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.utilityBtn:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.7);
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ACCORDION
+   ════════════════════════════════════════════════════════════════ */
+.accordionItem {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.accordionItem:last-of-type {
+  /* bottom border handled by .bottomBorder */
+}
+
+.accordionTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.25rem 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 150ms ease;
+}
+
+.accordionTrigger:hover .accordionTitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.accordionTrigger:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.accordionTitle {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  transition: color 180ms ease;
+}
+
+.accordionIcon {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+  margin-left: 1rem;
+  transition: color 180ms ease;
+}
+
+.accordionTrigger:hover .accordionIcon {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Panel ── */
+.accordionPanel {
+  /* height is animated by Framer Motion */
+}
+
+.accordionPanelInner {
+  padding-top: 0.75rem;
+  padding-bottom: 2rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ENDNOTES LIST
+   ════════════════════════════════════════════════════════════════ */
+.endnoteList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.endnoteItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.endnoteIndex {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgba(139, 92, 246, 0.75);
+  letter-spacing: 0.04em;
+  min-width: 1.4rem;
+  padding-top: 0.1rem;
+  flex-shrink: 0;
+}
+
+.endnoteText {
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROSE (Disclosures & Copyright)
+   ════════════════════════════════════════════════════════════════ */
+.proseBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.proseHeading {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.01em;
+  margin-top: 0.5rem;
+}
+
+.proseHeading:first-child {
+  margin-top: 0;
+}
+
+.proseParagraph {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BOTTOM BORDER
+   ════════════════════════════════════════════════════════════════ */
+.bottomBorder {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .bylineBar {
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem 0 1.75rem;
+  }
+
+  .bylineLeft {
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .bylineGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .utilityActions {
+    align-self: flex-end;
+  }
+
+  .accordionTrigger {
+    padding: 1rem 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bylineGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 2rem;
+  }
+}
