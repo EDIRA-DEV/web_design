@@ -20,8 +20,8 @@ export function EditorialHero() {
             key={lang}
             text={
               isEs
-                ? 'EDIRA EXECUTIVE INSIGHT // WHITE PAPER — AEROSPACE MRO // AGOSTO 2026'
-                : 'EDIRA EXECUTIVE INSIGHT // WHITE PAPER — AEROSPACE MRO // AUGUST 2026'
+                ? 'EDIRA EXECUTIVE INSIGHT // WHITE PAPER — AEROSPACE MRO // H2 2026'
+                : 'EDIRA EXECUTIVE INSIGHT // WHITE PAPER — AEROSPACE MRO // H2 2026'
             }
             triggerOnView
           />
