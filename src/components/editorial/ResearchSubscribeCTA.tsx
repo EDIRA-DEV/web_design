@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { LottieIcon } from './LottieIcon';
+import { LiquidGlassFilter } from './LiquidGlassFilter';
 import revistaAnimation from '../../../public/icons/revista.json';
 import styles from './ResearchSubscribeCTA.module.css';
 
@@ -84,6 +85,9 @@ export function ResearchSubscribeCTA({
       className={styles.wrapper}
       aria-label={isEs ? 'Suscripción al boletín de investigación' : 'Research newsletter subscription'}
     >
+      {/* ── Liquid glass SVG filter definition (zero-size, SSR-safe) ── */}
+      <LiquidGlassFilter />
+
       {/* ── Glassmorphic card ── */}
       <div className={styles.card}>
         {/* Ambient glow orb */}
@@ -122,13 +126,23 @@ export function ResearchSubscribeCTA({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             >
-              {/* Neon Lottie icon */}
+              {/* Liquid-glass Lottie icon — filter sculpted on vector silhouette only */}
               <div className={styles.iconWrap} aria-hidden="true" suppressHydrationWarning>
                 <LottieIcon
                   src={revistaAnimation}
                   loop
                   autoplay
                   className={styles.iconLottie}
+                  /*
+                   * The SVG filter is applied via an inline style so it targets
+                   * the rendered canvas element that Lottie injects, not a wrapper box.
+                   * The url() reference points to the #liquid-glass-core filter defined
+                   * by <LiquidGlassFilter /> above.
+                   */
+                  style={{
+                    filter:
+                      'brightness(0) invert(1) url(#liquid-glass-core)',
+                  }}
                 />
               </div>
 

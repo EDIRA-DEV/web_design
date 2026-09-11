@@ -63,9 +63,10 @@
 .iconLottie {
   width: 5rem;
   height: 5rem;
-  /* Convert dark strokes to white */
-  filter: brightness(0) invert(1);
+  /* filter is applied inline via the SVG liquid-glass filter chain */
+  display: block;
 }
+
 
 /* ── Kicker ── */
 .kicker {
