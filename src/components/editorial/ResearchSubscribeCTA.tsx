@@ -2,8 +2,10 @@
 
 import React, { useCallback, useId, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Loader2, Mail } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { LottieIcon } from './LottieIcon';
+import revistaAnimation from '../../../public/icons/revista.json';
 import styles from './ResearchSubscribeCTA.module.css';
 
 /* ─────────────────────────────────────────────────────────────
@@ -120,9 +122,18 @@ export function ResearchSubscribeCTA({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             >
+              {/* Neon Lottie icon */}
+              <div className={styles.iconWrap} aria-hidden="true">
+                <LottieIcon
+                  src={revistaAnimation}
+                  loop
+                  autoplay
+                  className={styles.iconLottie}
+                />
+              </div>
+
               {/* Kicker */}
               <p className={styles.kicker} aria-hidden="true">
-                <Mail size={12} strokeWidth={2} aria-hidden="true" />
                 {isEs ? 'EDIRA Research · Boletín Editorial' : 'EDIRA Research · Editorial Newsletter'}
               </p>
 
