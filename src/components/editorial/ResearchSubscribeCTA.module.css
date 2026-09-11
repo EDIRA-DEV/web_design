@@ -20,6 +20,11 @@
   border-radius: 1.25rem;
   padding: 3rem 3.5rem;
   transition: border-color 0.3s ease;
+  /* Safari/WebKit border-radius clipping & backdrop-filter fixes */
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  background-clip: padding-box;
 }
 
 .card:hover {
@@ -30,13 +35,14 @@
 .glowOrb {
   pointer-events: none;
   position: absolute;
-  bottom: -6rem;
-  right: -6rem;
-  width: 18rem;
-  height: 18rem;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.18) 0%, transparent 70%);
-  border-radius: 9999px;
-  filter: blur(40px);
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at 100% 100%,
+    rgba(139, 92, 246, 0.22) 0%,
+    rgba(139, 92, 246, 0.08) 35%,
+    transparent 70%
+  );
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -321,8 +327,3 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .card {
-    padding: 2.5rem 2.5rem;
-  }
-}
