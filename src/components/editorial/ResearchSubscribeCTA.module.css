@@ -63,10 +63,24 @@
 .iconLottie {
   width: 5rem;
   height: 5rem;
-  /* filter is applied inline via the SVG liquid-glass filter chain */
   display: block;
+  /*
+   * Base: invert Lottie strokes to solid white — works universally
+   * including Safari iOS where url(#...) chaining is broken.
+   */
+  filter: brightness(0) invert(1);
 }
 
+/*
+ * Desktop only (pointer: fine = mouse device).
+ * Chain the SVG liquid-glass filter for the specular + violet-fringe effect.
+ * Safari mobile is excluded here — it can't chain url() with other filters.
+ */
+@media (pointer: fine) {
+  .iconLottie {
+    filter: brightness(0) invert(1) url(#liquid-glass-core);
+  }
+}
 
 /* ── Kicker ── */
 .kicker {

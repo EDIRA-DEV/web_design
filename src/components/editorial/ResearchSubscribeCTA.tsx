@@ -126,23 +126,13 @@ export function ResearchSubscribeCTA({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             >
-              {/* Liquid-glass Lottie icon — filter sculpted on vector silhouette only */}
+              {/* Liquid-glass Lottie icon — filter handled by CSS for cross-browser compat */}
               <div className={styles.iconWrap} aria-hidden="true" suppressHydrationWarning>
                 <LottieIcon
                   src={revistaAnimation}
                   loop
                   autoplay
                   className={styles.iconLottie}
-                  /*
-                   * The SVG filter is applied via an inline style so it targets
-                   * the rendered canvas element that Lottie injects, not a wrapper box.
-                   * The url() reference points to the #liquid-glass-core filter defined
-                   * by <LiquidGlassFilter /> above.
-                   */
-                  style={{
-                    filter:
-                      'brightness(0) invert(1) url(#liquid-glass-core)',
-                  }}
                 />
               </div>
 
