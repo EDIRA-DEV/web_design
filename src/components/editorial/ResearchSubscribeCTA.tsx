@@ -123,7 +123,7 @@ export function ResearchSubscribeCTA({
               transition={{ duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
             >
               {/* Neon Lottie icon */}
-              <div className={styles.iconWrap} aria-hidden="true">
+              <div className={styles.iconWrap} aria-hidden="true" suppressHydrationWarning>
                 <LottieIcon
                   src={revistaAnimation}
                   loop
@@ -131,11 +131,6 @@ export function ResearchSubscribeCTA({
                   className={styles.iconLottie}
                 />
               </div>
-
-              {/* Kicker */}
-              <p className={styles.kicker} aria-hidden="true">
-                {isEs ? 'EDIRA Research · Boletín Editorial' : 'EDIRA Research · Editorial Newsletter'}
-              </p>
 
               {/* Heading */}
               <h2 className={styles.heading}>

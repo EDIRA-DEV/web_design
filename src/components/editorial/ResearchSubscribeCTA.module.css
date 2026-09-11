@@ -48,68 +48,17 @@
   gap: 0;
 }
 
-/* ── Neon icon container ── */
+/* ── Neon icon (bare—no container box) ── */
 .iconWrap {
-  position: relative;
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  margin-bottom: 1.5rem;
-  border-radius: 1rem;
-  background: rgba(139, 92, 246, 0.08);
-  border: 1px solid rgba(139, 92, 246, 0.22);
-  animation: neonPulse 3s ease-in-out infinite;
-}
-
-.iconWrap::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: transparent;
-  box-shadow:
-    0 0 12px rgba(139, 92, 246, 0.55),
-    0 0 28px rgba(139, 92, 246, 0.30),
-    0 0 56px rgba(139, 92, 246, 0.15);
-  animation: neonGlowPulse 3s ease-in-out infinite;
-  pointer-events: none;
+  margin-bottom: 1.25rem;
 }
 
 .iconLottie {
-  width: 2.25rem;
-  height: 2.25rem;
-  filter:
-    drop-shadow(0 0 6px rgba(167, 139, 250, 0.9))
-    drop-shadow(0 0 14px rgba(139, 92, 246, 0.7))
-    drop-shadow(0 0 28px rgba(109, 40, 217, 0.5));
-}
-
-@keyframes neonPulse {
-  0%, 100% {
-    background: rgba(139, 92, 246, 0.08);
-    border-color: rgba(139, 92, 246, 0.22);
-  }
-  50% {
-    background: rgba(139, 92, 246, 0.14);
-    border-color: rgba(139, 92, 246, 0.42);
-  }
-}
-
-@keyframes neonGlowPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 12px rgba(139, 92, 246, 0.55),
-      0 0 28px rgba(139, 92, 246, 0.30),
-      0 0 56px rgba(139, 92, 246, 0.15);
-  }
-  50% {
-    box-shadow:
-      0 0 20px rgba(139, 92, 246, 0.80),
-      0 0 44px rgba(139, 92, 246, 0.50),
-      0 0 80px rgba(139, 92, 246, 0.25);
-  }
+  width: 5rem;
+  height: 5rem;
+  /* Convert dark strokes to white */
+  filter: brightness(0) invert(1);
 }
 
 /* ── Kicker ── */
@@ -184,6 +133,8 @@
   font-size: 0.9375rem;
   font-family: var(--font-sans, 'Inter', sans-serif);
   outline: none;
+  -webkit-appearance: none;  /* kill iOS pill shape */
+  appearance: none;
   transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -324,18 +275,26 @@
     padding: 1.75rem 1.25rem;
   }
 
+  .form {
+    width: 100%;
+  }
+
   .inputRow {
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
   }
 
   .emailInput {
     min-width: 0;
     width: 100%;
+    box-sizing: border-box;
     height: 52px;
+    min-height: 52px;
+    line-height: 52px;
     font-size: 1rem; /* 16px — prevents iOS auto-zoom */
     padding: 0 1rem;
-    border-radius: 0.625rem;
+    /* same radius as desktop — no override */
   }
 
   .submitBtn {
@@ -343,7 +302,6 @@
     height: 52px;
     justify-content: center;
     font-size: 0.9375rem;
-    border-radius: 0.625rem;
   }
 
   .heading {
@@ -354,6 +312,12 @@
   .subCopy {
     font-size: 0.875rem;
     margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    padding: 2.5rem 2.5rem;
   }
 }
 
