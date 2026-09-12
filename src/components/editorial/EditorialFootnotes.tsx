@@ -255,41 +255,41 @@ export function EditorialFootnotes() {
     >
       {/* ════ BYLINE BAR ════ */}
       <div className={styles.bylineBar}>
-        <div className={styles.bylineLeft}>
+        <div className={styles.bylineTop}>
           <span className={styles.bylineLabel} aria-hidden="true">BY</span>
-          <dl className={styles.bylineGrid}>
-            {BYLINE_ROWS.map((row) => (
-              <div key={row.labelEn} className={styles.bylineEntry}>
-                <dt className={styles.bylineEntryLabel}>
-                  {isEs ? row.labelEs : row.labelEn}
-                </dt>
-                <dd className={styles.bylineEntryValue}>
-                  {isEs ? row.valueEs : row.valueEn}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <div className={styles.utilityActions} role="group" aria-label={isEs ? 'Acciones' : 'Actions'}>
+            <button
+              type="button"
+              className={styles.utilityBtn}
+              onClick={() => setShareOpen(true)}
+              aria-label={isEs ? 'Compartir paper' : 'Share this paper'}
+              aria-haspopup="dialog"
+            >
+              <Share2 size={17} strokeWidth={1.75} aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              className={styles.utilityBtn}
+              onClick={handleDownload}
+              aria-label={isEs ? 'Descargar paper (PDF)' : 'Download paper (PDF)'}
+            >
+              <Download size={17} strokeWidth={1.75} aria-hidden="true" />
+            </button>
+          </div>
         </div>
 
-        <div className={styles.utilityActions} role="group" aria-label={isEs ? 'Acciones' : 'Actions'}>
-          <button
-            type="button"
-            className={styles.utilityBtn}
-            onClick={() => setShareOpen(true)}
-            aria-label={isEs ? 'Compartir paper' : 'Share this paper'}
-            aria-haspopup="dialog"
-          >
-            <Share2 size={17} strokeWidth={1.75} aria-hidden="true" />
-          </button>
-          <button
-            type="button"
-            className={styles.utilityBtn}
-            onClick={handleDownload}
-            aria-label={isEs ? 'Descargar paper (PDF)' : 'Download paper (PDF)'}
-          >
-            <Download size={17} strokeWidth={1.75} aria-hidden="true" />
-          </button>
-        </div>
+        <dl className={styles.bylineGrid}>
+          {BYLINE_ROWS.map((row) => (
+            <div key={row.labelEn} className={styles.bylineEntry}>
+              <dt className={styles.bylineEntryLabel}>
+                {isEs ? row.labelEs : row.labelEn}
+              </dt>
+              <dd className={styles.bylineEntryValue}>
+                {isEs ? row.valueEs : row.valueEn}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
       {/* ════ ACCORDION — ENDNOTES ════ */}

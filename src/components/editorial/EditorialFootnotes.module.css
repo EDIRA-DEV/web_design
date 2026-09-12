@@ -16,19 +16,18 @@
    ════════════════════════════════════════════════════════════════ */
 .bylineBar {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1.25rem;
   padding: 2rem 0 2.25rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.bylineLeft {
+/* Desktop: fila superior = BY a la izq, grid en flex-1, botones a la der */
+.bylineTop {
   display: flex;
   align-items: flex-start;
-  gap: 1.75rem;
-  flex: 1;
-  min-width: 0;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 .bylineLabel {
@@ -46,8 +45,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.85rem 2.5rem;
-  flex: 1;
-  min-width: 0;
+  padding-left: 1.75rem;
 }
 
 .bylineEntry {
@@ -72,7 +70,7 @@
   line-height: 1.4;
 }
 
-/* ── Utility action buttons (Share / Print) ── */
+/* ── Utility action buttons (Share / Download) ── */
 .utilityActions {
   display: flex;
   align-items: center;
@@ -250,29 +248,34 @@
    ════════════════════════════════════════════════════════════════ */
 @media (max-width: 767px) {
   .bylineBar {
-    flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     padding: 1.5rem 0 1.75rem;
   }
 
-  .bylineLeft {
-    gap: 1rem;
-    flex-direction: column;
-  }
-
-  .bylineGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+  /* En mobile: BY y botones en la misma fila */
+  .bylineTop {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   .utilityActions {
-    align-self: flex-end;
+    margin-left: auto;
+    padding-top: 0;
+  }
+
+  /* Grid de contribuidores debajo, sin indent */
+  .bylineGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-left: 0;
   }
 
   .accordionTrigger {
     padding: 1rem 0;
   }
 }
+
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .bylineGrid {

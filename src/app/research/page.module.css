@@ -58,6 +58,13 @@
   }
 }
 
+/* Mobile: reduce espacio inferior para evitar hueco excesivo antes del footer */
+@media (max-width: 767px) {
+  .article {
+    padding-bottom: var(--space-8);
+  }
+}
+
 /* ── Print ── */
 @media print {
   .mainContent {
