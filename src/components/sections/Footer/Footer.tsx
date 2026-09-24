@@ -71,7 +71,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.instagram.com/edira_dev/"
+              href="https://www.instagram.com/ediradev/"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
@@ -84,7 +84,7 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=61591107226141"
+              href="https://www.facebook.com/ediradev"
               target="_blank"
               rel="noopener noreferrer"
               className={styles.socialLink}
