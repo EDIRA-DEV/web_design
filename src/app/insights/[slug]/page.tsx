@@ -48,9 +48,9 @@ export const metadata: Metadata = {
   description: 'How to build KPI frameworks that connect data to action and create alignment across your business.',
 };
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  // Normally we would use params.slug, here we just use mock data setup
-  const data = getArticleData('mock-slug');
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const data = getArticleData(slug || 'mock-slug');
 
   return (
     <>

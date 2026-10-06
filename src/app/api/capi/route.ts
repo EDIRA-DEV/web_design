@@ -9,7 +9,10 @@ export async function POST(request: Request) {
     const accessToken = process.env.FACEBOOK_ACCESS_TOKEN;
 
     if (!pixelId || !accessToken) {
-      return NextResponse.json({ error: 'Faltan credenciales de Meta' }, { status: 500 });
+      return NextResponse.json(
+        { enabled: false, message: 'Meta CAPI inactivo o sin credenciales configuradas' },
+        { status: 200 }
+      );
     }
 
     const payload = {

@@ -46,7 +46,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const fbPixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID;
+  const fbPixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '2237416873878802';
   const linkedInPartnerId = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
 
   return (
@@ -79,7 +79,7 @@ export default function RootLayout({
                   s.parentNode.insertBefore(t,s)}(window, document,'script',
                   'https://connect.facebook.net/en_US/fbevents.js');
                   fbq('init', '${fbPixelId}');
-                  /* PageView is dispatched by AnalyticsTracker with Event ID deduplication */
+                  fbq('track', 'PageView');
                 `,
               }}
             />
