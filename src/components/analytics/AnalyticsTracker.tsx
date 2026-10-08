@@ -6,7 +6,7 @@
  * Componente de inicialización y utilidades analíticas del cliente.
  * 
  * Nota de Auditoría & Arquitectura:
- * El evento estándar 'PageView' del nuevo Meta Pixel (ID: 2237416873878802) se
+ * El evento estándar 'PageView' del nuevo Meta Pixel (ID: 3364790573722018) se
  * despacha directamente desde el script base oficial en RootLayout (src/app/layout.tsx)
  * para garantizar compatibilidad estricta con Meta y evitar registros duplicados de visitas.
  *

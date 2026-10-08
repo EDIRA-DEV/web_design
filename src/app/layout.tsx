@@ -46,7 +46,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const fbPixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '2237416873878802';
+  const fbPixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '3364790573722018';
   const linkedInPartnerId = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
 
   return (
