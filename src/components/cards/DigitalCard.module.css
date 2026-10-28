@@ -1,0 +1,1168 @@
+/* ============================================
+   EDIRA — Digital Business Card (Executive Dark UI)
+   - Animated Electric Violet background
+   - /research Brand Primary circular buttons
+   - Tailored /research reticle grid on social cards
+   - Balanced desktop showcase layout
+   ============================================ */
+
+.page {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  position: relative;
+  min-height: 100dvh;
+  background-color: #050508;
+  color: var(--color-text, #ffffff);
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+/* ---------- 1. Animated Electric Violet Ambient Background ---------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glowTop {
+  position: absolute;
+  top: -12%;
+  left: 50%;
+  width: min(92vw, 480px);
+  height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(139, 92, 246, 0.48) 0%,
+    rgba(121, 40, 202, 0.28) 45%,
+    transparent 72%
+  );
+  filter: blur(48px);
+  will-change: transform, opacity;
+  animation: ambientDriftTop 6.5s ease-in-out infinite alternate;
+}
+
+.glowBottom {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  width: min(88vw, 440px);
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(168, 85, 247, 0.42) 0%,
+    rgba(109, 40, 217, 0.24) 50%,
+    transparent 72%
+  );
+  filter: blur(52px);
+  will-change: transform, opacity;
+  animation: ambientDriftBottom 7.5s ease-in-out infinite alternate;
+}
+
+.glowCenter {
+  position: absolute;
+  top: 28%;
+  left: 50%;
+  width: min(78vw, 360px);
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(139, 92, 246, 0.34) 0%,
+    rgba(121, 40, 202, 0.16) 50%,
+    transparent 72%
+  );
+  filter: blur(46px);
+  will-change: transform, opacity;
+  animation: ambientBreath 5.5s ease-in-out infinite alternate;
+}
+
+@keyframes ambientDriftTop {
+  0% {
+    transform: translate3d(-82%, -8%, 0) scale(0.92);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-18%, 22%, 0) scale(1.16);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-68%, 42%, 0) scale(1.04);
+    opacity: 0.88;
+  }
+}
+
+@keyframes ambientDriftBottom {
+  0% {
+    transform: translate3d(-18%, 10%, 0) scale(1.08);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate3d(-84%, -26%, 0) scale(0.94);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-26%, -44%, 0) scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+@keyframes ambientBreath {
+  0% {
+    transform: translate3d(-75%, -22%, 0) scale(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(-25%, 12%, 0) scale(1.22);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(-60%, 34%, 0) scale(0.96);
+    opacity: 0.75;
+  }
+}
+
+/* ---------- Mobile & Desktop Shell ---------- */
+.shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 420px;
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* Desktop Hero Card Backdrop (hidden on mobile, active in desktop CSS Grid) */
+.desktopHeroPanel {
+  display: none;
+}
+
+/* Neutralize Ant Design (.ant-app a) default blue link overrides everywhere inside the card */
+.page a,
+.page a:hover,
+.page a:active,
+.page a:focus,
+.page a:visited {
+  color: inherit;
+}
+
+/* Staggered entrance */
+.topBar,
+.avatarStage,
+.identityBlock,
+.quickActions,
+.aboutCard,
+.socialSection,
+.bottomArea {
+  animation: riseIn 0.65s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 40ms);
+}
+
+/* ---------- Top Bar ---------- */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.125rem;
+  padding-bottom: 0.5rem;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  opacity: 0.95;
+  transition: opacity var(--transition-fast);
+}
+
+.logo:hover {
+  opacity: 1;
+}
+
+.logo img {
+  height: 22px;
+  width: auto;
+}
+
+.logo:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.topActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ---------- 3. Circular Buttons (/research Brand Primary style on Mobile & Desktop) ---------- */
+.page .topIconBtn,
+.page a.circleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgba(13, 13, 18, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  color: #f8fafc !important;
+  cursor: pointer;
+  transition:
+    border-color 0.25s ease-out,
+    background-color 0.25s ease-out,
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease-out,
+    color 0.2s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.topIconBtn {
+  width: 40px;
+  height: 40px;
+}
+
+.circleBtn {
+  width: 3rem; /* 48px */
+  height: 3rem; /* 48px */
+}
+
+/* Brand Primary on Mobile Tap / Active / Focus AND Desktop Hover — zero blue */
+.page .topIconBtn:active,
+.page .topIconBtn:focus,
+.page .topIconBtn:focus-visible,
+.page a.circleBtn:active,
+.page a.circleBtn:focus,
+.page a.circleBtn:focus-visible,
+.page a.circleBtn:hover {
+  border-color: rgba(139, 92, 246, 0.65) !important;
+  background-color: rgba(46, 16, 101, 0.45) !important;
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(121, 40, 202, 0.5) !important;
+  color: #ffffff !important;
+}
+
+.page .topIconBtn:active,
+.page a.circleBtn:active {
+  transform: scale(0.95);
+}
+
+.page .topIconBtn:focus-visible,
+.page a.circleBtn:focus-visible {
+  outline: 2px solid var(--color-primary, #8b5cf6);
+  outline-offset: 3px;
+}
+
+/* ---------- Main Flow ---------- */
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* ---------- Portrait Stage & Executive Identity ---------- */
+.avatarStage {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.75rem;
+}
+
+.identityBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Editorial Portrait / Avatar (Pure Violet/Purple Ring — zero blue) */
+.avatarRing {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  padding: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    145deg,
+    rgba(196, 181, 253, 0.65) 0%,
+    rgba(139, 92, 246, 0.35) 50%,
+    rgba(121, 40, 202, 0.6) 100%
+  );
+  box-shadow:
+    0 14px 36px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(121, 40, 202, 0.25);
+  margin-bottom: 1.125rem;
+}
+
+.avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  overflow: hidden;
+  background:
+    radial-gradient(85% 85% at 30% 20%, rgba(168, 85, 247, 0.32) 0%, transparent 60%),
+    linear-gradient(145deg, #171226 0%, #0b0914 100%);
+}
+
+.avatarInitials {
+  font-size: 2.125rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+  user-select: none;
+}
+
+.avatarImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.avatarImg[data-loaded='true'] {
+  opacity: 1;
+}
+
+/* Executive Name & Lavender Role */
+.name {
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+.role {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+
+/* Quick Contact Circular Row */
+.quickActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- "About Me" Floating Dark Block ---------- */
+.aboutCard {
+  background: rgba(13, 13, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem 1.125rem;
+  margin-block: 1.125rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.aboutHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutTitle {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a855f7;
+}
+
+.page a.websiteChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.24);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #c4b5fd !important;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.aboutText {
+  font-size: 0.84375rem;
+  line-height: 1.55;
+  color: rgba(203, 213, 225, 0.88);
+}
+
+/* ---------- 5. Social Networks with Tailored /research Reticle Effect ---------- */
+@keyframes socialReticlePulse {
+  0%, 15%, 100% {
+    opacity: 1;
+  }
+  30%, 80% {
+    opacity: 0;
+  }
+}
+
+.socialSection {
+  margin-bottom: 1.25rem;
+}
+
+.socialList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.625rem;
+}
+
+.socialReticleCard {
+  position: relative;
+  display: block;
+  background-color: #0d0d12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.875rem 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.socialReticleCard:focus-visible {
+  outline: 2px solid var(--color-primary, #8b5cf6);
+  outline-offset: 2px;
+}
+
+/* Conic Shine Orb Layer */
+.reticleShine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reticleOrb {
+  position: absolute;
+  right: -20%;
+  top: -65%;
+  width: 140%;
+  padding-bottom: 140%;
+  border-radius: 50%;
+  filter: blur(36px);
+  opacity: 0.24;
+  background: conic-gradient(
+    from 215deg at 50% 50%,
+    rgba(121, 40, 202, 0) 0deg,
+    #7928ca 30deg,
+    rgba(168, 85, 247, 0.28) 285deg,
+    rgba(121, 40, 202, 0) 360deg
+  );
+}
+
+/* Tailored Reticle Mesh (Diagonal Top-Right Mask Variation) */
+.reticleMesh {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    circle at 78% 18%,
+    black 0%,
+    black 18%,
+    transparent 68%
+  );
+  mask-image: radial-gradient(
+    circle at 78% 18%,
+    black 0%,
+    black 18%,
+    transparent 68%
+  );
+}
+
+.reticleTiles,
+.reticleLine {
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reticleTile {
+  position: absolute;
+  background-color: rgba(168, 85, 247, 0.1);
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+/* 6 Asymmetric Reticle Cells */
+.rTile1 { top: 0; left: 32%; width: 22%; height: 28%; }
+.rTile2 { top: 0; left: 54%; width: 24%; height: 28%; animation-delay: -1.8s; }
+.rTile3 { top: 0; left: 78%; width: 22%; height: 28%; animation-delay: -3.6s; }
+.rTile4 { top: 28%; left: 54%; width: 24%; height: 36%; animation-delay: -2.4s; }
+.rTile5 { top: 28%; left: 78%; width: 22%; height: 36%; animation-delay: -4.8s; }
+.rTile6 { top: 64%; left: 78%; width: 22%; height: 36%; animation-delay: -1.2s; }
+
+/* Intersecting Crosshair Lines */
+.reticleLine {
+  position: absolute;
+  inset: 0;
+}
+
+.reticleLine::before,
+.reticleLine::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(168, 85, 247, 0.26);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reticleLine::before {
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform-origin: 100% 50%;
+  transform: scaleX(0);
+}
+
+.reticleLine::after {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+}
+
+.rLine1::before { top: 28%; }
+.rLine1::after { left: 54%; }
+.rLine2::before { top: 64%; transition-delay: 0.12s; }
+.rLine2::after { left: 78%; transition-delay: 0.12s; }
+
+/* Foreground Content (Clean Original Row: Icon + Name + Arrow) */
+.socialCardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.socialIconBubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+}
+
+.socialLabel {
+  flex: 1;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.socialArrow {
+  flex-shrink: 0;
+  color: rgba(148, 163, 184, 0.65);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Active state (Mobile wave / touch) */
+.socialReticleCard.isActive,
+.socialReticleCard:active {
+  border-color: rgba(168, 85, 247, 0.42);
+  box-shadow:
+    0 0 28px rgba(121, 40, 202, 0.18),
+    0 8px 28px rgba(0, 0, 0, 0.55);
+  transform: translateY(-2px);
+}
+
+.socialReticleCard.isActive .socialIconBubble,
+.socialReticleCard:active .socialIconBubble {
+  color: #c4b5fd;
+  background-color: rgba(121, 40, 202, 0.22);
+  border-color: rgba(139, 92, 246, 0.45);
+}
+
+.socialReticleCard.isActive .socialArrow,
+.socialReticleCard:active .socialArrow {
+  color: #c4b5fd;
+  transform: translate(2px, -2px);
+}
+
+.socialReticleCard.isActive .reticleShine,
+.socialReticleCard:active .reticleShine {
+  opacity: 1;
+}
+
+.socialReticleCard.isActive .reticleTiles,
+.socialReticleCard:active .reticleTiles {
+  opacity: 1;
+  transition-delay: 0.08s;
+}
+
+.socialReticleCard.isActive .reticleTile,
+.socialReticleCard:active .reticleTile {
+  animation-name: socialReticlePulse;
+}
+
+.socialReticleCard.isActive .reticleLine,
+.socialReticleCard:active .reticleLine {
+  opacity: 1;
+}
+
+.socialReticleCard.isActive .reticleLine::before,
+.socialReticleCard:active .reticleLine::before {
+  transform: scaleX(1);
+}
+
+.socialReticleCard.isActive .reticleLine::after,
+.socialReticleCard:active .reticleLine::after {
+  transform: scaleY(1);
+}
+
+/* ---------- 6. Bottom Action Buttons & Legal Footer ---------- */
+.bottomArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding-top: 0.25rem;
+}
+
+.ctaGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.625rem;
+}
+
+.saveContactBtn,
+.exchangeContactBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 50px;
+  padding: 0.75rem 1rem;
+  border-radius: 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform var(--transition-fast), background-color var(--transition-base),
+    border-color var(--transition-base), box-shadow var(--transition-base), opacity var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Primary Solid Accent Button: Save Contact */
+.saveContactBtn {
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 55%, #a855f7 100%);
+  color: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(139, 92, 246, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.saveContactBtn:active:not(:disabled) {
+  transform: scale(0.975);
+}
+
+.saveContactBtn:disabled {
+  cursor: progress;
+  opacity: 0.8;
+}
+
+/* Secondary Glass Button: Exchange Contact */
+.exchangeContactBtn {
+  background: rgba(13, 13, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.exchangeContactBtn:active {
+  transform: scale(0.975);
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(46, 16, 101, 0.3);
+}
+
+.saveContactBtn:focus-visible,
+.exchangeContactBtn:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 2px;
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+.legalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding-top: 0.125rem;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.6);
+}
+
+.legalFooter a {
+  text-decoration: underline;
+  text-decoration-color: rgba(148, 163, 184, 0.3);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  left: 50%;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: calc(100vw - 2.5rem);
+  padding: 10px 16px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(17, 17, 17, 0.88);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #ffffff;
+  transform: translate(-50%, -16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base), transform 0.4s var(--ease-out-expo);
+}
+
+.toast svg {
+  color: #34d399;
+  flex-shrink: 0;
+}
+
+.toast[data-visible='true'] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- QR dialog content ---------- */
+.qrContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.qrTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.qrDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #cbd5e1);
+}
+
+.qrTile {
+  display: grid;
+  place-items: center;
+  width: 248px;
+  height: 248px;
+  margin-block: 1rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 0 0 6px rgba(139, 92, 246, 0.15), 0 20px 60px rgba(124, 58, 237, 0.3);
+}
+
+.qrCopy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-text-secondary, #cbd5e1);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast), transform var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qrCopy:active {
+  transform: scale(0.97);
+}
+
+.qrCopy:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.qrUrl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- 4. Desktop Horizontal Layout Distribution (>= 768px) ---------- */
+@media (min-width: 768px) {
+  .page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.25rem 1.5rem;
+  }
+
+  /* On desktop, AmbientVioletGlow tracks the mouse cursor, so keep fixed ambient softer */
+  .glowTop,
+  .glowBottom,
+  .glowCenter {
+    filter: blur(72px);
+    animation-duration: 14s;
+  }
+
+  .shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.42fr) minmax(240px, 0.88fr);
+    min-height: auto;
+    max-width: 780px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .main,
+  .bottomArea {
+    display: contents;
+  }
+
+  /* Top Horizontal Split Hero Card Backdrop (Rows 1–4, Columns 1–2) */
+  .desktopHeroPanel {
+    display: block;
+    grid-column: 1 / -1;
+    grid-row: 1 / 5;
+    position: relative;
+    z-index: 0;
+    border-radius: 1.5rem;
+    background: rgba(11, 11, 17, 0.84);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 28px 70px rgba(0, 0, 0, 0.72),
+      0 0 60px rgba(121, 40, 202, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    animation: riseIn 0.65s var(--ease-out-expo) both;
+  }
+
+  /* Right-side Electric Violet Portrait Stage Accent (like reference desktop card) */
+  .desktopHeroPanel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 38.26%;
+    background:
+      radial-gradient(
+        90% 80% at 50% 48%,
+        rgba(139, 92, 246, 0.28) 0%,
+        rgba(121, 40, 202, 0.14) 58%,
+        transparent 100%
+      ),
+      linear-gradient(160deg, rgba(124, 58, 237, 0.16) 0%, rgba(46, 16, 101, 0.28) 100%);
+    border-left: 1px solid rgba(168, 85, 247, 0.16);
+    pointer-events: none;
+  }
+
+  /* Row 1: Top Bar inside Hero Card */
+  .topBar {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem 1.75rem 0.5rem;
+  }
+
+  /* Row 2 Left: Executive Identity aligned left */
+  .identityBlock {
+    grid-column: 1;
+    grid-row: 2;
+    position: relative;
+    z-index: 2;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0.5rem 1.75rem 0.75rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  /* Row 3 Left: About Me integrated in left column */
+  .aboutCard {
+    grid-column: 1;
+    grid-row: 3;
+    position: relative;
+    z-index: 2;
+    margin: 0.25rem 1.75rem 1.125rem;
+    background: rgba(255, 255, 255, 0.025);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Row 4 Left: Save Contact + Exchange Contact CTAs in left column */
+  .ctaGroup {
+    grid-column: 1;
+    grid-row: 4;
+    position: relative;
+    z-index: 2;
+    padding: 0 1.75rem 1.75rem;
+    animation: riseIn 0.65s var(--ease-out-expo) both;
+    animation-delay: 220ms;
+  }
+
+  /* Rows 2–4 Right: Large Editorial Portrait in Right Showcase Column */
+  .avatarStage {
+    grid-column: 2;
+    grid-row: 2 / 5;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.75rem 1.75rem;
+  }
+
+  .avatarRing {
+    width: 156px;
+    height: 156px;
+    margin-bottom: 0;
+    box-shadow:
+      0 20px 48px rgba(0, 0, 0, 0.7),
+      0 0 44px rgba(139, 92, 246, 0.35);
+  }
+
+  .avatarInitials {
+    font-size: 2.625rem;
+  }
+
+  /* Row 5 Full-Width: Horizontal Quick-Contact Bar below Hero Card */
+  .quickActions {
+    grid-column: 1 / -1;
+    grid-row: 5;
+    margin-top: 0.875rem;
+    margin-bottom: 0.875rem;
+    padding: 0.875rem 1.75rem;
+    border-radius: 1.25rem;
+    background: rgba(11, 11, 17, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    gap: 1.5rem;
+  }
+
+  /* Row 6 Full-Width: 2x2 Horizontal Social Reticle Grid */
+  .socialSection {
+    grid-column: 1 / -1;
+    grid-row: 6;
+    margin-bottom: 1rem;
+  }
+
+  .socialList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .socialReticleCard {
+    padding: 1rem 1.125rem;
+  }
+
+  /* Row 7 Full-Width: Legal Footer */
+  .legalFooter {
+    grid-column: 1 / -1;
+    grid-row: 7;
+    padding-top: 0.25rem;
+  }
+}
+
+/* ---------- Hover States (Desktop Pointer Devices) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  /* /research FloatingActionDock exact Brand Primary Hover */
+  .page .topIconBtn:hover,
+  .page a.circleBtn:hover {
+    border-color: rgba(139, 92, 246, 0.65) !important;
+    background-color: rgba(46, 16, 101, 0.42) !important;
+    transform: scale(1.06);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.6),
+      0 0 24px rgba(121, 40, 202, 0.5) !important;
+    color: #ffffff !important;
+  }
+
+  .page a.websiteChip:hover {
+    background: rgba(139, 92, 246, 0.22);
+    border-color: rgba(168, 85, 247, 0.48);
+    color: #ffffff !important;
+  }
+
+  /* /research Reticle Card Hover */
+  .socialReticleCard:hover {
+    border-color: rgba(168, 85, 247, 0.42);
+    box-shadow:
+      0 0 30px rgba(121, 40, 202, 0.16),
+      0 8px 32px rgba(0, 0, 0, 0.55);
+    transform: translateY(-2px);
+  }
+
+  .socialReticleCard:hover .socialIconBubble {
+    color: #c4b5fd;
+    background-color: rgba(121, 40, 202, 0.22);
+    border-color: rgba(139, 92, 246, 0.45);
+  }
+
+  .socialReticleCard:hover .socialArrow {
+    color: #c4b5fd;
+    transform: translate(2px, -2px);
+  }
+
+  .socialReticleCard:hover .reticleShine {
+    opacity: 1;
+  }
+
+  .socialReticleCard:hover .reticleTiles {
+    opacity: 1;
+    transition-delay: 0.08s;
+  }
+
+  .socialReticleCard:hover .reticleTile {
+    animation-name: socialReticlePulse;
+  }
+
+  .socialReticleCard:hover .reticleLine {
+    opacity: 1;
+  }
+
+  .socialReticleCard:hover .reticleLine::before {
+    transform: scaleX(1);
+  }
+
+  .socialReticleCard:hover .reticleLine::after {
+    transform: scaleY(1);
+  }
+
+  .saveContactBtn:hover:not(:disabled) {
+    box-shadow:
+      0 10px 30px rgba(139, 92, 246, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+  }
+
+  .exchangeContactBtn:hover {
+    border-color: rgba(139, 92, 246, 0.55);
+    background-color: rgba(46, 16, 101, 0.3);
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.5),
+      0 0 20px rgba(121, 40, 202, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .qrCopy:hover {
+    color: #ffffff;
+    background: rgba(46, 16, 101, 0.3);
+    border-color: rgba(139, 92, 246, 0.45);
+  }
+
+  .legalFooter a:hover {
+    color: #cbd5e1;
+  }
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktopHeroPanel,
+  .topBar,
+  .avatarStage,
+  .identityBlock,
+  .quickActions,
+  .aboutCard,
+  .socialSection,
+  .bottomArea,
+  .ctaGroup,
+  .glowTop,
+  .glowBottom,
+  .glowCenter {
+    animation: none;
+  }
+}

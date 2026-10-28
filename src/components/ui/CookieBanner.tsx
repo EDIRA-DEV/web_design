@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/i18n';
 import styles from './CookieBanner.module.css';
@@ -15,6 +16,9 @@ const STORAGE_KEY = 'edira_cookie_consent';
 
 export function CookieBanner() {
   const { lang } = useLang();
+  const pathname = usePathname();
+  const isDigitalCardRoute =
+    pathname?.startsWith('/card/') || pathname?.startsWith('/c/');
   const [isVisible, setIsVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -105,7 +109,7 @@ export function CookieBanner() {
     }));
   };
 
-  if (!isVisible) return null;
+  if (!isVisible || isDigitalCardRoute) return null;
 
   const t = {
     es: {

@@ -59,51 +59,64 @@
    ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .glowOrb {
-    width: 80vw;
-    height: 80vw;
-    filter: blur(90px);
-    animation: organicMobilePulse 14s ease-in-out infinite alternate;
+    width: 85vw;
+    height: 85vw;
+    background: radial-gradient(
+      circle at center,
+      rgba(139, 92, 246, 0.48) 0%,
+      rgba(124, 58, 237, 0.34) 38%,
+      rgba(109, 40, 217, 0.16) 65%,
+      transparent 82%
+    );
+    filter: blur(58px);
+    animation: organicMobilePulse 7s ease-in-out infinite alternate;
   }
 
   .secondaryOrb {
-    width: 60vw;
-    height: 60vw;
-    filter: blur(75px);
-    animation: secondaryMobilePulse 18s ease-in-out infinite alternate;
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(
+      circle at center,
+      rgba(168, 85, 247, 0.42) 0%,
+      rgba(124, 58, 237, 0.24) 45%,
+      transparent 78%
+    );
+    filter: blur(50px);
+    animation: secondaryMobilePulse 9s ease-in-out infinite alternate;
   }
 }
 
 @keyframes organicMobilePulse {
   0% {
-    transform: translate3d(5vw, 15vh, 0) scale(0.92);
-    opacity: 0.65;
+    transform: translate3d(-25vw, -5vh, 0) scale(0.9);
+    opacity: 0.78;
   }
-  35% {
-    transform: translate3d(35vw, 35vh, 0) scale(1.12);
-    opacity: 0.95;
+  33% {
+    transform: translate3d(45vw, 25vh, 0) scale(1.18);
+    opacity: 1;
   }
-  70% {
-    transform: translate3d(15vw, 65vh, 0) scale(0.96);
-    opacity: 0.75;
+  66% {
+    transform: translate3d(-15vw, 58vh, 0) scale(0.95);
+    opacity: 0.85;
   }
   100% {
-    transform: translate3d(40vw, 45vh, 0) scale(1.15);
-    opacity: 0.88;
+    transform: translate3d(40vw, 72vh, 0) scale(1.15);
+    opacity: 0.95;
   }
 }
 
 @keyframes secondaryMobilePulse {
   0% {
-    transform: translate3d(45vw, 40vh, 0) scale(1.1);
-    opacity: 0.55;
+    transform: translate3d(48vw, 68vh, 0) scale(1.12);
+    opacity: 0.72;
   }
   50% {
-    transform: translate3d(10vw, 20vh, 0) scale(0.9);
-    opacity: 0.8;
+    transform: translate3d(-20vw, 18vh, 0) scale(0.88);
+    opacity: 0.95;
   }
   100% {
-    transform: translate3d(30vw, 60vh, 0) scale(1.05);
-    opacity: 0.6;
+    transform: translate3d(35vw, -8vh, 0) scale(1.1);
+    opacity: 0.8;
   }
 }
 
