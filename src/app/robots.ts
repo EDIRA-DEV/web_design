@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/c/', '/card/'],
     },
     sitemap: 'https://edira.dev/sitemap.xml',
   };

@@ -27,9 +27,22 @@ export async function generateMetadata({
   if (!profile) {
     return {
       title: 'Tarjeta no encontrada | EDIRA',
-      robots: { index: false, follow: false },
+      robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {
+          index: false,
+          follow: false,
+          noimageindex: true,
+        },
+      },
     };
   }
+
+  const avatarUrl = profile.avatar.startsWith('http')
+    ? profile.avatar
+    : `${profile.website}${profile.avatar}`;
 
   return {
     title: `${profile.name} — ${profile.role} | ${profile.company}`,
@@ -40,10 +53,33 @@ export async function generateMetadata({
       url: `${profile.website}/card/${profile.slug}`,
       siteName: profile.company,
       type: 'profile',
+      images: [
+        {
+          url: avatarUrl,
+          width: 800,
+          height: 800,
+          alt: `${profile.name} — ${profile.role} | ${profile.company}`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary',
+      title: `${profile.name} — ${profile.role} | ${profile.company}`,
+      description: `Conecta con ${profile.name}, ${profile.role} en ${profile.company}.`,
+      images: [avatarUrl],
     },
     robots: {
       index: false,
       follow: false,
+      nocache: true,
+      googleBot: {
+        index: false,
+        follow: false,
+        noimageindex: true,
+      },
+    },
+    other: {
+      robots: 'noindex, nofollow, noarchive, nosnippet',
     },
   };
 }

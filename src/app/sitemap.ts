@@ -1,5 +1,10 @@
 import type { MetadataRoute } from 'next';
 
+/**
+ * EDIRA — Official Public Sitemap
+ * Note: Corporate digital business cards (`/c/*` and `/card/*`) are deliberately
+ * excluded to preserve executive privacy and prevent search engine indexing.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://edira.dev';
 
