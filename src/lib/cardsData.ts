@@ -98,7 +98,7 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     phoneRaw: '+524421071357',
     whatsapp: '524421071357',
     email: 'esilva@edira.dev',
-    avatar: '/images/cards/Retrato_Lalo.png',
+    avatar: '/images/cards/eduardo-silva.png',
   },
   {
     slug: 'diego-gonzalez',
@@ -112,7 +112,7 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     phoneRaw: '+524422006551',
     whatsapp: '524422006551',
     email: 'dgonzalez@edira.dev',
-    avatar: '/images/cards/Retrato_Diego.png',
+    avatar: '/images/cards/diego-gonzalez.png',
   },
   {
     slug: 'maria-teresa-silva',
@@ -126,7 +126,7 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     phoneRaw: '+524424234792',
     whatsapp: '524424234792',
     email: 'rrhh@edira.dev',
-    avatar: '/images/cards/Retrato_Maria.png',
+    avatar: '/images/cards/teresa-silva.png',
   },
 ];
 
