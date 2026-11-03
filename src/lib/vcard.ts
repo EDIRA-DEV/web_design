@@ -1,15 +1,16 @@
 /**
  * EDIRA — vCard 3.0 (.vcf) Generator & Downloader
- * Phase 1: Supports in-memory <canvas> JPEG resizing (max 300x300, 0.8 quality)
- * with graceful fallback if the avatar is an unavailable placeholder or fails to load.
+ * Supports 400x400 <canvas> JPEG rendering with:
+ * - Solid #fefefe backdrop + automatic bust crop (matching ProfileAvatar CSS) when portrait PNG loads
+ * - Automatic dark EDIRA purple gradient + white initials monogram fallback when a card has no photo
  */
 
 import type { CardProfile } from './cardsData';
-import { EDIRA_CORPORATE_DATA } from './cardsData';
+import { EDIRA_CORPORATE_DATA, getProfileInitials } from './cardsData';
 
-const DEFAULT_MAX_AVATAR_SIZE = 300;
-const DEFAULT_JPEG_QUALITY = 0.8;
-const IMAGE_LOAD_TIMEOUT_MS = 4000;
+const DEFAULT_AVATAR_CANVAS_SIZE = 400;
+const DEFAULT_JPEG_QUALITY = 0.85;
+const IMAGE_LOAD_TIMEOUT_MS = 4500;
 
 /**
  * Escapes special characters in vCard 3.0 text fields according to RFC 2426.
@@ -25,7 +26,9 @@ function escapeVCardValue(value: string): string {
 /**
  * Extracts structured family name (lastName) and given name (firstName) for the vCard `N` property.
  */
-function getStructuredName(profile: Pick<CardProfile, 'name'> & Partial<Pick<CardProfile, 'firstName' | 'lastName'>>): {
+function getStructuredName(
+  profile: Pick<CardProfile, 'name'> & Partial<Pick<CardProfile, 'firstName' | 'lastName'>>
+): {
   firstName: string;
   lastName: string;
 } {
@@ -50,20 +53,97 @@ function getStructuredName(profile: Pick<CardProfile, 'name'> & Partial<Pick<Car
 }
 
 /**
- * Attempts to load `avatarUrl` in the browser, resize it in memory on a `<canvas>`
- * to at most `maxSize x maxSize` (300x300px) as JPEG (`quality = 0.8`), and return
- * the raw Base64 payload without the `data:image/jpeg;base64,` prefix.
- *
- * Returns `null` if running on the server, if the image is a missing placeholder,
- * or if loading/encoding fails for any reason.
+ * Extracts raw Base64 payload from a canvas JPEG data URL.
+ */
+function extractJpegBase64(canvas: HTMLCanvasElement, quality: number): string | null {
+  const dataUrl = canvas.toDataURL('image/jpeg', quality);
+  const prefix = 'data:image/jpeg;base64,';
+  if (!dataUrl || !dataUrl.startsWith(prefix)) {
+    return null;
+  }
+  const base64 = dataUrl.slice(prefix.length).trim();
+  return base64.length > 0 ? base64 : null;
+}
+
+/**
+ * Renders the fallback EDIRA dark purple gradient + white initials monogram onto a 400x400 <canvas>
+ * when a card does not have a portrait photo or when loading the image fails.
+ */
+export function renderInitialsFallbackBase64(
+  initials: string,
+  size: number = DEFAULT_AVATAR_CANVAS_SIZE,
+  quality: number = DEFAULT_JPEG_QUALITY
+): string | null {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
+
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+
+    // 1. Base linear gradient (#171226 -> #0b0914)
+    const baseGrad = ctx.createLinearGradient(0, 0, size, size);
+    baseGrad.addColorStop(0, '#171226');
+    baseGrad.addColorStop(1, '#0b0914');
+    ctx.fillStyle = baseGrad;
+    ctx.fillRect(0, 0, size, size);
+
+    // 2. Radial purple glow at (30%, 20%)
+    const glowGrad = ctx.createRadialGradient(
+      size * 0.3,
+      size * 0.2,
+      0,
+      size * 0.3,
+      size * 0.2,
+      size * 0.75
+    );
+    glowGrad.addColorStop(0, 'rgba(168, 85, 247, 0.36)');
+    glowGrad.addColorStop(0.6, 'rgba(124, 58, 237, 0.12)');
+    glowGrad.addColorStop(1, 'rgba(11, 9, 20, 0)');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(0, 0, size, size);
+
+    // 3. White monogram initials
+    const fontSize = Math.round(size * 0.36);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `600 ${fontSize}px Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText((initials || 'ED').slice(0, 3).toUpperCase(), size / 2, size / 2 + size * 0.015);
+
+    return extractJpegBase64(canvas, quality);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Loads `avatarUrl` in the browser and renders a 400x400px JPEG on a `<canvas>`:
+ * - First fills the entire 400x400 canvas with solid `#fefefe` (preventing transparent PNG pixels from turning black).
+ * - Applies the exact bust crop (`object-fit: cover`, `object-position: 50% 14%`, `scale(1.38)` at `origin 50% 22%`)
+ *   so iOS/Android contacts show a close-up head-and-shoulders portrait on `#fefefe`.
+ * - If `avatarUrl` is undefined or fails to load, falls back to the dark EDIRA gradient + white initials when `fallbackInitials` is provided.
  */
 export async function loadAvatarAsBase64(
   avatarUrl?: string,
-  maxSize: number = DEFAULT_MAX_AVATAR_SIZE,
-  quality: number = DEFAULT_JPEG_QUALITY
+  size: number = DEFAULT_AVATAR_CANVAS_SIZE,
+  quality: number = DEFAULT_JPEG_QUALITY,
+  fallbackInitials?: string
 ): Promise<string | null> {
-  if (typeof window === 'undefined' || typeof document === 'undefined' || !avatarUrl) {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
     return null;
+  }
+
+  const fallback = () =>
+    fallbackInitials ? renderInitialsFallbackBase64(fallbackInitials, size, quality) : null;
+
+  if (!avatarUrl) {
+    return fallback();
   }
 
   return new Promise<string | null>((resolve) => {
@@ -76,7 +156,7 @@ export async function loadAvatarAsBase64(
     };
 
     const timeoutId = window.setTimeout(() => {
-      finish(null);
+      finish(fallback());
     }, IMAGE_LOAD_TIMEOUT_MS);
 
     try {
@@ -90,61 +170,64 @@ export async function loadAvatarAsBase64(
           const naturalHeight = img.naturalHeight || img.height;
 
           if (!naturalWidth || !naturalHeight) {
-            finish(null);
+            finish(fallback());
             return;
-          }
-
-          let targetWidth = naturalWidth;
-          let targetHeight = naturalHeight;
-
-          if (targetWidth > maxSize || targetHeight > maxSize) {
-            if (targetWidth >= targetHeight) {
-              targetHeight = Math.max(1, Math.round((targetHeight * maxSize) / targetWidth));
-              targetWidth = maxSize;
-            } else {
-              targetWidth = Math.max(1, Math.round((targetWidth * maxSize) / targetHeight));
-              targetHeight = maxSize;
-            }
           }
 
           const canvas = document.createElement('canvas');
-          canvas.width = targetWidth;
-          canvas.height = targetHeight;
+          canvas.width = size;
+          canvas.height = size;
 
           const ctx = canvas.getContext('2d');
           if (!ctx) {
-            finish(null);
+            finish(fallback());
             return;
           }
 
-          // Fill solid dark background before drawing in case of transparent source PNG/WebP
-          ctx.fillStyle = '#0a0a0a';
-          ctx.fillRect(0, 0, targetWidth, targetHeight);
-          ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+          // 1. Solid #fefefe background across the entire 400x400 canvas
+          ctx.fillStyle = '#fefefe';
+          ctx.fillRect(0, 0, size, size);
 
-          const dataUrl = canvas.toDataURL('image/jpeg', quality);
-          const prefix = 'data:image/jpeg;base64,';
-          if (!dataUrl || !dataUrl.startsWith(prefix)) {
-            finish(null);
-            return;
-          }
+          // 2. Bust crop matching ProfileAvatar CSS:
+          //    object-fit: cover; object-position: 50% 14%;
+          //    transform: scale(1.38); transform-origin: 50% 22%;
+          ctx.save();
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
 
-          const base64 = dataUrl.slice(prefix.length).trim();
-          finish(base64.length > 0 ? base64 : null);
+          const originX = size * 0.5;
+          const originY = size * 0.22;
+          const zoom = 1.38;
+
+          ctx.translate(originX, originY);
+          ctx.scale(zoom, zoom);
+          ctx.translate(-originX, -originY);
+
+          const coverScale = Math.max(size / naturalWidth, size / naturalHeight);
+          const drawnWidth = naturalWidth * coverScale;
+          const drawnHeight = naturalHeight * coverScale;
+          const offsetX = (size - drawnWidth) * 0.5;
+          const offsetY = (size - drawnHeight) * 0.14;
+
+          ctx.drawImage(img, offsetX, offsetY, drawnWidth, drawnHeight);
+          ctx.restore();
+
+          const base64 = extractJpegBase64(canvas, quality);
+          finish(base64 ?? fallback());
         } catch {
-          finish(null);
+          finish(fallback());
         }
       };
 
       img.onerror = () => {
         window.clearTimeout(timeoutId);
-        finish(null);
+        finish(fallback());
       };
 
       img.src = avatarUrl;
     } catch {
       window.clearTimeout(timeoutId);
-      finish(null);
+      finish(fallback());
     }
   });
 }
@@ -183,13 +266,16 @@ export function generateVCardString(
 
 /**
  * Generates and downloads on-the-fly a `.vcf` (vCard 3.0) file for the given profile.
- * Never fails even if `profile.avatar` is a missing placeholder or fails to load.
+ * Renders the 400x400 bust portrait on `#fefefe` when `profile.avatar` loads,
+ * or falls back to the dark EDIRA purple monogram with the executive's initials.
  */
 export async function downloadVCard(profile: CardProfile): Promise<string> {
+  const initials = getProfileInitials(profile);
   const photoBase64 = await loadAvatarAsBase64(
     profile.avatar,
-    DEFAULT_MAX_AVATAR_SIZE,
-    DEFAULT_JPEG_QUALITY
+    DEFAULT_AVATAR_CANVAS_SIZE,
+    DEFAULT_JPEG_QUALITY,
+    initials
   );
 
   const vcfContent = generateVCardString(profile, photoBase64);
@@ -214,4 +300,3 @@ export async function downloadVCard(profile: CardProfile): Promise<string> {
 
   return vcfContent;
 }
-

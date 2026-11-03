@@ -40,9 +40,10 @@ export async function generateMetadata({
     };
   }
 
-  const avatarUrl = profile.avatar.startsWith('http')
-    ? profile.avatar
-    : `${profile.website}${profile.avatar}`;
+  const rawAvatar = profile.avatar || '/og-image.jpg';
+  const avatarUrl = rawAvatar.startsWith('http')
+    ? rawAvatar
+    : `${profile.website}${rawAvatar}`;
 
   return {
     title: `${profile.name} — ${profile.role} | ${profile.company}`,

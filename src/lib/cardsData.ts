@@ -24,7 +24,7 @@ export interface CardProfile {
   phoneRaw: string;
   whatsapp: string;
   email: string;
-  avatar: string;
+  avatar?: string;
   website: string;
   socials: CardSocials;
   /** Top-level convenience aliases for social links */
@@ -82,7 +82,7 @@ interface RawCardSeed {
   phoneRaw: string;
   whatsapp: string;
   email: string;
-  avatar: string;
+  avatar?: string;
 }
 
 const INITIAL_CARDS_SEED: RawCardSeed[] = [
@@ -93,11 +93,12 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     lastName: 'Silva',
     initials: 'ES',
     role: 'CEO',
+    bio: 'Founder of EDIRA | Bridging business strategy and technology to transform challenges into opportunities through data, artificial intelligence, and digital innovation.',
     phoneDisplay: '+52 (442) 107 1357',
     phoneRaw: '+524421071357',
     whatsapp: '524421071357',
     email: 'esilva@edira.dev',
-    avatar: '/images/cards/eduardo-silva-placeholder.jpg',
+    avatar: '/images/cards/Retrato_Lalo.png',
   },
   {
     slug: 'diego-gonzalez',
@@ -106,24 +107,26 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     lastName: 'González',
     initials: 'DG',
     role: 'CFO',
+    bio: 'Co-Founder of EDIRA | Driving business growth through financial leadership, strategic planning, operational excellence, and project management.',
     phoneDisplay: '+52 (442) 200 6551',
     phoneRaw: '+524422006551',
     whatsapp: '524422006551',
     email: 'dgonzalez@edira.dev',
-    avatar: '/images/cards/diego-gonzalez-placeholder.jpg',
+    avatar: '/images/cards/Retrato_Diego.png',
   },
   {
     slug: 'maria-teresa-silva',
-    name: 'Maria Teresa Silva',
-    firstName: 'Maria Teresa',
+    name: 'Teresa Silva',
+    firstName: 'Teresa',
     lastName: 'Silva',
-    initials: 'MS',
+    initials: 'TS',
     role: 'HR Manager',
+    bio: 'Co-Founder of EDIRA | Building a people-first organization through talent strategy, professional development, and a culture of collaboration, innovation, and growth.',
     phoneDisplay: '+52 (442) 423 4792',
     phoneRaw: '+524424234792',
     whatsapp: '524424234792',
     email: 'rrhh@edira.dev',
-    avatar: '/images/cards/maria-teresa-silva-placeholder.jpg',
+    avatar: '/images/cards/Retrato_Maria.png',
   },
 ];
 
@@ -142,9 +145,11 @@ export const CARDS_DATA: CardProfile[] = INITIAL_CARDS_SEED.map((seed) => ({
   facebook: EDIRA_CORPORATE_DATA.socials.facebook,
 }));
 
-export const CARDS_BY_SLUG: Record<string, CardProfile> = Object.fromEntries(
-  CARDS_DATA.map((card) => [card.slug, card])
-);
+export const CARDS_BY_SLUG: Record<string, CardProfile> = {
+  ...Object.fromEntries(CARDS_DATA.map((card) => [card.slug, card])),
+  // Alias to support /card/teresa-silva in addition to /card/maria-teresa-silva
+  'teresa-silva': CARDS_DATA.find((c) => c.slug === 'maria-teresa-silva')!,
+};
 
 /**
  * Retrieve a card profile by its URL slug.
@@ -158,7 +163,7 @@ export function getCardBySlug(slug: string): CardProfile | undefined {
  * Retrieve all registered card slugs (used by Next.js generateStaticParams).
  */
 export function getAllCardSlugs(): string[] {
-  return CARDS_DATA.map((card) => card.slug);
+  return [...CARDS_DATA.map((card) => card.slug), 'teresa-silva'];
 }
 
 /**
