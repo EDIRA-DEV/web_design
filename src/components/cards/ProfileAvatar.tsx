@@ -44,7 +44,7 @@ export function ProfileAvatar({ src, name, initials }: ProfileAvatarProps) {
   const hasPhoto = Boolean(src) && status === 'loaded';
 
   return (
-    <div className={styles.avatarRing}>
+    <div className={styles.avatarRing} data-has-photo={hasPhoto ? 'true' : 'false'}>
       <div className={styles.avatar} data-has-photo={hasPhoto ? 'true' : 'false'}>
         <span className={styles.avatarInitials} aria-hidden="true">
           {initials}

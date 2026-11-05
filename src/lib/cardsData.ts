@@ -115,12 +115,12 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     avatar: '/images/cards/diego-gonzalez.png',
   },
   {
-    slug: 'maria-teresa-silva',
+    slug: 'teresa-silva',
     name: 'Teresa Silva',
     firstName: 'Teresa',
     lastName: 'Silva',
     initials: 'TS',
-    role: 'HR Manager',
+    role: 'CHRO',
     bio: 'Co-Founder of EDIRA | Building a people-first organization through talent strategy, professional development, and a culture of collaboration, innovation, and growth.',
     phoneDisplay: '+52 (442) 423 4792',
     phoneRaw: '+524424234792',
@@ -145,11 +145,9 @@ export const CARDS_DATA: CardProfile[] = INITIAL_CARDS_SEED.map((seed) => ({
   facebook: EDIRA_CORPORATE_DATA.socials.facebook,
 }));
 
-export const CARDS_BY_SLUG: Record<string, CardProfile> = {
-  ...Object.fromEntries(CARDS_DATA.map((card) => [card.slug, card])),
-  // Alias to support /card/teresa-silva in addition to /card/maria-teresa-silva
-  'teresa-silva': CARDS_DATA.find((c) => c.slug === 'maria-teresa-silva')!,
-};
+export const CARDS_BY_SLUG: Record<string, CardProfile> = Object.fromEntries(
+  CARDS_DATA.map((card) => [card.slug, card])
+);
 
 /**
  * Retrieve a card profile by its URL slug.
@@ -163,7 +161,7 @@ export function getCardBySlug(slug: string): CardProfile | undefined {
  * Retrieve all registered card slugs (used by Next.js generateStaticParams).
  */
 export function getAllCardSlugs(): string[] {
-  return [...CARDS_DATA.map((card) => card.slug), 'teresa-silva'];
+  return CARDS_DATA.map((card) => card.slug);
 }
 
 /**

@@ -146,13 +146,17 @@ export interface DigitalCardProps {
 export function DigitalCard({ profile }: DigitalCardProps) {
   const initials = getProfileInitials(profile);
 
-  /* Public card URL — dynamically resolved from current route on the client */
-  const [cardUrl, setCardUrl] = useState<string>(`${profile.website}/card/${profile.slug}`);
+  /* Public card URL — canonical production URL for QR & print, current route for copy/share */
+  const canonicalCardUrl = `${profile.website}/card/${profile.slug}`;
+  const [cardUrl, setCardUrl] = useState<string>(canonicalCardUrl);
   useEffect(() => {
-    setCardUrl(`${window.location.origin}${window.location.pathname}`);
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      setCardUrl(`${window.location.origin}${window.location.pathname}`);
+    }
   }, []);
   const shareUrl = `${cardUrl}?ref=share`;
-  const qrUrl = `${cardUrl}?ref=qr`;
+  const qrUrl = `${canonicalCardUrl}?ref=qr`;
+  const [useFallbackSvgQr, setUseFallbackSvgQr] = useState(false);
 
   /* Subtle mobile reticle wave highlight on initial view */
   const [activeSocialIndex, setActiveSocialIndex] = useState<number | null>(null);
@@ -256,6 +260,45 @@ export function DigitalCard({ profile }: DigitalCardProps) {
   const smsHref = `sms:${profile.phoneRaw}`;
   const websiteLabel = profile.website.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
+  const quickContactItems = [
+    {
+      label: 'Call',
+      sublabel: profile.phoneDisplay,
+      href: `tel:${profile.phoneRaw}`,
+      ariaLabel: `Call ${profile.name} (${profile.phoneDisplay})`,
+      title: profile.phoneDisplay,
+      external: false,
+      icon: <Phone size={19} strokeWidth={1.85} aria-hidden="true" />,
+    },
+    {
+      label: 'Email',
+      sublabel: profile.email,
+      href: `mailto:${profile.email}`,
+      ariaLabel: `Email ${profile.email}`,
+      title: profile.email,
+      external: false,
+      icon: <Mail size={19} strokeWidth={1.85} aria-hidden="true" />,
+    },
+    {
+      label: 'Message',
+      sublabel: 'Send SMS',
+      href: smsHref,
+      ariaLabel: `Send SMS to ${profile.name}`,
+      title: 'Send SMS',
+      external: false,
+      icon: <MessageSquare size={19} strokeWidth={1.85} aria-hidden="true" />,
+    },
+    {
+      label: 'WhatsApp',
+      sublabel: 'Contact me',
+      href: whatsappHref,
+      ariaLabel: `Message ${profile.name} on WhatsApp`,
+      title: 'WhatsApp',
+      external: true,
+      icon: <WhatsAppIcon />,
+    },
+  ];
+
   const socialItems = [
     {
       label: 'LinkedIn',
@@ -347,45 +390,53 @@ export function DigitalCard({ profile }: DigitalCardProps) {
             </p>
           </section>
 
-          {/* 4. Circular Quick-Contact Buttons Row (Under role on Mobile, Full-width bar below Hero Card on Desktop) */}
+          {/* 4. Circular Quick-Contact Buttons Row on Mobile (< 1024px) / 4 Bento Cards on Desktop (>= 1024px) */}
           <nav className={styles.quickActions} style={stagger(2)} aria-label="Quick direct contact">
-            <a
-              href={`tel:${profile.phoneRaw}`}
-              className={styles.circleBtn}
-              aria-label={`Call ${profile.name} (${profile.phoneDisplay})`}
-              title={profile.phoneDisplay}
-            >
-              <Phone size={19} strokeWidth={1.85} aria-hidden="true" />
-            </a>
+            {quickContactItems.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+                className={`${styles.circleBtn} ${styles.quickActionCard}`}
+                aria-label={item.ariaLabel}
+                title={item.title}
+              >
+                {/* Conic Violet Shine Layer (Desktop >= 1024px Bento Card) */}
+                <span
+                  className={`${styles.reticleShine} ${styles.desktopBentoDecor}`}
+                  aria-hidden="true"
+                >
+                  <span className={styles.reticleOrb} />
+                </span>
 
-            <a
-              href={`mailto:${profile.email}`}
-              className={styles.circleBtn}
-              aria-label={`Email ${profile.email}`}
-              title={profile.email}
-            >
-              <Mail size={19} strokeWidth={1.85} aria-hidden="true" />
-            </a>
+                {/* Reticle Grid & Pulsing Tiles (Desktop >= 1024px Bento Card) */}
+                <span
+                  className={`${styles.reticleMesh} ${styles.desktopBentoDecor}`}
+                  aria-hidden="true"
+                >
+                  <span className={styles.reticleTiles}>
+                    <span className={`${styles.reticleTile} ${styles.rTile1}`} />
+                    <span className={`${styles.reticleTile} ${styles.rTile2}`} />
+                    <span className={`${styles.reticleTile} ${styles.rTile3}`} />
+                    <span className={`${styles.reticleTile} ${styles.rTile4}`} />
+                    <span className={`${styles.reticleTile} ${styles.rTile5}`} />
+                    <span className={`${styles.reticleTile} ${styles.rTile6}`} />
+                  </span>
+                  <span className={`${styles.reticleLine} ${styles.rLine1}`} />
+                  <span className={`${styles.reticleLine} ${styles.rLine2}`} />
+                </span>
 
-            <a
-              href={smsHref}
-              className={styles.circleBtn}
-              aria-label={`Send SMS to ${profile.name}`}
-              title="Send SMS"
-            >
-              <MessageSquare size={19} strokeWidth={1.85} aria-hidden="true" />
-            </a>
+                <span className={styles.quickActionIcon} aria-hidden="true">
+                  {item.icon}
+                </span>
 
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.circleBtn}
-              aria-label={`Message ${profile.name} on WhatsApp`}
-              title="WhatsApp"
-            >
-              <WhatsAppIcon />
-            </a>
+                <span className={styles.quickActionMeta}>
+                  <span className={styles.quickActionTitle}>{item.label}</span>
+                  <span className={styles.quickActionSub}>{item.sublabel}</span>
+                </span>
+              </a>
+            ))}
           </nav>
 
           {/* 5. "About Me" Block (English — Floating card on Mobile, Left column inside Hero Card on Desktop) */}
@@ -542,18 +593,29 @@ export function DigitalCard({ profile }: DigitalCardProps) {
             Digital business card for {profile.name}
           </p>
           <div className={styles.qrTile}>
-            {isQrOpen && (
-              <QRCode
-                value={qrUrl}
-                size={216}
-                type="svg"
-                color="#0a0a0a"
-                bgColor="#ffffff"
-                errorLevel="M"
-                bordered={false}
-                style={{ padding: 0 }}
-              />
-            )}
+            {isQrOpen &&
+              (useFallbackSvgQr ? (
+                <QRCode
+                  value={qrUrl}
+                  size={216}
+                  type="svg"
+                  color="#0a0a0a"
+                  bgColor="#ffffff"
+                  errorLevel="M"
+                  bordered={false}
+                  style={{ padding: 0 }}
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={`/qr/${profile.slug}-qr.svg`}
+                  alt={`QR code for ${profile.name}`}
+                  width={216}
+                  height={216}
+                  className={styles.qrSvgImg}
+                  onError={() => setUseFallbackSvgQr(true)}
+                />
+              ))}
           </div>
           <button type="button" className={styles.qrCopy} onClick={() => copyLink(cardUrl)}>
             <span className={styles.qrUrl}>{cardUrl.replace(/^https?:\/\//, '')}</span>

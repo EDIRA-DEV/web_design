@@ -361,7 +361,7 @@
   color: #c4b5fd;
 }
 
-/* Quick Contact Circular Row */
+/* Quick Contact Circular Row (Mobile & Tablet Vertical < 1024px) */
 .quickActions {
   display: flex;
   align-items: center;
@@ -369,6 +369,17 @@
   gap: 0.875rem;
   margin-top: 1.25rem;
   margin-bottom: 0.25rem;
+}
+
+.quickActionIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktopBentoDecor,
+.quickActionMeta {
+  display: none;
 }
 
 /* ---------- "About Me" Floating Dark Block ---------- */
@@ -856,6 +867,12 @@
   white-space: nowrap;
 }
 
+.qrSvgImg {
+  display: block;
+  width: 216px;
+  height: 216px;
+}
+
 /* ---------- 4. Desktop Horizontal Layout Distribution (>= 768px) ---------- */
 @media (min-width: 768px) {
   .page {
@@ -1040,6 +1057,141 @@
   }
 }
 
+/* ---------- 4B. Desktop >= 1024px: Pop-Out Portrait Stage & 4 Bento Quick-Contact Cards ---------- */
+@media (min-width: 1024px) {
+  .topBar {
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .logo,
+  .topActions {
+    pointer-events: auto;
+  }
+
+  /* Span all 4 Hero rows so the portrait is truly centered vertically in the right panel */
+  .avatarStage {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1.5rem;
+  }
+
+  /* Transform Quick-Contact bar into 4-column Bento Grid matching Social Cards */
+  .quickActions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  /* Exact same card styling as .socialReticleCard */
+  .page a.quickActionCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: auto;
+    min-width: 0;
+    background-color: #0d0d12;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.125rem 0.875rem;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .page a.quickActionCard:active,
+  .page a.quickActionCard:focus,
+  .page a.quickActionCard:focus-visible {
+    border-color: rgba(168, 85, 247, 0.42) !important;
+    background-color: #0d0d12 !important;
+    box-shadow:
+      0 0 28px rgba(121, 40, 202, 0.18),
+      0 8px 28px rgba(0, 0, 0, 0.55) !important;
+    transform: translateY(-2px);
+  }
+
+  .desktopBentoDecor {
+    display: block;
+  }
+
+  /* Inner circular icon button inside the Bento card */
+  .quickActionIcon {
+    position: relative;
+    z-index: 2;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    background-color: rgba(13, 13, 18, 0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    color: #f8fafc;
+    margin-bottom: 0.625rem;
+    flex-shrink: 0;
+    transition:
+      border-color 0.3s ease,
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .quickActionMeta {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Exact same typography and weight as .socialLabel */
+  .quickActionTitle {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+
+  /* Discreet muted secondary subtitle with ellipsis for long emails */
+  .quickActionSub {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: var(--color-text-muted, #94a3b8);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 /* ---------- Hover States (Desktop Pointer Devices) ---------- */
 @media (hover: hover) and (pointer: fine) {
   /* /research FloatingActionDock exact Brand Primary Hover */
@@ -1129,6 +1281,53 @@
 
   .legalFooter a:hover {
     color: #cbd5e1;
+  }
+}
+
+/* Desktop (>= 1024px) Bento Quick-Contact Hover — identical to .socialReticleCard:hover */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .page a.quickActionCard:hover {
+    border-color: rgba(168, 85, 247, 0.42) !important;
+    background-color: #0d0d12 !important;
+    box-shadow:
+      0 0 30px rgba(121, 40, 202, 0.16),
+      0 8px 32px rgba(0, 0, 0, 0.55) !important;
+    transform: translateY(-2px);
+  }
+
+  .page a.quickActionCard:hover .quickActionIcon {
+    border-color: rgba(139, 92, 246, 0.65);
+    background-color: rgba(46, 16, 101, 0.42);
+    box-shadow:
+      0 8px 30px rgba(0, 0, 0, 0.6),
+      0 0 24px rgba(121, 40, 202, 0.5);
+    color: #ffffff;
+    transform: scale(1.06);
+  }
+
+  .page a.quickActionCard:hover .reticleShine {
+    opacity: 1;
+  }
+
+  .page a.quickActionCard:hover .reticleTiles {
+    opacity: 1;
+    transition-delay: 0.08s;
+  }
+
+  .page a.quickActionCard:hover .reticleTile {
+    animation-name: socialReticlePulse;
+  }
+
+  .page a.quickActionCard:hover .reticleLine {
+    opacity: 1;
+  }
+
+  .page a.quickActionCard:hover .reticleLine::before {
+    transform: scaleX(1);
+  }
+
+  .page a.quickActionCard:hover .reticleLine::after {
+    transform: scaleY(1);
   }
 }
 

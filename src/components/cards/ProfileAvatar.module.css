@@ -93,3 +93,69 @@
   }
 }
 
+/* Desktop Only (>= 1024px): 3D Pop-Out Half-Body Portrait over #fefefe Circle */
+@media (min-width: 1024px) {
+  .avatarRing[data-has-photo='true'] {
+    width: 220px;
+    height: 252px;
+    padding: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  /* Solid #fefefe circle + EDIRA violet ring in the lower ~87% (visual ~78% with head pop-out) */
+  .avatarRing[data-has-photo='true']::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 220px; /* exact 1:1 circle (220x220px) */
+    border-radius: 9999px;
+    border: 3px solid transparent;
+    background:
+      linear-gradient(#fefefe, #fefefe) padding-box,
+      linear-gradient(
+        145deg,
+        #a72ef4 0%,
+        rgba(139, 92, 246, 0.75) 50%,
+        #7c3aed 100%
+      ) border-box;
+    box-shadow:
+      0 22px 52px rgba(0, 0, 0, 0.72),
+      0 0 48px rgba(139, 92, 246, 0.4);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Open at the top so head/hair pop out right to top:0 (zero dead top space);
+     semicircular at the bottom to clip torso & crossed arms flush with the circle */
+  .avatar[data-has-photo='true'] {
+    position: absolute;
+    top: 0;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    width: auto;
+    height: auto;
+    border-radius: 0 0 9999px 9999px;
+    background: transparent;
+    background-color: transparent;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .avatar[data-has-photo='true'] .avatarImg {
+    inset: auto;
+    top: -36px;
+    left: -6%;
+    width: 112%;
+    height: auto;
+    object-fit: contain;
+    transform: none;
+  }
+}
+
