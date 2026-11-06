@@ -125,7 +125,7 @@ const INITIAL_CARDS_SEED: RawCardSeed[] = [
     phoneDisplay: '+52 442 423 4792',
     phoneRaw: '+524424234792',
     whatsapp: '524424234792',
-    email: 'rrhh@edira.dev',
+    email: 'humanresources@edira.dev',
     avatar: '/images/cards/teresa-silva.png',
   },
 ];
