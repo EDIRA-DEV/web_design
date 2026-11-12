@@ -29,6 +29,12 @@ const darkTheme = {
   }
 };
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 const TRACKING_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'gclid'] as const;
 
 export function captureTrackingParams(): void {
@@ -124,10 +130,8 @@ export function UniversalContactForm({
       });
 
       if (response.ok) {
-        if (typeof window !== 'undefined') {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: 'generate_lead',
+        if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
             form_location: formLocation,
           });
         }
