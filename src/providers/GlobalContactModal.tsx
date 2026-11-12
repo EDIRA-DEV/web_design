@@ -34,7 +34,7 @@ export function GlobalContactModal() {
         wrapClassName="glass-modal"
       >
         <div style={{ marginTop: '24px' }}>
-          <UniversalContactForm onSuccess={closeModal} />
+          <UniversalContactForm onSuccess={closeModal} formLocation="contact_modal" />
         </div>
       </Modal>
     </ConfigProvider>

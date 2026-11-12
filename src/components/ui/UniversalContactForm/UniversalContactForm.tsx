@@ -29,11 +29,22 @@ const darkTheme = {
   }
 };
 
-interface UniversalContactFormProps {
-  onSuccess?: () => void;
+declare global {
+  interface Window {
+    dataLayer?: Object[];
+    gtag?: (...args: unknown[]) => void;
+  }
 }
 
-export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
+interface UniversalContactFormProps {
+  onSuccess?: () => void;
+  formLocation?: 'contact_modal' | 'footer_form';
+}
+
+export function UniversalContactForm({
+  onSuccess,
+  formLocation = 'footer_form',
+}: UniversalContactFormProps) {
   const { t } = useLang();
   const { notification } = App.useApp();
   const [form] = Form.useForm();
@@ -52,6 +63,18 @@ export function UniversalContactForm({ onSuccess }: UniversalContactFormProps) {
       });
 
       if (response.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: 'generate_lead',
+          form_location: formLocation,
+        });
+
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'generate_lead', {
+            form_location: formLocation,
+          });
+        }
+
         notification.success({
           message: t('form.success.title'),
           description: t('form.success.desc'),

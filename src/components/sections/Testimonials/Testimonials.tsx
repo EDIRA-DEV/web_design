@@ -20,7 +20,7 @@ export function Testimonials() {
           </p>
         </div>
 
-        <UniversalContactForm />
+        <UniversalContactForm formLocation="footer_form" />
       </div>
     </section>
   );
