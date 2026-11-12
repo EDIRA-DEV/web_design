@@ -97,6 +97,23 @@ export default function RootLayout({
           </>
         )}
 
+        {/* Google Tag / GTM */}
+        <Script
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-MLBGBTHX"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="gtm-gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            `,
+          }}
+        />
+
         {/* Google Analytics 4 — loads after interactive, does not block render */}
         <GoogleAnalytics gaId="G-0XJMCV552V" />
       </body>
