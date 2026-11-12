@@ -32,7 +32,6 @@ const darkTheme = {
 declare global {
   interface Window {
     dataLayer?: Object[];
-    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -68,12 +67,6 @@ export function UniversalContactForm({
           event: 'generate_lead',
           form_location: formLocation,
         });
-
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'generate_lead', {
-            form_location: formLocation,
-          });
-        }
 
         notification.success({
           message: t('form.success.title'),
