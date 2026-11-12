@@ -1,7 +1,7 @@
 'use client';
 
 import { Form, Input, ConfigProvider, theme, App, Checkbox } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLang } from '@/lib/i18n';
 import styles from './UniversalContactForm.module.css';
 
@@ -29,9 +29,60 @@ const darkTheme = {
   }
 };
 
-declare global {
-  interface Window {
-    dataLayer?: Object[];
+const TRACKING_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'gclid'] as const;
+
+export function captureTrackingParams(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    TRACKING_KEYS.forEach((key) => {
+      const value = params.get(key);
+      if (value) {
+        sessionStorage.setItem(key, value);
+      }
+    });
+    if (!sessionStorage.getItem('landing_url')) {
+      sessionStorage.setItem('landing_url', window.location.href);
+    }
+  } catch {
+    // Ignore sessionStorage errors in restricted environments
+  }
+}
+
+function getTrackingParams() {
+  if (typeof window === 'undefined') {
+    return {
+      utm_source: 'directo_u_organico',
+      utm_medium: '',
+      utm_campaign: '',
+      utm_term: '',
+      gclid: '',
+      landing_url: '',
+    };
+  }
+
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const getParam = (key: (typeof TRACKING_KEYS)[number], fallback = '') =>
+      params.get(key) || sessionStorage.getItem(key) || fallback;
+
+    return {
+      utm_source: getParam('utm_source', 'directo_u_organico'),
+      utm_medium: getParam('utm_medium', ''),
+      utm_campaign: getParam('utm_campaign', ''),
+      utm_term: getParam('utm_term', ''),
+      gclid: getParam('gclid', ''),
+      landing_url: sessionStorage.getItem('landing_url') || window.location.href,
+    };
+  } catch {
+    return {
+      utm_source: 'directo_u_organico',
+      utm_medium: '',
+      utm_campaign: '',
+      utm_term: '',
+      gclid: '',
+      landing_url: window.location.href,
+    };
   }
 }
 
@@ -49,24 +100,37 @@ export function UniversalContactForm({
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
-  const onFinish = async (values: any) => {
+  useEffect(() => {
+    captureTrackingParams();
+  }, []);
+
+  const onFinish = async (values: Record<string, unknown>) => {
     setLoading(true);
     try {
+      const trackingParams = getTrackingParams();
+      const payload = {
+        ...values,
+        ...trackingParams,
+        form_location: formLocation,
+      };
+
       const response = await fetch('https://formspree.io/f/mgorobll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'generate_lead',
-          form_location: formLocation,
-        });
+        if (typeof window !== 'undefined') {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'generate_lead',
+            form_location: formLocation,
+          });
+        }
 
         notification.success({
           message: t('form.success.title'),
@@ -78,7 +142,7 @@ export function UniversalContactForm({
       } else {
         throw new Error('Failed to send message');
       }
-    } catch (error) {
+    } catch {
       notification.error({
         message: t('form.error.title'),
         description: t('form.error.desc'),

@@ -1,9 +1,12 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Modal, ConfigProvider, theme } from 'antd';
 import { useContactModal } from './ContactModalContext';
-import { UniversalContactForm } from '../components/ui/UniversalContactForm/UniversalContactForm';
-import { useLang } from '@/lib/i18n';
+import {
+  UniversalContactForm,
+  captureTrackingParams,
+} from '../components/ui/UniversalContactForm/UniversalContactForm';
 
 // Dark theme setup for Modal to match UniversalContactForm
 const modalTheme = {
@@ -18,7 +21,10 @@ const modalTheme = {
 
 export function GlobalContactModal() {
   const { isOpen, closeModal } = useContactModal();
-  const { t } = useLang();
+
+  useEffect(() => {
+    captureTrackingParams();
+  }, []);
 
   return (
     <ConfigProvider theme={modalTheme}>
