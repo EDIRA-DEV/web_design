@@ -141,6 +141,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'form.success.desc': 'Your request has been successfully submitted. We will contact you shortly.',
     'form.error.title': 'Submission Error',
     'form.error.desc': 'There was an error submitting your request. Please try again.',
+    'modal.title': 'Get In Touch',
 
     // Services Hero
     'servicesHero.prehead': 'Built for Complexity.',
@@ -478,6 +479,7 @@ export const translations: Record<Lang, Record<string, string>> = {
     'form.success.desc': 'Tu solicitud ha sido enviada con éxito. Nos pondremos en contacto contigo a la brevedad.',
     'form.error.title': 'Error de envío',
     'form.error.desc': 'Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.',
+    'modal.title': 'Ponte en Contacto',
 
     // Services Hero
     'servicesHero.prehead': 'Construido para la Complejidad.',

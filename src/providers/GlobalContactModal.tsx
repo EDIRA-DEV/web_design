@@ -7,6 +7,7 @@ import {
   UniversalContactForm,
   captureTrackingParams,
 } from '../components/ui/UniversalContactForm/UniversalContactForm';
+import { useLang } from '@/lib/i18n';
 
 // Dark theme setup for Modal to match UniversalContactForm
 const modalTheme = {
@@ -21,6 +22,7 @@ const modalTheme = {
 
 export function GlobalContactModal() {
   const { isOpen, closeModal } = useContactModal();
+  const { t } = useLang();
 
   useEffect(() => {
     captureTrackingParams();
@@ -29,7 +31,7 @@ export function GlobalContactModal() {
   return (
     <ConfigProvider theme={modalTheme}>
       <Modal
-        title={<span style={{ fontSize: '1.5rem', fontWeight: 600 }}>Get In Touch</span>}
+        title={<span style={{ fontSize: '1.5rem', fontWeight: 600 }}>{t('modal.title')}</span>}
         open={isOpen}
         onCancel={closeModal}
         footer={null}
