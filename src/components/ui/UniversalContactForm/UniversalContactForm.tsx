@@ -105,17 +105,23 @@ export function UniversalContactForm({
   const { notification } = App.useApp();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [gotcha, setGotcha] = useState('');
 
   useEffect(() => {
     captureTrackingParams();
   }, []);
 
   const onFinish = async (values: Record<string, unknown>) => {
+    if (gotcha || values._gotcha) {
+      return;
+    }
+
     setLoading(true);
     try {
       const trackingParams = getTrackingParams();
       const payload = {
         ...values,
+        _gotcha: gotcha,
         ...trackingParams,
         form_location: formLocation,
       };
@@ -166,6 +172,18 @@ export function UniversalContactForm({
         className={styles.formContainer}
         requiredMark={false}
       >
+        {/* Honeypot anti-bots para Formspree */}
+        <input
+          type="text"
+          name="_gotcha"
+          value={gotcha}
+          onChange={(e) => setGotcha(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{ display: 'none' }}
+        />
+
         {/* Nombre completo */}
         <Form.Item
           name="fullName"
