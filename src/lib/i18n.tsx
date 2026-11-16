@@ -108,6 +108,22 @@ export const translations: Record<Lang, Record<string, string>> = {
     'cta.primary': 'Start now',
     'cta.secondary': 'Contact sales',
 
+    // FAQ
+    'faq.eyebrow': 'EXECUTIVE FAQ',
+    'faq.title1': 'Frequently Asked',
+    'faq.title.italic': 'Questions',
+    'faq.subtitle': 'Clear technical and strategic answers on EDIRA B2B consulting services, data engineering, ERP integration, and regional coverage across Mexico.',
+    'faq.q0.question': 'What services does EDIRA offer as a B2B technology and data consultancy?',
+    'faq.q0.answer': 'EDIRA provides B2B consulting in data engineering and governance, cloud architecture, ERP system integration, Business Intelligence, predictive AI analytics, and custom software development. We deliver automated ETL/ELT pipelines, Medallion architectures, governed data catalogs, and real-time executive control towers for industrial enterprises and corporations in Querétaro, Mexico City, Monterrey, and Guadalajara.',
+    'faq.q1.question': 'In which cities in Mexico does EDIRA provide consulting and support?',
+    'faq.q1.answer': 'EDIRA operates with on-site and remote consulting across Mexico’s primary industrial and corporate corridors: Santiago de Querétaro, El Marqués, and Corregidora in Querétaro; Mexico City (CDMX); Monterrey and San Pedro Garza García in Nuevo León; and Guadalajara in Jalisco. We execute on-site plant or corporate discovery sessions and nationwide technical deployment.',
+    'faq.q2.question': 'How do data engineering and governance help industrial enterprises and corporations?',
+    'faq.q2.answer': 'We eliminate operational silos and manual spreadsheets through auditable pipelines, semantic metric contracts, and quality standards aligned with ISO and NIST frameworks. This enables manufacturing plants, aerospace MRO operations, and corporate teams in Querétaro, CDMX, and Monterrey to achieve full traceability, a single source of financial and operational truth, and reliable executive decisions.',
+    'faq.q3.question': 'Can you integrate data from our current ERP with Business Intelligence dashboards and cloud architectures?',
+    'faq.q3.answer': 'Yes. We engineer connectors via APIs, microservices, and ELT pipelines to extract and consolidate data from ERP, CRM, plant MES, and legacy databases into cloud Data Warehouses or Data Lakes. On top of this governed layer, we deploy executive control towers in Power BI and analytics platforms with automated refresh, cloud FinOps, and enterprise security.',
+    'faq.q4.question': 'How does the initial executive diagnostic with EDIRA work?',
+    'faq.q4.answer': 'The process starts by requesting a session at edira.dev/#contacto. Our team evaluates data maturity, reporting bottlenecks, ERP integrations, and current architecture across your organization in Querétaro, CDMX, Monterrey, or anywhere in Mexico. As a deliverable, we present a technical roadmap with scope, target architecture, financial impact KPIs, and an 8-stage implementation plan.',
+
     // Footer
     'footer.rights': 'All rights reserved.',
     'footer.privacyNotice': 'Privacy Notice',
@@ -445,6 +461,22 @@ export const translations: Record<Lang, Record<string, string>> = {
     'cta.desc': 'Empieza hoy y transforma tu negocio.',
     'cta.primary': 'Empezar ahora',
     'cta.secondary': 'Contactar ventas',
+
+    // FAQ
+    'faq.eyebrow': 'PREGUNTAS FRECUENTES B2B',
+    'faq.title1': 'Preguntas',
+    'faq.title.italic': 'Frecuentes',
+    'faq.subtitle': 'Respuestas técnicas y ejecutivas sobre nuestros servicios de ingeniería de datos, integración de ERPs, arquitectura cloud y cobertura en México.',
+    'faq.q0.question': '¿Qué servicios ofrece EDIRA como consultoría tecnológica y de datos B2B?',
+    'faq.q0.answer': 'EDIRA ofrece consultoría B2B en ingeniería y gobernanza de datos, arquitectura cloud, integración de sistemas ERP, Business Intelligence, analítica predictiva con IA y desarrollo de software a medida. Entregamos pipelines ETL/ELT automatizados, arquitecturas Medallion, catálogos de datos gobernados y tableros directivos en tiempo real para empresas industriales y corporativos en Querétaro, Ciudad de México, Monterrey y Guadalajara.',
+    'faq.q1.question': '¿En qué ciudades de México brinda atención y consultoría EDIRA?',
+    'faq.q1.answer': 'EDIRA opera con atención presencial y remota en los principales corredores industriales y corporativos de México: Santiago de Querétaro, El Marqués y Corregidora en Querétaro; Ciudad de México (CDMX); Monterrey y San Pedro Garza García en Nuevo León; y Guadalajara en Jalisco. Ejecutamos sesiones de descubrimiento en planta u oficinas corporativas y despliegue técnico continuo a nivel nacional.',
+    'faq.q2.question': '¿Cómo ayuda la ingeniería y gobernanza de datos a empresas industriales y corporativos?',
+    'faq.q2.answer': 'Eliminamos silos operativos y hojas de cálculo manuales mediante pipelines auditables, contratos de métricas semánticas y estándares de calidad alineados con marcos ISO y NIST. Esto permite a plantas de manufactura, operaciones aeroespaciales MRO y corporativos en Querétaro, CDMX y Monterrey contar con trazabilidad completa, una única fuente de verdad financiera y operativa, y decisiones directivas confiables.',
+    'faq.q3.question': '¿Pueden integrar datos de nuestro ERP actual con tableros de Business Intelligence y arquitecturas cloud?',
+    'faq.q3.answer': 'Sí. Diseñamos conectores mediante APIs, microservicios y pipelines ELT para extraer y consolidar información de sistemas ERP, CRM, MES de planta y bases de datos legadas hacia Data Warehouses o Data Lakes en la nube. Sobre esta capa gobernada implementamos torres de control ejecutivas en Power BI y plataformas analíticas con actualización automatizada, control de costos cloud y seguridad empresarial.',
+    'faq.q4.question': '¿Cómo funciona el diagnóstico ejecutivo inicial con EDIRA?',
+    'faq.q4.answer': 'El proceso inicia al solicitar una sesión en edira.dev/#contacto. Nuestro equipo evalúa la madurez de datos, cuellos de botella en reportería, integraciones ERP y arquitectura actual de su organización en Querétaro, CDMX, Monterrey o cualquier plaza de México. Como entregable, presentamos una hoja de ruta técnica con alcance, arquitectura objetivo, KPIs de impacto financiero y plan de implementación en 8 etapas.',
 
     // Footer
     'footer.rights': 'Todos los derechos reservados.',

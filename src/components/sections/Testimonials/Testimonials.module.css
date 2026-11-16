@@ -1,5 +1,6 @@
 .section {
   padding-block: var(--space-24);
+  scroll-margin-top: 6rem;
   background-color: var(--color-bg);
   color: var(--color-text);
 }

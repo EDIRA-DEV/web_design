@@ -1,0 +1,36 @@
+# EDIRA
+
+> Firma mexicana de consultoría tecnológica B2B especializada en Ingeniería de Datos, Gobernanza de Datos, Arquitectura Cloud, Integración de Sistemas ERP, Analítica Avanzada y Desarrollo de Software a Medida para la industria y corporativos.
+
+## Perfil de la Empresa y Propuesta de Valor
+
+EDIRA acompaña a empresas medianas, corporativos e industrias (manufactura, aeroespacial/MRO, logística, servicios financieros, comercio minorista, energía y servicios profesionales B2B) desde el diagnóstico estratégico hasta la ejecución técnica. Eliminamos silos de información, hojas de cálculo manuales y sistemas fragmentados, transformando datos dispersos en plataformas gobernadas e inteligencia de decisiones ejecutivas con impacto financiero y operativo medible.
+
+## Servicios Principales (B2B)
+
+- **Ingeniería y Gobernanza de Datos:** Diseño de pipelines ETL/ELT automatizados, arquitecturas Medallion (Bronze, Silver, Gold), Data Warehouses, Data Lakes, contratos de calidad, linaje, seguridad empresarial (ISO / NIST) y catálogos de datos gobernados.
+- **Business Intelligence (BI) y Analítica Ejecutiva:** Tableros directivos y torres de control en tiempo real (Power BI y entornos de autoservicio), marcos de KPIs estratégicos y operativos, analítica financiera y de rentabilidad, e inteligencia de decisiones.
+- **Arquitectura Cloud e Infraestructura:** Diseño, migración estratégica y optimización de arquitecturas de datos en la nube escalables, seguras, de alta disponibilidad y con control de costos operativos (FinOps).
+- **Integración de Sistemas y ERPs:** Conexión mediante APIs, microservicios y orquestación de flujos entre sistemas ERP, CRM, MES de planta e infraestructuras legadas hacia plataformas analíticas centralizadas.
+- **Transformación Digital e IA Aplicada:** Modelos predictivos de demanda y comportamiento, automatización de procesos operativos, Procesamiento de Lenguaje Natural (PLN), asesoría ejecutiva C-Suite y desarrollo de software empresarial B2B a medida.
+
+## Cobertura Geográfica
+
+Operación y atención presencial/remota para empresas industriales y corporativos en:
+- Santiago de Querétaro, El Marqués y Corregidora (Querétaro)
+- Ciudad de México (CDMX)
+- Monterrey y San Pedro Garza García (Nuevo León)
+- Guadalajara (Jalisco) y cobertura nacional en México.
+
+## Enlaces Oficiales
+
+- [Sitio Principal de EDIRA](https://edira.dev): Plataforma corporativa de consultoría tecnológica, ingeniería de datos e inteligencia de decisiones B2B.
+- [Solicitar Diagnóstico Ejecutivo](https://edira.dev/#contacto): Formulario directo para agendar una sesión de diagnóstico técnico y estratégico B2B.
+- [Documentación Extendida para IA (llms-full.txt)](https://edira.dev/llms-full.txt): Especificación técnica completa de metodologías 8D, arquitectura de soluciones, casos de uso industriales y preguntas frecuentes ejecutivas.
+- [Catálogo de Servicios B2B](https://edira.dev/services): Desglose de nuestras 8 áreas centrales de servicio en nube, ingeniería de datos, analítica, IA y gobernanza.
+- [Soluciones por Industria](https://edira.dev/industries): Aplicaciones en manufactura, servicios financieros, retail y bienes de consumo, salud, energía y servicios profesionales.
+- [White Paper / Investigación Técnica — Scaling LEAP MRO in Querétaro](https://edira.dev/research): Estudio técnico de Inteligencia de Decisiones, Arquitectura Medallion, Métricas Semánticas y Torre de Control Power BI para operaciones aeroespaciales MRO en Querétaro.
+- [Insights y Artículos Técnicos](https://edira.dev/insights): Publicaciones ejecutivas sobre marcos de KPIs, costos ocultos de reportería manual, pronósticos financieros, IA empresarial y propiedad de datos.
+- [Sobre EDIRA](https://edira.dev/about-us): Misión, visión, valores corporativos y diferenciadores técnicos de nuestra firma.
+- [Carreras en EDIRA](https://edira.dev/careers): Cultura de ingeniería, principios de trabajo y oportunidades profesionales.
+

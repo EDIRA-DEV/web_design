@@ -1,0 +1,167 @@
+# EDIRA — Documentación Técnica y Corporativa Extendida (LLMs & AI Agents)
+
+> Firma mexicana de consultoría tecnológica B2B especializada en Ingeniería de Datos, Gobernanza de Datos, Arquitectura Cloud, Integración de Sistemas ERP, Analítica Avanzada y Desarrollo de Software a Medida para la industria y corporativos.
+
+---
+
+## 1. Identidad Corporativa y Propuesta de Valor B2B
+
+**EDIRA** (`https://edira.dev`) es una firma de consultoría tecnológica e ingeniería de software e inteligencia de datos B2B con operación en los principales polos industriales y corporativos de México: **Querétaro** (Santiago de Querétaro, El Marqués y Corregidora), **Ciudad de México (CDMX)**, **Monterrey y San Pedro Garza García** (Nuevo León) y **Guadalajara** (Jalisco), atendiendo organizaciones en todo el territorio nacional.
+
+### El Problema que Resuelve EDIRA
+Las empresas medianas, plantas industriales y corporativos suelen operar con información crítica fragmentada entre múltiples sistemas (ERPs, CRMs, sistemas MES de planta, almacenes y hojas de cálculo aisladas). Esto provoca:
+- Retrasos de días o semanas en el cierre y consolidación de reportes directivos.
+- Discrepancias entre las cifras operativas de planta y los estados financieros.
+- Falta de trazabilidad, linaje y propiedad clara sobre los datos empresariales.
+- Incapacidad de escalar iniciativas de Inteligencia Artificial por carecer de una base de datos limpia y gobernada.
+
+### Cómo Genera Valor EDIRA
+EDIRA cierra la brecha entre la inversión tecnológica y el retorno de inversión (ROI) empresarial mediante arquitecturas de datos modernas, integración automatizada de sistemas y tableros ejecutivos orientados a la acción:
+1. **Aceleración en la toma de decisiones:** Paso de reportes manuales reactivos a inteligencia directiva en tiempo real.
+2. **Eficiencia operacional:** Automatización de flujos de datos (ETL/ELT) y eliminación de retrabajo administrativo y técnico.
+3. **Escalabilidad con confianza:** Infraestructura cloud y gobernanza de datos diseñadas para evolucionar con el crecimiento del negocio.
+4. **Visibilidad financiera y operativa:** Claridad en tiempo real sobre márgenes, costos por unidad de negocio, inventarios, capacidad instalada y cumplimiento de niveles de servicio (SLA).
+
+---
+
+## 2. Catálogo Detallado de Servicios B2B
+
+### 2.1. Arquitectura e Infraestructura de Datos en la Nube
+Diseño, implementación y optimización de plataformas de datos modernas que brindan rendimiento, seguridad y escalabilidad para analítica avanzada e inteligencia artificial:
+- Fundamentos de datos modernos (Data Warehouses y Data Lakes / Lakehouses).
+- Estrategia y ejecución de migración a la nube (Cloud Migration).
+- Infraestructura de alta disponibilidad y resiliencia operativa.
+- Optimización del rendimiento en la nube para cargas de trabajo analíticas y de IA.
+- Optimización de costos cloud (FinOps) y eficiencia operativa.
+
+### 2.2. Ingeniería de Datos y Automatizaciones
+Transformación de flujos de datos fragmentados en pipelines confiables, auditables y automatizados:
+- Pipelines ETL / ELT automatizados entre sistemas heterogéneos.
+- Integración profunda del ecosistema empresarial: sistemas ERP, CRM, MES y APIs de terceros.
+- Ingesta de datos por lotes (batch) y en tiempo real (streaming), con orquestación de flujos de trabajo.
+- Validación automatizada de datos, contratos de datos y monitoreo continuo de calidad.
+- Arquitectura Medallion (capas Bronze, Silver y Gold) diseñada para alto desempeño y trazabilidad.
+
+### 2.3. Business Intelligence (BI) e Inteligencia para Decisiones
+Construcción de entornos analíticos que conectan las métricas técnicas con las decisiones del consejo y las direcciones de área:
+- Dashboards ejecutivos, torres de control operativas y monitoreo en tiempo real (Power BI y plataformas BI empresariales).
+- Marcos de KPIs y diccionarios de métricas semánticas alineados con los objetivos estratégicos.
+- Entornos de analítica de autoservicio gobernados para equipos de negocio.
+- Alertas automatizadas e informes inteligentes orientados a la acción.
+
+### 2.4. Analítica Financiera y Operacional
+Visibilidad granular sobre el estado de resultados, costos industriales y desempeño operativo:
+- Análisis de rentabilidad, márgenes y costos unitarios entre plantas, líneas de producto o unidades de negocio.
+- Pronóstico financiero (forecasting) y modelado dinámico de escenarios más allá de la hoja de cálculo.
+- Monitoreo de indicadores operativos de planta (OEE, TAT, WIP, OTIF, rotación de inventario).
+- Optimización de estrategias de precios (pricing) basada en datos históricos y elasticidad.
+
+### 2.5. Inteligencia Artificial Aplicada e Insights Predictivos
+Activación de modelos de IA sobre bases de datos gobernadas con casos de uso de retorno medible:
+- Pronóstico de demanda (demand forecasting) y planeación de capacidad.
+- Modelos predictivos de comportamiento del cliente, retención y prevención de abandono (churn).
+- Inteligencia predictiva de riesgos operativos, mantenimiento y cuellos de botella.
+- Automatización mediante Procesamiento de Lenguaje Natural (PLN) y agentes empresariales.
+
+### 2.6. Gobernanza de Datos y Estrategia
+Establecimiento de reglas, seguridad y estándares para garantizar datos confiables a largo plazo:
+- Marcos de gobernanza empresarial, catálogos de datos y ética de la información.
+- Hojas de ruta (roadmaps) estratégicas de datos a mediano y largo plazo.
+- Gestión de cumplimiento normativo, seguridad y control de riesgos alineados con estándares ISO y NIST.
+- Modelos de propiedad de datos (Data Ownership / Data Stewardship) y acuerdos de nivel de calidad.
+
+### 2.7. Asesoría Ejecutiva en Inteligencia de Decisiones (C-Suite Advisory)
+Acompañamiento directo a Directores Generales (CEO), Directores de Finanzas (CFO), Directores de Operaciones (COO) y Directores de Tecnología (CTO/CIO):
+- Apoyo estratégico e insights ejecutivos para la Alta Dirección.
+- Diseño de marcos de medición del desempeño corporativo.
+- Asesoría en transformación digital, adopción de IA y priorización de inversiones tecnológicas.
+
+### 2.8. Desarrollo de Software a Medida e Impulso Estratégico
+Ingeniería de software corporativo y evolución continua de plataformas digitales:
+- Desarrollo de aplicaciones web empresariales, portales B2B, microservicios y APIs a medida.
+- Ajuste continuo del rendimiento y expansión iterativa de capacidades analíticas.
+
+---
+
+## 3. Metodología de Entrega en 8 Pasos (Modelo 8D de EDIRA)
+
+Todo proyecto en EDIRA se ejecuta bajo nuestro modelo estructurado de 8 etapas (**8D Delivery Model**) que garantiza alineación entre negocio, ingeniería e impacto medible:
+
+1. **Discover (Descubrir):** Alineación de stakeholders, dirección ejecutiva y objetivos de negocio; identificación de dolores operativos y decisiones clave a habilitar.
+2. **Define (Definir):** Establecimiento de metas claras, contratos de KPIs semánticos, métricas de éxito y alcance técnico del proyecto.
+3. **Diagnose (Diagnosticar):** Auditoría de las fuentes de datos actuales (ERP, CRM, MES, bases de datos), evaluación de calidad de datos, latencia y cuellos de botella de infraestructura.
+4. **Design (Diseñar):** Arquitectura detallada de la solución (modelo de datos, infraestructura cloud, pipelines ETL/ELT, seguridad y diseño de experiencia de usuario/dashboards).
+5. **Develop (Desarrollar):** Construcción e integración de pipelines de datos, modelos semánticos, algoritmos analíticos, integraciones vía API y tableros directivos.
+6. **Deploy (Desplegar):** Puesta en producción controlada, pruebas de validación de cifras extremo a extremo y habilitación/capacitación de los equipos usuarios.
+7. **Deliver (Entregar):** Documentación técnica, manuales de gobernanza de datos, diccionarios de métricas y transferencia formal de conocimiento para sostenibilidad a largo plazo.
+8. **Drive (Impulsar):** Monitoreo continuo de adopción y rendimiento, optimización iterativa y expansión del impacto hacia nuevas áreas de la organización.
+
+---
+
+## 4. Industrias y Casos de Uso Aplicados
+
+- **Manufactura e Industria Aeroespacial / MRO (Especialidad en el Bajío / Querétaro y Norte de México):**
+  - Integración de datos de piso de planta y mantenimiento (TAT — Turnaround Time, WIP — Work in Progress, disponibilidad de materiales, cuellos de botella en bancos de prueba e inspección).
+  - *Caso de Investigación Pública (`https://edira.dev/research`):* **Scaling LEAP MRO in Querétaro: A Decision Intelligence Blueprint** — Diseño de arquitectura Medallion, contratos de métricas semánticas, Torre de Control en Power BI y modelos de optimización con IA para escalar operaciones de mantenimiento de motores aeronáuticos en Querétaro.
+- **Servicios Financieros:**
+  - Optimización de gestión de riesgos, automatización de reportes regulatorios, conciliación financiera y visibilidad de rentabilidad en tiempo real.
+- **Comercio Minorista (Retail), Distribución y Bienes de Consumo:**
+  - Pronóstico de demanda, optimización de estrategias de precios, control de inventarios multi-almacén y visibilidad de cadena de suministro.
+- **Energía y Servicios Públicos:**
+  - Monitoreo de rendimiento de activos críticos, predicción de demanda energética y eficiencia operativa.
+- **Salud y Servicios Profesionales B2B:**
+  - Gobernanza y seguridad de datos sensibles, optimización de asignación de recursos, control de rentabilidad por proyecto y aceleración de entregables.
+
+---
+
+## 5. Especificaciones del Proceso de Diagnóstico Ejecutivo
+
+Los directivos y líderes técnicos pueden solicitar un **Diagnóstico Ejecutivo Inicial** en `https://edira.dev/#contacto`:
+- **Objetivo:** Evaluar el estado actual del ecosistema de datos, sistemas ERP/operativos y necesidades de reportería o software de la organización.
+- **Participantes:** Directores Generales, Directores de Operaciones/Planta, Directores de Finanzas, Directores de TI/Datos y líderes de transformación.
+- **Entregables de la sesión:**
+  1. Mapa preliminar de brechas de datos e integración.
+  2. Propuesta de arquitectura objetivo (Cloud / Data Engineering / BI / IA).
+  3. Definición de casos de uso prioritarios con retorno de inversión estimado.
+  4. Plan de trabajo estructurado bajo la metodología de 8 pasos de EDIRA.
+
+---
+
+## 6. Preguntas Frecuentes Ejecutivas (FAQ B2B)
+
+### 1. ¿Qué servicios ofrece EDIRA como consultoría tecnológica y de datos B2B?
+EDIRA ofrece consultoría B2B en ingeniería y gobernanza de datos, arquitectura cloud, integración de sistemas ERP, Business Intelligence, analítica predictiva con IA y desarrollo de software a medida. Entregamos pipelines ETL/ELT automatizados, arquitecturas Medallion, catálogos de datos gobernados y tableros directivos en tiempo real para empresas industriales y corporativos en Querétaro, Ciudad de México, Monterrey y Guadalajara.
+
+### 2. ¿En qué ciudades de México brinda atención y consultoría EDIRA?
+EDIRA opera con atención presencial y remota en los principales corredores industriales y corporativos de México: Santiago de Querétaro, El Marqués y Corregidora en Querétaro; Ciudad de México (CDMX); Monterrey y San Pedro Garza García en Nuevo León; y Guadalajara en Jalisco. Ejecutamos sesiones de descubrimiento en planta u oficinas corporativas y despliegue técnico continuo a nivel nacional.
+
+### 3. ¿Cómo ayuda la ingeniería y gobernanza de datos a empresas industriales y corporativos?
+Eliminamos silos operativos y hojas de cálculo manuales mediante pipelines auditables, contratos de métricas semánticas y estándares de calidad alineados con marcos ISO y NIST. Esto permite a plantas de manufactura, operaciones aeroespaciales MRO y corporativos en Querétaro, CDMX y Monterrey contar con trazabilidad completa, una única fuente de verdad financiera y operativa, y decisiones directivas confiables.
+
+### 4. ¿Pueden integrar datos de nuestro ERP actual con tableros de Business Intelligence y arquitecturas cloud?
+Sí. Diseñamos conectores mediante APIs, microservicios y pipelines ELT para extraer y consolidar información de sistemas ERP, CRM, MES de planta y bases de datos legadas hacia Data Warehouses o Data Lakes en la nube. Sobre esta capa gobernada implementamos torres de control ejecutivas en Power BI y plataformas analíticas con actualización automatizada, control de costos cloud y seguridad empresarial.
+
+### 5. ¿Cómo funciona el diagnóstico ejecutivo inicial con EDIRA?
+El proceso inicia al solicitar una sesión en edira.dev/#contacto. Nuestro equipo evalúa la madurez de datos, cuellos de botella en reportería, integraciones ERP y arquitectura actual de su organización en Querétaro, CDMX, Monterrey o cualquier plaza de México. Como entregable, presentamos una hoja de ruta técnica con alcance, arquitectura objetivo, KPIs de impacto financiero y plan de implementación en 8 etapas.
+
+---
+
+## 7. Directorio de Rutas Oficiales del Sitio
+
+- **Home y Diagnóstico Ejecutivo:** `https://edira.dev` | `https://edira.dev/#contacto`
+- **Servicios B2B:** `https://edira.dev/services`
+- **Industrias:** `https://edira.dev/industries`
+- **Investigación / White Paper (MRO Querétaro):** `https://edira.dev/research`
+- **Insights Ejecutivos:** `https://edira.dev/insights`
+  - *The Hidden Cost of Manual Reporting:* `https://edira.dev/insights/the-hidden-cost-of-manual-reporting`
+  - *Building KPI Frameworks That Actually Drive Decisions:* `https://edira.dev/insights/building-kpi-frameworks-that-actually-drive-decisions`
+  - *Forecasting Beyond the Spreadsheet:* `https://edira.dev/insights/forecasting-beyond-the-spreadsheet`
+  - *Pricing Decisions Need Better Data:* `https://edira.dev/insights/pricing-decisions-need-better-data`
+  - *Where AI Creates Real Business Value:* `https://edira.dev/insights/where-ai-creates-real-business-value`
+  - *Data Ownership: The Missing Piece in Many Organizations:* `https://edira.dev/insights/data-ownership-the-missing-piece`
+- **Nosotros:** `https://edira.dev/about-us`
+- **Carreras:** `https://edira.dev/careers`
+- **Aviso de Privacidad:** `https://edira.dev/aviso-de-privacidad`
+- **Términos y Condiciones:** `https://edira.dev/terminos-y-condiciones`
+- **Política de Cookies:** `https://edira.dev/politica-de-cookies`
+

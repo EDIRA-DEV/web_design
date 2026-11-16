@@ -40,12 +40,7 @@ export function TailoredSolutions() {
   }, []);
 
   const totalPages = Math.ceil(SOLUTIONS_KEYS.length / cardsPerPage);
-
-  useEffect(() => {
-    if (currentPage >= totalPages && totalPages > 0) {
-      setCurrentPage(totalPages - 1);
-    }
-  }, [totalPages, currentPage]);
+  const safeCurrentPage = totalPages > 0 ? Math.min(currentPage, totalPages - 1) : 0;
 
   const handleScroll = () => {
     if (!isMobile || !gridRef.current) return;
@@ -53,8 +48,7 @@ export function TailoredSolutions() {
     if (container.children.length === 0) return;
     const childWidth = (container.children[0] as HTMLElement).offsetWidth;
     const index = Math.round(container.scrollLeft / (childWidth + 16));
-    if (index !== currentPage && index >= 0 && index < totalPages) { // For mobile totalPages isn't exactly the same, but it's okay because we scroll
-      // Actually on mobile totalItems is SOLUTIONS_KEYS.length
+    if (index !== safeCurrentPage && index >= 0 && index < totalPages) {
        if(index < SOLUTIONS_KEYS.length) {
           setCurrentPage(index);
        }
@@ -71,7 +65,7 @@ export function TailoredSolutions() {
     if (isAnimating) return;
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentPage((prev) => (prev + 1) % totalPages);
+      setCurrentPage((prev) => (Math.min(prev, totalPages - 1) + 1) % totalPages);
       setIsAnimating(false);
     }, 300);
   };
@@ -86,7 +80,7 @@ export function TailoredSolutions() {
     if (isAnimating) return;
     setIsAnimating(true);
     setTimeout(() => {
-      setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+      setCurrentPage((prev) => (Math.min(prev, totalPages - 1) - 1 + totalPages) % totalPages);
       setIsAnimating(false);
     }, 300);
   };
@@ -94,8 +88,8 @@ export function TailoredSolutions() {
   const currentSolutions = isMobile 
     ? SOLUTIONS_KEYS 
     : SOLUTIONS_KEYS.slice(
-        currentPage * cardsPerPage,
-        (currentPage + 1) * cardsPerPage
+        safeCurrentPage * cardsPerPage,
+        (safeCurrentPage + 1) * cardsPerPage
       );
 
   return (
@@ -114,7 +108,7 @@ export function TailoredSolutions() {
           <div className={`${styles.gridFade} ${!isMobile && isAnimating ? styles.animating : ''}`}>
             <div className={styles.grid} ref={gridRef} onScroll={handleScroll}>
               {currentSolutions.map((solution) => (
-                <div 
+                <article 
                   key={solution.titleKey}
                   className={styles.card}
                 >
@@ -125,6 +119,7 @@ export function TailoredSolutions() {
                       loop 
                       muted 
                       playsInline
+                      aria-hidden="true"
                       className={styles.video}
                     />
                   </div>
@@ -132,10 +127,21 @@ export function TailoredSolutions() {
                     <h3 className={styles.cardTitle}>{t(solution.titleKey)}</h3>
                     <p className={styles.cardDescription}>{t(solution.descKey)}</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
+
+          {!isMobile && (
+            <div className="sr-only" aria-hidden="false">
+              {SOLUTIONS_KEYS.filter((sol) => !currentSolutions.includes(sol)).map((solution) => (
+                <article key={`ssr-${solution.titleKey}`}>
+                  <h3>{t(solution.titleKey)}</h3>
+                  <p>{t(solution.descKey)}</p>
+                </article>
+              ))}
+            </div>
+          )}
 
           <div className={styles.pagination}>
             <button 

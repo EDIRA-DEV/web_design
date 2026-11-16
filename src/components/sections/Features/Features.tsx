@@ -5,7 +5,6 @@ import styles from './Features.module.css';
 import { Container } from '@/components/ui/Container/Container';
 import { useLang } from '@/lib/i18n';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 
 const FEATURES_CONFIG = [
   { titleKey: 'features.item0.title', descKey: 'features.item0.desc', videoSrc: '/videos/Acelerate Decision Making (1).webm' },
@@ -139,7 +138,7 @@ export function Features() {
                         {t(feature.titleKey)}
                       </motion.h3>
                       <AnimatePresence initial={false}>
-                        {isActive && (
+                        {isActive ? (
                           <motion.div
                             initial={{ height: 0, opacity: 0, marginTop: 0 }}
                             animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
@@ -155,6 +154,7 @@ export function Features() {
                                   loop 
                                   muted 
                                   playsInline
+                                  aria-hidden="true"
                                   className={styles.video}
                                 />
                               </div>
@@ -163,6 +163,8 @@ export function Features() {
                               {t(feature.descKey)}
                             </p>
                           </motion.div>
+                        ) : (
+                          <p className="sr-only">{t(feature.descKey)}</p>
                         )}
                       </AnimatePresence>
                     </motion.div>
@@ -181,6 +183,7 @@ export function Features() {
                     loop 
                     muted 
                     playsInline
+                    aria-hidden="true"
                     className={`${styles.video} ${(activeIndex === 1 || activeIndex === 3) ? styles.containVideo : ''}`}
                   />
                 </div>

@@ -8,7 +8,8 @@ export function Testimonials() {
   const { t } = useLang();
 
   return (
-    <section className={styles.section} id="contact">
+    <section className={styles.section} id="contacto">
+      <span id="contact" aria-hidden="true" />
       <div className={styles.inner}>
         <div className={styles.headingGroup}>
           <h2 className={styles.title}>

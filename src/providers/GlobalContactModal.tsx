@@ -21,12 +21,33 @@ const modalTheme = {
 };
 
 export function GlobalContactModal() {
-  const { isOpen, closeModal } = useContactModal();
+  const { isOpen, openModal, closeModal } = useContactModal();
   const { t } = useLang();
 
   useEffect(() => {
     captureTrackingParams();
-  }, []);
+
+    if (typeof window === 'undefined') return;
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('modal') === 'contacto' || params.get('modal') === 'contact') {
+      openModal();
+    }
+
+    const handleDocumentClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      const anchor = target?.closest?.('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href') || '';
+      if (href.includes('modal=contacto') || anchor.hasAttribute('data-open-contact-modal')) {
+        e.preventDefault();
+        openModal();
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
+  }, [openModal]);
 
   return (
     <ConfigProvider theme={modalTheme}>
