@@ -4,15 +4,30 @@
 
 ## Perfil de la Empresa y Propuesta de Valor
 
-EDIRA acompaña a empresas medianas, corporativos e industrias (manufactura, aeroespacial/MRO, logística, servicios financieros, comercio minorista, energía y servicios profesionales B2B) desde el diagnóstico estratégico hasta la ejecución técnica. Eliminamos silos de información, hojas de cálculo manuales y sistemas fragmentados, transformando datos dispersos en plataformas gobernadas e inteligencia de decisiones ejecutivas con impacto financiero y operativo medible.
+EDIRA acompaña a empresas medianas, corporativos e industrias (manufactura, aeroespacial/MRO, logística, servicios financieros, comercio minorista, energía y servicios profesionales B2B) desde el diagnóstico estratégico hasta la ejecución técnica. Eliminamos silos de información, hojas de cálculo manuales y sistemas fragmentados, transformando datos dispersos en una Única Fuente de Verdad (*Single Source of Truth - SSoT*) e inteligencia de decisiones ejecutivas con impacto financiero y operativo medible.
+
+## Los 3 Pilares Estratégicos y Stack Tecnológico (One Pager Ejecutivo)
+
+1. **Scalable Data Engineering & Cloud Architecture:**
+   - Modern Data Lakes & Data Warehouses.
+   - Automated Self-Healing ETL/ELT Pipelines.
+   - Cloud Cost Optimization (FinOps) e infraestructura escalable sobre **AWS**, **Microsoft Azure**, **Google Cloud Platform (GCP)**, **Snowflake** y **Databricks**.
+2. **Unified BI & Advanced Analytics:**
+   - Single Source of Truth (SSoT).
+   - Real-Time Executive Dashboards & Control Towers.
+   - Predictive Analytic Models integrando sistemas **ERP**, **CRM**, **APIs** y archivos estructurados/no estructurados.
+3. **Data Governance & AI Readiness:**
+   - Data Stratification & Cleansing.
+   - Metadata Cataloging, Security & Lineage (marcos ISO / NIST).
+   - AI-Ready Data Asset Optimization para modelos predictivos y automatización empresarial.
 
 ## Servicios Principales (B2B)
 
-- **Ingeniería y Gobernanza de Datos:** Diseño de pipelines ETL/ELT automatizados, arquitecturas Medallion (Bronze, Silver, Gold), Data Warehouses, Data Lakes, contratos de calidad, linaje, seguridad empresarial (ISO / NIST) y catálogos de datos gobernados.
+- **Ingeniería y Gobernanza de Datos:** Diseño de pipelines ETL/ELT automatizados y auto-reparables (*Self-Healing*), arquitecturas Medallion (Bronze, Silver, Gold), Data Warehouses, Data Lakes, contratos de calidad, linaje, seguridad empresarial y catálogos de metadatos.
 - **Business Intelligence (BI) y Analítica Ejecutiva:** Tableros directivos y torres de control en tiempo real (Power BI y entornos de autoservicio), marcos de KPIs estratégicos y operativos, analítica financiera y de rentabilidad, e inteligencia de decisiones.
-- **Arquitectura Cloud e Infraestructura:** Diseño, migración estratégica y optimización de arquitecturas de datos en la nube escalables, seguras, de alta disponibilidad y con control de costos operativos (FinOps).
-- **Integración de Sistemas y ERPs:** Conexión mediante APIs, microservicios y orquestación de flujos entre sistemas ERP, CRM, MES de planta e infraestructuras legadas hacia plataformas analíticas centralizadas.
-- **Transformación Digital e IA Aplicada:** Modelos predictivos de demanda y comportamiento, automatización de procesos operativos, Procesamiento de Lenguaje Natural (PLN), asesoría ejecutiva C-Suite y desarrollo de software empresarial B2B a medida.
+- **Arquitectura Cloud e Infraestructura:** Diseño, migración estratégica y optimización de arquitecturas de datos en la nube (AWS, Azure, GCP, Snowflake, Databricks) escalables, seguras, de alta disponibilidad y con control de costos operativos.
+- **Integración de Sistemas y ERPs:** Conexión mediante APIs, microservicios y orquestación de flujos entre sistemas ERP, CRM, MES de planta, archivos estructurados/no estructurados e infraestructuras legadas hacia plataformas analíticas centralizadas.
+- **Transformación Digital e IA Aplicada:** Optimización de activos de datos listos para IA (*AI Readiness*), modelos predictivos de demanda y comportamiento, automatización de procesos operativos, asesoría ejecutiva C-Suite y desarrollo de software empresarial B2B a medida.
 
 ## Cobertura Geográfica
 
@@ -22,15 +37,21 @@ Operación y atención presencial/remota para empresas industriales y corporativ
 - Monterrey y San Pedro Garza García (Nuevo León)
 - Guadalajara (Jalisco) y cobertura nacional en México.
 
+## Contacto Directo y Oferta de Entrada Ejecutiva
+
+- **Oferta de Entrada:** Complimentary Data Architecture Evaluation (Evaluación de Arquitectura de Datos sin costo).
+- **Teléfono:** +52 (442) 866 2242
+- **Email:** info@edira.dev
+- **Solicitud en línea:** https://edira.dev/#contacto
+
 ## Enlaces Oficiales
 
 - [Sitio Principal de EDIRA](https://edira.dev): Plataforma corporativa de consultoría tecnológica, ingeniería de datos e inteligencia de decisiones B2B.
-- [Solicitar Diagnóstico Ejecutivo](https://edira.dev/#contacto): Formulario directo para agendar una sesión de diagnóstico técnico y estratégico B2B.
-- [Documentación Extendida para IA (llms-full.txt)](https://edira.dev/llms-full.txt): Especificación técnica completa de metodologías 8D, arquitectura de soluciones, casos de uso industriales y preguntas frecuentes ejecutivas.
+- [Solicitar Diagnóstico Ejecutivo / Evaluación sin Costo](https://edira.dev/#contacto): Formulario directo para agendar una Evaluación de Arquitectura de Datos sin costo (*Complimentary Data Architecture Evaluation*).
+- [Documentación Extendida para IA (llms-full.txt)](https://edira.dev/llms-full.txt): Especificación técnica completa de los 3 pilares, benchmarks de industria (Gartner, HBR, McKinsey), metodología 8D, casos de uso industriales y FAQs ejecutivas.
 - [Catálogo de Servicios B2B](https://edira.dev/services): Desglose de nuestras 8 áreas centrales de servicio en nube, ingeniería de datos, analítica, IA y gobernanza.
 - [Soluciones por Industria](https://edira.dev/industries): Aplicaciones en manufactura, servicios financieros, retail y bienes de consumo, salud, energía y servicios profesionales.
 - [White Paper / Investigación Técnica — Scaling LEAP MRO in Querétaro](https://edira.dev/research): Estudio técnico de Inteligencia de Decisiones, Arquitectura Medallion, Métricas Semánticas y Torre de Control Power BI para operaciones aeroespaciales MRO en Querétaro.
 - [Insights y Artículos Técnicos](https://edira.dev/insights): Publicaciones ejecutivas sobre marcos de KPIs, costos ocultos de reportería manual, pronósticos financieros, IA empresarial y propiedad de datos.
 - [Sobre EDIRA](https://edira.dev/about-us): Misión, visión, valores corporativos y diferenciadores técnicos de nuestra firma.
 - [Carreras en EDIRA](https://edira.dev/careers): Cultura de ingeniería, principios de trabajo y oportunidades profesionales.
-
