@@ -177,13 +177,13 @@ export const translations: Record<Lang, Record<string, string>> = {
     'industries.retail.title': 'Retail & Consumer Goods',
     'industries.retail.desc': 'We help retailers and consumer goods companies forecast demand, optimize pricing strategies, and improve supply chain visibility—ensuring profitability and customer satisfaction with data-driven solutions.',
     'industries.manufacturing.title': 'Manufacturing',
-    'industries.manufacturing.desc': 'From optimizing risk management to streamlining regulatory reporting, our solutions empower financial institutions to enhance decision-making, improve compliance, and drive profitability.',
+    'industries.manufacturing.desc': 'We connect shop-floor MES, ERP, and supply chain data into governed cloud platforms and real-time control towers—helping manufacturers reduce downtime, optimize throughput, and protect operating margins.',
     'industries.healthcare.title': 'Healthcare',
-    'industries.healthcare.desc': 'From optimizing risk management to streamlining regulatory reporting, our solutions empower financial institutions to enhance decision-making, improve compliance, and drive profitability.',
+    'industries.healthcare.desc': 'We build secure, governed data foundations and predictive analytics that unify clinical, operational, and financial systems—enabling healthcare organizations to safeguard sensitive data, streamline capacity, and elevate care delivery.',
     'industries.energy.title': 'Energy & Utilities',
     'industries.energy.desc': 'Our solutions help energy companies optimize operations, predict demand, and improve asset performance—empowering them to stay ahead of industry trends while improving efficiency and sustainability.',
     'industries.professional.title': 'Professional Services',
-    'industries.professional.desc': 'From optimizing client deliverables to improving resource allocation, our solutions for professional services firms enable smarter decision-making, faster project execution, and increased client satisfaction.',
+    'industries.professional.desc': 'We unify ERP, CRM, and project delivery data into a single source of truth—empowering professional services firms to optimize resource utilization, track engagement profitability in real time, and scale with precision.',
 
     // About Us CTA
     'aboutUsCTA.title': 'Ready to transform your Business?',
@@ -531,13 +531,13 @@ export const translations: Record<Lang, Record<string, string>> = {
     'industries.retail.title': 'Comercio Minorista y Bienes de Consumo',
     'industries.retail.desc': 'Ayudamos a minoristas y empresas de bienes de consumo a prever la demanda, optimizar estrategias de precios y mejorar la visibilidad de la cadena de suministro, asegurando rentabilidad y satisfacción del cliente con soluciones basadas en datos.',
     'industries.manufacturing.title': 'Manufactura',
-    'industries.manufacturing.desc': 'Desde optimizar la gestión de riesgos hasta agilizar el cumplimiento normativo, nuestras soluciones empoderan a las instituciones financieras para mejorar la toma de decisiones, asegurar el cumplimiento y aumentar la rentabilidad.',
+    'industries.manufacturing.desc': 'Integramos datos de planta (MES), ERP y cadena de suministro en arquitecturas cloud gobernadas y torres de control en tiempo real, ayudando a las empresas manufactureras a reducir tiempos muertos, optimizar el rendimiento y proteger sus márgenes.',
     'industries.healthcare.title': 'Salud',
-    'industries.healthcare.desc': 'Desde optimizar la gestión de riesgos hasta agilizar el cumplimiento normativo, nuestras soluciones empoderan a las instituciones financieras para mejorar la toma de decisiones, asegurar el cumplimiento y aumentar la rentabilidad.',
+    'industries.healthcare.desc': 'Construimos bases de datos seguras y gobernadas con analítica predictiva que unifican sistemas clínicos, operativos y financieros, permitiendo a las organizaciones de salud proteger información sensible, optimizar su capacidad y elevar la calidad de atención.',
     'industries.energy.title': 'Energía y Servicios Públicos',
     'industries.energy.desc': 'Nuestras soluciones ayudan a empresas energéticas a optimizar operaciones, predecir demanda y mejorar el rendimiento de activos, permitiéndoles mantenerse a la vanguardia de las tendencias mientras mejoran eficiencia y sostenibilidad.',
     'industries.professional.title': 'Servicios Profesionales',
-    'industries.professional.desc': 'Desde optimizar entregables para clientes hasta mejorar la asignación de recursos, nuestras soluciones para firmas de servicios profesionales permiten una toma de decisiones más inteligente, ejecución rápida de proyectos y mayor satisfacción del cliente.',
+    'industries.professional.desc': 'Unificamos datos de ERP, CRM y operación de proyectos en una única fuente de verdad, empoderando a las firmas de servicios profesionales para optimizar la asignación de recursos, monitorear la rentabilidad por proyecto en tiempo real y escalar con precisión.',
 
     // About Us CTA
     'aboutUsCTA.title': '¿Listo para transformar tu Negocio?',
